@@ -2,6 +2,7 @@
 
     height: 200px;
     margin: 20px 0;
+    margin: 40px 0;
 
     h2 {
         text-align: center;
@@ -26,6 +27,7 @@
                 width: 100%;
                 direction: rtl;
                 padding: 0 80px;
+                color: var(--btn-active);
             }
 
         }

@@ -128,6 +128,7 @@ body {
 .Offer {
   height: 200px;
   margin: 20px 0;
+  margin: 40px 0;
 }
 .Offer h2 {
   text-align: center;
@@ -149,10 +150,54 @@ body {
   width: 100%;
   direction: rtl;
   padding: 0 80px;
+  color: var(--btn-active);
 }
 .Offer__cards__card:nth-of-type(2) {
   border-top: none;
   border-right: 0.5px solid black;
   border-bottom: none;
   border-left: 0.5px solid black;
+}
+
+.Works {
+  width: 100%;
+  margin-top: 90px;
+  margin-bottom: 40px;
+  display: flex;
+}
+.Works__left {
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.Works__left__circle {
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 320px;
+  height: 320px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.Works__right {
+  width: 60%;
+  direction: rtl;
+  padding: 0 40px;
+}
+.Works__right h3 {
+  font-size: 40px;
+  font-weight: 600;
+  color: var(--main-color);
+}
+.Works__right ol li {
+  font-size: 24px;
+  font-weight: 500;
+  padding: 10px 0;
+}
+.Works__right ol li p {
+  display: inline;
+  font-size: 16px;
+  font-weight: 400;
 }/*# sourceMappingURL=main.css.map */
