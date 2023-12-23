@@ -12,3 +12,16 @@ body {
     --btn-hover: #0A4674;
     --btn-active: #7F7C7E;
 }
+
+.btnbtn {
+    background-color: var(--main-color);
+}
+
+.btnbtn:hover {
+    background-color: var(--btn-hover);
+    border: none;
+}
+
+.btnbtn:active {
+    background-color: var(--btn-active);
+}

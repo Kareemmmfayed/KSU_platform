@@ -47,7 +47,6 @@
         button {
             border: 1px solid white;
             border-radius: 8px;
-            background-color: var(--main-color);
             color: white;
             width: 180px;
             height: 50px;
@@ -55,15 +54,6 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
-        }
-
-        button:hover {
-            background-color: var(--btn-hover);
-            border: none;
-        }
-
-        button:active {
-            background-color: var(--btn-active);
         }
     }
 }

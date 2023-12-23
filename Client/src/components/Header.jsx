@@ -13,7 +13,7 @@ function Header() {
                 </div>
             </div>
             <div className="Header__left">
-                <button>الدخول</button>
+                <button className='btnbtn'>الدخول</button>
             </div>
         </div>
     )
