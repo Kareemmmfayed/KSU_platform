@@ -50,6 +50,7 @@ body {
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-between;
+  font-family: "Cairo", sans-serif;
 }
 @media (max-width: 500px) {
   .Header {
@@ -125,6 +126,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: "Cairo", sans-serif;
 }
 .Landing__hero__text {
   color: white;
@@ -197,6 +199,7 @@ body {
   height: 200px;
   margin: 20px 0;
   margin: 40px 0;
+  font-family: "Cairo", sans-serif;
 }
 .Offer h2 {
   text-align: center;
@@ -252,6 +255,7 @@ body {
   margin-top: 90px;
   margin-bottom: 40px;
   display: flex;
+  font-family: "Cairo", sans-serif;
 }
 @media (max-width: 700px) {
   .Works {
@@ -312,6 +316,7 @@ body {
   text-align: center;
   padding: 50px 0;
   height: 80vh;
+  font-family: "Cairo", sans-serif;
 }
 @media (max-width: 720px) {
   .Theslider {
@@ -360,6 +365,7 @@ body {
 
 .Footer {
   overflow: hidden;
+  font-family: "Cairo", sans-serif;
 }
 .Footer__in {
   color: white;
@@ -368,4 +374,87 @@ body {
   width: 100vw;
   padding: 20px 0;
   text-align: center;
+}
+
+.Sign-in {
+  font-family: "Cairo", sans-serif;
+}
+.Sign-in .Sign-in__inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 87vh;
+  width: 100vw;
+}
+.Sign-in .Sign-in__inner .sign-in__inner__form {
+  height: 65vh;
+  margin-bottom: 75px;
+  box-shadow: 4px 4px 24px 0px rgba(0, 0, 0, 0.2509803922);
+  padding: 20px 100px;
+}
+@media (max-width: 1200px) {
+  .Sign-in .Sign-in__inner .sign-in__inner__form {
+    padding: 20px 20px;
+  }
+}
+.Sign-in .Sign-in__inner .sign-in__inner__form h2 {
+  direction: rtl;
+  text-align: center;
+  margin: 30px;
+}
+.Sign-in .Sign-in__inner .sign-in__inner__form form {
+  display: flex;
+  flex-direction: column;
+}
+.Sign-in .Sign-in__inner .sign-in__inner__form form select,
+.Sign-in .Sign-in__inner .sign-in__inner__form form input {
+  direction: rtl;
+  margin: 15px 0;
+  height: 55px;
+  border-radius: 8px;
+  padding: 12px;
+  border: 1px solid grey;
+}
+.Sign-in .Sign-in__inner .sign-in__inner__form form .rem {
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  font-size: 14px;
+  font-weight: 400;
+  height: 20px;
+}
+.Sign-in .Sign-in__inner .sign-in__inner__form form .rem > div {
+  display: flex;
+  align-items: center;
+}
+.Sign-in .Sign-in__inner .sign-in__inner__form form .rem > div > label {
+  margin: 5px;
+}
+.Sign-in .Sign-in__inner .sign-in__inner__form form .rem a {
+  text-decoration: none;
+}
+.Sign-in .Sign-in__inner .sign-in__inner__form form .sub {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 25px;
+}
+.Sign-in .Sign-in__inner .sign-in__inner__form form .sub button {
+  width: 52%;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 10px;
+}
+.Sign-in .Sign-in__inner .sign-in__inner__form form .sub > div {
+  font-size: 12px;
+  font-weight: 400;
+}
+.Sign-in .Sign-in__inner .sign-in__inner__form form .sub > div a {
+  text-decoration: none;
+}
+.Sign-in .Footer__in {
+  position: absolute;
+  bottom: 0;
 }/*# sourceMappingURL=main.css.map */

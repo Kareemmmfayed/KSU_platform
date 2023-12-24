@@ -1,6 +1,9 @@
+/* eslint-disable react/prop-types */
 import logo from '../assets/logo.png'
+import { Link } from 'react-router-dom'
 
-function Header() {
+
+function Header(props) {
     return (
         <div className="Header">
             <div className="Header__right">
@@ -13,7 +16,9 @@ function Header() {
                 </div>
             </div>
             <div className="Header__left">
-                <button className='btnbtn'>الدخول</button>
+                <Link to={props.link}>
+                    <button className='btnbtn'> {props.name}</button>
+                </Link>
             </div>
         </div>
     )

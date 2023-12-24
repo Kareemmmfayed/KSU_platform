@@ -1,10 +1,11 @@
 import Header from "../Header"
 
+
 function Landing() {
 
     return (
         <div className="Landing">
-            <Header/>
+            <Header name="الدخول" link="/login"/>
             <div className="Landing__hero">
                 <div className="Landing__hero__text">
                     <p>منصة التقديم الإلكتروني على  <span>الدبلومات </span>

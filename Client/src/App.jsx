@@ -1,20 +1,21 @@
-import Landing from './components/Appflow/Landing'
-import Offer from './components/Appflow/Offer'
-import Works from './components/Appflow/Works'
-import Theslider from './components/Appflow/Theslider'
-import Footer from './components/Footer'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Home from './components/Appflow/Home'
+import Signin from './components/Appflow/Signin';
+import Signup from './components/Appflow/Signup';
 
 function App() {
-
   return (
-    <div className="App">
-      <Landing/>
-      <Offer/>
-      <Works/>
-      <Theslider/>
-      <Footer/>
-    </div>
-  )
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/login' element={<Signin />} />
+          <Route path='/signup' element={<Signup />} />
+        </Routes>
+      </div>
+    </Router>
+  );
 }
 
-export default App
+export default App;
+
