@@ -1,6 +1,7 @@
 import Landing from './components/Appflow/Landing'
 import Offer from './components/Appflow/Offer'
 import Works from './components/Appflow/Works'
+import Theslider from './components/Appflow/Theslider'
 
 function App() {
 
@@ -9,6 +10,7 @@ function App() {
       <Landing/>
       <Offer/>
       <Works/>
+      <Theslider/>
     </div>
   )
 }

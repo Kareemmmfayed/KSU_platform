@@ -1,3 +1,6 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 * {
   box-sizing: border-box;
   margin: 0;
@@ -24,6 +27,19 @@ body {
 
 .btnbtn:active {
   background-color: var(--btn-active);
+}
+
+.slick-slide > div {
+  margin: 0 10px;
+}
+
+.slick-next:before,
+.slick-prev:before {
+  color: grey;
+}
+
+.slick-track {
+  padding: 10px 0;
 }
 
 .Header {
@@ -200,4 +216,45 @@ body {
   display: inline;
   font-size: 16px;
   font-weight: 400;
+}
+
+.Theslider {
+  width: 100%;
+  text-align: center;
+  padding: 50px 0;
+  height: 50vh;
+}
+.Theslider h2 {
+  color: var(--main-color);
+  font-weight: 600;
+  font-size: 40px;
+}
+.Theslider .cara {
+  padding: 0 80px;
+}
+.Theslider .cara p:first-of-type {
+  color: var(--main-color);
+  direction: rtl;
+  font-weight: 400;
+  font-size: 16px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 18px;
+  margin: 0;
+}
+.Theslider .cara p:nth-child(2) {
+  font-weight: 600;
+  font-size: 16px;
+}
+.Theslider .cara p:nth-child(3) {
+  font-weight: 600;
+  font-size: 12px;
+  padding: 0 10px;
+  margin: 20px 0;
+  color: gray;
+}
+.Theslider .cardi {
+  box-shadow: 0px 4px 8px 0px rgba(42, 42, 42, 0.2509803922);
+  overflow: hidden;
+  border-radius: 12px;
 }/*# sourceMappingURL=main.css.map */
