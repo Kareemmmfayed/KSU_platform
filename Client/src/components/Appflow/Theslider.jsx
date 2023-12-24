@@ -3,13 +3,40 @@ import pro from '../../assets/landing.png'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+import { useState, useEffect } from 'react'
 
 function Theslider() {
+
+    const [num, setNum] = useState(4);
+
+    const handleResize = () => {
+        if (window.innerWidth > 1200) {
+        setNum(4);
+    } else if (window.innerWidth <= 1200 && window.innerWidth > 1000) {
+        setNum(3);
+    } else if (window.innerWidth <= 1000 && window.innerWidth > 700) {
+        setNum(2);
+    } else if (window.innerWidth <= 700) {
+        setNum(1);
+    }
+    }
+
+    useEffect(() => {
+        handleResize();
+
+        window.addEventListener('resize', handleResize);
+
+    return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
+
     const settings = {
         dots: false,
         infinite: true,
         speed: 500,
-        slidesToShow: 4,
+        slidesToShow: num,
         slidesToScroll: 1
     };
     return (

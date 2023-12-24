@@ -17,6 +17,14 @@
         justify-content: center;
         align-items: center;
 
+        @media (max-width: 800px) {
+            width: 70%;
+        }
+
+        @media (max-width: 500px) {
+            width: 85%;
+        }
+
         p:first-of-type {
             font-size: 46px;
             font-weight: 700;
@@ -25,6 +33,14 @@
 
             span {
                 color: var(--main-color);
+            }
+
+            @media (max-width: 900px) {
+                font-size: 36px;
+            }
+
+            @media (max-width: 400px) {
+                font-size: 27px;
             }
         }
 
@@ -35,6 +51,14 @@
             line-height: 2;
             width: 70%;
             margin: 10px 0;
+
+            @media (max-width: 900px) {
+                font-size: 14px;
+            }
+
+            @media (max-width: 400px) {
+                font-size: 10px;
+            }
         }
 
         button {
