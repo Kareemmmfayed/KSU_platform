@@ -457,4 +457,78 @@ body {
 .Sign-in .Footer__in {
   position: absolute;
   bottom: 0;
+}
+
+.Signup {
+  font-family: "Cairo", sans-serif;
+  position: relative;
+  height: 106vh;
+}
+.Signup .Signup__inner {
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+.Signup .Signup__inner .signup__inner__form {
+  flex-direction: column;
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  box-shadow: 4px 4px 24px 0px rgba(0, 0, 0, 0.2509803922);
+  padding: 20px;
+}
+@media (max-width: 1200px) {
+  .Signup .Signup__inner .signup__inner__form {
+    padding: 20px 20px;
+  }
+}
+.Signup .Signup__inner .signup__inner__form form {
+  display: flex;
+  flex-direction: column;
+  width: 85%;
+}
+.Signup .Signup__inner .signup__inner__form form input, .Signup .Signup__inner .signup__inner__form form select {
+  direction: rtl;
+  margin: 15px 0;
+  height: 55px;
+  border-radius: 8px;
+  padding: 12px;
+  border: 1px solid grey;
+}
+.Signup .Signup__inner .signup__inner__form form .gender {
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+}
+.Signup .Signup__inner .signup__inner__form form .gender .male,
+.Signup .Signup__inner .signup__inner__form form .gender .female {
+  display: flex;
+  align-items: center;
+  margin: 0 10px;
+}
+.Signup .Signup__inner .signup__inner__form form .gender .male label,
+.Signup .Signup__inner .signup__inner__form form .gender .female label {
+  margin: 0 10px;
+}
+.Signup .Signup__inner .signup__inner__form form .sub {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 25px;
+}
+.Signup .Signup__inner .signup__inner__form form .sub button {
+  width: 52%;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 10px;
+}
+.Signup .Signup__inner .signup__inner__form form .sub > div {
+  margin-top: 6px;
+  font-size: 14px;
+  font-weight: 400;
+}
+.Signup .Signup__inner .signup__inner__form form .sub > div a {
+  text-decoration: none;
 }/*# sourceMappingURL=main.css.map */
