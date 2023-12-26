@@ -566,7 +566,83 @@ body {
   bottom: 0;
 }
 
-.Application .Footer__in {
-  position: absolute;
-  bottom: 0;
+.Application {
+  font-family: "Cairo", sans-serif;
+  position: relative;
+  height: 115vh;
+}
+.Application__inner {
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+.Application__inner__form {
+  flex-direction: column;
+  display: flex;
+  height: 110vh;
+  align-items: center;
+  box-shadow: 4px 4px 24px 0px rgba(0, 0, 0, 0.2509803922);
+  padding: 20px;
+}
+@media (max-width: 1200px) {
+  .Application__inner__form {
+    padding: 20px 20px;
+  }
+}
+.Application__inner__form form {
+  display: flex;
+  flex-direction: column;
+  width: 85%;
+}
+.Application__inner__form form input[type=file] {
+  display: none;
+}
+.Application__inner__form form label, .Application__inner__form form .btns {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.Application__inner__form form label img {
+  -o-object-fit: contain;
+     object-fit: contain;
+  margin-bottom: 10px;
+}
+.Application__inner__form form label p {
+  color: gray;
+  font-weight: 500;
+  font-size: 16px;
+}
+.Application__inner__form form div, .Application__inner__form form select {
+  direction: rtl;
+  margin: 15px 0;
+  height: 55px;
+  border-radius: 8px;
+  padding: 12px;
+  border: 1px solid grey;
+}
+.Application__inner__form form .btns {
+  border: none;
+}
+.Application__inner__form form .btns button {
+  width: 140px;
+  height: 50px;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 600;
+}
+.Application__inner__form form .btns .right {
+  color: white;
+  border: none;
+}
+.Application__inner__form form .btns .left {
+  color: var(--main-color);
+  background-color: white;
+  border: 1px solid var(--main-color);
+  transition: all 0.3s;
+}
+.Application__inner__form form .btns .left:hover {
+  background-color: var(--main-color);
+  color: white;
 }/*# sourceMappingURL=main.css.map */
