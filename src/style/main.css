@@ -531,4 +531,42 @@ body {
 }
 .Signup .Signup__inner .signup__inner__form form .sub > div a {
   text-decoration: none;
+}
+
+.Success {
+  font-family: "Cairo", sans-serif;
+}
+.Success__in {
+  height: 75vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.Success__in__card {
+  text-align: center;
+}
+.Success__in__card p {
+  font-size: 14px;
+  font-weight: 400;
+}
+.Success__in__card button {
+  color: var(--main-color);
+  border: 1px solid var(--main-color);
+  border-radius: 10px;
+  padding: 10px;
+  background-color: white;
+  transition: all 0.3s;
+}
+.Success__in__card button:hover {
+  background-color: var(--main-color);
+  color: white;
+}
+.Success .Footer__in {
+  position: absolute;
+  bottom: 0;
+}
+
+.Application .Footer__in {
+  position: absolute;
+  bottom: 0;
 }/*# sourceMappingURL=main.css.map */

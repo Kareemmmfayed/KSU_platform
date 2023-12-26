@@ -1,0 +1,38 @@
+.Success {
+    font-family: 'Cairo', sans-serif;
+
+    &__in {
+        height: 75vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &__card {
+            text-align: center;
+
+            p {
+                font-size: 14px;
+                font-weight: 400;
+            }
+
+            button {
+                color: var(--main-color);
+                border: 1px solid var(--main-color);
+                border-radius: 10px;
+                padding: 10px;
+                background-color: white;
+                transition: all 0.3s;
+            }
+
+            button:hover {
+                background-color: var(--main-color);
+                color: white
+            }
+        }
+    }
+
+    .Footer__in {
+        position: absolute;
+        bottom: 0;
+    }
+}
