@@ -645,4 +645,41 @@ body {
 .Application__inner__form form .btns .left:hover {
   background-color: var(--main-color);
   color: white;
+}
+
+.Programs {
+  font-family: "Cairo", sans-serif;
+  position: relative;
+  height: 76vh;
+}
+.Programs__in {
+  height: 100%;
+  direction: rtl;
+  padding: 20px 60px 0;
+}
+@media (max-width: 400px) {
+  .Programs__in {
+    padding: 20px 10px 0 0;
+  }
+}
+.Programs__in__top {
+  display: flex;
+  justify-content: space-between;
+}
+.Programs__in__top input {
+  padding: 10px 16px 10px 16px;
+  border-radius: 8px;
+  width: 326px;
+  height: 50px;
+  border: 1px solid grey;
+}
+.Programs__in h2 {
+  color: var(--main-color);
+  margin-bottom: 40px;
+}
+.Programs__in ol li {
+  font-size: 24px;
+  font-weight: 400;
+  cursor: pointer;
+  margin: 15px 0;
 }/*# sourceMappingURL=main.css.map */
