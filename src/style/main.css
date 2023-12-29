@@ -834,4 +834,41 @@ body {
 }
 .Table__in .but button:active {
   background-color: var(--btn-active);
+}
+
+.Cric {
+  font-family: "Cairo", sans-serif;
+  position: relative;
+}
+.Cric__in {
+  height: 100%;
+  direction: rtl;
+  padding: 20px 60px 0;
+  min-height: 76vh;
+}
+@media (max-width: 400px) {
+  .Cric__in {
+    padding: 20px 10px 0 0;
+  }
+}
+.Cric__in__top {
+  display: flex;
+  justify-content: space-between;
+}
+.Cric__in__top input {
+  padding: 10px 16px 10px 16px;
+  border-radius: 8px;
+  width: 326px;
+  height: 50px;
+  border: 1px solid grey;
+}
+.Cric__in h2 {
+  color: var(--main-color);
+  margin-bottom: 40px;
+}
+.Cric__in ol li {
+  font-size: 24px;
+  font-weight: 400;
+  cursor: pointer;
+  margin: 15px 0;
 }/*# sourceMappingURL=main.css.map */

@@ -7,6 +7,7 @@ import Application from './components/Appflow/Application';
 import Programs from './components/Appflow/Programs';
 import Applicants from './components/Empflow/Applicants';
 import Table from './components/Lecturer/Table';
+import Cric from './components/Lecturer/Cric';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path='/programs' element={<Programs />} />
           <Route path='/applicants' element={<Applicants />} />
           <Route path='/table' element={<Table />} />
+          <Route path='/Subjects' element={<Cric />} />
         </Routes>
       </div>
     </Router>

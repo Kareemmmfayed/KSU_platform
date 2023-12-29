@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import Header from '../Header';
 import Footer from '../Footer';
-// import search from '../../assets/Group.png'
 
-function Programs() {
+function Cric() {
+
     const allPrograms = ["دبلومة إدارة الأعمال", "دبلومة المحاسبة", "دبلومة إدارة الموارد البشرية"]
     const [searchTerm, setSearchTerm] = useState('');
     
@@ -12,12 +12,12 @@ function Programs() {
     );
 
     return (
-    <>
+            <>
         <Header />
-        <div className='Programs'>
-            <div className='Programs__in'>
-                <div className='Programs__in__top'>
-                    <h2>برامج الدبلومات المتاحة حاليا</h2>
+        <div className='Cric'>
+            <div className='Cric__in'>
+                <div className='Cric__in__top'>
+                    <h2>المقررات الدراسية</h2>
                     <input
                         type='text'
                         placeholder='بحث'
@@ -35,7 +35,8 @@ function Programs() {
         <Footer />
         </div>
     </>
-    );
+
+    )
 }
 
-export default Programs;
+export default Cric
