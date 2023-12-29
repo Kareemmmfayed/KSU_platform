@@ -4,8 +4,7 @@ import Footer from '../Footer';
 // import search from '../../assets/Group.png'
 
 function Programs() {
-    const allPrograms = ["دبلومة إدارة الأعمال", "دبلومة المحاسبة", "دبلومة إدارة الموارد البشرية", "دبلومة البنوك والتمويل"];
-
+    const allPrograms = ["دبلومة إدارة الأعمال", "دبلومة المحاسبة", "دبلومة إدارة الموارد البشرية"]
     const [searchTerm, setSearchTerm] = useState('');
     
     const filteredPrograms = allPrograms.filter(program =>

@@ -5,6 +5,7 @@ import Signup from './components/Appflow/Signup';
 import Success from './components/Appflow/Success';
 import Application from './components/Appflow/Application';
 import Programs from './components/Appflow/Programs';
+import Applicants from './components/Empflow/Applicants';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path='/success' element={<Success />} />
           <Route path='/application' element={<Application />} />
           <Route path='/programs' element={<Programs />} />
+          <Route path='/applicants' element={<Applicants />} />
         </Routes>
       </div>
     </Router>

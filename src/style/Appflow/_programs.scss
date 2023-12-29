@@ -1,12 +1,12 @@
 .Programs {
     font-family: 'Cairo', sans-serif;
     position: relative;
-    height: 76vh;
 
     &__in {
         height: 100%;
         direction: rtl;
         padding: 20px 60px 0;
+        min-height: 76vh;
 
         @media (max-width: 400px) {
             padding: 20px 10px 0 0;

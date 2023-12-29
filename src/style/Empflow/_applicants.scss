@@ -1,0 +1,89 @@
+.Applicants {
+    font-family: 'Cairo', sans-serif;
+    position: relative;
+
+    &__in {
+        height: 100%;
+        direction: rtl;
+        padding: 20px 60px 0;
+        min-height: 76vh;
+
+        @media (max-width: 400px) {
+            padding: 20px 10px 0 0;
+        }
+
+        &__top {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+
+            input {
+                padding: 10px 16px 10px 16px;
+                border-radius: 8px;
+                width: 326px;
+                height: 50px;
+                border: 1px solid grey;
+            }
+
+            h2 {
+                color: var(--main-color);
+            }
+        }
+
+        ol {
+            display: grid;
+            // grid-template-rows: ;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px 155px;
+
+            @media (max-width: 1000px) {
+                grid-template-columns: 1fr;
+            }
+            
+            .Applicants__in__bot {
+                display: flex;
+                justify-content: space-between;
+                padding: 20px 40px;
+                box-shadow: 0px 3.276521682739258px 26.212173461914062px 0px #00000040;
+
+                li {
+                    color: var(--main-color);
+                    font-weight: 600;
+                    font-size: 30px;
+                }
+    
+                p {
+                    font-weight: 500;
+                    font-size: 20px;
+                    color: grey;
+                }
+
+                > div {
+                    padding-right: 30px;
+                }
+
+                button {
+                    align-items: end;
+                    display: flex;
+                    background: white;
+                    border: none;
+
+                    div {
+                        border-radius: 50%;
+                        transition: all 0.3s;
+                        padding: 10px;
+
+                        img {
+                            width: 30px;
+                        }
+                    }
+
+                    div:hover {
+                        background-color: lightgray;
+                    }
+
+                }
+            }
+        }
+    }
+}

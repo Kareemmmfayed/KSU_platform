@@ -650,12 +650,12 @@ body {
 .Programs {
   font-family: "Cairo", sans-serif;
   position: relative;
-  height: 76vh;
 }
 .Programs__in {
   height: 100%;
   direction: rtl;
   padding: 20px 60px 0;
+  min-height: 76vh;
 }
 @media (max-width: 400px) {
   .Programs__in {
@@ -682,4 +682,81 @@ body {
   font-weight: 400;
   cursor: pointer;
   margin: 15px 0;
+}
+
+.Applicants {
+  font-family: "Cairo", sans-serif;
+  position: relative;
+}
+.Applicants__in {
+  height: 100%;
+  direction: rtl;
+  padding: 20px 60px 0;
+  min-height: 76vh;
+}
+@media (max-width: 400px) {
+  .Applicants__in {
+    padding: 20px 10px 0 0;
+  }
+}
+.Applicants__in__top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.Applicants__in__top input {
+  padding: 10px 16px 10px 16px;
+  border-radius: 8px;
+  width: 326px;
+  height: 50px;
+  border: 1px solid grey;
+}
+.Applicants__in__top h2 {
+  color: var(--main-color);
+}
+.Applicants__in ol {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px 155px;
+}
+@media (max-width: 1000px) {
+  .Applicants__in ol {
+    grid-template-columns: 1fr;
+  }
+}
+.Applicants__in ol .Applicants__in__bot {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 40px;
+  box-shadow: 0px 3.2765216827px 26.2121734619px 0px rgba(0, 0, 0, 0.2509803922);
+}
+.Applicants__in ol .Applicants__in__bot li {
+  color: var(--main-color);
+  font-weight: 600;
+  font-size: 30px;
+}
+.Applicants__in ol .Applicants__in__bot p {
+  font-weight: 500;
+  font-size: 20px;
+  color: grey;
+}
+.Applicants__in ol .Applicants__in__bot > div {
+  padding-right: 30px;
+}
+.Applicants__in ol .Applicants__in__bot button {
+  align-items: end;
+  display: flex;
+  background: white;
+  border: none;
+}
+.Applicants__in ol .Applicants__in__bot button div {
+  border-radius: 50%;
+  transition: all 0.3s;
+  padding: 10px;
+}
+.Applicants__in ol .Applicants__in__bot button div img {
+  width: 30px;
+}
+.Applicants__in ol .Applicants__in__bot button div:hover {
+  background-color: lightgray;
 }/*# sourceMappingURL=main.css.map */
