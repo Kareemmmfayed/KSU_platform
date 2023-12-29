@@ -759,4 +759,79 @@ body {
 }
 .Applicants__in ol .Applicants__in__bot button div:hover {
   background-color: lightgray;
+}
+
+.Table {
+  font-family: "Cairo", sans-serif;
+  position: relative;
+}
+.Table__in {
+  height: 100%;
+  direction: rtl;
+  padding: 20px 60px 0;
+  min-height: 76vh;
+}
+@media (max-width: 400px) {
+  .Table__in {
+    padding: 20px 10px 0 0;
+  }
+}
+.Table__in__top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.Table__in__top input {
+  padding: 10px 16px 10px 16px;
+  border-radius: 8px;
+  width: 326px;
+  height: 50px;
+  border: 1px solid grey;
+}
+.Table__in__top h2 {
+  color: var(--main-color);
+}
+.Table__in__bot table {
+  width: 100%;
+}
+.Table__in__bot table thead {
+  color: white;
+  background: var(--main-color);
+}
+.Table__in__bot table thead th {
+  padding: 10px 20px;
+  font-weight: 400;
+  font-size: 18px;
+}
+.Table__in__bot table thead th:first-of-type {
+  width: 120px;
+}
+.Table__in__bot table th, .Table__in__bot table td {
+  border: 1px solid black;
+}
+.Table__in__bot table td {
+  padding: 15px;
+  background-color: #F2F2F2;
+}
+.Table__in__bot table tr td:first-of-type {
+  text-align: center;
+}
+.Table__in .but {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+.Table__in .but button {
+  height: 55px;
+  width: 200px;
+  background: var(--main-color);
+  color: white;
+  border: none;
+  border-radius: 10px;
+}
+.Table__in .but button:hover {
+  background-color: var(--btn-hover);
+}
+.Table__in .but button:active {
+  background-color: var(--btn-active);
 }/*# sourceMappingURL=main.css.map */

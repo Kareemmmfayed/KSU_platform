@@ -47,7 +47,7 @@ function Applicants() {
 
     return (
         <>
-            <Header />
+            <Header name="< العودة" link="/"/>
             <div className="Applicants">
                 <div className='Applicants__in'>
                     <div className='Applicants__in__top'>
