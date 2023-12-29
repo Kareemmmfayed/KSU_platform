@@ -1,0 +1,32 @@
+.Mydiplomas {
+    font-family: 'Cairo', sans-serif;
+
+    .Diploma {
+        min-height: 76vh;
+
+        .cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 30px 60px;
+            padding: 55px;
+    
+            .card {
+                box-shadow: 0px 3.276521682739258px 26.212173461914062px 0px #00000040;
+                padding: 10px;
+                text-align: center;
+
+                h2 {
+                    color: var(--main-color);
+                    font-weight: 600;
+                    font-size: 32px;
+                }
+
+                p:first-of-type {
+                    color: var(--main-color);
+                    font-weight: 500;
+                    font-size: 28px;
+                }
+            }
+        }
+    }
+}
