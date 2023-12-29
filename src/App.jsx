@@ -8,6 +8,7 @@ import Programs from './components/Appflow/Programs';
 import Applicants from './components/Empflow/Applicants';
 import Table from './components/Lecturer/Table';
 import Cric from './components/Lecturer/Cric';
+import AccountInfo from './components/Appflow/AccountInfo';
 
 function App() {
   return (
@@ -17,9 +18,10 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/login' element={<Signin />} />
           <Route path='/signup' element={<Signup />} />
-          <Route path='/success' element={<Success />} />
-          <Route path='/application' element={<Application />} />
           <Route path='/programs' element={<Programs />} />
+          <Route path='/application' element={<Application />} />
+          <Route path='/success' element={<Success />} />
+          <Route path='/AccountInfo' element={<AccountInfo />} />
           <Route path='/applicants' element={<Applicants />} />
           <Route path='/table' element={<Table />} />
           <Route path='/Subjects' element={<Cric />} />
