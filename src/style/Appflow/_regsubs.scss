@@ -1,0 +1,128 @@
+.Regsubs {
+    font-family: 'Cairo', sans-serif;
+
+    &__in {
+        min-height: 76vh;
+        direction: rtl;
+        padding: 40px 40px 0;
+
+        h2 {
+            color: var(--main-color);
+            font-weight: 600;
+            font-size: 40px;
+
+            @media (max-width: 400px) {
+                font-size: 30px;
+            }
+        }
+
+        &__two {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            min-height: 300px;
+
+            @media (max-width: 650px) {
+                flex-direction: column;
+            }
+
+            &__right, &__left {
+                width: 50%;
+                padding: 0;
+                list-style: none;
+
+                @media (max-width: 650px) {
+                    width: 100%;
+                }
+
+                ul {
+                    list-style: none;
+                    padding: 0;
+
+                    li {
+                        padding: 10px;
+                        display: flex;
+                        justify-content: space-between;
+                        font-size: 20px;
+                        font-weight: 600;
+
+                        @media (max-width: 650px) {
+                            font-size: 12px;
+                        }
+
+                        button {
+                            background-color: transparent;
+                            border: none;
+                        }
+                    }
+                }
+
+                p {
+                    font-size: 16px;
+                    font-weight: 500;
+                    color: #7F7C7E;
+
+                    @media (max-width: 400px) {
+                        font-size: 13px;
+                    }
+                }
+            }
+
+            &__left {
+                text-align: center;
+                margin-right: 80px;
+
+                @media (max-width: 650px) {
+                    margin-right: 0;
+                }
+            }
+        }
+
+        .butts {
+            display: flex;
+            padding-top: 40px;
+
+            .space {
+                width: 85%;
+            }
+
+            .two {
+                display: flex;
+                flex-direction: column;
+
+                button {
+                    height: 50px;
+                    border: none;
+                    border-radius: 10px;
+                    margin-bottom: 10px;
+                }
+
+                button:first-of-type {
+                    color: white;
+                }
+
+                button:last-of-type {
+                    color: var(--main-color);
+                    background-color: white;
+                    border: 1px solid var(--main-color)
+                }
+
+                button:last-of-type:hover {
+                    background-color: lightgrey;
+                }
+
+                .save:active {
+                    background-color: lightblue;
+                }
+            }
+        }
+    }
+}
+
+.one {
+    background: #EFF5FB;
+}
+
+.two {
+    background: #FAFDFF;
+}

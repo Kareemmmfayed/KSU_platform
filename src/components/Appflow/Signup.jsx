@@ -1,8 +1,38 @@
 import Header from '../Header'
 import Footer from '../Footer'
 import { Link } from 'react-router-dom'
+import { useState } from 'react';
+import { SignupApplicant } from '../../services/api';
+import { useNavigate } from 'react-router-dom';
+
+
 
 function Signup() {
+
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [nationalId, setNationalId] = useState('');
+    const [gender, setGender] = useState('');
+
+    const navigate = useNavigate();
+
+    const handleSignUp = async (e) => {
+        e.preventDefault();
+        
+        if (await SignupApplicant(name, email, password, nationalId, gender)) {
+            console.log("GOOOd");
+            // Further actions if signup failed
+            navigate("/");
+        } else {
+            console.log("BADD");
+            // Further actions if signup failed
+        }
+
+    };
+    
+    
+
     return (
         <>
             <Header name="< العودة" link="/"/>
@@ -10,9 +40,9 @@ function Signup() {
                 <div className='Signup__inner'>
                         <div className='signup__inner__form col-lg-5 col-md-6 col-12'>
                             <h2>أنشئ حسابك</h2>
-                            <form>
-                                <input type="text" placeholder='الإسم بالكامل'/>
-                                <input type="number" placeholder= 'الرقم القومي'/>
+                            <form onSubmit={handleSignUp}>
+                                <input type="text" placeholder='الإسم بالكامل' value={name} onChange={(e) => setName(e.target.value)}/>
+                                <input type="number" placeholder= 'الرقم القومي' value={nationalId} onChange={(e) => setNationalId(e.target.value)}/>
                                 <select id="colleges" name="colleges">
                                     <option disabled selected>الكلية</option>
                                     <option value="agriculture">كلية الزراعة</option>
@@ -41,16 +71,16 @@ function Signup() {
                                 <div className='gender'>
                                     <label htmlFor='gender'>: النوع</label>
                                     <div className='male'>
-                                        <label>ذكر</label>
-                                        <input type="radio" id="male" name="gender" value="male" />
+                                        <label htmlFor='male'>ذكر</label>
+                                        <input type="radio" id="male" name="gender" value="male" checked={gender === 'male'} onChange={(e) => setGender(e.target.value)}/>
                                     </div>
                                     <div className='female'>
-                                        <label>أنثي</label>
-                                        <input type="radio" id="female" name="gender" value="female" />
+                                        <label htmlFor='female'>أنثي</label>
+                                        <input type="radio" id="female" name="gender" value="female" checked={gender === 'female'} onChange={(e) => setGender(e.target.value)}/>
                                     </div>
                                 </div>
-                                <input type="email" placeholder='البريد الإلكتروني'/>
-                                <input type="password" placeholder='كلمة السر'/>
+                                <input type="email" placeholder='البريد الإلكتروني' value={email} onChange={(e) => setEmail(e.target.value)}/>
+                                <input type="password" placeholder='كلمة السر' value={password} onChange={(e) => setPassword(e.target.value)}/>
                                 <input type="password" placeholder='تأكيد كلمة المرور'/>
                                 <div className='sub'>
                                 <button type='submit' className='btnbtn'> الدخول </button>

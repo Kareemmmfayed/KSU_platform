@@ -51,6 +51,7 @@ body {
   flex-direction: row-reverse;
   justify-content: space-between;
   font-family: "Cairo", sans-serif;
+  box-shadow: 0px 14px 16px 0px rgba(4, 60, 102, 0.2509803922);
 }
 @media (max-width: 500px) {
   .Header {
@@ -988,4 +989,115 @@ body {
 }
 .Regsubs__in {
   min-height: 76vh;
+  direction: rtl;
+  padding: 40px 40px 0;
+}
+.Regsubs__in h2 {
+  color: var(--main-color);
+  font-weight: 600;
+  font-size: 40px;
+}
+@media (max-width: 400px) {
+  .Regsubs__in h2 {
+    font-size: 30px;
+  }
+}
+.Regsubs__in__two {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+  min-height: 300px;
+}
+@media (max-width: 650px) {
+  .Regsubs__in__two {
+    flex-direction: column;
+  }
+}
+.Regsubs__in__two__right, .Regsubs__in__two__left {
+  width: 50%;
+  padding: 0;
+  list-style: none;
+}
+@media (max-width: 650px) {
+  .Regsubs__in__two__right, .Regsubs__in__two__left {
+    width: 100%;
+  }
+}
+.Regsubs__in__two__right ul, .Regsubs__in__two__left ul {
+  list-style: none;
+  padding: 0;
+}
+.Regsubs__in__two__right ul li, .Regsubs__in__two__left ul li {
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 20px;
+  font-weight: 600;
+}
+@media (max-width: 650px) {
+  .Regsubs__in__two__right ul li, .Regsubs__in__two__left ul li {
+    font-size: 12px;
+  }
+}
+.Regsubs__in__two__right ul li button, .Regsubs__in__two__left ul li button {
+  background-color: transparent;
+  border: none;
+}
+.Regsubs__in__two__right p, .Regsubs__in__two__left p {
+  font-size: 16px;
+  font-weight: 500;
+  color: #7F7C7E;
+}
+@media (max-width: 400px) {
+  .Regsubs__in__two__right p, .Regsubs__in__two__left p {
+    font-size: 13px;
+  }
+}
+.Regsubs__in__two__left {
+  text-align: center;
+  margin-right: 80px;
+}
+@media (max-width: 650px) {
+  .Regsubs__in__two__left {
+    margin-right: 0;
+  }
+}
+.Regsubs__in .butts {
+  display: flex;
+  padding-top: 40px;
+}
+.Regsubs__in .butts .space {
+  width: 85%;
+}
+.Regsubs__in .butts .two {
+  display: flex;
+  flex-direction: column;
+}
+.Regsubs__in .butts .two button {
+  height: 50px;
+  border: none;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+.Regsubs__in .butts .two button:first-of-type {
+  color: white;
+}
+.Regsubs__in .butts .two button:last-of-type {
+  color: var(--main-color);
+  background-color: white;
+  border: 1px solid var(--main-color);
+}
+.Regsubs__in .butts .two button:last-of-type:hover {
+  background-color: lightgrey;
+}
+.Regsubs__in .butts .two .save:active {
+  background-color: lightblue;
+}
+
+.one {
+  background: #EFF5FB;
+}
+
+.two {
+  background: #FAFDFF;
 }/*# sourceMappingURL=main.css.map */
