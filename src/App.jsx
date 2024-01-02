@@ -11,6 +11,8 @@ import Cric from './components/Lecturer/Cric';
 import AccountInfo from './components/Appflow/AccountInfo';
 import Mydiplomas from './components/Appflow/Mydiplomas';
 import Regsubs from './components/Appflow/Regsubs';
+import Appinfo from './components/Appflow/Appinfo';
+import Appinfoemp from './components/Empflow/Appinfoemp';
 
 function App() {
   return (
@@ -27,6 +29,8 @@ function App() {
           <Route path='/YourDiplomas' element={<Mydiplomas />} />
           <Route path='/YourSubjects' element={<Regsubs />} />
           <Route path='/applicants' element={<Applicants />} />
+          <Route path='/appinfo' element={<Appinfo />} />
+          <Route path='/appinfoemp' element={<Appinfoemp />} />
           <Route path='/table' element={<Table />} />
           <Route path='/Subjects' element={<Cric />} />
         </Routes>

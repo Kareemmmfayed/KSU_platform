@@ -1,7 +1,21 @@
 import Header from "../Header"
+import { useAuth } from '../../services/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 
 function Landing() {
+
+    const { isAuthenticated } = useAuth();
+    const navigate = useNavigate();
+
+
+    const handleClick = () => {
+        if (isAuthenticated) {
+            navigate("/programs")
+        } else {
+            navigate("/login")
+        }
+    }
 
     return (
         <div className="Landing">
@@ -11,7 +25,7 @@ function Landing() {
                     <p>منصة التقديم الإلكتروني على  <span>الدبلومات </span>
                         للخريجين في جامعة كفر الشيخ.</p>
                     <p>مرحبًا بك في منصة التقديم الإلكتروني للدبلومات. نحن هنا لنسهِّل عليك الخطوات المطلوبة للحصول على فرصة دراسية في مجالات متنوعة .</p>
-                    <button className="btnbtn">إختر مسارك</button>
+                    <button className="btnbtn" onClick={handleClick}>إختر مسارك</button>
                 </div>
             </div>
         </div>

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { useState } from 'react';
 import { SignupApplicant } from '../../services/api';
 import { useNavigate } from 'react-router-dom';
-
+import { useAuth } from '../../services/AuthContext';
 
 
 function Signup() {
@@ -16,16 +16,15 @@ function Signup() {
     const [gender, setGender] = useState('');
 
     const navigate = useNavigate();
+    const { login } = useAuth();
 
     const handleSignUp = async (e) => {
         e.preventDefault();
         
         if (await SignupApplicant(name, email, password, nationalId, gender)) {
-            console.log("GOOOd");
-            // Further actions if signup failed
+            login(false);
             navigate("/");
         } else {
-            console.log("BADD");
             // Further actions if signup failed
         }
 

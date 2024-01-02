@@ -16,3 +16,6 @@
 @use './Appflow/accountinfo';
 @use './Appflow/mydiplomas';
 @use './Appflow/regsubs';
+@use './Appflow/appinfo';
+@use './lock';
+@use './Empflow/appinfoemp';

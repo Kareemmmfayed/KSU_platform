@@ -77,3 +77,19 @@
         }
     }
 }
+
+.userName {
+    display: flex;
+    direction: rtl;
+    align-items: start;
+
+    p {
+        color: white;
+        font-weight: 500;
+        margin-right: 5px;
+    }
+
+    img {
+        object-fit: contain;
+    }
+}

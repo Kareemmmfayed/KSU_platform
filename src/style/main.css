@@ -118,6 +118,21 @@ body {
   }
 }
 
+.userName {
+  display: flex;
+  direction: rtl;
+  align-items: start;
+}
+.userName p {
+  color: white;
+  font-weight: 500;
+  margin-right: 5px;
+}
+.userName img {
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
 .Landing__hero {
   width: 100%;
   height: 680px;
@@ -1100,4 +1115,118 @@ body {
 
 .two {
   background: #FAFDFF;
+}
+
+.Appinfo {
+  font-family: "Cairo", sans-serif;
+  direction: rtl;
+}
+.Appinfo__in {
+  min-height: 100vh;
+  padding: 30px 30px 0;
+}
+@media (max-width: 500px) {
+  .Appinfo__in {
+    padding: 30px 0 0;
+  }
+}
+.Appinfo__in h2 {
+  color: var(--main-color);
+  font-weight: 400;
+  font-size: 40px;
+}
+@media (max-width: 500px) {
+  .Appinfo__in h2 {
+    font-size: 25px;
+  }
+}
+
+.Lock {
+  padding: 30px 30px 0 0;
+}
+@media (max-width: 500px) {
+  .Lock {
+    padding: 30px 0 0;
+  }
+}
+.Lock form {
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+}
+@media (max-width: 1400px) {
+  .Lock form {
+    width: 60%;
+  }
+}
+@media (max-width: 1000px) {
+  .Lock form {
+    width: 100%;
+  }
+}
+.Lock form > div {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+  position: relative;
+}
+.Lock form > div img {
+  position: absolute;
+  top: 10px;
+  left: 7px;
+  width: 18px;
+}
+.Lock form > div > div {
+  direction: ltr;
+  width: 32%;
+}
+.Lock form > div label {
+  font-weight: 500;
+  font-size: 18px;
+}
+@media (max-width: 400px) {
+  .Lock form > div label {
+    font-size: 12px;
+  }
+}
+.Lock form > div input, .Lock form > div textarea {
+  width: 65%;
+  height: 37px;
+  border-radius: 7px;
+  border: 1px solid grey;
+  padding: 10px;
+}
+.Lock form > div textarea {
+  resize: none;
+  height: 80px;
+}
+.Lock form > div select {
+  width: 64%;
+  height: 37px;
+  border-radius: 7px;
+  border: 1px solid grey;
+}
+
+.Appemp {
+  font-family: "Cairo", sans-serif;
+  direction: rtl;
+}
+.Appemp__in {
+  min-height: 100vh;
+  padding: 30px 30px 0;
+}
+@media (max-width: 500px) {
+  .Appemp__in {
+    padding: 30px 0 0;
+  }
+}
+.Appemp__in h2 {
+  color: var(--main-color);
+  font-weight: 400;
+  font-size: 40px;
+}
+@media (max-width: 500px) {
+  .Appemp__in h2 {
+    font-size: 25px;
+  }
 }/*# sourceMappingURL=main.css.map */
