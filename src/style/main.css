@@ -1229,4 +1229,122 @@ body {
   .Appemp__in h2 {
     font-size: 25px;
   }
+}
+
+.Addmain {
+  font-family: "Cairo", sans-serif;
+  direction: rtl;
+}
+.Addmain__in {
+  min-height: 76vh;
+  padding: 30px 30px 0;
+}
+@media (max-width: 850px) {
+  .Addmain__in {
+    padding: 30px 0 0;
+  }
+}
+.Addmain__in__add {
+  margin-bottom: 60px;
+}
+.Addmain__in__add ul {
+  list-style: none;
+}
+.Addmain__in__add ul li {
+  margin: 10px;
+}
+.Addmain__in__add ul li button {
+  background: transparent;
+  border: none;
+}
+@media (max-width: 850px) {
+  .Addmain__in__add ul li button img {
+    width: 30px;
+  }
+}
+@media (max-width: 500px) {
+  .Addmain__in__add ul li button img {
+    width: 20px;
+  }
+}
+.Addmain__in__add ul li button span {
+  font-weight: 600;
+  font-size: 40px;
+  color: var(--main-color);
+}
+@media (max-width: 850px) {
+  .Addmain__in__add ul li button span {
+    font-size: 22px;
+  }
+}
+@media (max-width: 500px) {
+  .Addmain__in__add ul li button span {
+    font-size: 14px;
+  }
+}
+.Addmain__in__screen__top {
+  display: flex;
+  justify-content: space-between;
+  margin: 30px 0;
+}
+.Addmain__in__screen__top h2 {
+  font-weight: 600;
+  font-size: 40px;
+  color: var(--main-color);
+}
+.Addmain__in__screen__top input {
+  width: 30%;
+  border-radius: 8px;
+  border: 1px solid grey;
+  padding: 0 20px;
+}
+.Addmain__in__screen__body {
+  padding-top: 30px;
+}
+.Addmain__in__screen__body .cards {
+  display: grid;
+  grid-template-columns: 40% 40%;
+  justify-content: space-around;
+  gap: 50px 0;
+}
+.Addmain__in__screen__body .cards .card {
+  height: 450px;
+  padding: 20px;
+  box-shadow: 0px 3.2765216827px 26.2121734619px 0px rgba(0, 0, 0, 0.2509803922);
+  border-radius: 0;
+  position: relative;
+}
+.Addmain__in__screen__body .cards .card button {
+  display: flex;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  position: absolute;
+  left: 12px;
+}
+.Addmain__in__screen__body .cards .card h3 {
+  font-weight: 600;
+  font-size: 30px;
+  color: var(--main-color);
+}
+.Addmain__in__screen__body .cards .card p:first-of-type,
+.Addmain__in__screen__body .cards .card p:nth-child(2),
+.Addmain__in__screen__body .cards .card p:nth-child(3) {
+  font-weight: 500;
+  font-size: 25px;
+  color: var(--main-color);
+}
+.Addmain__in__screen__body .cards .card p:nth-child(3) {
+  margin-bottom: 35px;
+}
+.Addmain__in__screen__body .cards .card p:nth-child(4),
+.Addmain__in__screen__body .cards .card p:last-of-type {
+  color: gray;
+  font-weight: 500;
+  font-size: 22px;
+}
+.Addmain__in__screen__body .cards .card ul li {
+  color: gray;
+  font-weight: 500;
+  font-size: 22px;
 }/*# sourceMappingURL=main.css.map */

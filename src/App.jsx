@@ -13,6 +13,8 @@ import Mydiplomas from './components/Appflow/Mydiplomas';
 import Regsubs from './components/Appflow/Regsubs';
 import Appinfo from './components/Appflow/Appinfo';
 import Appinfoemp from './components/Empflow/Appinfoemp';
+import Addmain from './components/Admin/Addmain';
+import Mastermain from './components/Master/Mastermain';
 
 function App() {
   return (
@@ -33,6 +35,8 @@ function App() {
           <Route path='/appinfoemp' element={<Appinfoemp />} />
           <Route path='/table' element={<Table />} />
           <Route path='/Subjects' element={<Cric />} />
+          <Route path='/admin/add' element={<Addmain />} />
+          <Route path='/master/main' element={<Mastermain />} />
         </Routes>
       </div>
     </Router>
