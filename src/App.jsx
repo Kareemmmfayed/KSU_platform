@@ -15,6 +15,8 @@ import Appinfo from './components/Appflow/Appinfo';
 import Appinfoemp from './components/Empflow/Appinfoemp';
 import Addmain from './components/Admin/Addmain';
 import Mastermain from './components/Master/Mastermain';
+import Adiplomas from './components/Admin/Adiplomas';
+import Aemp from './components/Admin/Aemp';
 
 function App() {
   return (
@@ -35,7 +37,9 @@ function App() {
           <Route path='/appinfoemp' element={<Appinfoemp />} />
           <Route path='/table' element={<Table />} />
           <Route path='/Subjects' element={<Cric />} />
-          <Route path='/admin/add' element={<Addmain />} />
+          <Route path='/admin/main' element={<Addmain />} />
+          <Route path='/admin/diplomas' element={<Adiplomas />} />
+          <Route path='/admin/employees' element={<Aemp />} />
           <Route path='/master/main' element={<Mastermain />} />
         </Routes>
       </div>

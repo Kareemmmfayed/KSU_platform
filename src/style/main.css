@@ -1347,4 +1347,190 @@ body {
   color: gray;
   font-weight: 500;
   font-size: 22px;
+}
+
+.Adiplomas {
+  font-family: "Cairo", sans-serif;
+  direction: rtl;
+}
+.Adiplomas__in {
+  min-height: 76vh;
+  padding: 30px 30px 0;
+  position: relative;
+}
+.Adiplomas__in__top button {
+  background: transparent;
+  border: none;
+}
+.Adiplomas__in__body .cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 30px 60px;
+  padding: 55px;
+}
+.Adiplomas__in__body .cards .card {
+  box-shadow: 0px 3.2765216827px 26.2121734619px 0px rgba(0, 0, 0, 0.2509803922);
+  padding: 25px;
+  text-align: center;
+}
+.Adiplomas__in__body .cards .card h2 {
+  color: var(--main-color);
+  font-weight: 600;
+  font-size: 32px;
+}
+.Adiplomas__in__body .cards .card p:first-of-type {
+  color: var(--main-color);
+  font-weight: 500;
+  font-size: 28px;
+}
+.Adiplomas__in__body .cards .card button {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  border: none;
+  background: transparent;
+}
+.Adiplomas__in__body .cards .card button img {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+}
+.Adiplomas__in__body .cards .delete {
+  position: relative;
+  background-color: lightgrey;
+}
+.Adiplomas__in form {
+  position: absolute;
+  top: 36px;
+  left: 50%;
+  width: 45%;
+  height: 87%;
+  background: white;
+  transform: translate(-50%, 0);
+  box-shadow: 0px 3.2765216827px 26.2121734619px 0px rgba(0, 0, 0, 0.2509803922);
+  padding: 20px 10px 0;
+}
+.Adiplomas__in form div {
+  display: flex;
+  justify-content: space-between;
+  margin: 25px 10px;
+  font-weight: 500;
+  font-size: 20px;
+}
+.Adiplomas__in form div input {
+  width: 50%;
+  border-radius: 6px;
+  border: 1px solid grey;
+  font-weight: 400;
+  font-size: 18px;
+  padding: 4px 10px;
+}
+.Adiplomas__in form div .special {
+  height: 65px;
+  font-size: 15px;
+}
+.Adiplomas__in form div:last-of-type {
+  justify-content: center;
+}
+.Adiplomas__in form div:last-of-type button {
+  border: none;
+  border-radius: 6px;
+  color: white;
+  padding: 9px 14px;
+  width: 160px;
+}
+
+.Aemp {
+  font-family: "Cairo", sans-serif;
+  direction: rtl;
+}
+.Aemp__in {
+  min-height: 76vh;
+  padding: 30px 30px 0;
+  position: relative;
+}
+.Aemp__in__top button {
+  background: transparent;
+  border: none;
+}
+.Aemp__in__body .cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 30px 60px;
+  padding: 55px;
+}
+.Aemp__in__body .cards .card {
+  box-shadow: 0px 3.2765216827px 26.2121734619px 0px rgba(0, 0, 0, 0.2509803922);
+  padding: 25px;
+  text-align: center;
+}
+.Aemp__in__body .cards .card h2 {
+  color: var(--main-color);
+  font-weight: 600;
+  font-size: 32px;
+}
+.Aemp__in__body .cards .card p:first-of-type {
+  color: var(--main-color);
+  font-weight: 500;
+  font-size: 28px;
+}
+.Aemp__in__body .cards .card button {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  border: none;
+  background: transparent;
+}
+.Aemp__in__body .cards .card button img {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+}
+.Aemp__in__body .cards .delete {
+  position: relative;
+  background-color: lightgrey;
+}
+.Aemp__in form {
+  position: absolute;
+  top: 36px;
+  left: 50%;
+  width: 45%;
+  height: 87%;
+  background: white;
+  transform: translate(-50%, 0);
+  box-shadow: 0px 3.2765216827px 26.2121734619px 0px rgba(0, 0, 0, 0.2509803922);
+  padding: 20px 10px 0;
+}
+.Aemp__in form div {
+  display: flex;
+  justify-content: space-between;
+  margin: 25px 10px;
+  font-weight: 500;
+  font-size: 20px;
+}
+.Aemp__in form div input {
+  width: 50%;
+  border-radius: 6px;
+  border: 1px solid grey;
+  font-weight: 400;
+  font-size: 18px;
+  padding: 4px 10px;
+}
+.Aemp__in form div .special {
+  height: 65px;
+  font-size: 15px;
+}
+.Aemp__in form div:last-of-type {
+  justify-content: center;
+}
+.Aemp__in form div:last-of-type button {
+  border: none;
+  border-radius: 6px;
+  color: white;
+  padding: 9px 14px;
+  width: 160px;
 }/*# sourceMappingURL=main.css.map */

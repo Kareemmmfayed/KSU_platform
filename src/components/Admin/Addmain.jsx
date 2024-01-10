@@ -3,8 +3,11 @@ import Footer from '../Footer'
 import plus from '../../assets/plus.png'
 import { useState } from 'react'
 import print from '../../assets/print.png'
+import { useNavigate } from 'react-router-dom';
 
 function Addmain() {
+
+    const navigate = useNavigate();
 
     const program = [
         ["دبلومة إدارة الأعمال",
@@ -43,6 +46,13 @@ function Addmain() {
         
     }
 
+    const navtodip = () => {
+        navigate("/admin/diplomas")
+    }
+
+    const navtoemp = () => {
+        // navigate
+    }
 
     return (
         <>
@@ -52,13 +62,13 @@ function Addmain() {
                     <div className="Addmain__in__add">
                         <ul>
                             <li>
-                                <button>
+                                <button onClick={navtodip}>
                                     <img src={plus} alt="plus" />
                                     <span>إضافة برنامج دراسي جديد</span>
                                 </button>
                             </li>
                             <li>
-                                <button>
+                                <button onClick={navtoemp}>
                                     <img src={plus} alt="plus" />
                                     <span>إضافة موظف جديد</span>
                                 </button>
