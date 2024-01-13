@@ -51,7 +51,11 @@ function Addmain() {
     }
 
     const navtoemp = () => {
-        // navigate
+        navigate("/admin/employees")
+    }
+
+    const navtolec = () => {
+        navigate("/admin/lecturers")
     }
 
     return (
@@ -74,7 +78,7 @@ function Addmain() {
                                 </button>
                             </li>
                             <li>
-                                <button>
+                                <button onClick={navtolec}>
                                     <img src={plus} alt="plus" />
                                     <span>إضافة محاضر جديد</span>
                                 </button>

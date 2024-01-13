@@ -17,6 +17,8 @@ import Addmain from './components/Admin/Addmain';
 import Mastermain from './components/Master/Mastermain';
 import Adiplomas from './components/Admin/Adiplomas';
 import Aemp from './components/Admin/Aemp';
+import Alect from './components/Admin/Alect'
+import Asubjects from './components/Admin/Asubjects';
 
 function App() {
   return (
@@ -40,6 +42,8 @@ function App() {
           <Route path='/admin/main' element={<Addmain />} />
           <Route path='/admin/diplomas' element={<Adiplomas />} />
           <Route path='/admin/employees' element={<Aemp />} />
+          <Route path='/admin/lecturers' element={<Alect/>} />
+          <Route path='/admin/subjects' element={<Asubjects/>} />
           <Route path='/master/main' element={<Mastermain />} />
         </Routes>
       </div>

@@ -9,21 +9,15 @@ import checked from '../../assets/checked.png'
 import notchecked from '../../assets/notchecked.png'
 import copy from '../../assets/copy.png'
 
+function Asubjects() {
 
-function Alect() {
-
-    const employees = [
-        ["محمد سمير عادل شاكر", "M0hamedgg0@gmail.com", "8tyRkO8j"],
-        ["محمد سمير عادل شاكر", "M0hamedgg0@gmail.com", "8tyRkO8j"],
-        ["محمد سمير عادل شاكر", "M0hamedgg0@gmail.com", "8tyRkO8j"],
-        ["محمد سمير عادل شاكر", "M0hamedgg0@gmail.com", "8tyRkO8j"],
-        ["محمد سمير عادل شاكر", "M0hamedgg0@gmail.com", "8tyRkO8j"],
-        ["محمد سمير عادل شاكر", "M0hamedgg0@gmail.com", "8tyRkO8j"],
-        ["محمد سمير عادل شاكر", "M0hamedgg0@gmail.com", "8tyRkO8j"],
-        ["محمد سمير عادل شاكر", "M0hamedgg0@gmail.com", "8tyRkO8j"],
-        ["محمد سمير عادل شاكر", "M0hamedgg0@gmail.com", "8tyRkO8j"],
+    const subjects = [
+        ["تحليل إحصائي", "ECON25", "4", "المستوي الأول"],
+        ["تحليل إحصائي", "ECON25", "4", "المستوي الأول"],
+        ["تحليل إحصائي", "ECON25", "4", "المستوي الأول"],
     ]
 
+    
     const navigate = useNavigate();
 
     const navtohome = () => {
@@ -32,7 +26,7 @@ function Alect() {
 
     const [show, setShow] = useState(false)
     const [del, setDelete] = useState(false)
-    const [cardStates, setCardStates] = useState(Array(employees.length).fill(false));
+    const [cardStates, setCardStates] = useState(Array(subjects.length).fill(false));
 
     const toggleCardState = (index) => {
         setCardStates((prevStates) => {
@@ -60,12 +54,13 @@ function Alect() {
         navigator.clipboard.writeText(content)
     }
 
+
     return (
         <>
             <Header name="< العودة" link="/"/>
-            <div className="Alect">
-            <div className="Alect__in">
-                    <div className="Alect__in__top">
+            <div className="Asubjects">
+            <div className="Asubjects__in">
+                    <div className="Asubjects__in__top">
                         <button onClick={navtohome}>
                             <img src={home} alt="home" />
                         </button>
@@ -76,21 +71,22 @@ function Alect() {
                             <img src={trash} alt="trash" />
                         </button>
                     </div>
-                    <div className="Alect__in__body">
+                    <div className="Asubjects__in__body">
                         <div className="cards">
                         {
-                            employees.map((emp, index) => (
+                            subjects.map((emp, index) => (
                                 <div className={del ? "card delete" : "card"} key={index}>
-                                    <h2>الدكتور : {emp[0]}</h2>
-                                    <p>البريد الإلكتروني : {emp[1]}</p>
-                                    <p>كلمة المرور : {emp[2]}</p>
+                                    <h2>إسم المقرر : {emp[0]}</h2>
+                                    <p>كود المقرر : {emp[1]}</p>
+                                    <p>عدد الساعات المعتمدة : {emp[2]}</p>
+                                    <p>{emp[3]}</p>
                                     {del && (
                                         <button onClick={() => toggleCardState(index)}>
                                             <img src={cardStates[index] ? checked : notchecked} alt="circle" className='notcopy'/>
                                         </button>
                                     )}
                                     {!del && (
-                                        <button onClick={() => copycontent(`الاسم: ${emp[0]}\nالبريد الإلكتروني: ${emp[1]}\nكلمة المرور: ${emp[2]}`)}>
+                                        <button onClick={() => copycontent(`إسم المقرر: ${emp[0]}\nكود المقرر: ${emp[1]}\nعدد الساعات المعتمدة: ${emp[2]}\n${emp[3]}`)}>
                                             <img src={copy} alt="circle" className='copy'/>
                                         </button>
                                     )}
@@ -102,19 +98,19 @@ function Alect() {
                     { show && (
                         <form onSubmit={sub}>
                             <div>
-                                <label htmlFor="name">اسم المحاضر :</label>
+                                <label htmlFor="name">اسم المقرر :</label>
                                 <input type="text" id='name'/>
                             </div>
                             <div>
-                                <label htmlFor="faculty">الكلية الخاصة بالمحاضر :</label>
+                                <label htmlFor="faculty">كود المقرر :</label>
                                 <input type="text" id='faculty'/>
                             </div>
                             <div>
-                                <label htmlFor="mail">البريد الالكتروني :</label>
+                                <label htmlFor="mail">عدد الساعات المعتمدة :</label>
                                 <input type="text" id='mail'/>
                             </div>
                             <div>
-                                <label htmlFor="password">كلمة المرور :</label>
+                                <label htmlFor="password">مستوي المقرر :</label>
                                 <input type="text" id='password'/>
                             </div>
                             <div>
@@ -126,7 +122,8 @@ function Alect() {
                 <Footer/>
             </div>
         </>
+
     )
 }
 
-export default Alect
+export default Asubjects
