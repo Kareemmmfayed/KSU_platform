@@ -19,6 +19,9 @@ import Adiplomas from './components/Admin/Adiplomas';
 import Aemp from './components/Admin/Aemp';
 import Alect from './components/Admin/Alect'
 import Asubjects from './components/Admin/Asubjects';
+import Ayear from './components/Admin/Ayear';
+import Apay from './components/Admin/Apay';
+import Aprogram from './components/Admin/Aprogram';
 
 function App() {
   return (
@@ -44,6 +47,9 @@ function App() {
           <Route path='/admin/employees' element={<Aemp />} />
           <Route path='/admin/lecturers' element={<Alect/>} />
           <Route path='/admin/subjects' element={<Asubjects/>} />
+          <Route path='/admin/years' element={<Ayear/>} />
+          <Route path='/admin/payments' element={<Apay/>} />
+          <Route path='/admin/programs' element={<Aprogram/>} />
           <Route path='/master/main' element={<Mastermain />} />
         </Routes>
       </div>

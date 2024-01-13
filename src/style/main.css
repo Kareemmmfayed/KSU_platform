@@ -1804,4 +1804,351 @@ body {
   color: white;
   padding: 9px 14px;
   width: 160px;
+}
+
+.Ayear {
+  font-family: "Cairo", sans-serif;
+  direction: rtl;
+}
+.Ayear__in {
+  min-height: 76vh;
+  padding: 30px 30px 0;
+  position: relative;
+}
+.Ayear__in__top button {
+  background: transparent;
+  border: none;
+}
+@media (max-width: 650px) {
+  .Ayear__in__top button img {
+    width: 50px;
+  }
+}
+.Ayear__in__body .cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 30px 60px;
+  padding: 55px;
+}
+@media (max-width: 950px) {
+  .Ayear__in__body .cards {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 650px) {
+  .Ayear__in__body .cards {
+    grid-template-columns: 1fr;
+    padding: 55px 0;
+  }
+}
+.Ayear__in__body .cards .card {
+  box-shadow: 0px 3.2765216827px 26.2121734619px 0px rgba(0, 0, 0, 0.2509803922);
+  padding: 25px;
+  text-align: center;
+}
+.Ayear__in__body .cards .card p {
+  font-weight: 500;
+  font-size: 24px;
+}
+.Ayear__in__body .cards .card p:nth-child(2) {
+  color: var(--main-color);
+}
+.Ayear__in__body .cards .card p:last-of-type {
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--main-color);
+}
+.Ayear__in__body .cards .card button {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  border: none;
+  background: transparent;
+}
+.Ayear__in__body .cards .card button img {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+}
+.Ayear__in__body .cards .delete {
+  position: relative;
+  background-color: lightgrey;
+}
+.Ayear__in form {
+  position: absolute;
+  top: 36px;
+  left: 50%;
+  width: 45%;
+  height: 87%;
+  background: white;
+  transform: translate(-50%, 0);
+  box-shadow: 0px 3.2765216827px 26.2121734619px 0px rgba(0, 0, 0, 0.2509803922);
+  padding: 20px 10px 0;
+}
+.Ayear__in form div {
+  display: flex;
+  justify-content: space-between;
+  margin: 25px 10px;
+  font-weight: 500;
+  font-size: 20px;
+}
+.Ayear__in form div input {
+  width: 50%;
+  border-radius: 6px;
+  border: 1px solid grey;
+  font-weight: 400;
+  font-size: 18px;
+  padding: 4px 10px;
+}
+.Ayear__in form div .special {
+  height: 65px;
+  font-size: 15px;
+}
+.Ayear__in form div:last-of-type {
+  justify-content: center;
+  margin-top: 60px;
+}
+.Ayear__in form div:last-of-type button {
+  border: none;
+  border-radius: 6px;
+  color: white;
+  padding: 9px 14px;
+  width: 160px;
+}
+
+.Apay {
+  font-family: "Cairo", sans-serif;
+  direction: rtl;
+}
+.Apay__in {
+  min-height: 76vh;
+  padding: 30px 30px 0;
+  position: relative;
+}
+.Apay__in__top button {
+  background: transparent;
+  border: none;
+}
+@media (max-width: 650px) {
+  .Apay__in__top button img {
+    width: 50px;
+  }
+}
+.Apay__in__body .cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 30px 60px;
+  padding: 55px;
+}
+@media (max-width: 950px) {
+  .Apay__in__body .cards {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 650px) {
+  .Apay__in__body .cards {
+    grid-template-columns: 1fr;
+    padding: 55px 0;
+  }
+}
+.Apay__in__body .cards .card {
+  box-shadow: 0px 3.2765216827px 26.2121734619px 0px rgba(0, 0, 0, 0.2509803922);
+  padding: 25px;
+  text-align: center;
+}
+.Apay__in__body .cards .card p {
+  font-weight: 500;
+  font-size: 24px;
+}
+.Apay__in__body .cards .card p:nth-child(2) {
+  color: var(--main-color);
+}
+.Apay__in__body .cards .card p:last-of-type {
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--main-color);
+}
+.Apay__in__body .cards .card button {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  border: none;
+  background: transparent;
+}
+.Apay__in__body .cards .card button img {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+}
+.Apay__in__body .cards .delete {
+  position: relative;
+  background-color: lightgrey;
+}
+.Apay__in form {
+  position: absolute;
+  top: 95px;
+  left: 50%;
+  width: 45%;
+  height: 55%;
+  background: white;
+  transform: translate(-50%, 0);
+  box-shadow: 0px 3.2765216827px 26.2121734619px 0px rgba(0, 0, 0, 0.2509803922);
+  padding: 20px 10px 0;
+}
+.Apay__in form div {
+  display: flex;
+  justify-content: space-between;
+  margin: 25px 10px;
+  font-weight: 500;
+  font-size: 20px;
+}
+.Apay__in form div input {
+  width: 50%;
+  border-radius: 6px;
+  border: 1px solid grey;
+  font-weight: 400;
+  font-size: 18px;
+  padding: 4px 10px;
+}
+.Apay__in form div .special {
+  height: 65px;
+  font-size: 15px;
+}
+.Apay__in form div:last-of-type {
+  justify-content: center;
+  margin-top: 60px;
+}
+.Apay__in form div:last-of-type button {
+  border: none;
+  border-radius: 6px;
+  color: white;
+  padding: 9px 14px;
+  width: 160px;
+}
+
+.Aprogram {
+  font-family: "Cairo", sans-serif;
+  direction: rtl;
+}
+.Aprogram__in {
+  min-height: 76vh;
+  padding: 30px 30px 0;
+  position: relative;
+}
+.Aprogram__in__top button {
+  background: transparent;
+  border: none;
+}
+@media (max-width: 650px) {
+  .Aprogram__in__top button img {
+    width: 50px;
+  }
+}
+.Aprogram__in__body .cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px 130px;
+  padding: 55px;
+}
+@media (max-width: 1000px) {
+  .Aprogram__in__body .cards {
+    grid-template-columns: 1fr;
+    padding: 55px 0;
+  }
+}
+.Aprogram__in__body .cards .card {
+  box-shadow: 0px 3.2765216827px 26.2121734619px 0px rgba(0, 0, 0, 0.2509803922);
+  padding: 65px 25px 0;
+  text-align: right;
+}
+.Aprogram__in__body .cards .card h2 {
+  color: var(--main-color);
+  font-weight: 600;
+  font-size: 32px;
+  margin-bottom: 24px;
+}
+@media (max-width: 600px) {
+  .Aprogram__in__body .cards .card h2 {
+    font-size: 26px;
+  }
+}
+.Aprogram__in__body .cards .card p {
+  font-weight: 500;
+  font-size: 24px;
+  color: var(--main-color);
+}
+@media (max-width: 600px) {
+  .Aprogram__in__body .cards .card p {
+    font-size: 16px;
+  }
+}
+.Aprogram__in__body .cards .card ol {
+  margin: 42px 0;
+}
+.Aprogram__in__body .cards .card ol li {
+  color: grey;
+}
+.Aprogram__in__body .cards .card button {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  border: none;
+  background: transparent;
+}
+.Aprogram__in__body .cards .card button .notcopy {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+}
+.Aprogram__in__body .cards .card button .copy {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+}
+.Aprogram__in__body .cards .delete {
+  position: relative;
+  background-color: lightgrey;
+}
+.Aprogram__in form {
+  position: absolute;
+  top: 82px;
+  left: 50%;
+  width: 45%;
+  height: 415px;
+  background: white;
+  transform: translate(-50%, 0);
+  box-shadow: 0px 3.2765216827px 26.2121734619px 0px rgba(0, 0, 0, 0.2509803922);
+  padding: 20px 10px 0;
+}
+.Aprogram__in form div {
+  display: flex;
+  justify-content: space-between;
+  margin: 25px 10px;
+  font-weight: 500;
+  font-size: 20px;
+}
+.Aprogram__in form div input {
+  width: 50%;
+  height: 46px;
+  border-radius: 6px;
+  border: 1px solid grey;
+  font-weight: 400;
+  font-size: 18px;
+  padding: 4px 10px;
+}
+.Aprogram__in form div:last-of-type {
+  justify-content: center;
+}
+.Aprogram__in form div:last-of-type button {
+  border: none;
+  border-radius: 6px;
+  color: white;
+  padding: 9px 14px;
+  width: 160px;
 }/*# sourceMappingURL=main.css.map */

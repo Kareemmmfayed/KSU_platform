@@ -8,52 +8,48 @@ import { useState } from 'react'
 import notchecked from '../../assets/notchecked.png'
 import checked from '../../assets/checked.png'
 
-export default function Ayear() {
+function Apay() {
 
-    const years = [
-    ["الفصل الصيفي", "2023-2024"],
-    ["الفصل الصيفي", "2023-2024"],
-    ["الفصل الصيفي", "2023-2024"],
-    ]
     
-    const navigate = useNavigate();
-
-    const navtohome = () => {
-        navigate("/")
-    }
-
-    const [show, setShow] = useState(false)
-    const [del, setDelete] = useState(false)
-    const [cardStates, setCardStates] = useState(Array(years.length).fill(false));
-
-    const toggleCardState = (index) => {
-        setCardStates((prevStates) => {
-            const newStates = [...prevStates];
-            newStates[index] = !newStates[index];
-            return newStates;
-        });
-    };
+    const payments = ["القسط الأول", "القسط الأول", "القسط الأول"]
+        
+        const navigate = useNavigate();
     
-
-
-    const addItem = () => {
-        setShow(true)
-    }
-
-    const sub = () => {
-
-    }
-
-    const dele = () => {
-        setDelete(true)
-    }
-
+        const navtohome = () => {
+            navigate("/")
+        }
+    
+        const [show, setShow] = useState(false)
+        const [del, setDelete] = useState(false)
+        const [cardStates, setCardStates] = useState(Array(payments.length).fill(false));
+    
+        const toggleCardState = (index) => {
+            setCardStates((prevStates) => {
+                const newStates = [...prevStates];
+                newStates[index] = !newStates[index];
+                return newStates;
+            });
+        };
+        
+    
+    
+        const addItem = () => {
+            setShow(true)
+        }
+    
+        const sub = () => {
+    
+        }
+    
+        const dele = () => {
+            setDelete(true)
+        }
     return (
         <>
             <Header name="< العودة" link="/"/>
-            <div className="Ayear">
-                <div className="Ayear__in">
-                    <div className="Ayear__in__top">
+            <div className="Apay">
+                <div className="Apay__in">
+                    <div className="Apay__in__top">
                         <button onClick={navtohome}>
                             <img src={home} alt="home" />
                         </button>
@@ -64,14 +60,12 @@ export default function Ayear() {
                             <img src={trash} alt="trash" />
                         </button>
                     </div>
-                    <div className="Ayear__in__body">
+                    <div className="Apay__in__body">
                         <div className="cards">
                         {
-                            years.map((diploma, index) => (
+                            payments.map((diploma, index) => (
                                 <div className={del ? "card delete" : "card"} key={index}>
-                                    <p>{diploma[0]}</p>
-                                    <p>الفصل الدراسي</p>
-                                    <p>{diploma[1]}</p>
+                                    <p>{diploma}</p>
                                     {del && (
                                         <button onClick={() => toggleCardState(index)}>
                                             <img src={cardStates[index] ? checked : notchecked} alt="circle" />
@@ -89,18 +83,6 @@ export default function Ayear() {
                                 <input type="text" id='name'/>
                             </div>
                             <div>
-                                <label htmlFor="faculty">الفصل الدراسي :</label>
-                                <input type="text" id='faculty'/>
-                            </div>
-                            <div>
-                                <label htmlFor="intro">تاريخ بدأ الدراسة :</label>
-                                <input type="text" id='intro' />
-                            </div>
-                            <div>
-                                <label htmlFor="req">تاريخ نهاية الدراسة :</label>
-                                <input type="text" id='req' />
-                            </div>
-                            <div>
                                 <label htmlFor="time">ملاحظات :</label>
                                 <input type="text" id='time' className='special'/>
                             </div>
@@ -115,3 +97,5 @@ export default function Ayear() {
         </>
     )
 }
+
+export default Apay
