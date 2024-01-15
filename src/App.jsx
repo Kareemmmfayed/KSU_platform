@@ -22,6 +22,7 @@ import Asubjects from './components/Admin/Asubjects';
 import Ayear from './components/Admin/Ayear';
 import Apay from './components/Admin/Apay';
 import Aprogram from './components/Admin/Aprogram';
+import Mcollege from './components/Master/Mcollege';
 
 function App() {
   return (
@@ -51,6 +52,7 @@ function App() {
           <Route path='/admin/payments' element={<Apay/>} />
           <Route path='/admin/programs' element={<Aprogram/>} />
           <Route path='/master/main' element={<Mastermain />} />
+          <Route path='/master/colleges' element={<Mcollege />} />
         </Routes>
       </div>
     </Router>
