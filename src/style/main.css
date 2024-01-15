@@ -1349,6 +1349,126 @@ body {
   font-size: 22px;
 }
 
+.Mastermain {
+  font-family: "Cairo", sans-serif;
+  direction: rtl;
+}
+.Mastermain__in {
+  min-height: 76vh;
+  padding: 30px 30px 0;
+}
+.Mastermain__in__cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px 10px;
+}
+@media (max-width: 1100px) {
+  .Mastermain__in__cards {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 800px) {
+  .Mastermain__in__cards {
+    grid-template-columns: 1fr;
+  }
+}
+.Mastermain__in__cards .card {
+  display: flex;
+  flex-direction: row;
+  height: 160px;
+  border: none;
+  border-radius: 0;
+  box-shadow: 0px 3.2765216827px 26.2121734619px 0px rgba(0, 0, 0, 0.2509803922);
+}
+.Mastermain__in__cards .card__right {
+  width: 50%;
+  padding-right: 10px;
+}
+.Mastermain__in__cards .card__right p:first-of-type {
+  font-weight: 600;
+  font-size: 32px;
+  color: var(--main-color);
+}
+@media (max-width: 500px) {
+  .Mastermain__in__cards .card__right p:first-of-type {
+    font-size: 26px;
+  }
+}
+.Mastermain__in__cards .card__right p:last-of-type {
+  font-weight: 700;
+  font-size: 40px;
+  color: #1A5CAA;
+}
+@media (max-width: 500px) {
+  .Mastermain__in__cards .card__right p:last-of-type {
+    font-size: 30px;
+  }
+}
+.Mastermain__in__cards .card__left {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.Mastermain__in__cards .card__left #circle,
+.Mastermain__in__cards .card__left #circle1,
+.Mastermain__in__cards .card__left #circle2,
+.Mastermain__in__cards .card__left #circle3,
+.Mastermain__in__cards .card__left #circle4,
+.Mastermain__in__cards .card__left #circle5 {
+  width: 100px;
+  height: 100px;
+  background: conic-gradient(var(--col) 0% var(--percentage), #f0f0f0 var(--percentage) 100%);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@media (max-width: 400px) {
+  .Mastermain__in__cards .card__left #circle,
+  .Mastermain__in__cards .card__left #circle1,
+  .Mastermain__in__cards .card__left #circle2,
+  .Mastermain__in__cards .card__left #circle3,
+  .Mastermain__in__cards .card__left #circle4,
+  .Mastermain__in__cards .card__left #circle5 {
+    width: 60%;
+    height: 60%;
+  }
+}
+.Mastermain__in__cards .card__left #circle .inner,
+.Mastermain__in__cards .card__left #circle1 .inner,
+.Mastermain__in__cards .card__left #circle2 .inner,
+.Mastermain__in__cards .card__left #circle3 .inner,
+.Mastermain__in__cards .card__left #circle4 .inner,
+.Mastermain__in__cards .card__left #circle5 .inner {
+  background: white;
+  width: 80%;
+  height: 80%;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+  font-size: 25px;
+  color: var(--numCol);
+}
+.Mastermain__in__links {
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+}
+.Mastermain__in__links button {
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+.Mastermain__in__links button h2 {
+  margin-right: 20px;
+  color: var(--main-color);
+}
+
 .Adiplomas {
   font-family: "Cairo", sans-serif;
   direction: rtl;
