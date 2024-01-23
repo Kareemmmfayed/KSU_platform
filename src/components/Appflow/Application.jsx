@@ -1,9 +1,15 @@
 import Header from '../Header'
 import Footer from '../Footer'
 import up from '../../assets/upload.png'
-// import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 
 function Application() {
+
+    const navigate = useNavigate();
+
+    const toSuccess = () => {
+        navigate("/success");
+    }
     return (
         <>
         <Header name="< العودة" link="/"/>
@@ -66,7 +72,7 @@ function Application() {
                         </div>
                         <div className='btns'>
                             <button className='left'>حفظ</button>
-                            <button className='right btnbtn'>إرسال</button>
+                            <button className='right btnbtn' onClick={toSuccess}>إرسال</button>
                         </div>
                     </form>
                 </div>

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Header from '../Header';
 import Footer from '../Footer';
-// import search from '../../assets/Group.png'
+import { useNavigate } from 'react-router-dom';
 
 function Programs() {
     const allPrograms = ["دبلومة إدارة الأعمال", "دبلومة المحاسبة", "دبلومة إدارة الموارد البشرية"]
@@ -11,9 +11,15 @@ function Programs() {
         program.includes(searchTerm)
     );
 
+    const navigate = useNavigate();
+
+    const toDetails = () => {
+        navigate("/programs/details");
+    }
+
     return (
     <>
-        <Header />
+        <Header name="< العودة" link="/"/>
         <div className='Programs'>
             <div className='Programs__in'>
                 <div className='Programs__in__top'>
@@ -28,7 +34,9 @@ function Programs() {
 
             <ol>
                 {filteredPrograms.map((program, index) => (
-                <li key={index}>{program}</li>
+                <li key={index}>
+                    <button onClick={toDetails}>{program}</button>
+                </li>
                 ))}
             </ol>
         </div>

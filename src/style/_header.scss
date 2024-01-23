@@ -79,17 +79,50 @@
 }
 
 .userName {
-    display: flex;
-    direction: rtl;
-    align-items: start;
 
-    p {
-        color: white;
-        font-weight: 500;
-        margin-right: 5px;
+    position: relative;
+
+    button {
+        display: flex;
+        direction: rtl;
+        align-items: center;
+        background-color: transparent;
+        border: none;
+
+        p {
+            color: white;
+            font-weight: 500;
+            margin-right: 5px;
+            margin-top: 12px;
+        }
+    
+        img {
+            object-fit: contain;
+        }
+
     }
 
-    img {
-        object-fit: contain;
+    ul {
+        position: absolute;
+        background: white;
+        list-style: none;
+        border-radius: 6px;
+        padding: 0;
+        z-index: 100;
+        padding: 0px 23px;
+        border: 1px solid lightblue;
+
+        button {
+            color: black;
+        }
+
+        li:nth-of-type(2) {
+            border-top: 1px solid black;
+            border-bottom: 1px solid black;
+        }
+
+        button.red {
+            color: red;
+        }
     }
 }

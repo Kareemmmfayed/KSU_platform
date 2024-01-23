@@ -119,18 +119,44 @@ body {
 }
 
 .userName {
+  position: relative;
+}
+.userName button {
   display: flex;
   direction: rtl;
-  align-items: start;
+  align-items: center;
+  background-color: transparent;
+  border: none;
 }
-.userName p {
+.userName button p {
   color: white;
   font-weight: 500;
   margin-right: 5px;
+  margin-top: 12px;
 }
-.userName img {
+.userName button img {
   -o-object-fit: contain;
      object-fit: contain;
+}
+.userName ul {
+  position: absolute;
+  background: white;
+  list-style: none;
+  border-radius: 6px;
+  padding: 0;
+  z-index: 100;
+  padding: 0px 23px;
+  border: 1px solid lightblue;
+}
+.userName ul button {
+  color: black;
+}
+.userName ul li:nth-of-type(2) {
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
+.userName ul button.red {
+  color: red;
 }
 
 .Landing__hero {
@@ -699,6 +725,10 @@ body {
   cursor: pointer;
   margin: 15px 0;
 }
+.Programs__in ol li button {
+  background: transparent;
+  border: none;
+}
 
 .Applicants {
   font-family: "Cairo", sans-serif;
@@ -988,12 +1018,16 @@ body {
   padding: 10px;
   text-align: center;
 }
-.Mydiplomas .Diploma .cards .card h2 {
+.Mydiplomas .Diploma .cards .card button {
+  background: transparent;
+  border: none;
+}
+.Mydiplomas .Diploma .cards .card button h2 {
   color: var(--main-color);
   font-weight: 600;
   font-size: 32px;
 }
-.Mydiplomas .Diploma .cards .card p:first-of-type {
+.Mydiplomas .Diploma .cards .card button p:first-of-type {
   color: var(--main-color);
   font-weight: 500;
   font-size: 28px;
@@ -2512,4 +2546,59 @@ body {
   color: white;
   padding: 9px 14px;
   width: 160px;
+}
+
+.Pdetails,
+.Apdetails {
+  font-family: "Cairo", sans-serif;
+}
+.Pdetails .Pdetails__in,
+.Apdetails .Pdetails__in {
+  height: 100%;
+  direction: rtl;
+  padding: 20px 60px 0;
+  min-height: 76vh;
+  position: relative;
+}
+.Pdetails .Pdetails__in h2,
+.Apdetails .Pdetails__in h2 {
+  font-weight: 600;
+  font-size: 40px;
+  color: var(--main-color);
+  margin-bottom: 40px;
+}
+.Pdetails .Pdetails__in__about, .Pdetails .Pdetails__in__req, .Pdetails .Pdetails__in__pay, .Pdetails .Pdetails__in__time,
+.Apdetails .Pdetails__in__about,
+.Apdetails .Pdetails__in__req,
+.Apdetails .Pdetails__in__pay,
+.Apdetails .Pdetails__in__time {
+  margin-bottom: 30px;
+}
+.Pdetails .Pdetails__in__about h4, .Pdetails .Pdetails__in__req h4, .Pdetails .Pdetails__in__pay h4, .Pdetails .Pdetails__in__time h4,
+.Apdetails .Pdetails__in__about h4,
+.Apdetails .Pdetails__in__req h4,
+.Apdetails .Pdetails__in__pay h4,
+.Apdetails .Pdetails__in__time h4 {
+  font-weight: 500;
+  font-size: 25px;
+}
+.Pdetails .Pdetails__in button,
+.Apdetails .Pdetails__in button {
+  position: absolute;
+  left: 90px;
+  bottom: 25px;
+  width: 130px;
+  color: white;
+  border-radius: 8px;
+  border: none;
+  height: 52px;
+}
+
+.Eprogram {
+  font-family: "Cairo", sans-serif;
+  direction: rtl;
+}
+.Eprogram__in {
+  min-height: 76vh;
+  padding: 30px 30px 0;
 }/*# sourceMappingURL=main.css.map */

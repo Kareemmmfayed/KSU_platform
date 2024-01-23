@@ -24,6 +24,9 @@ import Apay from './components/Admin/Apay';
 import Aprogram from './components/Admin/Aprogram';
 import Mcollege from './components/Master/Mcollege';
 import Madmin from './components/Master/Madmin';
+import Pdetails from './components/Appflow/Pdetails';
+import Apdetails from './components/Appflow/Apdetails';
+import Eprogram from './components/Empflow/Eprogram';
 
 function App() {
   return (
@@ -34,11 +37,14 @@ function App() {
           <Route path='/login' element={<Signin />} />
           <Route path='/signup' element={<Signup />} />
           <Route path='/programs' element={<Programs />} />
+          <Route path='/programs/details' element={<Pdetails />} />
+          <Route path='/programs/Adetails' element={<Apdetails />} />
           <Route path='/application' element={<Application />} />
           <Route path='/success' element={<Success />} />
-          <Route path='/AccountInfo' element={<AccountInfo />} />
-          <Route path='/YourDiplomas' element={<Mydiplomas />} />
-          <Route path='/YourSubjects' element={<Regsubs />} />
+          <Route path='/account' element={<AccountInfo />} />
+          <Route path='/diplomas' element={<Mydiplomas />} />
+          <Route path='/subjects' element={<Regsubs />} />
+          <Route path='/employee/programs/details' element={<Eprogram />} />
           <Route path='/applicants' element={<Applicants />} />
           <Route path='/appinfo' element={<Appinfo />} />
           <Route path='/appinfoemp' element={<Appinfoemp />} />
