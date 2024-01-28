@@ -2,7 +2,7 @@ import Header from '../Header';
 import Footer from '../Footer';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import { loginApplicant } from '../../services/api';
+import { LogInApplicant } from '../../services/auth/LogInApplicant';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../services/AuthContext';
 
@@ -11,20 +11,19 @@ function Signin() {
     const [role, setRole] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [rem, setRem] = useState('');
-
+    const [rem, setRem] = useState(false);
 
     const navigate = useNavigate();
     const { login } = useAuth();
 
-
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (await loginApplicant(role, email, password)) {
-            login(rem === 'true');
+        const token = await LogInApplicant(role, email, password)
+        if (token) {
+            login(role, token, rem);
             navigate("/");
         } else {
-            // Further actions if signup failed
+            console.log("Log in Failed!");
         }
     };
 
@@ -48,7 +47,7 @@ function Signin() {
                             <div className='rem'>
                                 <div>
                                     <label htmlFor="rem">تذكرني</label>
-                                    <input type="checkbox" name="remember" id="rem" checked={rem} onChange={(e) => setRem(e.target.checked)} />
+                                    <input type="checkbox" name="remember" id="rem" checked={rem} onChange={(e) => setRem(e.target.checked)} /> {/* Update rem state based on checkbox state */}
                                 </div>
                                 <a href="">نسيت كلمة المرور؟</a>
                             </div>

@@ -4,6 +4,10 @@ import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import { useState, useEffect } from 'react'
+import linked from '../../assets/in.png';
+import github from '../../assets/github.png';
+import be from '../../assets/be.png';
+import chain from '../../assets/chain.png';
 
 function Theslider() {
 
@@ -46,12 +50,12 @@ function Theslider() {
             <div className='m-3/4 m-auto'>
                 <div className="mt-20 cara">
                     <Slider {...settings}>
-                        <Cards name="كريم" title="front-end" info="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem, fugit. Eaque mollitia impedit, quasi nostrum similique facilis deleniti ipsum dolorum commodi temporibus, totam placeat? Aspernatur maxime commodi neque cumque totam!" img={pro}/>
-                        <Cards name="كريم" title="front-end" info="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem, fugit. Eaque mollitia impedit, quasi nostrum similique facilis deleniti ipsum dolorum commodi temporibus, totam placeat? Aspernatur maxime commodi neque cumque totam!" img={pro}/>
-                        <Cards name="كريم" title="front-end" info="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem, fugit. Eaque mollitia impedit, quasi nostrum similique facilis deleniti ipsum dolorum commodi temporibus, totam placeat? Aspernatur maxime commodi neque cumque totam!" img={pro}/>
-                        <Cards name="كريم" title="front-end" info="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem, fugit. Eaque mollitia impedit, quasi nostrum similique facilis deleniti ipsum dolorum commodi temporibus, totam placeat? Aspernatur maxime commodi neque cumque totam!" img={pro}/>
-                        <Cards name="كريم" title="front-end" info="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem, fugit. Eaque mollitia impedit, quasi nostrum similique facilis deleniti ipsum dolorum commodi temporibus, totam placeat? Aspernatur maxime commodi neque cumque totam!" img={pro}/>
-                        <Cards name="كريم" title="front-end" info="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem, fugit. Eaque mollitia impedit, quasi nostrum similique facilis deleniti ipsum dolorum commodi temporibus, totam placeat? Aspernatur maxime commodi neque cumque totam!" img={pro}/>
+                        <Cards name="كريم فايد" title="Front-end Developer" info="Front-End developer with react js." img={pro} flogo={linked} flink="https://www.linkedin.com/in/kareem-fayed2002fe/" llogo={github} llink="https://github.com/Kareemmmfayed"/>
+                        <Cards name="أحمد الصعيدي" title="Back-end Developer" info="طالب في الفرقة الثانية كلية الحاسبات والمعلومات مطور مواقع الويب باستخدام ExpressJS, NestJS." img={pro} flogo={linked} flink="" llogo={github} llink=""/>
+                        <Cards name="سلمي دراز" title="UI/UX Designer" info="طالبة في الفرقة الرابعة كلية الحاسبات والمعلومات قسم نظم المعلومات. تعمل ك UI UX Designer في Websitable LLP ، ومستشارًا للإبداع في المعهد التقني بشيكاجو IIT." img={pro} flogo={linked} flink="" llogo={be} llink=""/>
+                        <Cards name="محمد ياسر" title="Back-End Developer / DevOps" info="خريج كلية الحاسبات والمعلومات قسم نظم المعلومات." img={pro} flogo={chain} llogo={github} />
+                        <Cards name="تسنيم بهاء" title="UI/UX Designer" info="طالبة في الفرقة الرابعة كلية الحاسبات والمعلومات قسم نظم المعلومات." img={pro} flogo={be} />
+                        <Cards name="هبة" title="UI/UX Designer" info="خريجة كلية الحاسبات والمعلومات قسم علوم الحاسب." img={pro} flogo={be}/>
                     </Slider>
                 </div>
             </div>

@@ -403,6 +403,16 @@ body {
   box-shadow: 0px 4px 8px 0px rgba(42, 42, 42, 0.2509803922);
   overflow: hidden;
   border-radius: 12px;
+  min-height: 450px;
+  position: relative;
+}
+.Theslider .cardi .links {
+  display: flex;
+  gap: 28px;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .Footer {
@@ -1263,6 +1273,26 @@ body {
   .Appemp__in h2 {
     font-size: 25px;
   }
+}
+.Appemp__in__btns {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  margin: 30px 0;
+}
+.Appemp__in__btns button {
+  width: 145px;
+  height: 45px;
+  border: none;
+  border-radius: 6px;
+}
+.Appemp__in__btns button.btnbtn {
+  color: white;
+}
+.Appemp__in__btns button:first-of-type {
+  border: 1px solid red;
+  color: red;
+  background-color: white;
 }
 
 .Addmain {
@@ -2601,4 +2631,51 @@ body {
 .Eprogram__in {
   min-height: 76vh;
   padding: 30px 30px 0;
+  position: relative;
+}
+.Eprogram__in h2 {
+  font-weight: 600;
+  font-size: 40px;
+  color: var(--main-color);
+  margin-bottom: 40px;
+}
+.Eprogram__in__about {
+  margin-bottom: 30px;
+}
+.Eprogram__in__about h4 {
+  font-weight: 500;
+  font-size: 25px;
+}
+.Eprogram__in__about p {
+  font-weight: 400;
+  font-size: 18px;
+}
+.Eprogram__in__add {
+  display: flex;
+  flex-direction: column;
+}
+.Eprogram__in__add button {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border: none;
+  width: 300px;
+}
+.Eprogram__in__add button img {
+  margin-left: 20px;
+}
+.Eprogram__in__add button p {
+  font-weight: 700;
+  font-size: 20px;
+  margin: 0px;
+}
+.Eprogram__in button.btnbtn {
+  position: absolute;
+  left: 90px;
+  bottom: 25px;
+  width: 130px;
+  color: white;
+  border-radius: 8px;
+  border: none;
+  height: 52px;
 }/*# sourceMappingURL=main.css.map */

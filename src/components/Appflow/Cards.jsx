@@ -10,7 +10,18 @@ function Cards(props) {
                 <p>{props.name}</p>
                 <p>{props.title}</p>
                 <p>{props.info}</p>
-                <button>link</button>
+                <div className="links">
+                    <a href={props.flink}>
+                        <img src={props.flogo} alt="link" />
+                    </a>
+                    {
+                        props.llogo && (
+                            <a href={props.llink}>
+                                <img src={props.llogo} alt="link" />
+                            </a>
+                        )
+                    }
+                </div>
             </div>
         </div>
     )

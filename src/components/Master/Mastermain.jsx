@@ -2,6 +2,7 @@ import Header from '../Header'
 import Footer from '../Footer'
 import { useEffect, useRef } from 'react';
 import plus from '../../assets/plus.png'
+import { useNavigate } from 'react-router-dom';
 
 function Mastermain() {
 
@@ -30,6 +31,16 @@ function Mastermain() {
         circle(20, "circle4", "#A18276", myRef4);
         circle(50, "circle5", "#A18276", myRef5);
     }, []); 
+
+    const navigate = useNavigate();
+
+    const navToCol = () => {
+        navigate("/master/colleges");
+    }
+
+    const navToAdmins = () => {
+        navigate("/master/admins");
+    }
 
     return (
         <>
@@ -105,11 +116,11 @@ function Mastermain() {
                         </div>
                     </div>
                     <div className="Mastermain__in__links">
-                        <button>
+                        <button onClick={navToCol}>
                             <img src={plus} alt="plus" />
                             <h2>إضافة كلية جديدة</h2>
                         </button>
-                        <button>
+                        <button onClick={navToAdmins}>
                             <img src={plus} alt="plus" />
                             <h2>إضافة مسؤول جديد</h2>
                         </button>

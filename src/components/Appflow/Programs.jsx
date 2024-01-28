@@ -4,7 +4,7 @@ import Footer from '../Footer';
 import { useNavigate } from 'react-router-dom';
 
 function Programs() {
-    const allPrograms = ["دبلومة إدارة الأعمال", "دبلومة المحاسبة", "دبلومة إدارة الموارد البشرية"]
+    const allPrograms = ["دبلومة إدارة ", "دبلومة المحاسبة", "دبلومة إدارة الموارد البشرية"]
     const [searchTerm, setSearchTerm] = useState('');
     
     const filteredPrograms = allPrograms.filter(program =>

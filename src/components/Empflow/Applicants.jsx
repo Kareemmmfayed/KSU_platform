@@ -2,21 +2,21 @@ import { useState } from 'react';
 import Header from '../Header';
 import Footer from '../Footer';
 import copy from '../../assets/copy.png';
+// import { useNavigate } from 'react-router-dom';
 
 function Applicants() {
     const initialApplicants = [
-        ["كريم فايد", "11"],
-        ["name2", "22"],
-        ["name3", "123"],
-        ["name4", "77"],
-        ["name5", "88"],
-        ["name6", "99"],
-        ["كريم فايد", "11"],
-        ["name2", "22"],
-        ["name3", "123"],
-        ["name4", "77"],
-        ["name5", "88"],
-        ["name6", "99"]
+        ["كريم فايد", "1111111111111"],
+        ["كريم فايد", "1111111111111"],
+        ["كريم فايد", "1111111111111"],
+        ["كريم فايد", "1111111111111"],
+        ["كريم فايد", "1111111111111"],
+        ["كريم فايد", "1111111111111"],
+        ["كريم فايد", "1111111111111"],
+        ["كريم فايد", "1111111111111"],
+        ["كريم فايد", "1111111111111"],
+        ["كريم فايد", "1111111111111"],
+        ["أحمد", "1111111111111"],
     ];
 
     const [searchValue, setSearchValue] = useState('');
@@ -44,6 +44,12 @@ function Applicants() {
         document.execCommand('copy');
         document.body.removeChild(textArea);
     };
+
+    // const navigate = useNavigate();
+
+    // const toInfo = () => {
+    //     navigate("/employee/applicant/info");
+    // }
 
     return (
         <>

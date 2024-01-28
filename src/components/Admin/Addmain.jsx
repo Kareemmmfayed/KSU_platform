@@ -58,6 +58,22 @@ function Addmain() {
         navigate("/admin/lecturers")
     }
 
+    const navtosubs = () => {
+        navigate("/admin/subjects")
+    }
+
+    const navtoyears = () => {
+        navigate("/admin/years")
+    }
+
+    const navtopay = () => {
+        navigate("/admin/payments")
+    }
+
+    // const navtopro = () => {
+    //     navigate("/admin/programs")
+    // }
+
     return (
         <>
             <Header name="< العودة" link="/"/>
@@ -84,25 +100,25 @@ function Addmain() {
                                 </button>
                             </li>
                             <li>
-                                <button>
+                                <button onClick={navtosubs}>
                                     <img src={plus} alt="plus" />
                                     <span>إضافة مقرر جديد</span>
                                 </button>
                             </li>
                             <li>
-                                <button>
+                                <button onClick={navtoyears}>
                                     <img src={plus} alt="plus" />
                                     <span>إضافة عام/فصل دراسي جديد</span>
                                 </button>
                             </li>
                             <li>
-                                <button>
+                                <button onClick={navtopay}>
                                     <img src={plus} alt="plus" />
                                     <span>إضافة مدفوعات جديدة</span>
                                 </button>
                             </li>
-                            <li>
-                                <button>
+                            {/* <li>
+                                <button onClick={navtopro}>
                                     <img src={plus} alt="plus" />
                                     <span>إضافة المقررات و المحاضرين للبرنامج</span>
                                 </button>
@@ -112,7 +128,7 @@ function Addmain() {
                                     <img src={plus} alt="plus" />
                                     <span>إضافة المدفوعات للبرنامج</span>
                                 </button>
-                            </li>
+                            </li> */}
                         </ul>
                     </div>
                     <div className="Addmain__in__screen">

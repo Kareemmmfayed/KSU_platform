@@ -2,7 +2,7 @@ import Header from '../Header'
 import Footer from '../Footer'
 import { Link } from 'react-router-dom'
 import { useState } from 'react';
-import { SignupApplicant } from '../../services/api';
+import { SignUpApplicant } from '../../services/auth/SignUpApplicant';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../services/AuthContext';
 
@@ -12,6 +12,7 @@ function Signup() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [cpassword, setCpassword] = useState('');
     const [nationalId, setNationalId] = useState('');
     const [gender, setGender] = useState('');
 
@@ -20,12 +21,17 @@ function Signup() {
 
     const handleSignUp = async (e) => {
         e.preventDefault();
-        
-        if (await SignupApplicant(name, email, password, nationalId, gender)) {
-            login(false);
-            navigate("/");
+
+        if (password == cpassword) {
+            if (await SignUpApplicant(name, email, password, nationalId, gender)) {
+                console.log("Worked")
+                login("applicant", false);
+                navigate("/");
+            } else {
+                console.log("Sign Up Failed!")
+            }
         } else {
-            // Further actions if signup failed
+            console.log("Wrong password")
         }
 
     };
@@ -80,7 +86,7 @@ function Signup() {
                                 </div>
                                 <input type="email" placeholder='البريد الإلكتروني' value={email} onChange={(e) => setEmail(e.target.value)}/>
                                 <input type="password" placeholder='كلمة السر' value={password} onChange={(e) => setPassword(e.target.value)}/>
-                                <input type="password" placeholder='تأكيد كلمة المرور'/>
+                                <input type="password" placeholder='تأكيد كلمة المرور' value={cpassword} onChange={(e) => setCpassword(e.target.value)}/>
                                 <div className='sub'>
                                 <button type='submit' className='btnbtn'> الدخول </button>
                                 <div>

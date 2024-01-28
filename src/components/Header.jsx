@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import logo from '../assets/logo.png'
 import { Link } from 'react-router-dom'
-// import { useAuth } from '../services/AuthContext';
+import { useAuth } from '../services/AuthContext';
 import pfp from '../assets/pfp.png'
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -9,8 +9,7 @@ import { useNavigate } from 'react-router-dom';
 
 function Header(props) {
 
-    // const { isAuthenticated } = useAuth();
-    const isAuthenticated = true;
+    const { isLoggedIn, logout } = useAuth();
 
     const [list, setList] = useState(false);
 
@@ -28,6 +27,10 @@ function Header(props) {
         navigate("/diplomas")
     }
 
+    const LogOut = () => {
+        logout();
+    }
+
     return (
         <div className="Header">
             <div className="Header__right">
@@ -40,7 +43,7 @@ function Header(props) {
                 </div>
             </div>
             <div className="Header__left">
-                { isAuthenticated ? (
+                { isLoggedIn ? (
                     <div className='userName'>
                         <button onClick={show}>
                             <img src={pfp} alt="Profile picture" />
@@ -55,7 +58,7 @@ function Header(props) {
                                     <button onClick={toAccount}>معلومات الحساب</button>
                                 </li>
                                 <li>
-                                    <button className='red'>تسجيل الخروج</button>
+                                    <button className='red' onClick={LogOut}>تسجيل الخروج</button>
                                 </li>
                             </ul>
                         )}

@@ -5,12 +5,12 @@ import { useNavigate } from 'react-router-dom';
 
 function Landing() {
 
-    const { isAuthenticated } = useAuth();
+    const { isLoggedIn } = useAuth();
     const navigate = useNavigate();
 
 
     const handleClick = () => {
-        if (isAuthenticated) {
+        if (isLoggedIn) {
             navigate("/programs")
         } else {
             navigate("/login")

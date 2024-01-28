@@ -47,7 +47,7 @@ function App() {
           <Route path='/employee/programs/details' element={<Eprogram />} />
           <Route path='/applicants' element={<Applicants />} />
           <Route path='/appinfo' element={<Appinfo />} />
-          <Route path='/appinfoemp' element={<Appinfoemp />} />
+          <Route path='/employee/Applicant/info' element={<Appinfoemp />} />
           <Route path='/table' element={<Table />} />
           <Route path='/Subjects' element={<Cric />} />
           <Route path='/admin/main' element={<Addmain />} />
