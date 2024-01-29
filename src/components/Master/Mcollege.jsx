@@ -11,11 +11,12 @@ import col from '../../assets/Collage.png'
 import { indexColleges } from '../../services/master/college/index'
 import { useAuth } from '../../services/AuthContext'
 import { createCollege } from '../../services/master/college/create';
+import { deleteCollege } from '../../services/master/college/delete';
 
 function Mcollege() {
-
     const { token } = useAuth();
     const [programs, setPrograms] = useState([]);
+    const [selectedCards, setSelectedCards] = useState([]);
 
     const fetchPrograms = async () => {
         const res = await indexColleges(token);
@@ -25,7 +26,7 @@ function Mcollege() {
 
     useEffect(() => {
         fetchPrograms();
-    }, []);
+    }, []); 
 
     const navigate = useNavigate();
 
@@ -35,13 +36,14 @@ function Mcollege() {
 
     const [show, setShow] = useState(false);
     const [del, setDelete] = useState(false);
-    const [cardStates, setCardStates] = useState([]);
 
-    const toggleCardState = (index) => {
-        setCardStates((prevStates) => {
-            const newStates = [...prevStates];
-            newStates[index] = !newStates[index];
-            return newStates;
+    const toggleCardState = (id) => {
+        setSelectedCards(prevSelected => {
+            if (prevSelected.includes(id)) {
+                return prevSelected.filter(cardId => cardId !== id);
+            } else {
+                return [...prevSelected, id];
+            }
         });
     };
 
@@ -52,14 +54,26 @@ function Mcollege() {
     const [faculty, setFaculty] = useState();
     const [college, setCollege] = useState();
 
-    const sub = async () => {
-        const res = await createCollege(token, faculty, college);
-        console.log(res);
-    }
+    const sub = async (e) => {
+        e.preventDefault();
+        await createCollege(token, faculty, college);
+        setShow(false);
+    };
 
     const dele = () => {
-        setDelete(true);
+        if (del) {
+            
+            selectedCards.map(async (id) => {
+                await deleteCollege(token, id);
+            });
+
+            setDelete(false);
+            setSelectedCards([]);
+        } else {
+            setDelete(true);
+        }
     }
+    
 
     return (
         <>
@@ -79,13 +93,13 @@ function Mcollege() {
                     </div>
                     <div className="Mcollege__in__body">
                         <div className="cards">
-                            {programs.map((college, index) => (
-                                <div className={del ? "card delete" : "card"} key={index}>
+                            {programs.map((college) => (
+                                <div className={del ? "card delete" : "card"} key={college.id}>
                                     <img src={col} alt="college" />
                                     <h2>{college.name}</h2>
                                     {del && (
-                                        <button onClick={() => toggleCardState(index)}>
-                                            <img src={cardStates[index] ? checked : notchecked} alt="circle" className='notcopy'/>
+                                        <button onClick={() => toggleCardState(college.id)}>
+                                            <img src={selectedCards.includes(college.id) ? checked : notchecked} alt="circle" className='notcopy'/>
                                         </button>
                                     )}
                                 </div>
