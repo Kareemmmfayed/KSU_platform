@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { LogInApplicant } from '../../services/auth/LogInApplicant';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../services/AuthContext';
+import { LogInMaster } from '../../services/auth/LogInMaster'
 
 function Signin() {
 
@@ -18,12 +19,22 @@ function Signin() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const token = await LogInApplicant(role, email, password)
-        if (token) {
-            login(role, token, rem);
-            navigate("/");
-        } else {
-            console.log("Log in Failed!");
+        if (role == "applicant") {
+            const token = await LogInApplicant(email, password)
+            if (token) {
+                login(role, token, rem);
+                navigate("/");
+            } else {
+                console.log("Log in Failed!");
+            }
+        } else if (role == "master") {
+            const token = await LogInMaster(email, password)
+            if (token) {
+                login(role, token, rem);
+                navigate("/master/main");
+            } else {
+                console.log("Log in Failed!");
+            }
         }
     };
 

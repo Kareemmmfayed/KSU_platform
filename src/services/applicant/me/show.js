@@ -1,6 +1,6 @@
 import { API_URL  } from "../../API";
 
-export  const show = async (token) => {
+export const showApplicant = async (token) => {
     let headersList = {
         Accept: "*/*",
         Authorization:
@@ -15,6 +15,6 @@ export  const show = async (token) => {
             headers: headersList,
         }
     );
-    let data = await response.text();
-    console.log(data);
+
+    return response;
 }

@@ -1,6 +1,6 @@
 import { API_URL } from "../API";
 
-export const LogInApplicant = async (email, password) => {
+export const LogInMaster = async (email, password) => {
     let headersList = {
         Accept: "*/*",
         Authorization:
@@ -9,7 +9,7 @@ export const LogInApplicant = async (email, password) => {
     };
     
     let bodyContent = JSON.stringify({
-        role: "applicant",
+        role: "master",
         email: email,
         password: password,
     });

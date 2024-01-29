@@ -1,29 +1,41 @@
 import Header from '../Header'
 import Footer from '../Footer'
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import home from '../../assets/home.png'
 import plus from '../../assets/plusb.png'
 import trash from '../../assets/trash.png'
 import checked from '../../assets/checked.png'
 import notchecked from '../../assets/notchecked.png'
 import col from '../../assets/Collage.png'
+import { indexColleges } from '../../services/master/college/index'
+import { useAuth } from '../../services/AuthContext'
+import { createCollege } from '../../services/master/college/create';
 
 function Mcollege() {
 
-    
-    const programs = [ "كلية تجارية", "كلية حاسبات و معلومات", "كلية تجارية", "كلية حاسبات و معلومات"]
+    const { token } = useAuth();
+    const [programs, setPrograms] = useState([]);
 
-    
+    const fetchPrograms = async () => {
+        const res = await indexColleges(token);
+        const data = await res.json();
+        setPrograms(data.data.collages);
+    }
+
+    useEffect(() => {
+        fetchPrograms();
+    }, []);
+
     const navigate = useNavigate();
 
     const navtohome = () => {
-        navigate("/")
+        navigate("/");
     }
 
-    const [show, setShow] = useState(false)
-    const [del, setDelete] = useState(false)
-    const [cardStates, setCardStates] = useState(Array(programs.length).fill(false));
+    const [show, setShow] = useState(false);
+    const [del, setDelete] = useState(false);
+    const [cardStates, setCardStates] = useState([]);
 
     const toggleCardState = (index) => {
         setCardStates((prevStates) => {
@@ -32,26 +44,28 @@ function Mcollege() {
             return newStates;
         });
     };
-    
-
 
     const addItem = () => {
-        setShow(true)
+        setShow(true);
     }
 
-    const sub = () => {
+    const [faculty, setFaculty] = useState();
+    const [college, setCollege] = useState();
 
+    const sub = async () => {
+        const res = await createCollege(token, faculty, college);
+        console.log(res);
     }
 
     const dele = () => {
-        setDelete(true)
+        setDelete(true);
     }
 
     return (
         <>
-            <Header name="< العودة" link="/"/>
+            <Header name="< العودة" link="/" />
             <div className="Mcollege">
-            <div className="Mcollege__in">
+                <div className="Mcollege__in">
                     <div className="Mcollege__in__top">
                         <button onClick={navtohome}>
                             <img src={home} alt="home" />
@@ -65,30 +79,28 @@ function Mcollege() {
                     </div>
                     <div className="Mcollege__in__body">
                         <div className="cards">
-                        {
-                            programs.map((emp, index) => (
+                            {programs.map((college, index) => (
                                 <div className={del ? "card delete" : "card"} key={index}>
                                     <img src={col} alt="college" />
-                                    <h2>{emp}</h2>
+                                    <h2>{college.name}</h2>
                                     {del && (
                                         <button onClick={() => toggleCardState(index)}>
                                             <img src={cardStates[index] ? checked : notchecked} alt="circle" className='notcopy'/>
                                         </button>
                                     )}
                                 </div>
-                            ))
-                        }
+                            ))}
                         </div>
                     </div>
                     { show && (
                         <form onSubmit={sub}>
                             <div>
                                 <label htmlFor="name">اسم الكلية :</label>
-                                <input type="text" id='name'/>
+                                <input type="text" id='name' onChange={(e) => setFaculty(e.target.value)}/>
                             </div>
                             <div>
                                 <label htmlFor="faculty">اسم الجامعة :</label>
-                                <input type="text" id='faculty'/>
+                                <input type="text" id='faculty' onChange={(e) => setCollege(e.target.value)}/> 
                             </div>
                             <div>
                                 <button className='btnbtn'>إضافة</button>
@@ -96,10 +108,10 @@ function Mcollege() {
                         </form>
                     )}
                 </div>
-                <Footer/>
+                <Footer />
             </div>
         </>
     )
 }
 
-export default Mcollege
+export default Mcollege;
