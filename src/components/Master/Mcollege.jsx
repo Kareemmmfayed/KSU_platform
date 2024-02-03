@@ -62,6 +62,7 @@ function Mcollege() {
     if (del && selectedCard) {
       await deleteCollege(token, selectedCard);
       setSelectedCard(null);
+      setDelete(!del);
       fetchPrograms();
     } else {
       setDelete(!del);

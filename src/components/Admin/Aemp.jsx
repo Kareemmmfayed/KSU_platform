@@ -18,32 +18,16 @@ function Aemp() {
   const [name, setName] = useState([]);
   const [mail, setMail] = useState([]);
   const [password, setPassword] = useState([]);
-  //   const [employees, setEmployees] = useState([]);
+  const [employees, setEmployees] = useState([]);
 
   const fetchData = async () => {
-    const meRes = await showAdmin(token);
-    const meData = await meRes.json();
-    const res = await indexEmployee(token, meData.data.adminData.collage_id);
-    const data = await res.json();
-    console.log(data);
-    // setPrograms(data.data.programs);
+    const res = await indexEmployee(token);
+    setEmployees(res);
   };
 
   useEffect(() => {
     fetchData();
   }, []);
-
-  const employees = [
-    ["محمد سمير عادل شاكر", "M0hamedgg0@gmail.com", "8tyRkO8j"],
-    ["محمد سمير عادل شاكر", "M0hamedgg0@gmail.com", "8tyRkO8j"],
-    ["محمد سمير عادل شاكر", "M0hamedgg0@gmail.com", "8tyRkO8j"],
-    ["محمد سمير عادل شاكر", "M0hamedgg0@gmail.com", "8tyRkO8j"],
-    ["محمد سمير عادل شاكر", "M0hamedgg0@gmail.com", "8tyRkO8j"],
-    ["محمد سمير عادل شاكر", "M0hamedgg0@gmail.com", "8tyRkO8j"],
-    ["محمد سمير عادل شاكر", "M0hamedgg0@gmail.com", "8tyRkO8j"],
-    ["محمد سمير عادل شاكر", "M0hamedgg0@gmail.com", "8tyRkO8j"],
-    ["محمد سمير عادل شاكر", "M0hamedgg0@gmail.com", "8tyRkO8j"],
-  ];
 
   const navigate = useNavigate();
 
@@ -108,15 +92,14 @@ function Aemp() {
           </div>
           <div className="Aemp__in__body">
             <div className="cards">
-              {employees.map((emp, index) => (
-                <div className={del ? "card delete" : "card"} key={index}>
-                  <h2>{emp[0]}</h2>
-                  <p>البريد الإلكتروني : {emp[1]}</p>
-                  <p>كلمة المرور : {emp[2]}</p>
+              {employees.map((emp) => (
+                <div className={del ? "card delete" : "card"} key={emp.id}>
+                  <h2>{emp.name}</h2>
+                  <p>البريد الإلكتروني : {emp.email}</p>
                   {del && (
-                    <button onClick={() => toggleCardState(index)}>
+                    <button onClick={() => toggleCardState(emp.id)}>
                       <img
-                        src={cardStates[index] ? checked : notchecked}
+                        src={cardStates[emp.id] ? checked : notchecked}
                         alt="circle"
                         className="notcopy"
                       />

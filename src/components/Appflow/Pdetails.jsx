@@ -1,19 +1,18 @@
-import Header from '../Header';
-import Footer from '../Footer';
-import Pdetailsin from './Pdetailsin';
+/* eslint-disable react/prop-types */
+import Header from "../Header";
+import Footer from "../Footer";
+import Pdetailsin from "./Pdetailsin";
 
-
-function Pdetails() {
-
-    return (
-        <>
-        <Header name="< العودة" link="/"/>
-        <div className='Pdetails'>
-            <Pdetailsin Signed = {true}/>
+function Pdetails({ program }) {
+  return (
+    <>
+      <Header name="< العودة" link="/" />
+      <div className="Pdetails">
+        <Pdetailsin Signed={true} program={program} />
         <Footer />
-        </div>
+      </div>
     </>
-    )
+  );
 }
 
-export default Pdetails
+export default Pdetails;

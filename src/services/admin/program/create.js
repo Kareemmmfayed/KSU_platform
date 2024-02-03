@@ -1,8 +1,8 @@
 import { API_URL } from "../../API";
+import { COLLEGE } from "../../API";
 
 export const createProgram = async (
   token,
-  collegeID,
   name,
   desc,
   appfees,
@@ -28,7 +28,7 @@ export const createProgram = async (
   });
 
   let response = await fetch(
-    `${API_URL}/admin/collages/${collegeID}/programs`,
+    `${API_URL}/admin/collages/${COLLEGE.id}/programs`,
     {
       method: "POST",
       body: bodyContent,

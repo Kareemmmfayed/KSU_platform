@@ -1,7 +1,7 @@
 import { API_URL } from "../../API";
 import { COLLEGE } from "../../API";
 
-export const deleteProgram = async (token, ProgramID) => {
+export const createApplication = async (token, programID) => {
   let headersList = {
     Accept: "*/*",
     Authorization: `Bearer ${token}`,
@@ -9,11 +9,12 @@ export const deleteProgram = async (token, ProgramID) => {
   };
 
   let response = await fetch(
-    `${API_URL}/admin/collages/${COLLEGE.id}/programs/${ProgramID}`,
+    `${API_URL}/applicant/collages/${COLLEGE.id}/programs/${programID}/applications`,
     {
-      method: "DELETE",
+      method: "POST",
       headers: headersList,
     }
   );
+  console.log(response);
   return response;
 };

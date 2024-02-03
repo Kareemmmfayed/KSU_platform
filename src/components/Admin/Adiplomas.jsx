@@ -9,7 +9,6 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../services/AuthContext";
 import { indexPrograms } from "../../services/admin/program";
-import { showAdmin } from "../../services/admin/me/show";
 import { createProgram } from "../../services/admin/program/create";
 import { deleteProgram } from "../../services/admin/program/delete";
 
@@ -20,18 +19,17 @@ function Adiplomas() {
   const [show, setShow] = useState(false);
   const [del, setDelete] = useState(false);
   const [name, setName] = useState("");
-  const [faculty, setFaculty] = useState("");
   const [intro, setIntro] = useState("");
-  const [req, setReq] = useState("");
-  const [time, setTime] = useState("");
+  const [app, setApp] = useState("");
+  const [fee, setFee] = useState("");
+  const [cre, setCre] = useState("");
+  const [stime, setStime] = useState("");
+  const [ctime, setCtime] = useState("");
   const navigate = useNavigate();
 
   const fetchData = async () => {
-    const meRes = await showAdmin(token);
-    const meData = await meRes.json();
-    const res = await indexPrograms(token, meData.data.adminData.collage_id);
-    const data = await res.json();
-    setPrograms(data.data.programs);
+    const res = await indexPrograms(token);
+    setPrograms(res);
   };
 
   useEffect(() => {
@@ -54,18 +52,15 @@ function Adiplomas() {
 
   const sub = async (e) => {
     e.preventDefault();
-    const res = await showAdmin(token);
-    const data = await res.json();
     await createProgram(
       token,
-      data.data.adminData.collage_id,
       name,
       intro,
-      100,
-      100,
-      "2023-08-29T12:00:00",
-      "2023-08-29T12:00:00",
-      100
+      app,
+      fee,
+      `${stime}T12:00:00`,
+      `${ctime}T12:00:00`,
+      cre
     );
     setShow(false);
     fetchData();
@@ -73,9 +68,7 @@ function Adiplomas() {
 
   const dele = async () => {
     if (del && selectedCard) {
-      const res = await showAdmin(token);
-      const data = await res.json();
-      await deleteProgram(token, data.data.adminData.collage_id, selectedCard);
+      await deleteProgram(token, selectedCard);
       setSelectedCard(null);
       setDelete(!del);
       fetchData();
@@ -131,15 +124,7 @@ function Adiplomas() {
                   id="name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                />
-              </div>
-              <div>
-                <label htmlFor="faculty">الكلية الخاصة بالبرنامج :</label>
-                <input
-                  type="text"
-                  id="faculty"
-                  value={faculty}
-                  onChange={(e) => setFaculty(e.target.value)}
+                  required
                 />
               </div>
               <div>
@@ -147,29 +132,61 @@ function Adiplomas() {
                 <input
                   type="text"
                   id="intro"
-                  className="special"
                   value={intro}
                   onChange={(e) => setIntro(e.target.value)}
+                  required
                 />
               </div>
               <div>
-                <label htmlFor="req">متطلبات القبول بالبرنامج :</label>
+                <label htmlFor="req">رسوم التقديم :</label>
                 <input
-                  type="text"
+                  type="number"
                   id="req"
-                  className="special"
-                  value={req}
-                  onChange={(e) => setReq(e.target.value)}
+                  value={app}
+                  onChange={(e) => setApp(e.target.value)}
+                  required
                 />
               </div>
               <div>
-                <label htmlFor="time">مدة البرنامج :</label>
+                <label htmlFor="req">رسوم الدبلومة :</label>
+                <input
+                  type="number"
+                  id="req"
+                  value={fee}
+                  onChange={(e) => setFee(e.target.value)}
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="time">موعد البداية :</label>
                 <input
                   type="text"
                   id="time"
-                  className="special"
-                  value={time}
-                  onChange={(e) => setTime(e.target.value)}
+                  value={stime}
+                  onChange={(e) => setStime(e.target.value)}
+                  placeholder="ex :- 2023-08-29"
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="time">موعد النهاية :</label>
+                <input
+                  type="text"
+                  id="time"
+                  value={ctime}
+                  onChange={(e) => setCtime(e.target.value)}
+                  placeholder="ex :- 2023-08-29"
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="req">رسوم الساعات المعتمدة :</label>
+                <input
+                  type="number"
+                  id="req"
+                  value={cre}
+                  onChange={(e) => setCre(e.target.value)}
+                  required
                 />
               </div>
               <div>

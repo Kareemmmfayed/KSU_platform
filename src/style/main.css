@@ -1461,7 +1461,7 @@ body {
 .Mastermain__in__cards .card__right p:last-of-type {
   font-weight: 700;
   font-size: 40px;
-  color: #1A5CAA;
+  color: #1a5caa;
 }
 @media (max-width: 500px) {
   .Mastermain__in__cards .card__right p:last-of-type {
@@ -1527,6 +1527,7 @@ body {
   display: flex;
   align-items: center;
   margin-top: 20px;
+  width: 350px;
 }
 .Mastermain__in__links button h2 {
   margin-right: 20px;
@@ -1606,7 +1607,7 @@ body {
   top: 36px;
   left: 50%;
   width: 45%;
-  height: 87%;
+  height: 94%;
   background: white;
   transform: translate(-50%, 0);
   box-shadow: 0px 3.2765216827px 26.2121734619px 0px rgba(0, 0, 0, 0.2509803922);
@@ -1626,10 +1627,6 @@ body {
   font-weight: 400;
   font-size: 18px;
   padding: 4px 10px;
-}
-.Adiplomas__in form div .special {
-  height: 65px;
-  font-size: 15px;
 }
 .Adiplomas__in form div:last-of-type {
   justify-content: center;

@@ -60,6 +60,7 @@ function Madmin() {
     if (del && selectedCardIndex) {
       await deleteAdmin(token, selectedCardIndex);
       setSelectedCardIndex(null);
+      setDelete(!del);
       fetchData();
     } else {
       setDelete(!del);
