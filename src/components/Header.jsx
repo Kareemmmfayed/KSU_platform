@@ -29,6 +29,7 @@ function Header(props) {
 
     const LogOut = () => {
         logout();
+        navigate("/");
     }
 
     return (
