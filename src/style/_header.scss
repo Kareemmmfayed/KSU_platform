@@ -1,128 +1,125 @@
 .Header {
-    width: 100%;
-    height: 100px;
-    padding: 10px 70px;
-    background-color: var(--main-color);
+  width: 100%;
+  height: 100px;
+  padding: 10px 70px;
+  background-color: var(--main-color);
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  font-family: "Cairo", sans-serif;
+  box-shadow: 0px 14px 16px 0px #043c6640;
+
+  @media (max-width: 500px) {
+    padding: 10px 10px;
+  }
+
+  &__right {
     display: flex;
     flex-direction: row-reverse;
-    justify-content: space-between;
-    font-family: 'Cairo', sans-serif;
-    box-shadow: 0px 14px 16px 0px #043C6640;
 
-    @media (max-width: 500px) {
-        padding: 10px 10px;
+    &__logo {
+      background: white;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.8);
+
+      img {
+        width: 65%;
+      }
     }
 
-    &__right {
-        display: flex;
-        flex-direction: row-reverse;
-        
-        &__logo {
-            background: white;
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.8);
+    &__text {
+      h3 {
+        font-weight: 700;
 
-            img {
-                width: 65%;
-            }
+        @media (max-width: 700px) {
+          font-size: 16px;
         }
+      }
 
-        &__text {
-
-            h3 {
-                font-weight: 700;
-
-                @media (max-width: 700px) {
-                    font-size: 16px;
-                }
-            }
-
-            color: white;
-            direction: rtl;
-            padding: 5px;
-            margin-right: 15px;
-        }
+      color: white;
+      direction: rtl;
+      padding: 5px;
+      margin-right: 15px;
     }
+  }
 
-    &__left {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+  &__left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-        button {
-            border: 1px solid white;
-            border-radius: 8px;
-            color: white;
-            width: 180px;
-            height: 50px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
+    button {
+      border: 1px solid white;
+      border-radius: 8px;
+      color: white;
+      width: 180px;
+      height: 50px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
 
-            @media (max-width: 700px) {
-                width: 120px;
-                height: 50px;
-            }
+      @media (max-width: 700px) {
+        width: 120px;
+        height: 50px;
+      }
 
-            @media (max-width: 400px) {
-                width: 80px;
-                height: 40px;
-            }
-        }
+      @media (max-width: 400px) {
+        width: 80px;
+        height: 40px;
+      }
     }
+  }
 }
 
 .userName {
+  position: relative;
 
-    position: relative;
+  button {
+    display: flex;
+    direction: rtl;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+
+    p {
+      color: white;
+      font-weight: 500;
+      margin-right: 5px;
+      margin-top: 12px;
+    }
+
+    img {
+      object-fit: contain;
+    }
+  }
+
+  ul {
+    position: absolute;
+    background: white;
+    list-style: none;
+    border-radius: 6px;
+    padding: 0;
+    z-index: 100;
+    padding: 0px 23px;
+    border: 1px solid lightblue;
 
     button {
-        display: flex;
-        direction: rtl;
-        align-items: center;
-        background-color: transparent;
-        border: none;
-
-        p {
-            color: white;
-            font-weight: 500;
-            margin-right: 5px;
-            margin-top: 12px;
-        }
-    
-        img {
-            object-fit: contain;
-        }
-
+      color: black;
     }
 
-    ul {
-        position: absolute;
-        background: white;
-        list-style: none;
-        border-radius: 6px;
-        padding: 0;
-        z-index: 100;
-        padding: 0px 23px;
-        border: 1px solid lightblue;
-
-        button {
-            color: black;
-        }
-
-        li:nth-of-type(2) {
-            border-top: 1px solid black;
-            border-bottom: 1px solid black;
-        }
-
-        button.red {
-            color: red;
-        }
+    li:nth-of-type(2) {
+      border-top: 1px solid black;
+      border-bottom: 1px solid black;
     }
+
+    button.red {
+      color: red;
+    }
+  }
 }

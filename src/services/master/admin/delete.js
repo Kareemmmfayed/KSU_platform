@@ -1,7 +1,7 @@
 import { API_URL } from "../../API";
 import { COLLEGE } from "../../API";
 
-export const indexAdmin = async (token) => {
+export const deleteAdmin = async (token, adminID) => {
   let headersList = {
     Accept: "*/*",
     Authorization: `Bearer ${token}`,
@@ -9,12 +9,13 @@ export const indexAdmin = async (token) => {
   };
 
   let response = await fetch(
-    `${API_URL}/master/collages/${COLLEGE.id}/admins`,
+    `${API_URL}/master/collages/${COLLEGE.id}/admins/${adminID}`,
     {
-      method: "GET",
+      method: "DELETE",
       headers: headersList,
     }
   );
 
-  return response;
+  let data = await response.json();
+  return data;
 };

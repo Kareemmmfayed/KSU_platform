@@ -12,7 +12,6 @@ import { indexPrograms } from "../../services/admin/program";
 import { showAdmin } from "../../services/admin/me/show";
 import { createProgram } from "../../services/admin/program/create";
 import { deleteProgram } from "../../services/admin/program/delete";
-import { showProgram } from "../../services/admin/program/show";
 
 function Adiplomas() {
   const { token } = useAuth();
@@ -86,18 +85,6 @@ function Adiplomas() {
     }
   };
 
-  const collegeName = async (program) => {
-    const dres = await showAdmin(token);
-    const ddata = await dres.json();
-    const res = await showProgram(
-      token,
-      ddata.data.adminData.collage_id,
-      program.id
-    );
-    const data = await res.json();
-    return data.data.program.name;
-  };
-
   return (
     <>
       <Header name="< العودة" link="/" />
@@ -123,7 +110,6 @@ function Adiplomas() {
                   onClick={() => toggleCardState(program.id)}
                 >
                   <h2>{program.name}</h2>
-                  <p>{collegeName(program)}</p>
                   {del && (
                     <button>
                       <img
