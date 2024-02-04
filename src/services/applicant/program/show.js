@@ -9,7 +9,7 @@ export const showProgram = async (token, programID) => {
   };
 
   let response = await fetch(
-    `${API_URL}/admin/collages/${COLLEGE.id}/programs/${programID}`,
+    `${API_URL}/applicant/collages/${COLLEGE.id}/programs/${programID}`,
     {
       method: "GET",
       headers: headersList,
@@ -17,6 +17,5 @@ export const showProgram = async (token, programID) => {
   );
 
   let data = await response.json();
-  console.log(data);
-  return data;
+  return data.data.program;
 };

@@ -1,19 +1,18 @@
 /* eslint-disable react/prop-types */
 import { useNavigate } from "react-router-dom";
-import PropTypes from "prop-types";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { showProgram } from "../../services/applicant/program/show";
 import { useAuth } from "../../services/AuthContext";
 
-function Pdetailsin({ Signed, program }) {
-  const { token } = useAuth();
+function Pdetailsin({ Signed }) {
+  const { token, dip } = useAuth();
   const navigate = useNavigate();
 
-  const [diploma, setdiploma] = useState();
+  const [data, setData] = useState();
 
   const fetchData = async () => {
-    const res = await showProgram(token, program);
-    setdiploma(res);
+    const res = await showProgram(token, dip);
+    setData(res);
   };
 
   useEffect(() => {
@@ -30,10 +29,10 @@ function Pdetailsin({ Signed, program }) {
 
   return (
     <div className="Pdetails__in">
-      <h2>{diploma.name}</h2>
+      <h2>{data.name}</h2>
       <div className="Pdetails__in__about">
         <h4>عن الدبلومة</h4>
-        <p>{diploma.description}</p>
+        <p>{data.description}</p>
       </div>
       <div className="Pdetails__in__req">
         <h4>متطلبات القبول</h4>
@@ -51,8 +50,8 @@ function Pdetailsin({ Signed, program }) {
       <div className="Pdetails__in__pay">
         <h4>رسوم البرنامج</h4>
         <ul>
-          <li>رسوم التقديم: {diploma.applying_fees} (غير قابلة للاسترداد).</li>
-          <li>رسوم الدراسة: {diploma.program_fees}.</li>
+          <li>رسوم التقديم: {data.applying_fees} (غير قابلة للاسترداد).</li>
+          <li>رسوم الدراسة: {data.program_fees}.</li>
           <li>رسوم الكتب والمواد: تتفاوت حسب المقررات والمتطلبات.</li>
         </ul>
       </div>
@@ -75,9 +74,5 @@ function Pdetailsin({ Signed, program }) {
     </div>
   );
 }
-
-Pdetailsin.propTypes = {
-  Signed: PropTypes.bool.isRequired,
-};
 
 export default Pdetailsin;
