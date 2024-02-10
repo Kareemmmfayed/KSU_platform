@@ -13,6 +13,7 @@ function Signup() {
   const [cpassword, setCpassword] = useState("");
   const [nationalId, setNationalId] = useState("");
   const [gender, setGender] = useState("");
+  const [wrongPass, setWrongPass] = useState(false);
 
   const navigate = useNavigate();
   const { login } = useAuth();
@@ -29,7 +30,8 @@ function Signup() {
         console.log("Sign Up Failed!");
       }
     } else {
-      console.log("Wrong password");
+      setWrongPass((e) => !e);
+      console.log("Wrong pass!");
     }
   };
 
@@ -48,46 +50,13 @@ function Signup() {
                 onChange={(e) => setName(e.target.value)}
               />
               <input
-                type="number"
+                type="text"
                 placeholder="الرقم القومي"
                 value={nationalId}
                 onChange={(e) => setNationalId(e.target.value)}
+                minLength={14}
+                maxLength={14}
               />
-              <select id="colleges" name="colleges">
-                <option disabled selected>
-                  الكلية
-                </option>
-                <option value="agriculture">كلية الزراعة</option>
-                <option value="education">كلية التربية</option>
-                <option value="veterinary-medicine">كلية الطب البيطري</option>
-                <option value="commerce">كلية التجارة</option>
-                <option value="engineering">كلية الهندسة</option>
-                <option value="special-education">كلية التربية النوعية</option>
-                <option value="arts">كلية الأداب</option>
-                <option value="physical-education">
-                  كلية التربية الرياضية
-                </option>
-                <option value="science">كلية العلوم</option>
-                <option value="pharmacy">كلية الصيدلة والتصنيع الدوائي</option>
-                <option value="medicine">كلية الطب</option>
-                <option value="physical-therapy">كلية العلاج الطبيعي</option>
-                <option value="nursing">كلية التمريض</option>
-                <option value="fisheries">علوم الثروة السمكية والمصايد</option>
-                <option value="dentistry">كلية طب الفم والأسنان</option>
-                <option value="computing">كلية الحاسبات والمعلومات</option>
-                <option value="languages">كلية الألسن</option>
-                <option value="nano-technology">
-                  معهد علوم وتكنولوجيا النانو
-                </option>
-                <option value="drug-discovery">
-                  معهد اكتشاف وتطوير الدواء
-                </option>
-                <option value="nursing-institute">المعهد الفني للتمريض</option>
-                <option value="law">كلية الحقوق</option>
-                <option value="artificial-intelligence">
-                  كلية الذكاء الاصطناعي
-                </option>
-              </select>
               <div className="gender">
                 <label htmlFor="gender">: النوع</label>
                 <div className="male">
@@ -124,12 +93,14 @@ function Signup() {
                 placeholder="كلمة السر"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                style={wrongPass ? { border: "1px solid red" } : {}}
               />
               <input
                 type="password"
                 placeholder="تأكيد كلمة المرور"
                 value={cpassword}
                 onChange={(e) => setCpassword(e.target.value)}
+                style={wrongPass ? { border: "1px solid red" } : {}}
               />
               <div className="sub">
                 <button type="submit" className="btnbtn">

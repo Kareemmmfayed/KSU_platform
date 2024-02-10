@@ -30,8 +30,11 @@ import Eprogram from "./components/Empflow/Eprogram";
 import { useState } from "react";
 
 function App() {
-  const [program, setProgram] = useState();
+  const [diplomaId, setDiplomaId] = useState();
 
+  const pickDiplomaId = (id) => {
+    setDiplomaId(id);
+  };
   return (
     <Router>
       <div className="App">
@@ -41,11 +44,11 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route
             path="/programs"
-            element={<Programs setDiploma={setProgram} />}
+            element={<Programs pickDiplomaId={pickDiplomaId} />}
           />
           <Route
             path="/programs/details"
-            element={<Pdetails diploma={program} />}
+            element={<Pdetails diplomaId={diplomaId} />}
           />
           <Route path="/programs/Adetails" element={<Apdetails />} />
           <Route path="/application" element={<Application />} />

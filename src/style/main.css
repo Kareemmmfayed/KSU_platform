@@ -465,7 +465,6 @@ body {
   height: 55px;
   border-radius: 8px;
   padding: 12px;
-  border: 1px solid grey;
 }
 .Sign-in .Sign-in__inner .sign-in__inner__form form .rem {
   display: flex;
@@ -525,7 +524,7 @@ body {
 .Signup .Signup__inner .signup__inner__form {
   flex-direction: column;
   display: flex;
-  height: 100vh;
+  height: 90vh;
   align-items: center;
   box-shadow: 4px 4px 24px 0px rgba(0, 0, 0, 0.2509803922);
   padding: 20px;
@@ -540,7 +539,16 @@ body {
   flex-direction: column;
   width: 85%;
 }
-.Signup .Signup__inner .signup__inner__form form input, .Signup .Signup__inner .signup__inner__form form select {
+.Signup .Signup__inner .signup__inner__form form input[type=number]::-webkit-inner-spin-button,
+.Signup .Signup__inner .signup__inner__form form input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.Signup .Signup__inner .signup__inner__form form input[type=number] {
+  -moz-appearance: textfield;
+}
+.Signup .Signup__inner .signup__inner__form form input,
+.Signup .Signup__inner .signup__inner__form form select {
   direction: rtl;
   margin: 15px 0;
   height: 55px;
@@ -1333,7 +1341,7 @@ body {
 }
 .Addmain__in__add ul li button span {
   font-weight: 600;
-  font-size: 40px;
+  font-size: 32px;
   color: var(--main-color);
 }
 @media (max-width: 850px) {

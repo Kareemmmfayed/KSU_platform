@@ -1,97 +1,94 @@
 .Sign-in {
+  font-family: "Cairo", sans-serif;
 
-    font-family: 'Cairo', sans-serif;
+  .Sign-in__inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 87vh;
+    width: 100vw;
 
+    .sign-in__inner__form {
+      height: 65vh;
+      margin-bottom: 75px;
+      box-shadow: 4px 4px 24px 0px #00000040;
+      padding: 20px 100px;
 
-    .Sign-in__inner {
+      @media (max-width: 1200px) {
+        padding: 20px 20px;
+      }
+
+      h2 {
+        direction: rtl;
+        text-align: center;
+        margin: 30px;
+      }
+
+      form {
         display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 87vh;
-        width: 100vw;
+        flex-direction: column;
 
-        .sign-in__inner__form {
-            height: 65vh;
-            margin-bottom: 75px;
-            box-shadow: 4px 4px 24px 0px #00000040;
-            padding: 20px 100px;
-
-            @media (max-width: 1200px) {
-                padding: 20px 20px;
-            }
-
-            h2 {
-                direction: rtl;
-                text-align: center;
-                margin: 30px;
-            }
-
-            form {
-                display: flex;
-                flex-direction: column;
-
-                select,
-                input {
-                    direction: rtl;
-                    margin: 15px 0;
-                    height: 55px;
-                    border-radius: 8px;
-                    padding: 12px;
-                    border: 1px solid grey;
-                }
-
-                .rem {
-                    display: flex;
-                    align-items: center;
-                    flex-direction: row-reverse;
-                    justify-content: space-between;
-                    font-size: 14px;
-                    font-weight: 400;
-                    height: 20px;
-
-                    > div {
-                        display: flex;
-                        align-items: center;
-                        
-                        > label {
-                            margin: 5px;
-                        }
-                    }
-
-                    a {
-                        text-decoration: none;
-                    }
-                }
-
-                .sub {
-                    display: flex;
-                    align-items: center;
-                    flex-direction: column;
-                    margin-top: 25px;
-
-                    button {
-                        width: 52%;
-                        color: white;
-                        border: none;
-                        border-radius: 6px;
-                        padding: 10px;
-                    }
-
-                    > div {
-                        font-size: 12px;
-                        font-weight: 400;
-
-                        a {
-                            text-decoration: none;
-                        }
-                    }
-                }
-            }
+        select,
+        input {
+          direction: rtl;
+          margin: 15px 0;
+          height: 55px;
+          border-radius: 8px;
+          padding: 12px;
         }
-    }
 
-    .Footer__in {
-        position: absolute;
-        bottom: 0;
+        .rem {
+          display: flex;
+          align-items: center;
+          flex-direction: row-reverse;
+          justify-content: space-between;
+          font-size: 14px;
+          font-weight: 400;
+          height: 20px;
+
+          > div {
+            display: flex;
+            align-items: center;
+
+            > label {
+              margin: 5px;
+            }
+          }
+
+          a {
+            text-decoration: none;
+          }
+        }
+
+        .sub {
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+          margin-top: 25px;
+
+          button {
+            width: 52%;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 10px;
+          }
+
+          > div {
+            font-size: 12px;
+            font-weight: 400;
+
+            a {
+              text-decoration: none;
+            }
+          }
+        }
+      }
     }
+  }
+
+  .Footer__in {
+    position: absolute;
+    bottom: 0;
+  }
 }

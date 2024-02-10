@@ -14,6 +14,7 @@ function Signin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rem, setRem] = useState(false);
+  const [wrong, setWrong] = useState(false);
 
   const navigate = useNavigate();
   const { login } = useAuth();
@@ -26,7 +27,7 @@ function Signin() {
         login(role, token, rem);
         navigate("/");
       } else {
-        console.log("Log in Failed!");
+        setWrong((e) => !e);
       }
     } else if (role == "lecturer") {
       const token = await LogInLecturer(email, password);
@@ -34,7 +35,7 @@ function Signin() {
         login(role, token, rem);
         navigate("/");
       } else {
-        console.log("Log in Failed!");
+        setWrong((e) => !e);
       }
     } else if (role == "admin") {
       const token = await LogInAdmin(email, password);
@@ -42,7 +43,7 @@ function Signin() {
         login(role, token, rem);
         navigate("/admin/main");
       } else {
-        console.log("Log in Failed!");
+        setWrong((e) => !e);
       }
     } else if (role == "master") {
       const token = await LogInMaster(email, password);
@@ -50,7 +51,7 @@ function Signin() {
         login(role, token, rem);
         navigate("/master/main");
       } else {
-        console.log("Log in Failed!");
+        setWrong((e) => !e);
       }
     }
   };
@@ -78,12 +79,22 @@ function Signin() {
                 placeholder="البريد الإلكتروني"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                style={
+                  wrong
+                    ? { border: "1px solid red" }
+                    : { border: "1px solid grey" }
+                }
               />
               <input
                 type="password"
                 placeholder="كلمة السر"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                style={
+                  wrong
+                    ? { border: "1px solid red" }
+                    : { border: "1px solid grey" }
+                }
               />
               <div className="rem">
                 <div>

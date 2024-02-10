@@ -23,7 +23,6 @@ const AuthProvider = ({ children }) => {
   const [isLoggedIn, setLoggedIn] = useState(storedAuth === "true");
   const [userType, setUserType] = useState(storedUserType);
   const [token, setToken] = useState(storedToken);
-  const [dip, setDip] = useState();
 
   const login = (userType, token, rememberMe) => {
     setLoggedIn(true);
@@ -71,8 +70,6 @@ const AuthProvider = ({ children }) => {
         token,
         login,
         logout,
-        dip,
-        setDip,
       }}
     >
       {children}

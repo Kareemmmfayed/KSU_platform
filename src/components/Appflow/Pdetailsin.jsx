@@ -1,31 +1,8 @@
 /* eslint-disable react/prop-types */
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { showProgram } from "../../services/applicant/program/show";
-import { useAuth } from "../../services/AuthContext";
 
-function Pdetailsin({ Signed }) {
-  const { token, dip } = useAuth();
+function Pdetailsin({ Signed, data }) {
   const navigate = useNavigate();
-
-  const [data, setData] = useState();
-
-  const fetchData = async () => {
-    const res = await showProgram(token, dip);
-    setData(res);
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const toApp = () => {
-    navigate("/application");
-  };
-
-  const toData = () => {
-    navigate("/appinfo");
-  };
 
   return (
     <div className="Pdetails__in">
@@ -63,11 +40,11 @@ function Pdetailsin({ Signed }) {
         </ul>
       </div>
       {Signed ? (
-        <button className="btnbtn" onClick={toApp}>
+        <button className="btnbtn" onClick={() => navigate("/application")}>
           سجل الآن
         </button>
       ) : (
-        <button className="btnbtn" onClick={toData}>
+        <button className="btnbtn" onClick={() => navigate("/appinfo")}>
           معلومات طلبك
         </button>
       )}

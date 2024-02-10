@@ -2,13 +2,29 @@
 import Header from "../Header";
 import Footer from "../Footer";
 import Pdetailsin from "./Pdetailsin";
+import { useState, useEffect } from "react";
+import { showProgram } from "../../services/applicant/program/show";
+import { useAuth } from "../../services/AuthContext";
 
-function Pdetails() {
+function Pdetails({ diplomaId }) {
+  const { token } = useAuth();
+
+  const [data, setData] = useState({});
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await showProgram(token, diplomaId);
+      setData(res);
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <>
       <Header name="< العودة" link="/" />
       <div className="Pdetails">
-        <Pdetailsin Signed={true} />
+        <Pdetailsin Signed={true} data={data} />
         <Footer />
       </div>
     </>

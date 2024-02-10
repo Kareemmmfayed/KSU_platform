@@ -6,10 +6,10 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../services/AuthContext";
 import { indexPrograms } from "../../services/applicant/program/index";
 
-function Programs() {
+function Programs({ pickDiplomaId }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [diplomas, setDiplomas] = useState([]);
-  const { token, setDip } = useAuth();
+  const { token } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -30,8 +30,8 @@ function Programs() {
   );
 
   const details = (id) => {
+    pickDiplomaId(id);
     navigate("/programs/details");
-    setDip(id);
   };
 
   return (
