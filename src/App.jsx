@@ -56,12 +56,17 @@ function App() {
           <Route path="/account" element={<AccountInfo />} />
           <Route path="/diplomas" element={<Mydiplomas />} />
           <Route path="/subjects" element={<Regsubs />} />
-          <Route path="/employee/programs/details" element={<Eprogram />} />
           <Route path="/applicants" element={<Applicants />} />
           <Route path="/appinfo" element={<Appinfo />} />
+          <Route
+            path="/employee/programs/details"
+            element={<Eprogram diplomaId={diplomaId} />}
+          />
           <Route path="/employee/Applicant/info" element={<Appinfoemp />} />
+
           <Route path="/lecturer/table" element={<Table />} />
-          <Route path="/Subjects" element={<Cric />} />
+          <Route path="/lecturer/subjects" element={<Cric />} />
+
           <Route path="/admin/main" element={<Addmain />} />
           <Route path="/admin/diplomas" element={<Adiplomas />} />
           <Route path="/admin/employees" element={<Aemp />} />
@@ -70,6 +75,7 @@ function App() {
           <Route path="/admin/years" element={<Ayear />} />
           <Route path="/admin/payments" element={<Apay />} />
           <Route path="/admin/programs" element={<Aprogram />} />
+
           <Route path="/master/main" element={<Mastermain />} />
           <Route path="/master/colleges" element={<Mcollege />} />
           <Route path="/master/admins" element={<Madmin />} />

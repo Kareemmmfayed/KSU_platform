@@ -5,20 +5,22 @@ import Footer from "../Footer";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../services/AuthContext";
 import { indexPrograms } from "../../services/applicant/program/index";
+import { indexEmployeePrograms } from "../../services/employee/program/index";
 
 function Programs({ pickDiplomaId }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [diplomas, setDiplomas] = useState([]);
-  const { token } = useAuth();
+  const { token, userType } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
+      if (userType === "applicant") {
         const programs = await indexPrograms(token);
         setDiplomas(programs);
-      } catch (error) {
-        console.error("Error fetching programs:", error);
+      } else if (userType === "employee") {
+        const programs = await indexEmployeePrograms(token);
+        setDiplomas(programs);
       }
     };
 
@@ -31,7 +33,11 @@ function Programs({ pickDiplomaId }) {
 
   const details = (id) => {
     pickDiplomaId(id);
-    navigate("/programs/details");
+    if (userType === "applicant") {
+      navigate("/programs/details");
+    } else if (userType === "employee") {
+      navigate("/employee/programs/details");
+    }
   };
 
   return (

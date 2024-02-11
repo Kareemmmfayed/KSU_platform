@@ -658,7 +658,8 @@ body {
 .Application__inner__form form input[type=file] {
   display: none;
 }
-.Application__inner__form form label, .Application__inner__form form .btns {
+.Application__inner__form form label,
+.Application__inner__form form .btns {
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -673,13 +674,13 @@ body {
   font-weight: 500;
   font-size: 16px;
 }
-.Application__inner__form form div, .Application__inner__form form select {
+.Application__inner__form form div,
+.Application__inner__form form select {
   direction: rtl;
   margin: 15px 0;
   height: 55px;
   border-radius: 8px;
   padding: 12px;
-  border: 1px solid grey;
 }
 .Application__inner__form form .btns {
   border: none;

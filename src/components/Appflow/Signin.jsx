@@ -8,6 +8,7 @@ import { LogInApplicant } from "../../services/auth/LogInApplicant";
 import { LogInMaster } from "../../services/auth/LogInMaster";
 import { LogInLecturer } from "../../services/auth/LogInLecturer";
 import { LogInAdmin } from "../../services/auth/LogInAdmin";
+import { LogInEmployee } from "../../services/auth/LogInEmployee";
 
 function Signin() {
   const [role, setRole] = useState("");
@@ -31,6 +32,14 @@ function Signin() {
       }
     } else if (role == "lecturer") {
       const token = await LogInLecturer(email, password);
+      if (token) {
+        login(role, token, rem);
+        navigate("/");
+      } else {
+        setWrong((e) => !e);
+      }
+    } else if (role == "employee") {
+      const token = await LogInEmployee(email, password);
       if (token) {
         login(role, token, rem);
         navigate("/");
@@ -64,7 +73,11 @@ function Signin() {
           <div className="sign-in__inner__form col-lg-5 col-md-6 col-12">
             <h2>أهلا بعودتك !</h2>
             <form onSubmit={handleSubmit}>
-              <select value={role} onChange={(e) => setRole(e.target.value)}>
+              <select
+                value={role}
+                onChange={(e) => setRole(e.target.value)}
+                required
+              >
                 <option disabled value="">
                   الدور
                 </option>

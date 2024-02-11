@@ -3,27 +3,46 @@ import logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
 import { useAuth } from "../services/AuthContext";
 import pfp from "../assets/pfp.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { showApplicant } from "../services/applicant/me/show";
+import { showEmployee } from "../services/employee/me/show";
+import { showAdmin } from "../services/admin/me/show";
+import { showMaster } from "../services/master/me/show";
 
 function Header(props) {
-  const { isLoggedIn, logout, userType } = useAuth();
+  const { isLoggedIn, logout, userType, token } = useAuth();
 
   const [list, setList] = useState(false);
+  const [userName, setUserName] = useState("");
+
+  useEffect(() => {
+    const fetchName = async () => {
+      if (userType === "applicant") {
+        const res = await showApplicant(token);
+        setUserName(res.name);
+      } else if (userType === "employee") {
+        const res = await showEmployee(token);
+        setUserName(res.name);
+      } else if (userType === "admin") {
+        const res = await showAdmin(token);
+        setUserName(res.name);
+      } else if (userType === "master") {
+        const res = await showMaster(token);
+        setUserName(res.name);
+      }
+    };
+
+    if (isLoggedIn) {
+      fetchName();
+    }
+  }, []);
 
   const show = () => {
     setList(!list);
   };
 
   const navigate = useNavigate();
-
-  const toAccount = () => {
-    navigate("/account");
-  };
-
-  const toDip = () => {
-    navigate("/diplomas");
-  };
 
   const LogOut = () => {
     logout();
@@ -46,17 +65,21 @@ function Header(props) {
           <div className="userName">
             <button onClick={show}>
               <img src={pfp} alt="Profile picture" />
-              <p>إسم المستخدم</p>
+              <p>{userName}</p>
             </button>
             {list && (
               <ul>
                 {userType == "applicant" && (
                   <li>
-                    <button onClick={toDip}>الدبلومات السابقة</button>
+                    <button onClick={() => navigate("/diplomas")}>
+                      الدبلومات السابقة
+                    </button>
                   </li>
                 )}
                 <li>
-                  <button onClick={toAccount}>معلومات الحساب</button>
+                  <button onClick={() => navigate("/account")}>
+                    معلومات الحساب
+                  </button>
                 </li>
                 <li>
                   <button className="red" onClick={LogOut}>
