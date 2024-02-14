@@ -20,9 +20,6 @@ function Adiplomas() {
   const [del, setDelete] = useState(false);
   const [name, setName] = useState("");
   const [intro, setIntro] = useState("");
-  const [app, setApp] = useState("");
-  const [fee, setFee] = useState("");
-  const [cre, setCre] = useState("");
   const [stime, setStime] = useState("");
   const [ctime, setCtime] = useState("");
   const navigate = useNavigate();
@@ -35,10 +32,6 @@ function Adiplomas() {
   useEffect(() => {
     fetchData();
   }, []);
-
-  const navtohome = () => {
-    navigate("/admin/main");
-  };
 
   const toggleCardState = (id) => {
     if (del) {
@@ -56,11 +49,8 @@ function Adiplomas() {
       token,
       name,
       intro,
-      app,
-      fee,
       `${stime}T12:00:00`,
-      `${ctime}T12:00:00`,
-      cre
+      `${ctime}T12:00:00`
     );
     setShow(false);
     fetchData();
@@ -84,7 +74,7 @@ function Adiplomas() {
       <div className="Adiplomas">
         <div className="Adiplomas__in">
           <div className="Adiplomas__in__top">
-            <button onClick={navtohome}>
+            <button onClick={() => navigate("/admin/main")}>
               <img src={home} alt="home" />
             </button>
             <button onClick={addItem}>
@@ -97,14 +87,10 @@ function Adiplomas() {
           <div className="Adiplomas__in__body">
             <div className="cards">
               {programs.map((program) => (
-                <div
-                  className={del ? "card delete" : "card"}
-                  key={program.id}
-                  onClick={() => toggleCardState(program.id)}
-                >
+                <div className={del ? "card delete" : "card"} key={program.id}>
                   <h2>{program.name}</h2>
                   {del && (
-                    <button>
+                    <button onClick={() => toggleCardState(program.id)}>
                       <img
                         src={selectedCard === program.id ? checked : notchecked}
                         alt="circle"
@@ -138,26 +124,6 @@ function Adiplomas() {
                 />
               </div>
               <div>
-                <label htmlFor="req">رسوم التقديم :</label>
-                <input
-                  type="number"
-                  id="req"
-                  value={app}
-                  onChange={(e) => setApp(e.target.value)}
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor="req">رسوم الدبلومة :</label>
-                <input
-                  type="number"
-                  id="req"
-                  value={fee}
-                  onChange={(e) => setFee(e.target.value)}
-                  required
-                />
-              </div>
-              <div>
                 <label htmlFor="time">موعد البداية :</label>
                 <input
                   type="text"
@@ -176,16 +142,6 @@ function Adiplomas() {
                   value={ctime}
                   onChange={(e) => setCtime(e.target.value)}
                   placeholder="ex :- 2023-08-29"
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor="req">رسوم الساعات المعتمدة :</label>
-                <input
-                  type="number"
-                  id="req"
-                  value={cre}
-                  onChange={(e) => setCre(e.target.value)}
                   required
                 />
               </div>

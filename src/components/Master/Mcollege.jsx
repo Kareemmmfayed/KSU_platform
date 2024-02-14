@@ -20,8 +20,7 @@ function Mcollege() {
   const [del, setDelete] = useState(false);
 
   const fetchPrograms = async () => {
-    const res = await indexColleges(token);
-    const data = await res.json();
+    const data = await indexColleges(token);
     setPrograms(data.data.collages);
   };
 
@@ -30,10 +29,6 @@ function Mcollege() {
   }, []);
 
   const navigate = useNavigate();
-
-  const navtohome = () => {
-    navigate("/master/main");
-  };
 
   const toggleCardState = (id) => {
     if (del) {
@@ -53,17 +48,18 @@ function Mcollege() {
     e.preventDefault();
     await createCollege(token, faculty, college);
     setShow(false);
+    fetchPrograms();
     setFaculty("");
     setCollege("");
-    fetchPrograms();
   };
 
   const dele = async () => {
     if (del && selectedCard) {
       await deleteCollege(token, selectedCard);
       setSelectedCard(null);
-      setDelete(!del);
       fetchPrograms();
+
+      setDelete(!del);
     } else {
       setDelete(!del);
       setSelectedCard(null);
@@ -76,7 +72,7 @@ function Mcollege() {
       <div className="Mcollege">
         <div className="Mcollege__in">
           <div className="Mcollege__in__top">
-            <button onClick={navtohome}>
+            <button onClick={() => navigate("/master/main")}>
               <img src={home} alt="home" />
             </button>
             <button onClick={addItem}>

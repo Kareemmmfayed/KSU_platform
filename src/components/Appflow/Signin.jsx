@@ -28,7 +28,7 @@ function Signin() {
         login(role, token, rem);
         navigate("/");
       } else {
-        setWrong((e) => !e);
+        setWrong(true);
       }
     } else if (role == "lecturer") {
       const token = await LogInLecturer(email, password);
@@ -36,7 +36,7 @@ function Signin() {
         login(role, token, rem);
         navigate("/");
       } else {
-        setWrong((e) => !e);
+        setWrong(true);
       }
     } else if (role == "employee") {
       const token = await LogInEmployee(email, password);
@@ -44,7 +44,7 @@ function Signin() {
         login(role, token, rem);
         navigate("/");
       } else {
-        setWrong((e) => !e);
+        setWrong(true);
       }
     } else if (role == "admin") {
       const token = await LogInAdmin(email, password);
@@ -60,7 +60,7 @@ function Signin() {
         login(role, token, rem);
         navigate("/master/main");
       } else {
-        setWrong((e) => !e);
+        setWrong(true);
       }
     }
   };

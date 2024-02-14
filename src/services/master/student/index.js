@@ -1,6 +1,6 @@
 import { API_URL } from "../../API";
 
-export const indexColleges = async (token) => {
+export const indexStudent = async (token) => {
   let headersList = {
     Authorization: `Bearer ${token}`,
   };

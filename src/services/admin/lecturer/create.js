@@ -1,7 +1,7 @@
 import { API_URL } from "../../API";
 import { COLLEGE } from "../../API";
 
-export const createEmployee = async (token, name, mail, pass) => {
+export const createLecturer = async (token, name, mail, pass) => {
   let headersList = {
     Accept: "*/*",
     Authorization: `Bearer ${token}`,
@@ -15,7 +15,7 @@ export const createEmployee = async (token, name, mail, pass) => {
   });
 
   let response = await fetch(
-    `${API_URL}/admin/collages/${COLLEGE.id}/employees`,
+    `${API_URL}/admin/collages/${COLLEGE.id}/instructors`,
     {
       method: "POST",
       body: bodyContent,
@@ -23,5 +23,5 @@ export const createEmployee = async (token, name, mail, pass) => {
     }
   );
   let data = await response.json();
-  return data;
+  return data.data.instructor;
 };

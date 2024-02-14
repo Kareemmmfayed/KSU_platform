@@ -9,15 +9,15 @@ import checked from "../../assets/checked.png";
 import notchecked from "../../assets/notchecked.png";
 import copy from "../../assets/copy.png";
 import { useAuth } from "../../services/AuthContext";
-import { showAdmin } from "../../services/admin/me/show";
 import { indexEmployee } from "../../services/admin/employee";
 import { createEmployee } from "../../services/admin/employee/create";
+import { deleteEmployee } from "../../services/admin/employee/delete";
 
 function Aemp() {
   const { token } = useAuth();
-  const [name, setName] = useState([]);
-  const [mail, setMail] = useState([]);
-  const [password, setPassword] = useState([]);
+  const [name, setName] = useState("");
+  const [mail, setMail] = useState("");
+  const [password, setPassword] = useState("");
   const [employees, setEmployees] = useState([]);
 
   const fetchData = async () => {
@@ -31,22 +31,14 @@ function Aemp() {
 
   const navigate = useNavigate();
 
-  const navtohome = () => {
-    navigate("/");
-  };
-
   const [show, setShow] = useState(false);
   const [del, setDelete] = useState(false);
-  const [cardStates, setCardStates] = useState(
-    Array(employees.length).fill(false)
-  );
+  const [cardStates, setCardStates] = useState(null);
 
-  const toggleCardState = (index) => {
-    setCardStates((prevStates) => {
-      const newStates = Array(prevStates.length).fill(false);
-      newStates[index] = !prevStates[index];
-      return newStates;
-    });
+  const toggleCardState = (id) => {
+    if (del) {
+      setCardStates(id);
+    }
   };
 
   const addItem = () => {
@@ -55,19 +47,21 @@ function Aemp() {
 
   const sub = async (e) => {
     e.preventDefault();
-    const meRes = await showAdmin(token);
-    const meData = await meRes.json();
-    await createEmployee(
-      token,
-      meData.data.adminData.collage_id,
-      name,
-      mail,
-      password
-    );
+    await createEmployee(token, name, mail, password);
+    setShow(false);
+    fetchData();
   };
 
-  const dele = () => {
-    setDelete(true);
+  const dele = async () => {
+    if (del && cardStates) {
+      await deleteEmployee(token, cardStates);
+      setCardStates(null);
+      setDelete(!del);
+      fetchData();
+    } else {
+      setDelete(!del);
+      setCardStates(null);
+    }
   };
 
   const copycontent = (content) => {
@@ -80,7 +74,7 @@ function Aemp() {
       <div className="Aemp">
         <div className="Aemp__in">
           <div className="Aemp__in__top">
-            <button onClick={navtohome}>
+            <button onClick={() => navigate("/admin/main")}>
               <img src={home} alt="home" />
             </button>
             <button onClick={addItem}>
@@ -93,13 +87,17 @@ function Aemp() {
           <div className="Aemp__in__body">
             <div className="cards">
               {employees.map((emp) => (
-                <div className={del ? "card delete" : "card"} key={emp.id}>
+                <div
+                  className={del ? "card delete" : "card"}
+                  key={emp.id}
+                  onClick={() => toggleCardState(emp.id)}
+                >
                   <h2>{emp.name}</h2>
                   <p>البريد الإلكتروني : {emp.email}</p>
                   {del && (
                     <button onClick={() => toggleCardState(emp.id)}>
                       <img
-                        src={cardStates[emp.id] ? checked : notchecked}
+                        src={cardStates === emp.id ? checked : notchecked}
                         alt="circle"
                         className="notcopy"
                       />
