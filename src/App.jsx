@@ -28,6 +28,8 @@ import Pdetails from "./components/Appflow/Pdetails";
 import Apdetails from "./components/Appflow/Apdetails";
 import Eprogram from "./components/Empflow/Eprogram";
 import { useState } from "react";
+import AppLayout from "./components/AppLayout";
+import ProtectedRoutes from "./components/ProtectedRoutes";
 
 function App() {
   const [diplomaId, setDiplomaId] = useState();
@@ -43,42 +45,50 @@ function App() {
           <Route path="/login" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
           <Route
-            path="/programs"
-            element={<Programs pickDiplomaId={pickDiplomaId} />}
-          />
-          <Route
-            path="/programs/details"
-            element={<Pdetails diplomaId={diplomaId} />}
-          />
-          <Route path="/programs/Adetails" element={<Apdetails />} />
-          <Route path="/application" element={<Application />} />
-          <Route path="/success" element={<Success />} />
-          <Route path="/account" element={<AccountInfo />} />
-          <Route path="/diplomas" element={<Mydiplomas />} />
-          <Route path="/subjects" element={<Regsubs />} />
-          <Route path="/applicants" element={<Applicants />} />
-          <Route path="/appinfo" element={<Appinfo />} />
-          <Route
-            path="/employee/programs/details"
-            element={<Eprogram diplomaId={diplomaId} />}
-          />
-          <Route path="/employee/Applicant/info" element={<Appinfoemp />} />
+            element={
+              <ProtectedRoutes>
+                <AppLayout />
+              </ProtectedRoutes>
+            }
+          >
+            <Route
+              path="/programs"
+              element={<Programs pickDiplomaId={pickDiplomaId} />}
+            />
+            <Route
+              path="/programs/details"
+              element={<Pdetails diplomaId={diplomaId} />}
+            />
+            <Route path="/programs/Adetails" element={<Apdetails />} />
+            <Route path="/application" element={<Application />} />
+            <Route path="/success" element={<Success />} />
+            <Route path="/account" element={<AccountInfo />} />
+            <Route path="/diplomas" element={<Mydiplomas />} />
+            <Route path="/subjects" element={<Regsubs />} />
+            <Route path="/applicants" element={<Applicants />} />
+            <Route path="/appinfo" element={<Appinfo />} />
+            <Route
+              path="/employee/programs/details"
+              element={<Eprogram diplomaId={diplomaId} />}
+            />
+            <Route path="/employee/Applicant/info" element={<Appinfoemp />} />
 
-          <Route path="/lecturer/table" element={<Table />} />
-          <Route path="/lecturer/subjects" element={<Cric />} />
+            <Route path="/lecturer/table" element={<Table />} />
+            <Route path="/lecturer/subjects" element={<Cric />} />
 
-          <Route path="/admin/main" element={<Addmain />} />
-          <Route path="/admin/diplomas" element={<Adiplomas />} />
-          <Route path="/admin/employees" element={<Aemp />} />
-          <Route path="/admin/lecturers" element={<Alect />} />
-          <Route path="/admin/subjects" element={<Asubjects />} />
-          <Route path="/admin/years" element={<Ayear />} />
-          <Route path="/admin/payments" element={<Apay />} />
-          <Route path="/admin/programs" element={<Aprogram />} />
+            <Route path="/admin/main" element={<Addmain />} />
+            <Route path="/admin/diplomas" element={<Adiplomas />} />
+            <Route path="/admin/employees" element={<Aemp />} />
+            <Route path="/admin/lecturers" element={<Alect />} />
+            <Route path="/admin/subjects" element={<Asubjects />} />
+            <Route path="/admin/years" element={<Ayear />} />
+            <Route path="/admin/payments" element={<Apay />} />
+            <Route path="/admin/programs" element={<Aprogram />} />
 
-          <Route path="/master/main" element={<Mastermain />} />
-          <Route path="/master/colleges" element={<Mcollege />} />
-          <Route path="/master/admins" element={<Madmin />} />
+            <Route path="/master/main" element={<Mastermain />} />
+            <Route path="/master/colleges" element={<Mcollege />} />
+            <Route path="/master/admins" element={<Madmin />} />
+          </Route>
         </Routes>
       </div>
     </Router>
