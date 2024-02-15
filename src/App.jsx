@@ -51,43 +51,54 @@ function App() {
               </ProtectedRoutes>
             }
           >
-            <Route
-              path="/programs"
-              element={<Programs pickDiplomaId={pickDiplomaId} />}
-            />
-            <Route
-              path="/programs/details"
-              element={<Pdetails diplomaId={diplomaId} />}
-            />
-            <Route path="/programs/Adetails" element={<Apdetails />} />
-            <Route path="/application" element={<Application />} />
-            <Route path="/success" element={<Success />} />
-            <Route path="/account" element={<AccountInfo />} />
-            <Route path="/diplomas" element={<Mydiplomas />} />
-            <Route path="/subjects" element={<Regsubs />} />
-            <Route path="/applicants" element={<Applicants />} />
-            <Route path="/appinfo" element={<Appinfo />} />
-            <Route
-              path="/employee/programs/details"
-              element={<Eprogram diplomaId={diplomaId} />}
-            />
-            <Route path="/employee/Applicant/info" element={<Appinfoemp />} />
+            <Route path="/applicant">
+              <Route
+                path="programs"
+                element={<Programs pickDiplomaId={pickDiplomaId} />}
+              />
+              <Route
+                path="programs/details"
+                element={<Pdetails diplomaId={diplomaId} />}
+              />
+              <Route path="programs/Adetails" element={<Apdetails />} />
+              <Route path="application" element={<Application />} />
+              <Route path="success" element={<Success />} />
+              <Route path="account" element={<AccountInfo />} />
+              <Route path="diplomas" element={<Mydiplomas />} />
+              <Route path="subjects" element={<Regsubs />} />
+              <Route path="applicants" element={<Applicants />} />
+              <Route path="appinfo" element={<Appinfo />} />
+            </Route>
 
-            <Route path="/lecturer/table" element={<Table />} />
-            <Route path="/lecturer/subjects" element={<Cric />} />
+            <Route path="/employee">
+              <Route
+                path="programs/details"
+                element={<Eprogram diplomaId={diplomaId} />}
+              />
+              <Route path="Applicant/info" element={<Appinfoemp />} />
+            </Route>
 
-            <Route path="/admin/main" element={<Addmain />} />
-            <Route path="/admin/diplomas" element={<Adiplomas />} />
-            <Route path="/admin/employees" element={<Aemp />} />
-            <Route path="/admin/lecturers" element={<Alect />} />
-            <Route path="/admin/subjects" element={<Asubjects />} />
-            <Route path="/admin/years" element={<Ayear />} />
-            <Route path="/admin/payments" element={<Apay />} />
-            <Route path="/admin/programs" element={<Aprogram />} />
+            <Route path="lecturer">
+              <Route path="table" element={<Table />} />
+              <Route path="subjects" element={<Cric />} />
+            </Route>
 
-            <Route path="/master/main" element={<Mastermain />} />
-            <Route path="/master/colleges" element={<Mcollege />} />
-            <Route path="/master/admins" element={<Madmin />} />
+            <Route path="/admin">
+              <Route path="main" element={<Addmain />} />
+              <Route path="diplomas" element={<Adiplomas />} />
+              <Route path="employees" element={<Aemp />} />
+              <Route path="lecturers" element={<Alect />} />
+              <Route path="subjects" element={<Asubjects />} />
+              <Route path="years" element={<Ayear />} />
+              <Route path="payments" element={<Apay />} />
+              <Route path="programs" element={<Aprogram />} />
+            </Route>
+
+            <Route path="/master">
+              <Route path="main" element={<Mastermain />} />
+              <Route path="colleges" element={<Mcollege />} />
+              <Route path="admins" element={<Madmin />} />
+            </Route>
           </Route>
         </Routes>
       </div>
