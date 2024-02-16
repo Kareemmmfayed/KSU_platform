@@ -10,6 +10,7 @@ import checked from "../../assets/checked.png";
 import { useAuth } from "../../services/AuthContext";
 import { indexLevel } from "../../services/admin/level/index";
 import { createLevel } from "../../services/admin/level/create";
+import { deleteLevel } from "../../services/admin/level/delete";
 
 export default function Ayear({ AdminDiplomaId }) {
   const { token } = useAuth();
@@ -47,13 +48,25 @@ export default function Ayear({ AdminDiplomaId }) {
 
   const sub = async (e) => {
     e.preventDefault();
-    await createLevel(token, AdminDiplomaId, name);
+    await createLevel(token, AdminDiplomaId, level);
     setShow(false);
     fetchData();
   };
 
-  const dele = () => {
-    setDelete(true);
+  const dele = async () => {
+    if (del && selectedCard) {
+      await deleteLevel(token, AdminDiplomaId, selectedCard);
+      setSelectedCard(null);
+      setDelete(!del);
+      fetchData();
+    } else {
+      setDelete(!del);
+      setSelectedCard(null);
+    }
+  };
+
+  const handleClick = () => {
+    navigate;
   };
 
   return (
@@ -85,7 +98,7 @@ export default function Ayear({ AdminDiplomaId }) {
                       />
                     </button>
                   ) : (
-                    <button></button>
+                    <button onClick={handleClick}></button>
                   )}
                 </div>
               ))}
