@@ -58,7 +58,7 @@ function Asubjects({ AdminDiplomaId, levelId, semesterId }) {
       levelId,
       semesterId,
       name,
-      hours,
+      Number(hours),
       code
     );
     setShow(false);
@@ -109,11 +109,11 @@ function Asubjects({ AdminDiplomaId, levelId, semesterId }) {
                 <div className={del ? "card delete" : "card"} key={sub.id}>
                   <h2>إسم المقرر : {sub.name}</h2>
                   <p>كود المقرر : {sub.code}</p>
-                  <p>عدد الساعات المعتمدة : {credit_hours}</p>
+                  <p>عدد الساعات المعتمدة : {sub.credit_hours}</p>
                   {del && (
                     <button onClick={() => toggleCardState(index)}>
                       <img
-                        src={electedCard === year.id ? checked : notchecked}
+                        src={selectedCard === year.id ? checked : notchecked}
                         alt="circle"
                         className="notcopy"
                       />
@@ -123,7 +123,7 @@ function Asubjects({ AdminDiplomaId, levelId, semesterId }) {
                     <button
                       onClick={() =>
                         copycontent(
-                          `إسم المقرر: ${emp[0]}\nكود المقرر: ${emp[1]}\nعدد الساعات المعتمدة: ${emp[2]}\n${emp[3]}`
+                          `إسم المقرر: ${sub.name}\nكود المقرر: ${sub.code}\nعدد الساعات المعتمدة: ${sub.credit_hours}`
                         )
                       }
                     >
@@ -149,7 +149,7 @@ function Asubjects({ AdminDiplomaId, levelId, semesterId }) {
               <div>
                 <label htmlFor="faculty">كود المقرر :</label>
                 <input
-                  type="number"
+                  type="text"
                   id="faculty"
                   value={code}
                   onChange={(e) => setCode(e.target.value)}

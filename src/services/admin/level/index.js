@@ -1,5 +1,4 @@
-import { API_URL } from "../../API";
-import { COLLEGE } from "../../API";
+import { API_URL, COLLEGE } from "../../API";
 
 export const indexLevel = async (token, programId) => {
   let headersList = {

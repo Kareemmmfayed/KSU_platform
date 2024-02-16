@@ -1,5 +1,4 @@
-import { API_URL } from "../../API";
-import { COLLEGE } from "../../API";
+import { API_URL, COLLEGE } from "../../API";
 import { createProgramFiles } from "../program_files/create";
 
 export const createProgram = async (token, name, desc, open, close) => {
