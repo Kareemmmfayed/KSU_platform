@@ -1,20 +1,34 @@
 import { API_URL } from "../../API";
 import { COLLEGE } from "../../API";
 
-export const indexCourse = async (token, programId, levelId, semesterId) => {
+export const createCourse = async (
+  token,
+  programId,
+  levelId,
+  semesterId,
+  name,
+  hours,
+  code
+) => {
   let headersList = {
     Accept: "*/*",
     Authorization: `Bearer ${token}`,
     "Content-Type": "application/json",
   };
 
+  let bodyContent = JSON.stringify({
+    name: name,
+    creditHours: hours,
+    code: code,
+  });
+
   let response = await fetch(
     `${API_URL}/admin/collages/${COLLEGE.id}/programs/${programId}/levels/${levelId}/semesters/${semesterId}/courses`,
     {
-      method: "GET",
+      method: "POST",
+      body: bodyContent,
       headers: headersList,
     }
   );
-  const data = await response.json();
-  return data.data.courses;
+  return response;
 };

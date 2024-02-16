@@ -6,20 +6,22 @@ import trash from "../../assets/trash.png";
 import checked from "../../assets/checked.png";
 import notchecked from "../../assets/notchecked.png";
 import copy from "../../assets/copy.png";
-// import { useAuth } from "../../services/AuthContext";
+import { useAuth } from "../../services/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { indexCourse } from "../../services/admin/course/index";
+import { createCourse } from "../../services/admin/course/create";
+import { deleteCourse } from "../../services/admin/course/delete";
 
-function Asubjects() {
-  const subjects = [];
-  //   const { token } = useAuth();
-  //   const [subjects, setSubjects] = useState([]);
+function Asubjects({ AdminDiplomaId, levelId, semesterId }) {
+  const { token } = useAuth();
+  const [subjects, setSubjects] = useState([]);
 
   const navigate = useNavigate();
 
   const fetchData = async () => {
-    // const res = await indexPrograms(token);
-    // setSubjects(res);
+    const res = await indexCourse(token);
+    setSubjects(res);
   };
 
   useEffect(() => {
@@ -30,22 +32,51 @@ function Asubjects() {
   const [del, setDelete] = useState(false);
   const [cardStates, setCardStates] = useState(null);
 
-  const toggleCardState = (index) => {
-    setCardStates((prevStates) => {
-      const newStates = [...prevStates];
-      newStates[index] = !newStates[index];
-      return newStates;
-    });
+  const toggleCardState = (id) => {
+    if (del) {
+      if (selectedCard === id) {
+        setSelectedCard(null);
+      } else {
+        setSelectedCard(id);
+      }
+    }
   };
 
   const addItem = () => {
     setShow(true);
   };
 
-  const sub = () => {};
+  const sub = async (e) => {
+    e.preventDefault();
+    await createCourse(
+      token,
+      AdminDiplomaId,
+      levelId,
+      semesterId,
+      name,
+      hours,
+      code
+    );
+    setShow(false);
+    fetchData();
+  };
 
-  const dele = () => {
-    setDelete(true);
+  const dele = async () => {
+    if (del && selectedCard) {
+      await deleteCourse(
+        token,
+        AdminDiplomaId,
+        levelId,
+        semesterId,
+        selectedCard
+      );
+      setSelectedCard(null);
+      setDelete(!del);
+      fetchData();
+    } else {
+      setDelete(!del);
+      setSelectedCard(null);
+    }
   };
 
   const copycontent = (content) => {
@@ -70,16 +101,15 @@ function Asubjects() {
           </div>
           <div className="Asubjects__in__body">
             <div className="cards">
-              {subjects.map((emp, index) => (
-                <div className={del ? "card delete" : "card"} key={index}>
-                  <h2>إسم المقرر : {emp[0]}</h2>
-                  <p>كود المقرر : {emp[1]}</p>
-                  <p>عدد الساعات المعتمدة : {emp[2]}</p>
-                  <p>{emp[3]}</p>
+              {subjects.map((sub) => (
+                <div className={del ? "card delete" : "card"} key={sub.id}>
+                  <h2>إسم المقرر : {sub.name}</h2>
+                  <p>كود المقرر : {sub.code}</p>
+                  <p>عدد الساعات المعتمدة : {credit_hours}</p>
                   {del && (
                     <button onClick={() => toggleCardState(index)}>
                       <img
-                        src={cardStates[index] ? checked : notchecked}
+                        src={electedCard === year.id ? checked : notchecked}
                         alt="circle"
                         className="notcopy"
                       />

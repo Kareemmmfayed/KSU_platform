@@ -8,20 +8,20 @@ import { useState, useEffect } from "react";
 import notchecked from "../../assets/notchecked.png";
 import checked from "../../assets/checked.png";
 import { useAuth } from "../../services/AuthContext";
-import { indexLevel } from "../../services/admin/level/index";
-import { createLevel } from "../../services/admin/level/create";
-import { deleteLevel } from "../../services/admin/level/delete";
+import { indexSemester } from "../../services/admin/semester/index";
+import { createSemester } from "../../services/admin/semester/create";
+import { deleteSemester } from "../../services/admin/semester/delete";
 
-export default function Ayear({ AdminDiplomaId, handleLevelId }) {
+function Semester({ AdminDiplomaId, levelId, handleSemesterId }) {
   const { token } = useAuth();
-  const [years, setYears] = useState([]);
-  const [level, setLevel] = useState("");
+  const [semesters, setSemesters] = useState([]);
+  const [name, setName] = useState("");
 
   const navigate = useNavigate();
 
   const fetchData = async () => {
-    const data = await indexLevel(token, AdminDiplomaId);
-    setYears(data);
+    const data = await indexSemester(token, AdminDiplomaId, levelId);
+    setSemesters(data);
   };
 
   useEffect(() => {
@@ -48,14 +48,14 @@ export default function Ayear({ AdminDiplomaId, handleLevelId }) {
 
   const sub = async (e) => {
     e.preventDefault();
-    await createLevel(token, AdminDiplomaId, level);
+    await createSemester(token, AdminDiplomaId, levelId, name);
     setShow(false);
     fetchData();
   };
 
   const dele = async () => {
     if (del && selectedCard) {
-      await deleteLevel(token, AdminDiplomaId, selectedCard);
+      await deleteSemester(token, AdminDiplomaId, levelId, selectedCard);
       setSelectedCard(null);
       setDelete(!del);
       fetchData();
@@ -66,8 +66,8 @@ export default function Ayear({ AdminDiplomaId, handleLevelId }) {
   };
 
   const handleClick = (id) => {
-    handleLevelId(id);
-    navigate("/admin/semesters");
+    handleSemesterId(id);
+    navigate("/admin/subjects");
   };
 
   return (
@@ -88,7 +88,7 @@ export default function Ayear({ AdminDiplomaId, handleLevelId }) {
           </div>
           <div className="Ayear__in__body">
             <div className="cards">
-              {years.map((year) => (
+              {semesters.map((year) => (
                 <div className={del ? "card delete" : "card"} key={year.id}>
                   <p>{year.name}</p>
                   {del ? (
@@ -108,12 +108,12 @@ export default function Ayear({ AdminDiplomaId, handleLevelId }) {
           {show && (
             <form onSubmit={sub}>
               <div>
-                <label htmlFor="name">إسم المستوي :</label>
+                <label htmlFor="name">إسم السمستر :</label>
                 <input
                   type="text"
                   id="name"
-                  value={level}
-                  onChange={(e) => setLevel(e.target.value)}
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                 />
               </div>
               <div>
@@ -129,3 +129,5 @@ export default function Ayear({ AdminDiplomaId, handleLevelId }) {
     </>
   );
 }
+
+export default Semester;

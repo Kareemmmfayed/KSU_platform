@@ -28,6 +28,7 @@ import Pdetails from "./components/Applicant/Pdetails";
 import Apdetails from "./components/Applicant/Apdetails";
 import Eprogram from "./components/Employee/Eprogram";
 import { useState } from "react";
+import Semester from "./components/Admin/Semester";
 import AppLayout from "./components/AppLayout";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 
@@ -42,6 +43,18 @@ function App() {
 
   const handleAdminDiplomaId = (id) => {
     setAdminDiplomaId(id);
+  };
+
+  const [levelId, setLevelId] = useState();
+
+  const handleLevelId = (id) => {
+    setLevelId(id);
+  };
+
+  const [semesterId, setSemesterId] = useState();
+
+  const handleSemesterId = (id) => {
+    setSemesterId(id);
   };
 
   return (
@@ -100,13 +113,39 @@ function App() {
             />
             <Route
               path="years"
-              element={<Ayear AdminDiplomaId={AdminDiplomaId} />}
+              element={
+                <Ayear
+                  AdminDiplomaId={AdminDiplomaId}
+                  handleSemesterId={handleSemesterId}
+                  handleLevelId={handleLevelId}
+                />
+              }
             />
             <Route path="employees" element={<Aemp />} />
             <Route path="lecturers" element={<Alect />} />
-            <Route path="subjects" element={<Asubjects />} />
+            <Route
+              path="subjects"
+              element={
+                <Asubjects
+                  AdminDiplomaId={AdminDiplomaId}
+                  levelId={levelId}
+                  semesterId={semesterId}
+                />
+              }
+            />
             <Route path="payments" element={<Apay />} />
             <Route path="programs" element={<Aprogram />} />
+            <Route
+              path="semesters"
+              element={
+                <Semester
+                  AdminDiplomaId={AdminDiplomaId}
+                  semesterId={semesterId}
+                  levelId={levelId}
+                  handleSemesterId={handleSemesterId}
+                />
+              }
+            />
           </Route>
 
           <Route path="/master">
