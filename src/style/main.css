@@ -1381,7 +1381,8 @@ body {
   gap: 50px 0;
 }
 .Addmain__in__screen__body .cards .card {
-  height: 450px;
+  height: -moz-fit-content;
+  height: fit-content;
   padding: 20px;
   box-shadow: 0px 3.2765216827px 26.2121734619px 0px rgba(0, 0, 0, 0.2509803922);
   border-radius: 0;
@@ -2069,10 +2070,10 @@ body {
 }
 .Ayear__in form {
   position: absolute;
-  top: 36px;
+  top: 137px;
   left: 50%;
   width: 45%;
-  height: 87%;
+  height: 100px;
   background: white;
   transform: translate(-50%, 0);
   box-shadow: 0px 3.2765216827px 26.2121734619px 0px rgba(0, 0, 0, 0.2509803922);

@@ -102,22 +102,6 @@ export default function Ayear({ AdminDiplomaId }) {
                   onChange={(e) => setLevel(e.target.value)}
                 />
               </div>
-              {/* <div>
-                <label htmlFor="faculty">الفصل الدراسي :</label>
-                <input type="text" id="faculty" />
-              </div>
-              <div>
-                <label htmlFor="intro">تاريخ بدأ الدراسة :</label>
-                <input type="text" id="intro" />
-              </div>
-              <div>
-                <label htmlFor="req">تاريخ نهاية الدراسة :</label>
-                <input type="text" id="req" />
-              </div>
-              <div>
-                <label htmlFor="time">ملاحظات :</label>
-                <input type="text" id="time" className="special" />
-              </div> */}
               <div>
                 <button type="submit" className="btnbtn">
                   إضافة
