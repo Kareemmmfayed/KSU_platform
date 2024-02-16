@@ -20,7 +20,7 @@ function Asubjects({ AdminDiplomaId, levelId, semesterId }) {
   const navigate = useNavigate();
 
   const fetchData = async () => {
-    const res = await indexCourse(token);
+    const res = await indexCourse(token, AdminDiplomaId, levelId, semesterId);
     setSubjects(res);
   };
 
@@ -30,7 +30,7 @@ function Asubjects({ AdminDiplomaId, levelId, semesterId }) {
 
   const [show, setShow] = useState(false);
   const [del, setDelete] = useState(false);
-  const [cardStates, setCardStates] = useState(null);
+  const [selectedCard, setSelectedCard] = useState(null);
 
   const toggleCardState = (id) => {
     if (del) {
@@ -45,6 +45,10 @@ function Asubjects({ AdminDiplomaId, levelId, semesterId }) {
   const addItem = () => {
     setShow(true);
   };
+
+  const [name, setName] = useState("");
+  const [hours, setHours] = useState("");
+  const [code, setCode] = useState("");
 
   const sub = async (e) => {
     e.preventDefault();
@@ -134,19 +138,33 @@ function Asubjects({ AdminDiplomaId, levelId, semesterId }) {
             <form onSubmit={sub}>
               <div>
                 <label htmlFor="name">اسم المقرر :</label>
-                <input type="text" id="name" />
+                <input
+                  type="text"
+                  id="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                />
               </div>
               <div>
                 <label htmlFor="faculty">كود المقرر :</label>
-                <input type="text" id="faculty" />
+                <input
+                  type="number"
+                  id="faculty"
+                  value={code}
+                  onChange={(e) => setCode(e.target.value)}
+                  required
+                />
               </div>
               <div>
                 <label htmlFor="mail">عدد الساعات المعتمدة :</label>
-                <input type="text" id="mail" />
-              </div>
-              <div>
-                <label htmlFor="password">مستوي المقرر :</label>
-                <input type="text" id="password" />
+                <input
+                  type="text"
+                  id="mail"
+                  value={hours}
+                  onChange={(e) => setHours(e.target.value)}
+                  required
+                />
               </div>
               <div>
                 <button className="btnbtn">إضافة</button>
