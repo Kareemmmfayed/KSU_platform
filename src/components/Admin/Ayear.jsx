@@ -4,36 +4,53 @@ import home from "../../assets/home.png";
 import plus from "../../assets/plusb.png";
 import trash from "../../assets/trash.png";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import notchecked from "../../assets/notchecked.png";
 import checked from "../../assets/checked.png";
+import { useAuth } from "../../services/AuthContext";
+import { indexLevel } from "../../services/admin/level/index";
+import { createLevel } from "../../services/admin/level/create";
 
-export default function Ayear() {
-  const years = [
-    ["الفصل الصيفي", "2023-2024"],
-    ["الفصل الصيفي", "2023-2024"],
-    ["الفصل الصيفي", "2023-2024"],
-  ];
+export default function Ayear({ AdminDiplomaId }) {
+  const { token } = useAuth();
+  const [years, setYears] = useState([]);
+  const [level, setLevel] = useState("");
 
   const navigate = useNavigate();
 
+  const fetchData = async () => {
+    const data = await indexLevel(token, AdminDiplomaId);
+    setYears(data);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   const [show, setShow] = useState(false);
   const [del, setDelete] = useState(false);
-  const [cardStates, setCardStates] = useState(Array(years.length).fill(false));
+  const [selectedCard, setSelectedCard] = useState(null);
 
-  const toggleCardState = (index) => {
-    setCardStates((prevStates) => {
-      const newStates = [...prevStates];
-      newStates[index] = !newStates[index];
-      return newStates;
-    });
+  const toggleCardState = (id) => {
+    if (del) {
+      if (selectedCard === id) {
+        setSelectedCard(null);
+      } else {
+        setSelectedCard(id);
+      }
+    }
   };
 
   const addItem = () => {
     setShow(true);
   };
 
-  const sub = () => {};
+  const sub = async (e) => {
+    e.preventDefault();
+    await createLevel(token, AdminDiplomaId, name);
+    setShow(false);
+    fetchData();
+  };
 
   const dele = () => {
     setDelete(true);
@@ -57,18 +74,18 @@ export default function Ayear() {
           </div>
           <div className="Ayear__in__body">
             <div className="cards">
-              {years.map((diploma, index) => (
-                <div className={del ? "card delete" : "card"} key={index}>
-                  <p>{diploma[0]}</p>
-                  <p>الفصل الدراسي</p>
-                  <p>{diploma[1]}</p>
-                  {del && (
-                    <button onClick={() => toggleCardState(index)}>
+              {years.map((year) => (
+                <div className={del ? "card delete" : "card"} key={year.id}>
+                  <p>{year.name}</p>
+                  {del ? (
+                    <button onClick={() => toggleCardState(year.id)}>
                       <img
-                        src={cardStates[index] ? checked : notchecked}
+                        src={selectedCard === year.id ? checked : notchecked}
                         alt="circle"
                       />
                     </button>
+                  ) : (
+                    <button></button>
                   )}
                 </div>
               ))}
@@ -77,10 +94,15 @@ export default function Ayear() {
           {show && (
             <form onSubmit={sub}>
               <div>
-                <label htmlFor="name">العام الدراسي :</label>
-                <input type="text" id="name" />
+                <label htmlFor="name">إسم المستوي :</label>
+                <input
+                  type="text"
+                  id="name"
+                  value={level}
+                  onChange={(e) => setLevel(e.target.value)}
+                />
               </div>
-              <div>
+              {/* <div>
                 <label htmlFor="faculty">الفصل الدراسي :</label>
                 <input type="text" id="faculty" />
               </div>
@@ -95,7 +117,7 @@ export default function Ayear() {
               <div>
                 <label htmlFor="time">ملاحظات :</label>
                 <input type="text" id="time" className="special" />
-              </div>
+              </div> */}
               <div>
                 <button type="submit" className="btnbtn">
                   إضافة

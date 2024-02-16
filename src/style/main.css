@@ -1536,7 +1536,8 @@ body {
   display: flex;
   align-items: center;
   margin-top: 20px;
-  width: 350px;
+  width: -moz-fit-content;
+  width: fit-content;
 }
 .Mastermain__in__links button h2 {
   margin-right: 20px;

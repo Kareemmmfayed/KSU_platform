@@ -32,7 +32,11 @@ function Mcollege() {
 
   const toggleCardState = (id) => {
     if (del) {
-      setSelectedCard(id);
+      if (selectedCard === id) {
+        setSelectedCard(null);
+      } else {
+        setSelectedCard(id);
+      }
     }
   };
 

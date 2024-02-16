@@ -16,27 +16,27 @@ function Header(props) {
   const [list, setList] = useState(false);
   const [userName, setUserName] = useState("");
 
-  useEffect(() => {
-    const fetchName = async () => {
-      if (userType === "applicant") {
-        const res = await showApplicant(token);
-        setUserName(res.name);
-      } else if (userType === "employee") {
-        const res = await showEmployee(token);
-        setUserName(res.name);
-      } else if (userType === "admin") {
-        const res = await showAdmin(token);
-        setUserName(res.name);
-      } else if (userType === "master") {
-        const res = await showMaster(token);
-        setUserName(res.name);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchName = async () => {
+  //     if (userType === "applicant") {
+  //       const res = await showApplicant(token);
+  //       setUserName(res.name);
+  //     } else if (userType === "employee") {
+  //       const res = await showEmployee(token);
+  //       setUserName(res.name);
+  //     } else if (userType === "admin") {
+  //       const res = await showAdmin(token);
+  //       setUserName(res.name);
+  //     } else if (userType === "master") {
+  //       const res = await showMaster(token);
+  //       setUserName(res.name);
+  //     }
+  //   };
 
-    if (isLoggedIn) {
-      fetchName();
-    }
-  }, []);
+  //   if (isLoggedIn) {
+  //     fetchName();
+  //   }
+  // }, []);
 
   const show = () => {
     setList(!list);
@@ -65,7 +65,7 @@ function Header(props) {
           <div className="userName">
             <button onClick={show}>
               <img src={pfp} alt="Profile picture" />
-              <p>{userName}</p>
+              <p>{""}</p>
             </button>
             {list && (
               <ul>

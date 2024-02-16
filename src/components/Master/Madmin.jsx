@@ -22,8 +22,7 @@ function Madmin() {
   const [pass, setPass] = useState([]);
 
   const fetchData = async () => {
-    const res = await indexAdmin(token);
-    const data = await res.json();
+    const data = await indexAdmin(token);
     setAdmins(data.data.admins);
   };
 
@@ -33,16 +32,18 @@ function Madmin() {
 
   const navigate = useNavigate();
 
-  const navtohome = () => {
-    navigate("/");
-  };
-
   const [show, setShow] = useState(false);
   const [del, setDelete] = useState(false);
-  const [selectedCardIndex, setSelectedCardIndex] = useState(null);
+  const [selectedCard, setSelectedCard] = useState(null);
 
-  const toggleCardState = (index) => {
-    setSelectedCardIndex(index === selectedCardIndex ? null : index);
+  const toggleCardState = (id) => {
+    if (del) {
+      if (selectedCard === id) {
+        setSelectedCard(null);
+      } else {
+        setSelectedCard(id);
+      }
+    }
   };
 
   const addItem = () => {
@@ -57,14 +58,14 @@ function Madmin() {
   };
 
   const dele = async () => {
-    if (del && selectedCardIndex) {
-      await deleteAdmin(token, selectedCardIndex);
-      setSelectedCardIndex(null);
+    if (del && selectedCard) {
+      await deleteAdmin(token, selectedCard);
+      setSelectedCard(null);
       setDelete(!del);
       fetchData();
     } else {
       setDelete(!del);
-      setSelectedCardIndex(null);
+      setSelectedCard(null);
     }
   };
 
@@ -78,7 +79,7 @@ function Madmin() {
       <div className="Madmin">
         <div className="Madmin__in">
           <div className="Madmin__in__top">
-            <button onClick={navtohome}>
+            <button onClick={() => navigate("/master/main")}>
               <img src={home} alt="home" />
             </button>
             <button onClick={addItem}>
@@ -98,9 +99,7 @@ function Madmin() {
                   {del && (
                     <button onClick={() => toggleCardState(admin.id)}>
                       <img
-                        src={
-                          admin.id === selectedCardIndex ? checked : notchecked
-                        }
+                        src={admin.id === selectedCard ? checked : notchecked}
                         alt="circle"
                         className="notcopy"
                       />

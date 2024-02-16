@@ -12,7 +12,7 @@ import { indexPrograms } from "../../services/admin/program";
 import { createProgram } from "../../services/admin/program/create";
 import { deleteProgram } from "../../services/admin/program/delete";
 
-function Adiplomas() {
+function Adiplomas({ handleAdminDiplomaId }) {
   const { token } = useAuth();
   const [programs, setPrograms] = useState([]);
   const [selectedCard, setSelectedCard] = useState(null);
@@ -35,7 +35,11 @@ function Adiplomas() {
 
   const toggleCardState = (id) => {
     if (del) {
-      setSelectedCard(id);
+      if (selectedCard === id) {
+        setSelectedCard(null);
+      } else {
+        setSelectedCard(id);
+      }
     }
   };
 
@@ -68,6 +72,11 @@ function Adiplomas() {
     }
   };
 
+  const handleClick = (id) => {
+    handleAdminDiplomaId(id);
+    navigate("/admin/years");
+  };
+
   return (
     <>
       <Header name="< العودة" link="/" />
@@ -89,13 +98,15 @@ function Adiplomas() {
               {programs.map((program) => (
                 <div className={del ? "card delete" : "card"} key={program.id}>
                   <h2>{program.name}</h2>
-                  {del && (
+                  {del ? (
                     <button onClick={() => toggleCardState(program.id)}>
                       <img
                         src={selectedCard === program.id ? checked : notchecked}
                         alt="circle"
                       />
                     </button>
+                  ) : (
+                    <button onClick={() => handleClick(program.id)}></button>
                   )}
                 </div>
               ))}
