@@ -1,101 +1,125 @@
-import Header from '../Header'
-import Footer from '../Footer'
-import home from '../../assets/home.png'
-import plus from '../../assets/plusb.png'
-import trash from '../../assets/trash.png'
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react'
-import notchecked from '../../assets/notchecked.png'
-import checked from '../../assets/checked.png'
+import Header from "../Header";
+import Footer from "../Footer";
+import home from "../../assets/home.png";
+import plus from "../../assets/plusb.png";
+import trash from "../../assets/trash.png";
+import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import notchecked from "../../assets/notchecked.png";
+import checked from "../../assets/checked.png";
+import { useAuth } from "../../services/AuthContext";
+import { indexPayments } from "../../services/admin/payments/index";
+import { createPayment } from "../../services/admin/payments/create";
 
-function Apay() {
+function Apay({ payId }) {
+  const navigate = useNavigate();
+  const { token } = useAuth();
 
-    
-    const payments = ["القسط الأول", "القسط الأول", "القسط الأول"]
-        
-        const navigate = useNavigate();
-    
-        const navtohome = () => {
-            navigate("/")
-        }
-    
-        const [show, setShow] = useState(false)
-        const [del, setDelete] = useState(false)
-        const [cardStates, setCardStates] = useState(Array(payments.length).fill(false));
-    
-        const toggleCardState = (index) => {
-            setCardStates((prevStates) => {
-                const newStates = [...prevStates];
-                newStates[index] = !newStates[index];
-                return newStates;
-            });
-        };
-        
-    
-    
-        const addItem = () => {
-            setShow(true)
-        }
-    
-        const sub = () => {
-    
-        }
-    
-        const dele = () => {
-            setDelete(true)
-        }
-    return (
-        <>
-            <Header name="< العودة" link="/"/>
-            <div className="Apay">
-                <div className="Apay__in">
-                    <div className="Apay__in__top">
-                        <button onClick={navtohome}>
-                            <img src={home} alt="home" />
-                        </button>
-                        <button onClick={addItem}>
-                            <img src={plus} alt="plus" />
-                        </button>
-                        <button onClick={dele}>
-                            <img src={trash} alt="trash" />
-                        </button>
-                    </div>
-                    <div className="Apay__in__body">
-                        <div className="cards">
-                        {
-                            payments.map((diploma, index) => (
-                                <div className={del ? "card delete" : "card"} key={index}>
-                                    <p>{diploma}</p>
-                                    {del && (
-                                        <button onClick={() => toggleCardState(index)}>
-                                            <img src={cardStates[index] ? checked : notchecked} alt="circle" />
-                                        </button>
-                                    )}
-                                </div>
-                            ))
-                        }
-                        </div>
-                    </div>
-                    { show && (
-                        <form onSubmit={sub}>
-                            <div>
-                                <label htmlFor="name">العام الدراسي :</label>
-                                <input type="text" id='name'/>
-                            </div>
-                            <div>
-                                <label htmlFor="time">ملاحظات :</label>
-                                <input type="text" id='time' className='special'/>
-                            </div>
-                            <div>
-                                <button type='submit' className='btnbtn'>إضافة</button>
-                            </div>
-                        </form>
-                    )}
+  const [payments, setPayments] = useState([]);
+  const [kind, setKind] = useState();
+
+  const [show, setShow] = useState(false);
+  const [del, setDelete] = useState(false);
+  const [selectedCard, setSelectedCard] = useState(null);
+
+  const fetchData = async () => {
+    const data = await indexPayments(token, payId);
+    setPayments(data);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const toggleCardState = (id) => {
+    if (del) {
+      if (selectedCard === id) {
+        setSelectedCard(null);
+      } else {
+        setSelectedCard(id);
+      }
+    }
+  };
+
+  const addItem = () => {
+    setShow(true);
+  };
+
+  const sub = async (e) => {
+    e.preventDefault();
+    await createPayment(token, kind, payId);
+    setShow(false);
+    fetchData();
+  };
+
+  // const dele = async () => {
+  //   if (del && selectedCard) {
+  //     await deleteProgram(token, selectedCard);
+  //     setSelectedCard(null);
+  //     setDelete(!del);
+  //     fetchData();
+  //   } else {
+  //     setDelete(!del);
+  //     setSelectedCard(null);
+  //   }
+  // };
+
+  return (
+    <>
+      <Header name="< العودة" link="/" />
+      <div className="Apay">
+        <div className="Apay__in">
+          <div className="Apay__in__top">
+            <button onClick={() => navigate("/")}>
+              <img src={home} alt="home" />
+            </button>
+            <button onClick={addItem}>
+              <img src={plus} alt="plus" />
+            </button>
+            <button>
+              <img src={trash} alt="trash" />
+            </button>
+          </div>
+          <div className="Apay__in__body">
+            <div className="cards">
+              {payments.map((pay) => (
+                <div className={del ? "card delete" : "card"} key={pay.id}>
+                  <p>{pay.name}</p>
+                  {del && (
+                    <button onClick={() => toggleCardState(pay.id)}>
+                      <img
+                        src={selectedCard === pay.id ? checked : notchecked}
+                        alt="circle"
+                      />
+                    </button>
+                  )}
                 </div>
-                <Footer />
+              ))}
             </div>
-        </>
-    )
+          </div>
+          {show && (
+            <form onSubmit={sub}>
+              <div>
+                <label htmlFor="name">نوع القسط :</label>
+                <input
+                  type="text"
+                  id="name"
+                  value={kind}
+                  onChange={(e) => setKind(e.target.value)}
+                />
+              </div>
+              <div>
+                <button type="submit" className="btnbtn">
+                  إضافة
+                </button>
+              </div>
+            </form>
+          )}
+        </div>
+        <Footer />
+      </div>
+    </>
+  );
 }
 
-export default Apay
+export default Apay;

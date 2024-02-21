@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { useState } from "react";
 import Home from "./components/Applicant/Home";
 import Signin from "./components/Applicant/Signin";
 import Signup from "./components/Applicant/Signup";
@@ -20,17 +21,17 @@ import Aemp from "./components/Admin/Aemp";
 import Alect from "./components/Admin/Alect";
 import Asubjects from "./components/Admin/Asubjects";
 import Ayear from "./components/Admin/Ayear";
-import Apay from "./components/Admin/Apay";
 import Aprogram from "./components/Admin/Aprogram";
 import Mcollege from "./components/Master/Mcollege";
 import Madmin from "./components/Master/Madmin";
 import Pdetails from "./components/Applicant/Pdetails";
 import Apdetails from "./components/Applicant/Apdetails";
 import Eprogram from "./components/Employee/Eprogram";
-import { useState } from "react";
 import Semester from "./components/Admin/Semester";
-import AppLayout from "./components/AppLayout";
-import ProtectedRoutes from "./components/ProtectedRoutes";
+import BeforePay from "./components/Admin/BeforePay";
+import Apay from "./components/Admin/Apay";
+// import AppLayout from "./components/AppLayout";
+// import ProtectedRoutes from "./components/ProtectedRoutes";
 
 function App() {
   const [diplomaId, setDiplomaId] = useState();
@@ -55,6 +56,12 @@ function App() {
 
   const handleSemesterId = (id) => {
     setSemesterId(id);
+  };
+
+  const [payId, setPayId] = useState();
+
+  const pickPayId = (id) => {
+    setPayId(id);
   };
 
   return (
@@ -133,7 +140,11 @@ function App() {
                 />
               }
             />
-            <Route path="payments" element={<Apay />} />
+            <Route
+              path="payments"
+              element={<BeforePay pickPayId={pickPayId} />}
+            />
+            <Route path="program/payments" element={<Apay payId={payId} />} />
             <Route path="programs" element={<Aprogram />} />
             <Route
               path="semesters"

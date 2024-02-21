@@ -1,15 +1,13 @@
 import Header from "../Header";
 import Footer from "../Footer";
-import { useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import plus from "../../assets/plus.png";
 import { useNavigate } from "react-router-dom";
-// import { useAuth } from "../../services/AuthContext";
-// import { indexColleges } from "../../services/master/college/index";
-// import { indexAdmin } from "../../services/master/admin/index";
-// import { indexProgram } from "../../services/master/program/index";
+import { useAuth } from "../../services/AuthContext";
+import { getStats } from "../../services/master/getStats";
 
 function Mastermain() {
-  // const { token } = useAuth();
+  const { token } = useAuth();
 
   const myRef = useRef(null);
   const myRef1 = useRef(null);
@@ -18,23 +16,15 @@ function Mastermain() {
   const myRef4 = useRef(null);
   const myRef5 = useRef(null);
 
-  // const [collegeNum, setCollegeNum] = useState(0);
-  // const [adminNum, setAdminNum] = useState(0);
-  // const [programNum, setProgramNum] = useState(0);
+  const [stats, setStats] = useState({});
 
-  // const getData = async () => {
-  //   const cdata = await indexColleges(token);
-  //   setCollegeNum(cdata.data.count);
-
-  //   const adata = await indexAdmin(token);
-  //   setAdminNum(adata.data.count);
-
-  //   const pdata = await indexProgram(token);
-  //   setProgramNum(pdata.data.count);
-  // };
+  const getData = async () => {
+    const data = await getStats(token);
+    setStats(data);
+  };
 
   useEffect(() => {
-    // getData();
+    getData();
 
     const circle = (per, ele, col, ref) => {
       const percentage = per;
@@ -64,12 +54,12 @@ function Mastermain() {
             <div className="card">
               <div className="card__right">
                 <p>عدد الكليات</p>
-                <p>0</p>
+                <p>{stats.collagesCount}</p>
               </div>
               <div className="card__left">
                 <div id="circle">
                   <div className="inner" ref={myRef}>
-                    0
+                    {stats.collagesCount}
                   </div>
                 </div>
               </div>
@@ -77,12 +67,12 @@ function Mastermain() {
             <div className="card">
               <div className="card__right">
                 <p>عدد برامج الدبلومة</p>
-                <p>0</p>
+                <p>{stats.programsCount}</p>
               </div>
               <div className="card__left">
                 <div id="circle1">
                   <div className="inner" ref={myRef1}>
-                    0
+                    {stats.programsCount}
                   </div>
                 </div>
               </div>
@@ -90,12 +80,12 @@ function Mastermain() {
             <div className="card">
               <div className="card__right">
                 <p>عدد الطلاب</p>
-                <p>10</p>
+                <p>{stats.studentsCount}</p>
               </div>
               <div className="card__left">
                 <div id="circle2">
                   <div className="inner" ref={myRef2}>
-                    10
+                    {stats.studentsCount}
                   </div>
                 </div>
               </div>
@@ -103,12 +93,12 @@ function Mastermain() {
             <div className="card">
               <div className="card__right">
                 <p>عدد المسؤولين</p>
-                <p>0</p>
+                <p>{stats.adminsCount}</p>
               </div>
               <div className="card__left">
                 <div id="circle3">
                   <div className="inner" ref={myRef3}>
-                    0
+                    {stats.adminsCount}
                   </div>
                 </div>
               </div>
@@ -116,12 +106,12 @@ function Mastermain() {
             <div className="card">
               <div className="card__right">
                 <p>عدد الموظفين</p>
-                <p>10</p>
+                <p>{stats.employeesCount}</p>
               </div>
               <div className="card__left">
                 <div id="circle4">
                   <div className="inner" ref={myRef4}>
-                    10
+                    {stats.employeesCount}
                   </div>
                 </div>
               </div>
@@ -129,12 +119,12 @@ function Mastermain() {
             <div className="card">
               <div className="card__right">
                 <p>عدد المحاضرين</p>
-                <p>10</p>
+                <p>{stats.instructorsCount}</p>
               </div>
               <div className="card__left">
                 <div id="circle5">
                   <div className="inner" ref={myRef5}>
-                    10
+                    {stats.instructorsCount}
                   </div>
                 </div>
               </div>
