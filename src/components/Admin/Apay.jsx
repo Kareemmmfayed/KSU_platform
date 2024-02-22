@@ -2,11 +2,10 @@ import Header from "../Header";
 import Footer from "../Footer";
 import home from "../../assets/home.png";
 import plus from "../../assets/plusb.png";
-import trash from "../../assets/trash.png";
-import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
 import notchecked from "../../assets/notchecked.png";
 import checked from "../../assets/checked.png";
+import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { useAuth } from "../../services/AuthContext";
 import { indexPayments } from "../../services/admin/payments/index";
 import { createPayment } from "../../services/admin/payments/create";
@@ -52,18 +51,6 @@ function Apay({ payId }) {
     fetchData();
   };
 
-  // const dele = async () => {
-  //   if (del && selectedCard) {
-  //     await deleteProgram(token, selectedCard);
-  //     setSelectedCard(null);
-  //     setDelete(!del);
-  //     fetchData();
-  //   } else {
-  //     setDelete(!del);
-  //     setSelectedCard(null);
-  //   }
-  // };
-
   return (
     <>
       <Header name="< العودة" link="/" />
@@ -76,15 +63,12 @@ function Apay({ payId }) {
             <button onClick={addItem}>
               <img src={plus} alt="plus" />
             </button>
-            <button>
-              <img src={trash} alt="trash" />
-            </button>
           </div>
           <div className="Apay__in__body">
             <div className="cards">
               {payments.map((pay) => (
                 <div className={del ? "card delete" : "card"} key={pay.id}>
-                  <p>{pay.name}</p>
+                  <p>{pay.payment_kind}</p>
                   {del && (
                     <button onClick={() => toggleCardState(pay.id)}>
                       <img

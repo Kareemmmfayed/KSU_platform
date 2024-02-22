@@ -30,6 +30,7 @@ import Eprogram from "./components/Employee/Eprogram";
 import Semester from "./components/Admin/Semester";
 import BeforePay from "./components/Admin/BeforePay";
 import Apay from "./components/Admin/Apay";
+import Eprograms from "./components/Employee/Eprograms";
 // import AppLayout from "./components/AppLayout";
 // import ProtectedRoutes from "./components/ProtectedRoutes";
 
@@ -99,7 +100,11 @@ function App() {
 
           <Route path="/employee">
             <Route
-              path="programs/details"
+              path="programs"
+              element={<Eprograms pickDiplomaId={pickDiplomaId} />}
+            />
+            <Route
+              path="program/details"
               element={<Eprogram diplomaId={diplomaId} />}
             />
             <Route path="Applicant/info" element={<Appinfoemp />} />

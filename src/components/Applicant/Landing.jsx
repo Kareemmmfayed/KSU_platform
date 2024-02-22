@@ -13,7 +13,11 @@ function Landing() {
       } else if (userType === "lecturer") {
         navigate("/lecturer/subjects");
       } else if (userType === "employee") {
-        navigate("/programs");
+        navigate("/employee/programs");
+      } else if (userType === "admin") {
+        navigate("/admin/main");
+      } else if (userType === "master") {
+        navigate("/master/main");
       }
     } else {
       navigate("/login");

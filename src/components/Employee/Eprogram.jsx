@@ -16,8 +16,8 @@ function Eprogram({ diplomaId }) {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await showEmployeeProgram(token, diplomaId);
-      setData(res);
+      const data = await showEmployeeProgram(token, diplomaId);
+      setData(data);
     };
 
     fetchData();
