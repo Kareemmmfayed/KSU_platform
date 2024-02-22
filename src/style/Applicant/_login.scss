@@ -5,11 +5,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 87vh;
+    height: calc(100vh - 100px) !important;
     width: 100vw;
 
     .sign-in__inner__form {
-      height: 65vh;
+      height: 70vh;
       margin-bottom: 75px;
       box-shadow: 4px 4px 24px 0px #00000040;
       padding: 20px 100px;
