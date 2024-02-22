@@ -30,7 +30,6 @@ import Eprogram from "./components/Employee/Eprogram";
 import Semester from "./components/Admin/Semester";
 import BeforePay from "./components/Admin/BeforePay";
 import Apay from "./components/Admin/Apay";
-import Eprograms from "./components/Employee/Eprograms";
 // import AppLayout from "./components/AppLayout";
 // import ProtectedRoutes from "./components/ProtectedRoutes";
 
@@ -72,104 +71,100 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
-          {/* <Route
+          <Route
             element={
               <ProtectedRoutes>
                 <AppLayout />
               </ProtectedRoutes>
             }
-          > */}
-          <Route path="/applicant">
-            <Route
-              path="programs"
-              element={<Programs pickDiplomaId={pickDiplomaId} />}
-            />
-            <Route
-              path="programs/details"
-              element={<Pdetails diplomaId={diplomaId} />}
-            />
-            <Route path="programs/Adetails" element={<Apdetails />} />
-            <Route path="application" element={<Application />} />
-            <Route path="success" element={<Success />} />
-            <Route path="account" element={<AccountInfo />} />
-            <Route path="diplomas" element={<Mydiplomas />} />
-            <Route path="subjects" element={<Regsubs />} />
-            <Route path="applicants" element={<Applicants />} />
-            <Route path="appinfo" element={<Appinfo />} />
-          </Route>
+          >
+            <Route path="/applicant">
+              <Route
+                path="programs"
+                element={<Programs pickDiplomaId={pickDiplomaId} />}
+              />
+              <Route
+                path="programs/details"
+                element={<Pdetails diplomaId={diplomaId} />}
+              />
+              <Route path="programs/Adetails" element={<Apdetails />} />
+              <Route path="application" element={<Application />} />
+              <Route path="success" element={<Success />} />
+              <Route path="account" element={<AccountInfo />} />
+              <Route path="diplomas" element={<Mydiplomas />} />
+              <Route path="subjects" element={<Regsubs />} />
+              <Route path="applicants" element={<Applicants />} />
+              <Route path="appinfo" element={<Appinfo />} />
+            </Route>
 
-          <Route path="/employee">
-            <Route
-              path="programs"
-              element={<Eprograms pickDiplomaId={pickDiplomaId} />}
-            />
-            <Route
-              path="program/details"
-              element={<Eprogram diplomaId={diplomaId} />}
-            />
-            <Route path="Applicant/info" element={<Appinfoemp />} />
-          </Route>
+            <Route path="/employee">
+              <Route
+                path="programs/details"
+                element={<Eprogram diplomaId={diplomaId} />}
+              />
+              <Route path="Applicant/info" element={<Appinfoemp />} />
+            </Route>
 
-          <Route path="lecturer">
-            <Route path="table" element={<Table />} />
-            <Route path="subjects" element={<Cric />} />
-          </Route>
+            <Route path="lecturer">
+              <Route path="table" element={<Table />} />
+              <Route path="subjects" element={<Cric />} />
+            </Route>
 
-          <Route path="/admin">
-            <Route path="main" element={<Addmain />} />
-            <Route
-              path="diplomas"
-              element={
-                <Adiplomas handleAdminDiplomaId={handleAdminDiplomaId} />
-              }
-            />
-            <Route
-              path="years"
-              element={
-                <Ayear
-                  AdminDiplomaId={AdminDiplomaId}
-                  handleSemesterId={handleSemesterId}
-                  handleLevelId={handleLevelId}
-                />
-              }
-            />
-            <Route path="employees" element={<Aemp />} />
-            <Route path="lecturers" element={<Alect />} />
-            <Route
-              path="subjects"
-              element={
-                <Asubjects
-                  AdminDiplomaId={AdminDiplomaId}
-                  levelId={levelId}
-                  semesterId={semesterId}
-                />
-              }
-            />
-            <Route
-              path="payments"
-              element={<BeforePay pickPayId={pickPayId} />}
-            />
-            <Route path="program/payments" element={<Apay payId={payId} />} />
-            <Route path="programs" element={<Aprogram />} />
-            <Route
-              path="semesters"
-              element={
-                <Semester
-                  AdminDiplomaId={AdminDiplomaId}
-                  semesterId={semesterId}
-                  levelId={levelId}
-                  handleSemesterId={handleSemesterId}
-                />
-              }
-            />
-          </Route>
+            <Route path="/admin">
+              <Route path="main" element={<Addmain />} />
+              <Route
+                path="diplomas"
+                element={
+                  <Adiplomas handleAdminDiplomaId={handleAdminDiplomaId} />
+                }
+              />
+              <Route
+                path="years"
+                element={
+                  <Ayear
+                    AdminDiplomaId={AdminDiplomaId}
+                    handleSemesterId={handleSemesterId}
+                    handleLevelId={handleLevelId}
+                  />
+                }
+              />
+              <Route path="employees" element={<Aemp />} />
+              <Route path="lecturers" element={<Alect />} />
+              <Route
+                path="subjects"
+                element={
+                  <Asubjects
+                    AdminDiplomaId={AdminDiplomaId}
+                    levelId={levelId}
+                    semesterId={semesterId}
+                  />
+                }
+              />
+              <Route
+                path="payments"
+                element={<BeforePay pickPayId={pickPayId} />}
+              />
+              <Route path="program/payments" element={<Apay payId={payId} />} />
+              <Route path="programs" element={<Aprogram />} />
+              <Route
+                path="semesters"
+                element={
+                  <Semester
+                    AdminDiplomaId={AdminDiplomaId}
+                    semesterId={semesterId}
+                    levelId={levelId}
+                    handleSemesterId={handleSemesterId}
+                  />
+                }
+              />
+            </Route>
 
-          <Route path="/master">
-            <Route path="main" element={<Mastermain />} />
-            <Route path="colleges" element={<Mcollege />} />
-            <Route path="admins" element={<Madmin />} />
+            <Route path="/master">
+              <Route path="main" element={<Mastermain />} />
+              <Route path="colleges" element={<Mcollege />} />
+              <Route path="admins" element={<Madmin />} />
+            </Route>
           </Route>
-          {/* </Route> */}
         </Routes>
       </div>
     </Router>
