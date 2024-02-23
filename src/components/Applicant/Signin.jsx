@@ -1,7 +1,7 @@
 import Header from "../Header";
 import Footer from "../Footer";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { Link, redirect } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../services/AuthContext";
 import { LogInApplicant } from "../../services/auth/LogInApplicant";
@@ -12,13 +12,19 @@ import { LogInEmployee } from "../../services/auth/LogInEmployee";
 
 function Signin() {
   const [role, setRole] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("kareem@mail.com");
+  const [password, setPassword] = useState("kareempass");
   const [rem, setRem] = useState(false);
   const [wrong, setWrong] = useState(false);
 
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { login, isLoggedIn } = useAuth();
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/", { replace: true });
+    }
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

@@ -3,42 +3,63 @@
 @tailwind utilities;
 
 * {
-    box-sizing: border-box;
-    margin: 0;
+  box-sizing: border-box;
+  margin: 0;
 }
 
 body {
-    font-family: 'Cairo', sans-serif;
+  font-family: "Cairo", sans-serif;
 }
 
 :root {
-    --main-color: #1778C2;
-    --btn-hover: #0A4674;
-    --btn-active: #7F7C7E;
+  --main-color: #1778c2;
+  --btn-hover: #0a4674;
+  --btn-active: #7f7c7e;
 }
 
 .btnbtn {
-    background-color: var(--main-color);
+  background-color: var(--main-color);
 }
 
 .btnbtn:hover {
-    background-color: var(--btn-hover);
-    border: none;
+  background-color: var(--btn-hover);
+  border: none;
 }
 
 .btnbtn:active {
-    background-color: var(--btn-active);
+  background-color: var(--btn-active);
 }
 
 .slick-slide > div {
-    margin: 0 10px;
+  margin: 0 10px;
 }
 
 .slick-next:before,
 .slick-prev:before {
-    color: grey;
+  color: grey;
 }
 
 .slick-track {
-    padding: 10px 0;
+  padding: 10px 0;
+}
+
+.spinnerContainer {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spinner {
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+  background: conic-gradient(#0000 10%, var(--main-color));
+  animation: rotate 1.5s infinite linear;
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(1turn);
+  }
 }

@@ -9,12 +9,35 @@ import { showApplicant } from "../services/applicant/me/show";
 import { showEmployee } from "../services/employee/me/show";
 import { showAdmin } from "../services/admin/me/show";
 import { showMaster } from "../services/master/me/show";
+import { useQuery } from "@tanstack/react-query";
+import Spinner from "./Applicant/Spinner";
 
 function Header(props) {
   const { isLoggedIn, logout, userType, token } = useAuth();
 
   const [list, setList] = useState(false);
-  const [userName, setUserName] = useState("");
+
+  const fetchName = async () => {
+    if (userType === "applicant") {
+      const res = await showApplicant(token);
+      return res.name || "";
+    } else if (userType === "employee") {
+      const res = await showEmployee(token);
+      return res.name || "";
+    } else if (userType === "admin") {
+      const res = await showAdmin(token);
+      return res.name || "";
+    } else if (userType === "master") {
+      const res = await showMaster(token);
+      return res.name || "";
+    }
+    return "";
+  };
+
+  const { data, isLoading } = useQuery({
+    queryKey: ["name"],
+    queryFn: fetchName,
+  });
 
   // useEffect(() => {
   //   const fetchName = async () => {
@@ -65,7 +88,7 @@ function Header(props) {
           <div className="userName">
             <button onClick={show}>
               <img src={pfp} alt="Profile picture" />
-              <p>{""}</p>
+              <p>{data}</p>
             </button>
             {list && (
               <ul>
