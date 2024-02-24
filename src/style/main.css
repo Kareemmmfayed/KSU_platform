@@ -375,7 +375,8 @@ body {
 .Theslider {
   width: 100%;
   text-align: center;
-  padding: 50px 0;
+  padding: 50px 0 100px;
+  margin-bottom: 80px;
   height: 80vh;
   font-family: "Cairo", sans-serif;
 }
