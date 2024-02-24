@@ -71,7 +71,6 @@ function Alect() {
 
   return (
     <>
-      <Header name="< العودة" link="/" />
       <div className="Alect">
         <div className="Alect__in">
           <div className="Alect__in__top">
@@ -147,7 +146,6 @@ function Alect() {
             </form>
           )}
         </div>
-        <Footer />
       </div>
     </>
   );

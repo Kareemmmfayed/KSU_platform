@@ -15,12 +15,19 @@ function Addmain() {
 
   const fetchData = async () => {
     const res = await indexPrograms(token);
-    setPrograms(res);
+    return res;
   };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  const { data, isLoading } = useQuery({
+    queryFn: fetchData,
+    queryKey: ["programs"],
+  });
+
+  setPrograms(data);
+
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
 
   const [filterValue, setFilterValue] = useState("");
   const filteredProgram = programs.filter((pro) =>
@@ -31,7 +38,6 @@ function Addmain() {
 
   return (
     <>
-      <Header name="< العودة" link="/" />
       <div className="Addmain">
         <div className="Addmain__in">
           <div className="Addmain__in__add">
@@ -89,7 +95,6 @@ function Addmain() {
             </div>
           </div>
         </div>
-        <Footer />
       </div>
     </>
   );

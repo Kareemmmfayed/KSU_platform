@@ -11,6 +11,7 @@ import { useAuth } from "../../services/AuthContext";
 import { indexPrograms } from "../../services/admin/program";
 import { createProgram } from "../../services/admin/program/create";
 import { deleteProgram } from "../../services/admin/program/delete";
+import { useQuery } from "@tanstack/react-query";
 
 function Adiplomas({ handleAdminDiplomaId }) {
   const { token } = useAuth();
@@ -26,12 +27,19 @@ function Adiplomas({ handleAdminDiplomaId }) {
 
   const fetchData = async () => {
     const res = await indexPrograms(token);
-    setPrograms(res);
+    return res;
   };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  const { data, isLoading } = useQuery({
+    queryFn: fetchData,
+    queryKey: ["programs"],
+  });
+
+  setPrograms(data);
+
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
 
   const toggleCardState = (id) => {
     if (del) {
@@ -79,7 +87,6 @@ function Adiplomas({ handleAdminDiplomaId }) {
 
   return (
     <>
-      <Header name="< العودة" link="/" />
       <div className="Adiplomas">
         <div className="Adiplomas__in">
           <div className="Adiplomas__in__top">
@@ -164,7 +171,6 @@ function Adiplomas({ handleAdminDiplomaId }) {
             </form>
           )}
         </div>
-        <Footer />
       </div>
     </>
   );

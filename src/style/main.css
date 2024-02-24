@@ -11,9 +11,9 @@ body {
 }
 
 :root {
-  --main-color: #1778C2;
-  --btn-hover: #0A4674;
-  --btn-active: #7F7C7E;
+  --main-color: #1778c2;
+  --btn-hover: #0a4674;
+  --btn-active: #7f7c7e;
 }
 
 .btnbtn {
@@ -42,6 +42,26 @@ body {
   padding: 10px 0;
 }
 
+.spinnerContainer {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spinner {
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+  background: conic-gradient(rgba(0, 0, 0, 0) 10%, var(--main-color));
+  animation: rotate 1.5s infinite linear;
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(1turn);
+  }
+}
 .Header {
   width: 100%;
   height: 100px;
@@ -355,7 +375,8 @@ body {
 .Theslider {
   width: 100%;
   text-align: center;
-  padding: 50px 0;
+  padding: 50px 0 100px;
+  margin-bottom: 80px;
   height: 80vh;
   font-family: "Cairo", sans-serif;
 }
@@ -434,11 +455,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 87vh;
+  height: calc(100vh - 100px);
   width: 100vw;
 }
 .Sign-in .Sign-in__inner .sign-in__inner__form {
-  height: 65vh;
+  height: 70vh;
   margin-bottom: 75px;
   box-shadow: 4px 4px 24px 0px rgba(0, 0, 0, 0.2509803922);
   padding: 20px 100px;

@@ -89,7 +89,6 @@ function Asubjects({ AdminDiplomaId, levelId, semesterId }) {
 
   return (
     <>
-      <Header name="< العودة" link="/" />
       <div className="Asubjects">
         <div className="Asubjects__in">
           <div className="Asubjects__in__top">
@@ -172,7 +171,6 @@ function Asubjects({ AdminDiplomaId, levelId, semesterId }) {
             </form>
           )}
         </div>
-        <Footer />
       </div>
     </>
   );

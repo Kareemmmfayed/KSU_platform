@@ -70,7 +70,6 @@ function Aemp() {
 
   return (
     <>
-      <Header name="< العودة" link="/" />
       <div className="Aemp">
         <div className="Aemp__in">
           <div className="Aemp__in__top">
@@ -150,7 +149,6 @@ function Aemp() {
             </form>
           )}
         </div>
-        <Footer />
       </div>
     </>
   );

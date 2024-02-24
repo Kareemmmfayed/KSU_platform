@@ -28,7 +28,6 @@ function BeforePay({ pickPayId }) {
 
   return (
     <>
-      <Header name="< العودة" link="/" />
       <div className="Before">
         <div className="Before__in">
           <div className="cards">
@@ -40,7 +39,6 @@ function BeforePay({ pickPayId }) {
             ))}
           </div>
         </div>
-        <Footer />
       </div>
     </>
   );

@@ -4,7 +4,7 @@ import {
   Routes,
   Navigate,
 } from "react-router-dom";
-import { Suspense, lazy, useState } from "react";
+import { useState } from "react";
 import Home from "./components/Applicant/Home";
 import Signin from "./components/Applicant/Signin";
 import Signup from "./components/Applicant/Signup";
@@ -19,7 +19,7 @@ import Mydiplomas from "./components/Applicant/Mydiplomas";
 import Regsubs from "./components/Applicant/Regsubs";
 import Appinfo from "./components/Applicant/Appinfo";
 import Appinfoemp from "./components/Employee/Appinfoemp";
-// import Addmain from "./components/Admin/Addmain";
+import Addmain from "./components/Admin/Addmain";
 import Mastermain from "./components/Master/Mastermain";
 import Adiplomas from "./components/Admin/Adiplomas";
 import Aemp from "./components/Admin/Aemp";
@@ -39,9 +39,8 @@ import Eprograms from "./components/Employee/Eprograms";
 import AppLayout from "./components/AppLayout";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Spinner from "./components/Applicant/Spinner";
-
-const Addmain = lazy(() => import("./components/Admin/Addmain"));
 
 function App() {
   const [diplomaId, setDiplomaId] = useState();
@@ -83,6 +82,7 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools initialIsOpen={false} />
       <Router>
         <div className="App">
           <Routes>

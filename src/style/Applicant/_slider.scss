@@ -1,68 +1,67 @@
 .Theslider {
-    width: 100%;
-    text-align: center;
-    padding: 50px 0;
-    height: 80vh;
-    font-family: 'Cairo', sans-serif;
+  width: 100%;
+  text-align: center;
+  padding: 50px 0 100px;
+  margin-bottom: 80px;
+  height: 80vh;
+  font-family: "Cairo", sans-serif;
 
+  @media (max-width: 720px) {
+    height: 88vh;
+  }
 
-    @media (max-width: 720px) {
-        height: 88vh;
+  h2 {
+    color: var(--main-color);
+    font-weight: 600;
+    font-size: 40px;
+  }
+
+  .cara {
+    padding: 0 80px;
+
+    @media (max-width: 500px) {
+      padding: 0 35px;
     }
 
-    h2 {
-        color: var(--main-color);
-        font-weight: 600;
-        font-size: 40px;
+    p:first-of-type {
+      color: var(--main-color);
+      direction: rtl;
+      font-weight: 400;
+      font-size: 16px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 18px;
+      margin: 0;
     }
 
-    .cara {
-        padding: 0 80px;
-
-        @media (max-width: 500px) {
-            padding: 0 35px;
-        }
-
-        p:first-of-type {
-            color: var(--main-color);
-            direction: rtl;
-            font-weight: 400;
-            font-size: 16px;
-            text-align: center;
-            font-weight: 700;
-            font-size: 18px;
-            margin: 0;
-        }
-    
-        p:nth-child(2) {
-            font-weight: 600;
-            font-size: 16px;
-        }
-
-        p:nth-child(3) {
-            font-weight: 600;
-            font-size: 12px;
-            padding: 0 10px;
-            margin: 20px 0;
-            color: gray;
-        }
+    p:nth-child(2) {
+      font-weight: 600;
+      font-size: 16px;
     }
 
-    .cardi {
-        box-shadow: 0px 4px 8px 0px #2A2A2A40;
-        overflow: hidden;
-        border-radius: 12px;
-        min-height: 450px;
-        position: relative;
-
-
-        .links {
-            display: flex;
-            gap: 28px;
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
+    p:nth-child(3) {
+      font-weight: 600;
+      font-size: 12px;
+      padding: 0 10px;
+      margin: 20px 0;
+      color: gray;
     }
+  }
+
+  .cardi {
+    box-shadow: 0px 4px 8px 0px #2a2a2a40;
+    overflow: hidden;
+    border-radius: 12px;
+    min-height: 450px;
+    position: relative;
+
+    .links {
+      display: flex;
+      gap: 28px;
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
 }

@@ -37,6 +37,7 @@ function Header(props) {
   const { data, isLoading } = useQuery({
     queryKey: ["name"],
     queryFn: fetchName,
+    retry: false,
   });
 
   // useEffect(() => {

@@ -53,7 +53,6 @@ function Apay({ payId }) {
 
   return (
     <>
-      <Header name="< العودة" link="/" />
       <div className="Apay">
         <div className="Apay__in">
           <div className="Apay__in__top">
@@ -100,7 +99,6 @@ function Apay({ payId }) {
             </form>
           )}
         </div>
-        <Footer />
       </div>
     </>
   );
