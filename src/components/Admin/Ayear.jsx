@@ -72,7 +72,6 @@ export default function Ayear({ AdminDiplomaId, handleLevelId }) {
 
   return (
     <>
-      <Header name="< العودة" link="/" />
       <div className="Ayear">
         <div className="Ayear__in">
           <div className="Ayear__in__top">
@@ -124,7 +123,6 @@ export default function Ayear({ AdminDiplomaId, handleLevelId }) {
             </form>
           )}
         </div>
-        <Footer />
       </div>
     </>
   );
