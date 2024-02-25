@@ -7,7 +7,7 @@ $numCol: "blue";
   direction: rtl;
 
   &__in {
-    min-height: 76vh;
+    min-height: calc(100vh - 175px);
     padding: 30px 30px 0;
 
     &__cards {
@@ -26,7 +26,7 @@ $numCol: "blue";
       .card {
         display: flex;
         flex-direction: row;
-        height: 160px;
+        height: 150px;
         border: none;
         border-radius: 0;
         box-shadow: 0px 3.276521682739258px 26.212173461914062px 0px #00000040;
@@ -34,24 +34,17 @@ $numCol: "blue";
         &__right {
           width: 50%;
           padding-right: 10px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
 
-          p:first-of-type {
+          p {
             font-weight: 600;
             font-size: 32px;
             color: var(--main-color);
 
             @media (max-width: 500px) {
               font-size: 26px;
-            }
-          }
-
-          p:last-of-type {
-            font-weight: 700;
-            font-size: 40px;
-            color: #1a5caa;
-
-            @media (max-width: 500px) {
-              font-size: 30px;
             }
           }
         }
@@ -113,6 +106,8 @@ $numCol: "blue";
         align-items: center;
         margin-top: 20px;
         width: fit-content;
+
+        margin: 0;
 
         h2 {
           margin-right: 20px;

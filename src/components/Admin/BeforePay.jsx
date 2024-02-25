@@ -1,5 +1,3 @@
-import Header from "../Header";
-import Footer from "../Footer";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { indexPrograms } from "../../services/admin/program/index";
@@ -27,20 +25,18 @@ function BeforePay({ pickPayId }) {
   };
 
   return (
-    <>
-      <div className="Before">
-        <div className="Before__in">
-          <div className="cards">
-            {programs.map((program) => (
-              <button key={program.id} onClick={() => handleClick(program.id)}>
-                <p>مصاريف دبلومة :</p>
-                <p>{program.name}</p>
-              </button>
-            ))}
-          </div>
+    <div className="Before">
+      <div className="Before__in">
+        <div className="cards">
+          {programs.map((program) => (
+            <button key={program.id} onClick={() => handleClick(program.id)}>
+              <p>مصاريف دبلومة :</p>
+              <p>{program.name}</p>
+            </button>
+          ))}
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

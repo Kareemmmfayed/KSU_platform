@@ -3,7 +3,7 @@
   direction: rtl;
 
   &__in {
-    min-height: 76vh;
+    min-height: calc(100vh - 175px);
     padding: 30px 30px 0;
     position: relative;
 
@@ -118,6 +118,7 @@
 
       div:last-of-type {
         justify-content: center;
+        gap: 52px;
 
         button {
           border: none;
@@ -125,6 +126,10 @@
           color: white;
           padding: 9px 14px;
           width: 160px;
+
+          &:first-of-type {
+            background-color: #cc5454;
+          }
         }
       }
     }

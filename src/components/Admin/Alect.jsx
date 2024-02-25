@@ -1,5 +1,3 @@
-import Header from "../Header";
-import Footer from "../Footer";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import home from "../../assets/home.png";
@@ -70,84 +68,83 @@ function Alect() {
   };
 
   return (
-    <>
-      <div className="Alect">
-        <div className="Alect__in">
-          <div className="Alect__in__top">
-            <button onClick={() => navigate("/admin/main")}>
-              <img src={home} alt="home" />
-            </button>
-            <button onClick={addItem}>
-              <img src={plus} alt="plus" />
-            </button>
-            <button onClick={dele}>
-              <img src={trash} alt="trash" />
-            </button>
-          </div>
-          <div className="Alect__in__body">
-            <div className="cards">
-              {lecturers.map((lec) => (
-                <div className={del ? "card delete" : "card"} key={lec.id}>
-                  <h2>الدكتور : {lec.name}</h2>
-                  <p>البريد الإلكتروني : {lec.email}</p>
-                  {del && (
-                    <button onClick={() => toggleCardState(lec.id)}>
-                      <img
-                        src={cardStates === lec.id ? checked : notchecked}
-                        alt="circle"
-                        className="notcopy"
-                      />
-                    </button>
-                  )}
-                  {!del && (
-                    <button
-                      onClick={() =>
-                        copycontent(
-                          `الاسم: ${lec.name}\nالبريد الإلكتروني: ${lec.email}`
-                        )
-                      }
-                    >
-                      <img src={copy} alt="circle" className="copy" />
-                    </button>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-          {show && (
-            <form onSubmit={sub}>
-              <div>
-                <label htmlFor="name">اسم المحاضر :</label>
-                <input
-                  type="text"
-                  id="name"
-                  onChange={(e) => setName(e.target.value)}
-                />
-              </div>
-              <div>
-                <label htmlFor="mail">البريد الالكتروني :</label>
-                <input
-                  type="text"
-                  id="mail"
-                  onChange={(e) => setMail(e.target.value)}
-                />
-              </div>
-              <div>
-                <label htmlFor="password">كلمة المرور :</label>
-                <input
-                  type="text"
-                  id="password"
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </div>
-              <div>
-                <button className="btnbtn">إضافة</button>
-              </div>
-            </form>
-          )}
+    <div className="Alect">
+      <div className="Alect__in">
+        <div className="Alect__in__top">
+          <button onClick={() => navigate("/admin/main")}>
+            <img src={home} alt="home" />
+          </button>
+          <button onClick={addItem}>
+            <img src={plus} alt="plus" />
+          </button>
+          <button onClick={dele}>
+            <img src={trash} alt="trash" />
+          </button>
         </div>
+        <div className="Alect__in__body">
+          <div className="cards">
+            {lecturers.map((lec) => (
+              <div className={del ? "card delete" : "card"} key={lec.id}>
+                <h2>الدكتور : {lec.name}</h2>
+                <p>البريد الإلكتروني : {lec.email}</p>
+                {del && (
+                  <button onClick={() => toggleCardState(lec.id)}>
+                    <img
+                      src={cardStates === lec.id ? checked : notchecked}
+                      alt="circle"
+                      className="notcopy"
+                    />
+                  </button>
+                )}
+                {!del && (
+                  <button
+                    onClick={() =>
+                      copycontent(
+                        `الاسم: ${lec.name}\nالبريد الإلكتروني: ${lec.email}`
+                      )
+                    }
+                  >
+                    <img src={copy} alt="circle" className="copy" />
+                  </button>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+        {show && (
+          <form onSubmit={sub}>
+            <div>
+              <label htmlFor="name">اسم المحاضر :</label>
+              <input
+                type="text"
+                id="name"
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
+            <div>
+              <label htmlFor="mail">البريد الالكتروني :</label>
+              <input
+                type="text"
+                id="mail"
+                onChange={(e) => setMail(e.target.value)}
+              />
+            </div>
+            <div>
+              <label htmlFor="password">كلمة المرور :</label>
+              <input
+                type="text"
+                id="password"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            <div>
+              <button onClick={() => setShow(false)}>إلغاء</button>
+              <button className="btnbtn">إضافة</button>
+            </div>
+          </form>
+        )}
       </div>
-    </>
+    </div>
   );
 }
 

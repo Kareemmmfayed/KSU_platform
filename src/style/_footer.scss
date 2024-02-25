@@ -1,13 +1,14 @@
 .Footer {
-    overflow: hidden;
-    font-family: 'Cairo', sans-serif;
+  overflow: hidden;
+  font-family: "Cairo", sans-serif;
+  height: 75px;
 
-    &__in {
-        color: white;
-        background-color: var(--main-color);
-        margin: 20px 0 0 0;
-        width: 100vw;
-        padding: 20px 0;
-        text-align: center;
-    }
+  &__in {
+    color: white;
+    background-color: var(--main-color);
+    margin: 20px 0 0 0;
+    width: 100vw;
+    padding: 20px 0;
+    text-align: center;
+  }
 }

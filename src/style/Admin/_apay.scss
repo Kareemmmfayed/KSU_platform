@@ -3,7 +3,7 @@
   direction: rtl;
 
   &__in {
-    min-height: 76vh;
+    height: calc(100vh - 175px);
     padding: 30px 30px 0;
     position: relative;
 

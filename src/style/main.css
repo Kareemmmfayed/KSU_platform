@@ -209,7 +209,7 @@ body {
   }
 }
 .Landing__hero__text p:first-of-type {
-  font-size: 46px;
+  font-size: 42px;
   font-weight: 700;
   line-height: 2;
   text-align: center;
@@ -228,7 +228,7 @@ body {
   }
 }
 .Landing__hero__text p:last-of-type {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
   text-align: center;
   line-height: 2;
@@ -438,6 +438,7 @@ body {
 .Footer {
   overflow: hidden;
   font-family: "Cairo", sans-serif;
+  height: 75px;
 }
 .Footer__in {
   color: white;
@@ -455,12 +456,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: calc(100vh - 100px);
+  height: calc(100vh - 175px);
   width: 100vw;
 }
 .Sign-in .Sign-in__inner .sign-in__inner__form {
   height: 70vh;
-  margin-bottom: 75px;
   box-shadow: 4px 4px 24px 0px rgba(0, 0, 0, 0.2509803922);
   padding: 20px 100px;
 }
@@ -472,7 +472,7 @@ body {
 .Sign-in .Sign-in__inner .sign-in__inner__form h2 {
   direction: rtl;
   text-align: center;
-  margin: 30px;
+  margin: 20px;
 }
 .Sign-in .Sign-in__inner .sign-in__inner__form form {
   display: flex;
@@ -533,26 +533,29 @@ body {
 .Signup {
   font-family: "Cairo", sans-serif;
   position: relative;
-  height: 106vh;
 }
 .Signup .Signup__inner {
   height: 100%;
   justify-content: center;
   align-items: center;
   display: flex;
+  min-height: calc(100vh - 175px);
 }
 .Signup .Signup__inner .signup__inner__form {
   flex-direction: column;
   display: flex;
-  height: 90vh;
+  height: 98vh;
   align-items: center;
   box-shadow: 4px 4px 24px 0px rgba(0, 0, 0, 0.2509803922);
-  padding: 20px;
+  margin: 30px 0;
 }
 @media (max-width: 1200px) {
   .Signup .Signup__inner .signup__inner__form {
     padding: 20px 20px;
   }
+}
+.Signup .Signup__inner .signup__inner__form h2 {
+  margin: 10px;
 }
 .Signup .Signup__inner .signup__inner__form form {
   display: flex;
@@ -1380,6 +1383,11 @@ body {
   justify-content: space-between;
   margin: 30px 0;
 }
+@media (max-width: 770px) {
+  .Addmain__in__screen__top {
+    flex-direction: column;
+  }
+}
 .Addmain__in__screen__top h2 {
   font-weight: 600;
   font-size: 40px;
@@ -1391,6 +1399,12 @@ body {
   border: 1px solid grey;
   padding: 0 20px;
 }
+@media (max-width: 770px) {
+  .Addmain__in__screen__top input {
+    height: 35px;
+    margin: 10px 20px;
+  }
+}
 .Addmain__in__screen__body {
   padding-top: 30px;
 }
@@ -1400,6 +1414,11 @@ body {
   justify-content: space-around;
   gap: 50px 0;
 }
+@media (max-width: 770px) {
+  .Addmain__in__screen__body .cards {
+    grid-template-columns: 90%;
+  }
+}
 .Addmain__in__screen__body .cards .card {
   height: -moz-fit-content;
   height: fit-content;
@@ -1407,6 +1426,7 @@ body {
   box-shadow: 0px 3.2765216827px 26.2121734619px 0px rgba(0, 0, 0, 0.2509803922);
   border-radius: 0;
   position: relative;
+  padding-left: 45px;
 }
 .Addmain__in__screen__body .cards .card button {
   display: flex;
@@ -1416,10 +1436,22 @@ body {
   position: absolute;
   left: 12px;
 }
+@media (max-width: 1024px) {
+  .Addmain__in__screen__body .cards .card button img {
+    -o-object-fit: contain;
+       object-fit: contain;
+    width: 20px;
+  }
+}
 .Addmain__in__screen__body .cards .card h3 {
   font-weight: 600;
   font-size: 30px;
   color: var(--main-color);
+}
+@media (max-width: 1024px) {
+  .Addmain__in__screen__body .cards .card h3 {
+    font-size: 24px;
+  }
 }
 .Addmain__in__screen__body .cards .card p:first-of-type,
 .Addmain__in__screen__body .cards .card p:nth-child(2),
@@ -1437,6 +1469,12 @@ body {
   font-weight: 500;
   font-size: 22px;
 }
+@media (max-width: 1024px) {
+  .Addmain__in__screen__body .cards .card p:nth-child(4),
+  .Addmain__in__screen__body .cards .card p:last-of-type {
+    font-size: 16px;
+  }
+}
 .Addmain__in__screen__body .cards .card ul li {
   color: gray;
   font-weight: 500;
@@ -1448,7 +1486,7 @@ body {
   direction: rtl;
 }
 .Mastermain__in {
-  min-height: 76vh;
+  min-height: calc(100vh - 175px);
   padding: 30px 30px 0;
 }
 .Mastermain__in__cards {
@@ -1469,7 +1507,7 @@ body {
 .Mastermain__in__cards .card {
   display: flex;
   flex-direction: row;
-  height: 160px;
+  height: 150px;
   border: none;
   border-radius: 0;
   box-shadow: 0px 3.2765216827px 26.2121734619px 0px rgba(0, 0, 0, 0.2509803922);
@@ -1477,25 +1515,18 @@ body {
 .Mastermain__in__cards .card__right {
   width: 50%;
   padding-right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.Mastermain__in__cards .card__right p:first-of-type {
+.Mastermain__in__cards .card__right p {
   font-weight: 600;
   font-size: 32px;
   color: var(--main-color);
 }
 @media (max-width: 500px) {
-  .Mastermain__in__cards .card__right p:first-of-type {
+  .Mastermain__in__cards .card__right p {
     font-size: 26px;
-  }
-}
-.Mastermain__in__cards .card__right p:last-of-type {
-  font-weight: 700;
-  font-size: 40px;
-  color: #1a5caa;
-}
-@media (max-width: 500px) {
-  .Mastermain__in__cards .card__right p:last-of-type {
-    font-size: 30px;
   }
 }
 .Mastermain__in__cards .card__left {
@@ -1559,6 +1590,7 @@ body {
   margin-top: 20px;
   width: -moz-fit-content;
   width: fit-content;
+  margin: 0;
 }
 .Mastermain__in__links button h2 {
   margin-right: 20px;
@@ -1570,7 +1602,7 @@ body {
   direction: rtl;
 }
 .Adiplomas__in {
-  min-height: 76vh;
+  min-height: calc(100vh - 175px);
   padding: 30px 30px 0;
   position: relative;
 }
@@ -1638,7 +1670,7 @@ body {
   top: 97px;
   left: 50%;
   width: 45%;
-  height: 63%;
+  height: 70%;
   background: white;
   transform: translate(-50%, 0);
   box-shadow: 0px 3.2765216827px 26.2121734619px 0px rgba(0, 0, 0, 0.2509803922);
@@ -1661,6 +1693,7 @@ body {
 }
 .Adiplomas__in form div:last-of-type {
   justify-content: center;
+  gap: 52px;
 }
 .Adiplomas__in form div:last-of-type button {
   border: none;
@@ -1669,13 +1702,16 @@ body {
   padding: 9px 14px;
   width: 160px;
 }
+.Adiplomas__in form div:last-of-type button:first-of-type {
+  background-color: #cc5454;
+}
 
 .Aemp {
   font-family: "Cairo", sans-serif;
   direction: rtl;
 }
 .Aemp__in {
-  min-height: 76vh;
+  min-height: calc(100vh - 175px);
   padding: 30px 30px 0;
   position: relative;
 }
@@ -1777,6 +1813,7 @@ body {
 }
 .Aemp__in form div:last-of-type {
   justify-content: center;
+  gap: 52px;
 }
 .Aemp__in form div:last-of-type button {
   border: none;
@@ -1785,13 +1822,16 @@ body {
   padding: 9px 14px;
   width: 160px;
 }
+.Aemp__in form div:last-of-type button:first-of-type {
+  background-color: #cc5454;
+}
 
 .Alect {
   font-family: "Cairo", sans-serif;
   direction: rtl;
 }
 .Alect__in {
-  min-height: 76vh;
+  min-height: calc(100vh - 175px);
   padding: 30px 30px 0;
   position: relative;
 }
@@ -1893,6 +1933,7 @@ body {
 }
 .Alect__in form div:last-of-type {
   justify-content: center;
+  gap: 52px;
 }
 .Alect__in form div:last-of-type button {
   border: none;
@@ -1901,13 +1942,16 @@ body {
   padding: 9px 14px;
   width: 160px;
 }
+.Alect__in form div:last-of-type button:first-of-type {
+  background-color: #cc5454;
+}
 
 .Asubjects {
   font-family: "Cairo", sans-serif;
   direction: rtl;
 }
 .Asubjects__in {
-  min-height: 76vh;
+  min-height: calc(100vh - 175px);
   padding: 30px 30px 0;
   position: relative;
 }
@@ -2009,6 +2053,7 @@ body {
 }
 .Asubjects__in form div:last-of-type {
   justify-content: center;
+  gap: 52px;
 }
 .Asubjects__in form div:last-of-type button {
   border: none;
@@ -2017,13 +2062,16 @@ body {
   padding: 9px 14px;
   width: 160px;
 }
+.Asubjects__in form div:last-of-type button:first-of-type {
+  background-color: #cc5454;
+}
 
 .Ayear {
   font-family: "Cairo", sans-serif;
   direction: rtl;
 }
 .Ayear__in {
-  min-height: 76vh;
+  min-height: calc(100vh - 175px);
   padding: 30px 30px 0;
   position: relative;
 }
@@ -2121,6 +2169,7 @@ body {
 .Ayear__in form div:last-of-type {
   justify-content: center;
   margin-top: 60px;
+  gap: 52px;
 }
 .Ayear__in form div:last-of-type button {
   border: none;
@@ -2129,13 +2178,16 @@ body {
   padding: 9px 14px;
   width: 160px;
 }
+.Ayear__in form div:last-of-type button:first-of-type {
+  background-color: #cc5454;
+}
 
 .Apay {
   font-family: "Cairo", sans-serif;
   direction: rtl;
 }
 .Apay__in {
-  min-height: 76vh;
+  height: calc(100vh - 175px);
   padding: 30px 30px 0;
   position: relative;
 }
@@ -2370,7 +2422,7 @@ body {
   direction: rtl;
 }
 .Mcollege__in {
-  min-height: 76vh;
+  min-height: calc(100vh - 175px);
   padding: 30px 30px 0;
   position: relative;
 }
@@ -2457,7 +2509,7 @@ body {
   top: 145px;
   left: 50%;
   width: 45%;
-  height: 295px;
+  height: 270px;
   background: white;
   transform: translate(-50%, 0);
   box-shadow: 0px 3.2765216827px 26.2121734619px 0px rgba(0, 0, 0, 0.2509803922);
@@ -2481,6 +2533,7 @@ body {
 }
 .Mcollege__in form div:last-of-type {
   justify-content: center;
+  gap: 52px;
 }
 .Mcollege__in form div:last-of-type button {
   border: none;
@@ -2489,13 +2542,16 @@ body {
   padding: 9px 14px;
   width: 160px;
 }
+.Mcollege__in form div:last-of-type button:first-of-type {
+  background-color: #cc5454;
+}
 
 .Madmin {
   font-family: "Cairo", sans-serif;
   direction: rtl;
 }
 .Madmin__in {
-  min-height: 76vh;
+  min-height: calc(100vh - 175px);
   padding: 30px 30px 0;
   position: relative;
 }
@@ -2573,7 +2629,7 @@ body {
   top: 82px;
   left: 50%;
   width: 45%;
-  height: 350px;
+  height: 330px;
   background: white;
   transform: translate(-50%, 0);
   box-shadow: 0px 3.2765216827px 26.2121734619px 0px rgba(0, 0, 0, 0.2509803922);
@@ -2597,6 +2653,7 @@ body {
 }
 .Madmin__in form div:last-of-type {
   justify-content: center;
+  gap: 52px;
 }
 .Madmin__in form div:last-of-type button {
   border: none;
@@ -2604,6 +2661,9 @@ body {
   color: white;
   padding: 9px 14px;
   width: 160px;
+}
+.Madmin__in form div:last-of-type button:first-of-type {
+  background-color: #cc5454;
 }
 
 .Pdetails,
@@ -2713,7 +2773,7 @@ body {
   direction: rtl;
 }
 .Before__in {
-  min-height: 76vh;
+  height: calc(100vh - 175px);
   padding: 30px 30px 0;
   position: relative;
 }

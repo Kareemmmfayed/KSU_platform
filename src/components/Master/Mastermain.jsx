@@ -1,5 +1,3 @@
-import Header from "../Header";
-import Footer from "../Footer";
 import { useState, useEffect, useRef } from "react";
 import plus from "../../assets/plus.png";
 import { useNavigate } from "react-router-dom";
@@ -46,104 +44,94 @@ function Mastermain() {
   const navigate = useNavigate();
 
   return (
-    <>
-      <Header name="< العودة" link="/" />
-      <div className="Mastermain">
-        <div className="Mastermain__in">
-          <div className="Mastermain__in__cards">
-            <div className="card">
-              <div className="card__right">
-                <p>عدد الكليات</p>
-                <p>{stats.collagesCount}</p>
-              </div>
-              <div className="card__left">
-                <div id="circle">
-                  <div className="inner" ref={myRef}>
-                    {stats.collagesCount}
-                  </div>
-                </div>
-              </div>
+    <div className="Mastermain">
+      <div className="Mastermain__in">
+        <div className="Mastermain__in__cards">
+          <div className="card">
+            <div className="card__right">
+              <p>عدد الكليات</p>
             </div>
-            <div className="card">
-              <div className="card__right">
-                <p>عدد برامج الدبلومة</p>
-                <p>{stats.programsCount}</p>
-              </div>
-              <div className="card__left">
-                <div id="circle1">
-                  <div className="inner" ref={myRef1}>
-                    {stats.programsCount}
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="card">
-              <div className="card__right">
-                <p>عدد الطلاب</p>
-                <p>{stats.studentsCount}</p>
-              </div>
-              <div className="card__left">
-                <div id="circle2">
-                  <div className="inner" ref={myRef2}>
-                    {stats.studentsCount}
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="card">
-              <div className="card__right">
-                <p>عدد المسؤولين</p>
-                <p>{stats.adminsCount}</p>
-              </div>
-              <div className="card__left">
-                <div id="circle3">
-                  <div className="inner" ref={myRef3}>
-                    {stats.adminsCount}
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="card">
-              <div className="card__right">
-                <p>عدد الموظفين</p>
-                <p>{stats.employeesCount}</p>
-              </div>
-              <div className="card__left">
-                <div id="circle4">
-                  <div className="inner" ref={myRef4}>
-                    {stats.employeesCount}
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="card">
-              <div className="card__right">
-                <p>عدد المحاضرين</p>
-                <p>{stats.instructorsCount}</p>
-              </div>
-              <div className="card__left">
-                <div id="circle5">
-                  <div className="inner" ref={myRef5}>
-                    {stats.instructorsCount}
-                  </div>
+            <div className="card__left">
+              <div id="circle">
+                <div className="inner" ref={myRef}>
+                  {stats.collagesCount}
                 </div>
               </div>
             </div>
           </div>
-          <div className="Mastermain__in__links">
-            <button onClick={() => navigate("/master/colleges")}>
-              <img src={plus} alt="plus" />
-              <h2>إضافة كلية جديدة</h2>
-            </button>
-            <button onClick={() => navigate("/master/admins")}>
-              <img src={plus} alt="plus" />
-              <h2>إضافة مسؤول جديد</h2>
-            </button>
+          <div className="card">
+            <div className="card__right">
+              <p>عدد برامج الدبلومة</p>
+            </div>
+            <div className="card__left">
+              <div id="circle1">
+                <div className="inner" ref={myRef1}>
+                  {stats.programsCount}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="card">
+            <div className="card__right">
+              <p>عدد الطلاب</p>
+            </div>
+            <div className="card__left">
+              <div id="circle2">
+                <div className="inner" ref={myRef2}>
+                  {stats.studentsCount}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="card">
+            <div className="card__right">
+              <p>عدد المسؤولين</p>
+            </div>
+            <div className="card__left">
+              <div id="circle3">
+                <div className="inner" ref={myRef3}>
+                  {stats.adminsCount}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="card">
+            <div className="card__right">
+              <p>عدد الموظفين</p>
+            </div>
+            <div className="card__left">
+              <div id="circle4">
+                <div className="inner" ref={myRef4}>
+                  {stats.employeesCount}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="card">
+            <div className="card__right">
+              <p>عدد المحاضرين</p>
+            </div>
+            <div className="card__left">
+              <div id="circle5">
+                <div className="inner" ref={myRef5}>
+                  {stats.instructorsCount}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <Footer />
+        <div className="Mastermain__in__links">
+          <button onClick={() => navigate("/master/colleges")}>
+            <img src={plus} alt="plus" />
+            <h2>إضافة كلية جديدة</h2>
+          </button>
+          <button onClick={() => navigate("/master/admins")}>
+            <img src={plus} alt="plus" />
+            <h2>إضافة مسؤول جديد</h2>
+          </button>
+        </div>
       </div>
-    </>
+    </div>
   );
 }
 

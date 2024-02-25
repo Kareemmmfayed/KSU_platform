@@ -1,5 +1,3 @@
-import Header from "../Header";
-import Footer from "../Footer";
 import home from "../../assets/home.png";
 import plus from "../../assets/plusb.png";
 import trash from "../../assets/trash.png";
@@ -71,60 +69,59 @@ function Semester({ AdminDiplomaId, levelId, handleSemesterId }) {
   };
 
   return (
-    <>
-      <div className="Ayear">
-        <div className="Ayear__in">
-          <div className="Ayear__in__top">
-            <button onClick={() => navigate("/admin/main")}>
-              <img src={home} alt="home" />
-            </button>
-            <button onClick={addItem}>
-              <img src={plus} alt="plus" />
-            </button>
-            <button onClick={dele}>
-              <img src={trash} alt="trash" />
-            </button>
-          </div>
-          <div className="Ayear__in__body">
-            <div className="cards">
-              {semesters.map((year) => (
-                <div className={del ? "card delete" : "card"} key={year.id}>
-                  <p>{year.name}</p>
-                  {del ? (
-                    <button onClick={() => toggleCardState(year.id)}>
-                      <img
-                        src={selectedCard === year.id ? checked : notchecked}
-                        alt="circle"
-                      />
-                    </button>
-                  ) : (
-                    <button onClick={() => handleClick(year.id)}></button>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-          {show && (
-            <form onSubmit={sub}>
-              <div>
-                <label htmlFor="name">إسم السمستر :</label>
-                <input
-                  type="text"
-                  id="name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                />
-              </div>
-              <div>
-                <button type="submit" className="btnbtn">
-                  إضافة
-                </button>
-              </div>
-            </form>
-          )}
+    <div className="Ayear">
+      <div className="Ayear__in">
+        <div className="Ayear__in__top">
+          <button onClick={() => navigate("/admin/main")}>
+            <img src={home} alt="home" />
+          </button>
+          <button onClick={addItem}>
+            <img src={plus} alt="plus" />
+          </button>
+          <button onClick={dele}>
+            <img src={trash} alt="trash" />
+          </button>
         </div>
+        <div className="Ayear__in__body">
+          <div className="cards">
+            {semesters.map((year) => (
+              <div className={del ? "card delete" : "card"} key={year.id}>
+                <p>{year.name}</p>
+                {del ? (
+                  <button onClick={() => toggleCardState(year.id)}>
+                    <img
+                      src={selectedCard === year.id ? checked : notchecked}
+                      alt="circle"
+                    />
+                  </button>
+                ) : (
+                  <button onClick={() => handleClick(year.id)}></button>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+        {show && (
+          <form onSubmit={sub}>
+            <div>
+              <label htmlFor="name">إسم السمستر :</label>
+              <input
+                type="text"
+                id="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
+            <div>
+              <button onClick={() => setShow(false)}>إلغاء</button>
+              <button type="submit" className="btnbtn">
+                إضافة
+              </button>
+            </div>
+          </form>
+        )}
       </div>
-    </>
+    </div>
   );
 }
 
