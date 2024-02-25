@@ -739,7 +739,7 @@ body {
   height: 100%;
   direction: rtl;
   padding: 20px 60px 0;
-  min-height: 76vh;
+  min-height: calc(100vh - 175px);
 }
 @media (max-width: 400px) {
   .Programs__in {
@@ -780,7 +780,7 @@ body {
   height: 100%;
   direction: rtl;
   padding: 20px 60px 0;
-  min-height: 76vh;
+  min-height: calc(100vh - 175px);
 }
 @media (max-width: 400px) {
   .Applicants__in {
@@ -857,7 +857,7 @@ body {
   height: 100%;
   direction: rtl;
   padding: 20px 60px 0;
-  min-height: 76vh;
+  min-height: calc(100vh - 175px);
 }
 @media (max-width: 400px) {
   .Table__in {
@@ -894,12 +894,13 @@ body {
 .Table__in__bot table thead th:first-of-type {
   width: 120px;
 }
-.Table__in__bot table th, .Table__in__bot table td {
+.Table__in__bot table th,
+.Table__in__bot table td {
   border: 1px solid black;
 }
 .Table__in__bot table td {
   padding: 15px;
-  background-color: #F2F2F2;
+  background-color: #f2f2f2;
 }
 .Table__in__bot table tr td:first-of-type {
   text-align: center;
@@ -932,7 +933,7 @@ body {
   height: 100%;
   direction: rtl;
   padding: 20px 60px 0;
-  min-height: 76vh;
+  min-height: calc(100vh - 175px);
 }
 @media (max-width: 400px) {
   .Cric__in {
@@ -964,36 +965,32 @@ body {
 .Account {
   font-family: "Cairo", sans-serif;
   position: relative;
-  height: 106vh;
 }
 .Account .Account__inner {
   height: 100%;
   justify-content: center;
   align-items: center;
   display: flex;
+  height: calc(100vh - 175px);
 }
 .Account .Account__inner .Account__inner__form {
   flex-direction: column;
   display: flex;
-  height: 100vh;
   align-items: center;
   box-shadow: 4px 4px 24px 0px rgba(0, 0, 0, 0.2509803922);
-  padding: 20px;
-}
-@media (max-width: 1200px) {
-  .Account .Account__inner .Account__inner__form {
-    padding: 20px 20px;
-  }
+  margin-top: 20px;
+  padding: 9px 20px;
 }
 .Account .Account__inner .Account__inner__form form {
   display: flex;
   flex-direction: column;
   width: 85%;
 }
-.Account .Account__inner .Account__inner__form form input, .Account .Account__inner .Account__inner__form form select {
+.Account .Account__inner .Account__inner__form form input,
+.Account .Account__inner .Account__inner__form form select {
   direction: rtl;
   margin: 15px 0;
-  height: 55px;
+  height: 50px;
   border-radius: 8px;
   padding: 12px;
   border: 1px solid grey;
@@ -2717,7 +2714,7 @@ body {
   direction: rtl;
 }
 .Eprogram__in {
-  min-height: 76vh;
+  min-height: calc(100vh - 175px);
   padding: 30px 30px 0;
   position: relative;
 }

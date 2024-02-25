@@ -4,12 +4,16 @@ import { showApplicant } from "../../services/applicant/me/show";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../services/AuthContext";
 import { COLLEGE } from "../../services/API";
+import { useNavigate } from "react-router-dom";
 
 function AccountInfo() {
-  const { token } = useAuth();
+  const { token, isloggedIn } = useAuth();
+  const navigate = useNavigate();
+
   const [user, setUser] = useState({});
 
   useEffect(() => {
+    if (!isloggedIn) navigate("/login");
     const fetchData = async () => {
       const res = await showApplicant(token);
       setUser(res);
@@ -26,9 +30,9 @@ function AccountInfo() {
           <div className="Account__inner__form col-lg-5 col-md-6 col-12">
             <h2>معلومات الحساب</h2>
             <form>
-              <input type="text" value={user.name} />
+              <input type="text" value={user.name} disabled />
               <input type="number" value={user.national_id} disabled />
-              <input type="text" value={COLLEGE.name} />
+              <input type="text" value={COLLEGE.name} disabled />
               <div className="gender">
                 <label htmlFor="gender">: النوع</label>
                 <div className="male">
@@ -57,14 +61,8 @@ function AccountInfo() {
                 type="email"
                 placeholder="البريد الإلكتروني"
                 value={user.email}
+                disabled
               />
-              <div className="sub">
-                <button type="submit" className="btnbtn">
-                  {" "}
-                  حفظ
-                </button>
-                <button className="delete">حذف الحساب</button>
-              </div>
             </form>
           </div>
         </div>

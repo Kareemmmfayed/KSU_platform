@@ -89,6 +89,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Signin />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="account" element={<AccountInfo />} />
             <Route
               element={
                 <ProtectedRoutes>
@@ -108,7 +109,6 @@ function App() {
                 <Route path="programs/Adetails" element={<Apdetails />} />
                 <Route path="application" element={<Application />} />
                 <Route path="success" element={<Success />} />
-                <Route path="account" element={<AccountInfo />} />
                 <Route path="diplomas" element={<Mydiplomas />} />
                 <Route path="subjects" element={<Regsubs />} />
                 <Route path="applicants" element={<Applicants />} />
