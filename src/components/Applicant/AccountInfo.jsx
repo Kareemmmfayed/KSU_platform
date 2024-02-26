@@ -1,22 +1,45 @@
 import Header from "../Header";
 import Footer from "../Footer";
-import { showApplicant } from "../../services/applicant/me/show";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../services/AuthContext";
 import { COLLEGE } from "../../services/API";
 import { useNavigate } from "react-router-dom";
+import { showApplicant } from "../../services/applicant/me/show";
+import { showAdmin } from "../../services/admin/me/show";
+import { showEmployee } from "../../services/employee/me/show";
+import { showMaster } from "../../services/master/me/show";
 
 function AccountInfo() {
-  const { token, isloggedIn } = useAuth();
+  const { token, userType } = useAuth();
   const navigate = useNavigate();
 
   const [user, setUser] = useState({});
 
   useEffect(() => {
-    if (!isloggedIn) navigate("/login");
+    // if (!isloggedIn) {
+    //   navigate("/login");
+    // }
+
     const fetchData = async () => {
-      const res = await showApplicant(token);
-      setUser(res);
+      if (userType === "applicant") {
+        const res = await showApplicant(token);
+        setUser(res);
+        return;
+      } else if (userType === "employee") {
+        const res = await showEmployee(token);
+        setUser(res);
+        return;
+      } else if (userType === "admin") {
+        const res = await showAdmin(token);
+        console.log(res.national_id);
+        setUser(res);
+        return;
+      } else if (userType === "master") {
+        const res = await showMaster(token);
+        setUser(res);
+        return;
+      }
+      return "";
     };
 
     fetchData();

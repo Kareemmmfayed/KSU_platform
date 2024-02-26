@@ -59,23 +59,21 @@
 
           button {
             position: absolute;
-            width: 100%;
-            height: 100%;
-            left: 0;
-            top: 0;
             border: none;
             background: transparent;
 
-            .notcopy {
-              position: absolute;
-              top: 15px;
-              left: 15px;
+            &:first-of-type {
+              left: 5px;
+              bottom: 10px;
             }
 
-            .copy {
-              position: absolute;
-              bottom: 15px;
-              left: 15px;
+            &:last-of-type {
+              left: 10px;
+              top: 10px;
+
+              img {
+                width: 35px;
+              }
             }
           }
         }
@@ -131,6 +129,17 @@
           &:first-of-type {
             background-color: #cc5454;
           }
+        }
+      }
+
+      ul {
+        list-style: none;
+        height: 50%;
+        overflow: auto;
+        margin-top: 20px;
+
+        input {
+          margin-left: 10px;
         }
       }
     }

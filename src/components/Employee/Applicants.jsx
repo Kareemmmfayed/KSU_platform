@@ -1,25 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import copy from "../../assets/copy.png";
-// import { useNavigate } from 'react-router-dom';
+import { indexApplications } from "../../services/employee/application";
+import { useAuth } from "../../services/AuthContext";
 
-function Applicants() {
-  const initialApplicants = [
-    ["كريم فايد", "1111111111111"],
-    ["كريم فايد", "1111111111111"],
-    ["كريم فايد", "1111111111111"],
-    ["كريم فايد", "1111111111111"],
-    ["كريم فايد", "1111111111111"],
-    ["كريم فايد", "1111111111111"],
-    ["كريم فايد", "1111111111111"],
-    ["كريم فايد", "1111111111111"],
-    ["كريم فايد", "1111111111111"],
-    ["كريم فايد", "1111111111111"],
-    ["أحمد", "1111111111111"],
-  ];
-
+function Applicants({ diplomaId }) {
+  const [applicants, setApplicants] = useState("");
   const [searchValue, setSearchValue] = useState("");
-  const [filteredApplicants, setFilteredApplicants] =
-    useState(initialApplicants);
+  const [filteredApplicants, setFilteredApplicants] = useState();
+
+  const { token } = useAuth();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await indexApplications(token, diplomaId);
+      setApplicants(res);
+    };
+
+    fetchData();
+  }, []);
 
   const handleSearch = (e) => {
     const searchTerm = e.target.value;
@@ -43,12 +41,6 @@ function Applicants() {
     document.body.removeChild(textArea);
   };
 
-  // const navigate = useNavigate();
-
-  // const toInfo = () => {
-  //     navigate("/employee/applicant/info");
-  // }
-
   return (
     <div className="Applicants">
       <div className="Applicants__in">
@@ -62,16 +54,18 @@ function Applicants() {
           />
         </div>
         <ol>
-          {filteredApplicants.map((applicant, index) => (
-            <div className="Applicants__in__bot" key={index}>
+          {filteredApplicants?.map((applicant) => (
+            <div className="Applicants__in__bot" key={applicant.id}>
               <div className="Applicants__in__bot__right">
                 <div>
-                  <li>{applicant[0]}</li>
+                  <li>{applicant.name}</li>
                 </div>
-                <p>الرقم القومي : {applicant[1]}</p>
+                <p>الرقم القومي : {applicant.national_id}</p>
               </div>
               <button
-                onClick={() => copyToClipboard(applicant[0], applicant[1])}
+                onClick={() =>
+                  copyToClipboard(applicant.name, applicant.national_id)
+                }
               >
                 <div>
                   <img src={copy} alt="copy" />

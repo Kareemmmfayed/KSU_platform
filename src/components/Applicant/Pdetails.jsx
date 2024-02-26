@@ -21,13 +21,9 @@ function Pdetails({ diplomaId }) {
   }, []);
 
   return (
-    <>
-      <Header name="< العودة" link="/" />
-      <div className="Pdetails">
-        <Pdetailsin Signed={true} data={data} />
-        <Footer />
-      </div>
-    </>
+    <div className="Pdetails">
+      <Pdetailsin Signed={true} data={data} />
+    </div>
   );
 }
 

@@ -40,11 +40,17 @@ function Pdetailsin({ Signed, data }) {
         </ul>
       </div>
       {Signed ? (
-        <button className="btnbtn" onClick={() => navigate("/application")}>
+        <button
+          className="btnbtn"
+          onClick={() => navigate("/applicant/application")}
+        >
           سجل الآن
         </button>
       ) : (
-        <button className="btnbtn" onClick={() => navigate("/appinfo")}>
+        <button
+          className="btnbtn"
+          onClick={() => navigate("/applicant/appinfo")}
+        >
           معلومات طلبك
         </button>
       )}

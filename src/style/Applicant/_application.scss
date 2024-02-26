@@ -1,18 +1,19 @@
 .Application {
   font-family: "Cairo", sans-serif;
   position: relative;
-  height: 115vh;
+  height: 125vh;
 
   &__inner {
-    height: 100%;
+    min-height: calc(100vh - 175px);
     justify-content: center;
     align-items: center;
     display: flex;
+    margin-top: 20px;
 
     &__form {
       flex-direction: column;
       display: flex;
-      height: 110vh;
+      height: 100%;
       align-items: center;
       box-shadow: 4px 4px 24px 0px #00000040;
       padding: 20px;

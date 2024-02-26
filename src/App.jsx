@@ -89,7 +89,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Signin />} />
             <Route path="/signup" element={<Signup />} />
-            <Route path="account" element={<AccountInfo />} />
+            <Route path="/account" element={<AccountInfo />} />
             <Route
               element={
                 <ProtectedRoutes>
@@ -111,7 +111,6 @@ function App() {
                 <Route path="success" element={<Success />} />
                 <Route path="diplomas" element={<Mydiplomas />} />
                 <Route path="subjects" element={<Regsubs />} />
-                <Route path="applicants" element={<Applicants />} />
                 <Route path="appinfo" element={<Appinfo />} />
               </Route>
 
@@ -125,6 +124,10 @@ function App() {
                   element={<Eprogram diplomaId={diplomaId} />}
                 />
                 <Route path="Applicant/info" element={<Appinfoemp />} />
+                <Route
+                  path="applicants"
+                  element={<Applicants diplomaId={diplomaId} />}
+                />
               </Route>
 
               <Route path="lecturer">

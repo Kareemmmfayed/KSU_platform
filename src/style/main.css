@@ -652,18 +652,19 @@ body {
 .Application {
   font-family: "Cairo", sans-serif;
   position: relative;
-  height: 115vh;
+  height: 125vh;
 }
 .Application__inner {
-  height: 100%;
+  min-height: calc(100vh - 175px);
   justify-content: center;
   align-items: center;
   display: flex;
+  margin-top: 20px;
 }
 .Application__inner__form {
   flex-direction: column;
   display: flex;
-  height: 110vh;
+  height: 100%;
   align-items: center;
   box-shadow: 4px 4px 24px 0px rgba(0, 0, 0, 0.2509803922);
   padding: 20px;
@@ -1195,7 +1196,7 @@ body {
   direction: rtl;
 }
 .Appinfo__in {
-  min-height: 100vh;
+  min-height: calc(100vh - 175px);
   padding: 30px 30px 0;
 }
 @media (max-width: 500px) {
@@ -2000,22 +2001,19 @@ body {
 }
 .Asubjects__in__body .cards .card button {
   position: absolute;
-  width: 100%;
-  height: 100%;
-  left: 0;
-  top: 0;
   border: none;
   background: transparent;
 }
-.Asubjects__in__body .cards .card button .notcopy {
-  position: absolute;
-  top: 15px;
-  left: 15px;
+.Asubjects__in__body .cards .card button:first-of-type {
+  left: 5px;
+  bottom: 10px;
 }
-.Asubjects__in__body .cards .card button .copy {
-  position: absolute;
-  bottom: 15px;
-  left: 15px;
+.Asubjects__in__body .cards .card button:last-of-type {
+  left: 10px;
+  top: 10px;
+}
+.Asubjects__in__body .cards .card button:last-of-type img {
+  width: 35px;
 }
 .Asubjects__in__body .cards .delete {
   position: relative;
@@ -2061,6 +2059,15 @@ body {
 }
 .Asubjects__in form div:last-of-type button:first-of-type {
   background-color: #cc5454;
+}
+.Asubjects__in form ul {
+  list-style: none;
+  height: 50%;
+  overflow: auto;
+  margin-top: 20px;
+}
+.Asubjects__in form ul input {
+  margin-left: 10px;
 }
 
 .Ayear {

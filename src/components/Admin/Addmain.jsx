@@ -33,7 +33,26 @@ function Addmain() {
     pro.name.includes(filterValue)
   );
 
-  const printDiploma = () => {};
+  const printDiploma = (pro) => {
+    const printWindow = window.open("", "_blank");
+    printWindow.document.write(`
+            <html>
+                <head>
+                    <style>
+                    body {
+                      direction: rtl;
+                    }
+                    </style>
+                </head>
+                <body>
+                  <h1>${pro.name}</h1>
+                  <p>${pro.description}</p>
+                </body>
+            </html>
+        `);
+    printWindow.document.close();
+    printWindow.print();
+  };
 
   return (
     <div className="Addmain">
@@ -82,7 +101,7 @@ function Addmain() {
             <div className="cards">
               {filteredProgram.map((pro) => (
                 <div className="card" key={pro.id}>
-                  <button onClick={printDiploma}>
+                  <button onClick={() => printDiploma(pro)}>
                     <img src={print} alt="print" />
                   </button>
                   <h3>البرنامج: {pro.name}</h3>

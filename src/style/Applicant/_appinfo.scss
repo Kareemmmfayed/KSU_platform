@@ -1,24 +1,23 @@
 .Appinfo {
-    font-family: 'Cairo', sans-serif;
-    direction: rtl;
+  font-family: "Cairo", sans-serif;
+  direction: rtl;
 
-    &__in {
-        min-height: 100vh;
-        padding: 30px 30px 0;
+  &__in {
+    min-height: calc(100vh - 175px);
+    padding: 30px 30px 0;
 
-        @media (max-width: 500px) {
-            padding: 30px 0 0;
-        }
-
-        h2 {
-            color: var(--main-color);
-            font-weight: 400;
-            font-size: 40px;
-
-            @media (max-width: 500px) {
-                font-size: 25px;
-            }
-        }
+    @media (max-width: 500px) {
+      padding: 30px 0 0;
     }
 
+    h2 {
+      color: var(--main-color);
+      font-weight: 400;
+      font-size: 40px;
+
+      @media (max-width: 500px) {
+        font-size: 25px;
+      }
+    }
+  }
 }

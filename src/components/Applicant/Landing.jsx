@@ -9,7 +9,7 @@ function Landing() {
   const handleClick = () => {
     if (isLoggedIn) {
       if (userType === "applicant") {
-        navigate("/programs");
+        navigate("/applicant/programs");
       } else if (userType === "lecturer") {
         navigate("/lecturer/subjects");
       } else if (userType === "employee") {

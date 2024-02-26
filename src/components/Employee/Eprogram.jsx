@@ -39,7 +39,10 @@ function Eprogram({ diplomaId }) {
             <p>العام الدراسي الثاني</p>
           </button>
         </div>
-        <button className="btnbtn" onClick={() => navigate("/applicants")}>
+        <button
+          className="btnbtn"
+          onClick={() => navigate("/employee/applicants")}
+        >
           الطلبة المتقدمون
         </button>
       </div>

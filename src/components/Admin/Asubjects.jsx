@@ -4,22 +4,29 @@ import trash from "../../assets/trash.png";
 import checked from "../../assets/checked.png";
 import notchecked from "../../assets/notchecked.png";
 import copy from "../../assets/copy.png";
+import lect from "../../assets/lect.png";
 import { useAuth } from "../../services/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { indexCourse } from "../../services/admin/course/index";
 import { createCourse } from "../../services/admin/course/create";
 import { deleteCourse } from "../../services/admin/course/delete";
+import { indexLecturer } from "../../services/admin/lecturer/index";
+import { AssignCourseToAdmin } from "../../services/admin/course/assignCourseToAdmin";
 
 function Asubjects({ AdminDiplomaId, levelId, semesterId }) {
   const { token } = useAuth();
   const [subjects, setSubjects] = useState([]);
+  const [lecturers, setLecturers] = useState([]);
 
   const navigate = useNavigate();
 
   const fetchData = async () => {
     const res = await indexCourse(token, AdminDiplomaId, levelId, semesterId);
     setSubjects(res);
+
+    const data = await indexLecturer(token);
+    setLecturers(data);
   };
 
   useEffect(() => {
@@ -85,6 +92,27 @@ function Asubjects({ AdminDiplomaId, levelId, semesterId }) {
     navigator.clipboard.writeText(content);
   };
 
+  const [select, setSelect] = useState(false);
+  const [subId, setSubId] = useState("");
+  const [lecturerId, setLecturerId] = useState("");
+
+  const handleSelect = (id) => {
+    setSelect(true);
+    setSubId(id);
+  };
+
+  const subL = async (e) => {
+    e.preventDefault();
+    await AssignCourseToAdmin(
+      token,
+      AdminDiplomaId,
+      levelId,
+      semesterId,
+      subId,
+      lecturerId
+    );
+  };
+
   return (
     <div className="Asubjects">
       <div className="Asubjects__in">
@@ -116,15 +144,20 @@ function Asubjects({ AdminDiplomaId, levelId, semesterId }) {
                   </button>
                 )}
                 {!del && (
-                  <button
-                    onClick={() =>
-                      copycontent(
-                        `إسم المقرر: ${sub.name}\nكود المقرر: ${sub.code}\nعدد الساعات المعتمدة: ${sub.credit_hours}`
-                      )
-                    }
-                  >
-                    <img src={copy} alt="circle" className="copy" />
-                  </button>
+                  <>
+                    <button
+                      onClick={() =>
+                        copycontent(
+                          `إسم المقرر: ${sub.name}\nكود المقرر: ${sub.code}\nعدد الساعات المعتمدة: ${sub.credit_hours}`
+                        )
+                      }
+                    >
+                      <img src={copy} alt="circle" />
+                    </button>
+                    <button onClick={() => handleSelect(sub.id)}>
+                      <img src={lect} alt="Pick a lecturer" />
+                    </button>
+                  </>
                 )}
               </div>
             ))}
@@ -165,6 +198,30 @@ function Asubjects({ AdminDiplomaId, levelId, semesterId }) {
             <div>
               <button onClick={() => setShow(false)}>إلغاء</button>
               <button className="btnbtn">إضافة</button>
+            </div>
+          </form>
+        )}
+        {select && (
+          <form>
+            <h2>إختر المحاضر المناسب :</h2>
+            <ul>
+              {lecturers.map((lect) => (
+                <li key={lect.id}>
+                  <input
+                    type="radio"
+                    name="lecturer"
+                    id={`lect${lect.id}`}
+                    onChange={() => setLecturerId(lect.id)}
+                  />
+                  <label htmlFor={`lect${lect.id}`}>{lect.name}</label>
+                </li>
+              ))}
+            </ul>
+            <div>
+              <button onClick={() => setSelect(false)}>إلغاء</button>
+              <button className="btnbtn" onClick={subL}>
+                إضافة
+              </button>
             </div>
           </form>
         )}
