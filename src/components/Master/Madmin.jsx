@@ -11,22 +11,30 @@ import { indexAdmin } from "../../services/master/admin";
 import { COLLEGE } from "../../services/API";
 import { createAdmin } from "../../services/master/admin/create";
 import { deleteAdmin } from "../../services/master/admin/delete";
+import { useQuery } from "@tanstack/react-query";
+import Spinner from "../Applicant/Spinner";
 
 function Madmin() {
   const { token } = useAuth();
-  const [admins, setAdmins] = useState([]);
+  // const [admins, setAdmins] = useState([]);
   const [name, setName] = useState([]);
   const [mail, setMail] = useState([]);
   const [pass, setPass] = useState([]);
 
   const fetchData = async () => {
     const data = await indexAdmin(token);
-    setAdmins(data.data.admins);
+    // setAdmins(data.data.admins);
+    return data.data.admins;
   };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  const { data: admins, isLoading } = useQuery({
+    queryFn: fetchData,
+    queryKey: ["admins"],
+  });
+
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
 
   const navigate = useNavigate();
 
@@ -70,6 +78,8 @@ function Madmin() {
   const copycontent = (content) => {
     navigator.clipboard.writeText(content);
   };
+
+  if (isLoading) return <Spinner />;
 
   return (
     <div className="Madmin">
