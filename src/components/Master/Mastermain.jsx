@@ -3,6 +3,8 @@ import plus from "../../assets/plus.png";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../services/AuthContext";
 import { getStats } from "../../services/master/getStats";
+import { useQuery } from "@tanstack/react-query";
+import Spinner from "../Applicant/Spinner";
 
 function Mastermain() {
   const { token } = useAuth();
@@ -14,16 +16,22 @@ function Mastermain() {
   const myRef4 = useRef(null);
   const myRef5 = useRef(null);
 
-  const [stats, setStats] = useState({});
+  // const [stats, setStats] = useState({});
 
   const getData = async () => {
     const data = await getStats(token);
-    setStats(data);
+    // setStats(data);
+    return data;
   };
 
-  useEffect(() => {
-    getData();
+  const { data: stats, isLoading } = useQuery({
+    queryFn: getData,
+    queryKey: ["stats"],
+  });
 
+  // console.log(stats);
+
+  useEffect(() => {
     const circle = (per, ele, col, ref) => {
       const percentage = per;
       const circleElement = document.getElementById(ele);
@@ -33,15 +41,17 @@ function Mastermain() {
       myElement.style.setProperty("--numCol", col);
     };
 
-    circle(50, "circle", "#CB8589", myRef);
-    circle(50, "circle1", "#B4869F", myRef1);
-    circle(50, "circle2", "#539987", myRef2);
-    circle(50, "circle3", "#4793CD", myRef3);
-    circle(50, "circle4", "#A18276", myRef4);
-    circle(50, "circle5", "#A18276", myRef5);
+    circle(100, "circle", "#CB8589", myRef);
+    circle(100, "circle1", "#B4869F", myRef1);
+    circle(100, "circle2", "#539987", myRef2);
+    circle(100, "circle3", "#4793CD", myRef3);
+    circle(100, "circle4", "#A18276", myRef4);
+    circle(100, "circle5", "#cc5454", myRef5);
   }, []);
 
   const navigate = useNavigate();
+
+  if (isLoading) return <Spinner />;
 
   return (
     <div className="Mastermain">

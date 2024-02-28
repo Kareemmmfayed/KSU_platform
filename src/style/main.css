@@ -43,7 +43,7 @@ body {
 }
 
 .spinnerContainer {
-  height: 100%;
+  height: calc(100vh - 175px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -53,7 +53,8 @@ body {
   width: 6rem;
   height: 6rem;
   border-radius: 50%;
-  background: conic-gradient(rgba(0, 0, 0, 0) 10%, var(--main-color));
+  background-color: transparent;
+  border: 10px dotted var(--main-color);
   animation: rotate 1.5s infinite linear;
 }
 
@@ -439,6 +440,8 @@ body {
   overflow: hidden;
   font-family: "Cairo", sans-serif;
   height: 75px;
+  position: relative;
+  bottom: 0;
 }
 .Footer__in {
   color: white;
