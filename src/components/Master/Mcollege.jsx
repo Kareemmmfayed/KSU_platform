@@ -10,21 +10,29 @@ import { indexColleges } from "../../services/master/college/index";
 import { useAuth } from "../../services/AuthContext";
 import { createCollege } from "../../services/master/college/create";
 import { deleteCollege } from "../../services/master/college/delete";
+import { useQuery } from "@tanstack/react-query";
+import Spinner from "../Applicant/Spinner";
 
 function Mcollege() {
   const { token } = useAuth();
-  const [programs, setPrograms] = useState([]);
+  // const [programs, setPrograms] = useState([]);
   const [selectedCard, setSelectedCard] = useState(null);
   const [del, setDelete] = useState(false);
 
   const fetchPrograms = async () => {
     const data = await indexColleges(token);
-    setPrograms(data.data.collages);
+    // setPrograms(data.data.collages);
+    return data.data.collages;
   };
 
-  useEffect(() => {
-    fetchPrograms();
-  }, []);
+  const { data: programs, isLoading } = useQuery({
+    queryFn: fetchPrograms,
+    queryKey: ["collages"],
+  });
+
+  // useEffect(() => {
+  //   fetchPrograms();
+  // }, []);
 
   const navigate = useNavigate();
 
@@ -67,6 +75,8 @@ function Mcollege() {
       setSelectedCard(null);
     }
   };
+
+  if (isLoading) return <Spinner />;
 
   return (
     <div className="Mcollege">
