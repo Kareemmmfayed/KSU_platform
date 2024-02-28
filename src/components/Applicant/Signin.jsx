@@ -12,8 +12,8 @@ import { LogInEmployee } from "../../services/auth/LogInEmployee";
 
 function Signin() {
   const [role, setRole] = useState("");
-  const [email, setEmail] = useState("kareemE@mail.com");
-  const [password, setPassword] = useState("kareemE");
+  const [email, setEmail] = useState("ahmed@mail.com");
+  const [password, setPassword] = useState("ahmed123456");
   const [rem, setRem] = useState(false);
   const [wrong, setWrong] = useState(false);
 
