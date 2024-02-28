@@ -34,8 +34,12 @@
       li {
         font-size: 24px;
         font-weight: 400;
-        cursor: pointer;
         margin: 15px 0;
+
+        button {
+          background-color: transparent;
+          border: none;
+        }
       }
     }
   }

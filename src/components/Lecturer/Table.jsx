@@ -3,14 +3,16 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../services/AuthContext";
 import { indexStudents } from "../../services/instructor/students/index";
 
-function Table({ courseId }) {
+function Table({ diplomaId }) {
   const { token } = useAuth();
 
   const [searchTerm, setSearchTerm] = useState("");
 
+  const [subjects, setSubjects] = useState([]);
+
   useEffect(() => {
     const fetchData = async () => {
-      const res = await indexStudents(token, courseId);
+      const res = await indexStudents(token, diplomaId);
       setSubjects(res);
     };
 
@@ -55,8 +57,8 @@ function Table({ courseId }) {
                                 (applicant, index) => `
                                 <tr>
                                     <td>${index + 1}</td>
-                                    <td>${applicant[0]}</td>
-                                    <td>${applicant[1]}</td>
+                                    <td>${applicant.name}</td>
+                                    <td>${applicant.national_id}</td>
                                 </tr>
                             `
                               )

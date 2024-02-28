@@ -3,8 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../services/AuthContext";
 import { indexCourses } from "../../services/instructor/courses/index";
 
-function Cric() {
+function Cric({ pickDiplomaId }) {
   const { token } = useAuth();
+  const navigate = useNavigate();
 
   const [subjects, setSubjects] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -22,6 +23,10 @@ function Cric() {
     sub.name.includes(searchTerm)
   );
 
+  const handleClick = (id) => {
+    pickDiplomaId(id);
+    navigate("/lecturer/table");
+  };
   return (
     <div className="Cric">
       <div className="Cric__in">
@@ -36,7 +41,9 @@ function Cric() {
         </div>
         <ol>
           {filteredPrograms.map((sub) => (
-            <li key={sub.id}>{sub.name}</li>
+            <li key={sub.id}>
+              <button onClick={() => handleClick(sub.id)}>{sub.name}</button>
+            </li>
           ))}
         </ol>
       </div>

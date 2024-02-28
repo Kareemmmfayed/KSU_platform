@@ -18,19 +18,22 @@ function Header(props) {
   const [list, setList] = useState(false);
 
   const fetchName = async () => {
-    if (userType === "applicant") {
-      const res = await showApplicant(token);
-      return res.name || "";
-    } else if (userType === "employee") {
-      const res = await showEmployee(token);
-      return res.name || "";
-    } else if (userType === "admin") {
-      const res = await showAdmin(token);
-      return res.name || "";
-    } else if (userType === "master") {
-      const res = await showMaster(token);
-      return res.name || "";
+    if (isLoggedIn) {
+      if (userType === "applicant") {
+        const res = await showApplicant(token);
+        return res.name;
+      } else if (userType === "employee") {
+        const res = await showEmployee(token);
+        return res.name;
+      } else if (userType === "admin") {
+        const res = await showAdmin(token);
+        return res.name;
+      } else if (userType === "master") {
+        const res = await showMaster(token);
+        return res.name;
+      }
     }
+
     return "";
   };
 

@@ -111,6 +111,7 @@ function Asubjects({ AdminDiplomaId, levelId, semesterId }) {
       subId,
       lecturerId
     );
+    setSelect(false);
   };
 
   return (
@@ -135,11 +136,13 @@ function Asubjects({ AdminDiplomaId, levelId, semesterId }) {
                 <p>كود المقرر : {sub.code}</p>
                 <p>عدد الساعات المعتمدة : {sub.credit_hours}</p>
                 {del && (
-                  <button onClick={() => toggleCardState(index)}>
+                  <button
+                    onClick={() => toggleCardState(sub.id)}
+                    className="del"
+                  >
                     <img
-                      src={selectedCard === year.id ? checked : notchecked}
+                      src={selectedCard === sub.id ? checked : notchecked}
                       alt="circle"
-                      className="notcopy"
                     />
                   </button>
                 )}

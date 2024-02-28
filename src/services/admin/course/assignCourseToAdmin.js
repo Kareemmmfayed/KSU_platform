@@ -22,7 +22,8 @@ export const AssignCourseToAdmin = async (
   let response = await fetch(
     `${API_URL}/admin/collages/${COLLEGE.id}/programs/${programId}/levels/${levelId}/semesters/${semesterId}/courses/${courseId}/`,
     {
-      method: "GET",
+      method: "POST",
+      body: bodyContent,
       headers: headersList,
     }
   );

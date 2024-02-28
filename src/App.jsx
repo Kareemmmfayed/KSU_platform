@@ -1,9 +1,4 @@
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Navigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { useState } from "react";
@@ -43,7 +38,6 @@ import ProtectedRoutes from "./components/ProtectedRoutes";
 import Spinner from "./components/Applicant/Spinner";
 
 function App() {
-  const [diplomaId, setDiplomaId] = useState();
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
@@ -52,30 +46,27 @@ function App() {
     },
   });
 
+  const [diplomaId, setDiplomaId] = useState();
   const pickDiplomaId = (id) => {
     setDiplomaId(id);
   };
 
   const [AdminDiplomaId, setAdminDiplomaId] = useState();
-
   const handleAdminDiplomaId = (id) => {
     setAdminDiplomaId(id);
   };
 
   const [levelId, setLevelId] = useState();
-
   const handleLevelId = (id) => {
     setLevelId(id);
   };
 
   const [semesterId, setSemesterId] = useState();
-
   const handleSemesterId = (id) => {
     setSemesterId(id);
   };
 
   const [payId, setPayId] = useState();
-
   const pickPayId = (id) => {
     setPayId(id);
   };
@@ -131,8 +122,11 @@ function App() {
               </Route>
 
               <Route path="lecturer">
-                <Route path="table" element={<Table />} />
-                <Route path="subjects" element={<Cric />} />
+                <Route path="table" element={<Table diplomaId={diplomaId} />} />
+                <Route
+                  path="subjects"
+                  element={<Cric pickDiplomaId={pickDiplomaId} />}
+                />
               </Route>
 
               <Route path="/admin">
