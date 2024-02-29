@@ -7,26 +7,35 @@ import { useState, useEffect } from "react";
 import { useAuth } from "../../services/AuthContext";
 import { indexPayments } from "../../services/admin/payments/index";
 import { createPayment } from "../../services/admin/payments/create";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import toast from "react-hot-toast";
+import Spinner from "../Applicant/Spinner";
 
 function Apay({ payId }) {
   const navigate = useNavigate();
   const { token } = useAuth();
 
-  const [payments, setPayments] = useState([]);
+  // const [payments, setPayments] = useState([]);
   const [kind, setKind] = useState();
 
   const [show, setShow] = useState(false);
   const [del, setDelete] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
+  const queryClient = useQueryClient();
 
   const fetchData = async () => {
     const data = await indexPayments(token, payId);
     setPayments(data);
   };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
+
+  const { data: payments, isLoading } = useQuery({
+    queryFn: fetchData,
+    queryKey: ["payments"],
+  });
 
   const toggleCardState = (id) => {
     if (del) {
@@ -46,8 +55,22 @@ function Apay({ payId }) {
     e.preventDefault();
     await createPayment(token, kind, payId);
     setShow(false);
-    fetchData();
+    // fetchData();
   };
+
+  const { mutate: addPayment, isPending: isAdding } = useMutation({
+    mutationFn: (e) => sub(e),
+    onSuccess: () => {
+      queryClient.invalidateQueries("payments");
+      toast.success("تمت الإضافة بنجاح");
+    },
+    onError: (error) => {
+      console.log(error);
+      toast.error("حدث خطأ ما");
+    },
+  });
+
+  if (isLoading || isAdding) return <Spinner />;
 
   return (
     <div className="Apay">
@@ -78,7 +101,7 @@ function Apay({ payId }) {
           </div>
         </div>
         {show && (
-          <form onSubmit={sub}>
+          <form onSubmit={addPayment}>
             <div>
               <label htmlFor="name">نوع القسط :</label>
               <input

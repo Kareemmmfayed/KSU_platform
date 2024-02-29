@@ -9,8 +9,9 @@ import { useAuth } from "../../services/AuthContext";
 import { indexPrograms } from "../../services/admin/program";
 import { createProgram } from "../../services/admin/program/create";
 import { deleteProgram } from "../../services/admin/program/delete";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Spinner from "../Applicant/Spinner";
+import toast from "react-hot-toast";
 
 function Adiplomas({ handleAdminDiplomaId }) {
   const { token } = useAuth();
@@ -23,6 +24,7 @@ function Adiplomas({ handleAdminDiplomaId }) {
   const [stime, setStime] = useState("");
   const [ctime, setCtime] = useState("");
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const fetchData = async () => {
     const res = await indexPrograms(token);
@@ -65,7 +67,7 @@ function Adiplomas({ handleAdminDiplomaId }) {
       `${ctime}T12:00:00`
     );
     setShow(false);
-    fetchData();
+    // fetchData();
   };
 
   const dele = async () => {
@@ -73,7 +75,8 @@ function Adiplomas({ handleAdminDiplomaId }) {
       await deleteProgram(token, selectedCard);
       setSelectedCard(null);
       setDelete(!del);
-      fetchData();
+      toast.success("تم الحذف بنجاح");
+      // fetchData();
     } else {
       setDelete(!del);
       setSelectedCard(null);
@@ -82,15 +85,24 @@ function Adiplomas({ handleAdminDiplomaId }) {
 
   const { mutate: subMutation, isSubmitting } = useMutation({
     mutationFn: (e) => sub(e),
+    onSuccess: () => {
+      queryClient.invalidateQueries("programs");
+      toast.success("تمت الإضافة بنجاح");
+    },
     onError: (error) => {
       console.log(error);
+      toast.error("حدث خطأ ما");
     },
   });
 
   const { mutate: deleteMutation, isDeleting } = useMutation({
     mutationFn: dele,
+    onSuccess: () => {
+      queryClient.invalidateQueries("programs");
+    },
     onError: (error) => {
       console.log(error);
+      toast.error("حدث خطأ ما");
     },
   });
 

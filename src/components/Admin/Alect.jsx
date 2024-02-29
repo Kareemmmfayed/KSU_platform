@@ -10,15 +10,18 @@ import { useAuth } from "../../services/AuthContext";
 import { indexLecturer } from "../../services/admin/lecturer/index";
 import { createLecturer } from "../../services/admin/lecturer/create";
 import { deleteLecturer } from "../../services/admin/lecturer/delete";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import toast from "react-hot-toast";
+import Spinner from "../Applicant/Spinner";
 
 function Alect() {
   const { token } = useAuth();
 
-  const [lecturers, setLecturers] = useState([]);
+  // const [lecturers, setLecturers] = useState([]);
   const [name, setName] = useState("");
   const [mail, setMail] = useState("");
   const [password, setPassword] = useState("");
-
+  const queryClient = useQueryClient();
   const navigate = useNavigate();
 
   const fetchData = async () => {
@@ -26,9 +29,14 @@ function Alect() {
     setLecturers(res);
   };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
+
+  const { data: lecturers, isLoading } = useQuery({
+    queryFn: fetchData,
+    queryKey: ["lecturers"],
+  });
 
   const [show, setShow] = useState(false);
   const [del, setDelete] = useState(false);
@@ -48,7 +56,7 @@ function Alect() {
     e.preventDefault();
     await createLecturer(token, name, mail, password);
     setShow(false);
-    fetchData();
+    // fetchData();
   };
 
   const dele = async () => {
@@ -56,16 +64,41 @@ function Alect() {
       await deleteLecturer(token, cardStates);
       setCardStates(null);
       setDelete(!del);
-      fetchData();
+      toast.success("تم الحذف بنجاح");
+      // fetchData();
     } else {
       setDelete(!del);
       setCardStates(null);
     }
   };
 
+  const { mutate: addLecturer, isAdding } = useMutation({
+    mutationFn: (e) => sub(e),
+    onSuccess: () => {
+      queryClient.invalidateQueries("lecturers");
+      toast.success("تم الحذف بنجاح");
+    },
+    onError: (error) => {
+      console.log(error);
+      toast.error("حدث خطأ ما");
+    },
+  });
+  const { mutate: deleteMutation, isDeleting } = useMutation({
+    mutationFn: dele,
+    onSuccess: () => {
+      queryClient.invalidateQueries("lecturers");
+    },
+    onError: (error) => {
+      console.log(error);
+      toast.error("حدث خطأ ما");
+    },
+  });
+
   const copycontent = (content) => {
     navigator.clipboard.writeText(content);
   };
+
+  if (isLoading || isAdding || isDeleting) return <Spinner />;
 
   return (
     <div className="Alect">
@@ -77,13 +110,13 @@ function Alect() {
           <button onClick={addItem}>
             <img src={plus} alt="plus" />
           </button>
-          <button onClick={dele}>
+          <button onClick={deleteMutation}>
             <img src={trash} alt="trash" />
           </button>
         </div>
         <div className="Alect__in__body">
           <div className="cards">
-            {lecturers.map((lec) => (
+            {lecturers?.map((lec) => (
               <div className={del ? "card delete" : "card"} key={lec.id}>
                 <h2>الدكتور : {lec.name}</h2>
                 <p>البريد الإلكتروني : {lec.email}</p>
@@ -112,7 +145,7 @@ function Alect() {
           </div>
         </div>
         {show && (
-          <form onSubmit={sub}>
+          <form onSubmit={addLecturer}>
             <div>
               <label htmlFor="name">اسم المحاضر :</label>
               <input
@@ -132,7 +165,7 @@ function Alect() {
             <div>
               <label htmlFor="password">كلمة المرور :</label>
               <input
-                type="text"
+                type="password"
                 id="password"
                 onChange={(e) => setPassword(e.target.value)}
               />
