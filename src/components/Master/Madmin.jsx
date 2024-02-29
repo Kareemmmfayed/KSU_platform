@@ -11,22 +11,32 @@ import { indexAdmin } from "../../services/master/admin";
 import { COLLEGE } from "../../services/API";
 import { createAdmin } from "../../services/master/admin/create";
 import { deleteAdmin } from "../../services/master/admin/delete";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import Spinner from "../Applicant/Spinner";
+import toast from "react-hot-toast";
 
 function Madmin() {
   const { token } = useAuth();
-  const [admins, setAdmins] = useState([]);
+  // const [admins, setAdmins] = useState([]);
   const [name, setName] = useState([]);
   const [mail, setMail] = useState([]);
   const [pass, setPass] = useState([]);
+  const queryClient = useQueryClient();
 
   const fetchData = async () => {
     const data = await indexAdmin(token);
-    setAdmins(data.data.admins);
+    // setAdmins(data.data.admins);
+    return data.data.admins;
   };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  const { data: admins, isLoading } = useQuery({
+    queryFn: fetchData,
+    queryKey: ["admins"],
+  });
+
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
 
   const navigate = useNavigate();
 
@@ -52,7 +62,7 @@ function Madmin() {
     e.preventDefault();
     await createAdmin(token, name, mail, pass);
     setShow(false);
-    fetchData();
+    // fetchData();
   };
 
   const dele = async () => {
@@ -60,16 +70,42 @@ function Madmin() {
       await deleteAdmin(token, selectedCard);
       setSelectedCard(null);
       setDelete(!del);
-      fetchData();
+      toast.success("تم الحذف بنجاح");
+      // fetchData();
     } else {
       setDelete(!del);
       setSelectedCard(null);
     }
   };
 
+  const { mutate: create, isCreating } = useMutation({
+    mutationFn: (e) => sub(e),
+    onSuccess: () => {
+      queryClient.invalidateQueries("admins");
+      toast.success("تمت الإضافة بنجاح");
+    },
+    onError: (error) => {
+      console.log(error);
+      toast.error("حدث خطأ ما");
+    },
+  });
+
+  const { mutate: delAdmin, isDeleting } = useMutation({
+    mutationFn: dele,
+    onSuccess: () => {
+      queryClient.invalidateQueries("admins");
+    },
+    onError: (error) => {
+      console.log(error);
+      toast.error("حدث خطأ ما");
+    },
+  });
+
   const copycontent = (content) => {
     navigator.clipboard.writeText(content);
   };
+
+  if (isLoading || isCreating || isDeleting) return <Spinner />;
 
   return (
     <div className="Madmin">
@@ -81,7 +117,7 @@ function Madmin() {
           <button onClick={addItem}>
             <img src={plus} alt="plus" />
           </button>
-          <button onClick={dele}>
+          <button onClick={delAdmin}>
             <img src={trash} alt="trash" />
           </button>
         </div>
@@ -117,7 +153,7 @@ function Madmin() {
           </div>
         </div>
         {show && (
-          <form onSubmit={sub}>
+          <form onSubmit={create}>
             <div>
               <label htmlFor="name">الاسم الرباعي :</label>
               <input
@@ -144,7 +180,9 @@ function Madmin() {
             </div>
             <div>
               <button onClick={() => setShow(false)}>إلغاء</button>
-              <button className="btnbtn">إضافة</button>
+              <button type="submit" className="btnbtn">
+                إضافة
+              </button>
             </div>
           </form>
         )}

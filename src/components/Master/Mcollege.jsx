@@ -10,21 +10,31 @@ import { indexColleges } from "../../services/master/college/index";
 import { useAuth } from "../../services/AuthContext";
 import { createCollege } from "../../services/master/college/create";
 import { deleteCollege } from "../../services/master/college/delete";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import Spinner from "../Applicant/Spinner";
+import toast from "react-hot-toast";
 
 function Mcollege() {
   const { token } = useAuth();
-  const [programs, setPrograms] = useState([]);
+  // const [programs, setPrograms] = useState([]);
   const [selectedCard, setSelectedCard] = useState(null);
   const [del, setDelete] = useState(false);
+  const queryClient = useQueryClient();
 
   const fetchPrograms = async () => {
     const data = await indexColleges(token);
-    setPrograms(data.data.collages);
+    // setPrograms(data.data.collages);
+    return data.data.collages;
   };
 
-  useEffect(() => {
-    fetchPrograms();
-  }, []);
+  const { data: programs, isLoading } = useQuery({
+    queryFn: fetchPrograms,
+    queryKey: ["collages"],
+  });
+
+  // useEffect(() => {
+  //   fetchPrograms();
+  // }, []);
 
   const navigate = useNavigate();
 
@@ -50,16 +60,29 @@ function Mcollege() {
     e.preventDefault();
     await createCollege(token, faculty, college);
     setShow(false);
-    fetchPrograms();
+    // fetchPrograms();
     setFaculty("");
     setCollege("");
   };
+
+  const { mutate: create, isCreating } = useMutation({
+    mutationFn: (e) => sub(e),
+    onSuccess: () => {
+      queryClient.invalidateQueries("collages");
+      toast.success("تمت الإضافة بنجاح");
+    },
+    onError: (error) => {
+      console.log(error);
+      toast.error("حدث خطأ ما");
+    },
+  });
 
   const dele = async () => {
     if (del && selectedCard) {
       await deleteCollege(token, selectedCard);
       setSelectedCard(null);
-      fetchPrograms();
+      toast.success("تم الحذف بنجاح");
+      // fetchPrograms();
 
       setDelete(!del);
     } else {
@@ -67,6 +90,19 @@ function Mcollege() {
       setSelectedCard(null);
     }
   };
+
+  const { mutate: deleteColl, isDeleting } = useMutation({
+    mutationFn: dele,
+    onSuccess: () => {
+      queryClient.invalidateQueries("collages");
+    },
+    onError: (error) => {
+      console.log(error);
+      toast.error("حدث خطأ ما");
+    },
+  });
+
+  if (isLoading || isDeleting || isCreating) return <Spinner />;
 
   return (
     <div className="Mcollege">
@@ -78,7 +114,7 @@ function Mcollege() {
           <button onClick={addItem}>
             <img src={plus} alt="plus" />
           </button>
-          <button onClick={dele}>
+          <button onClick={deleteColl} disabled={isDeleting}>
             <img src={trash} alt="trash" />
           </button>
         </div>
@@ -106,7 +142,7 @@ function Mcollege() {
           </div>
         </div>
         {show && (
-          <form onSubmit={sub}>
+          <form onSubmit={create}>
             <div>
               <label htmlFor="name">اسم الكلية :</label>
               <input
@@ -127,7 +163,9 @@ function Mcollege() {
             </div>
             <div>
               <button onClick={() => setShow(false)}>إلغاء</button>
-              <button className="btnbtn">إضافة</button>
+              <button className="btnbtn" disabled={isCreating}>
+                إضافة
+              </button>
             </div>
           </form>
         )}

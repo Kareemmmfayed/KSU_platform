@@ -4,29 +4,32 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { indexPrograms } from "../../services/admin/program";
 import { useAuth } from "../../services/AuthContext";
+import Spinner from "../Applicant/Spinner";
+import { useQuery } from "@tanstack/react-query";
 // import { useQuery } from "@tanstack/react-query";
 
 function Addmain() {
   const navigate = useNavigate();
 
   const { token } = useAuth();
-  const [programs, setPrograms] = useState([]);
+  // const [programs, setPrograms] = useState([]);
 
   const fetchData = async () => {
     const res = await indexPrograms(token);
-    setPrograms(res);
+    // setPrograms(res);
+    return res;
   };
 
-  // const { data, isLoading } = useQuery({
-  //   queryFn: fetchData,
-  //   queryKey: ["programs"],
-  // });
+  const { data: programs, isLoading } = useQuery({
+    queryFn: fetchData,
+    queryKey: ["programs"],
+  });
 
   // setPrograms(data);
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
 
   const [filterValue, setFilterValue] = useState("");
   const filteredProgram = programs.filter((pro) =>
@@ -53,6 +56,8 @@ function Addmain() {
     printWindow.document.close();
     printWindow.print();
   };
+
+  if (isLoading) return <Spinner />;
 
   return (
     <div className="Addmain">

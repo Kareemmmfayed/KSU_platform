@@ -9,11 +9,12 @@ import { useAuth } from "../../services/AuthContext";
 import { indexPrograms } from "../../services/admin/program";
 import { createProgram } from "../../services/admin/program/create";
 import { deleteProgram } from "../../services/admin/program/delete";
-// import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import Spinner from "../Applicant/Spinner";
 
 function Adiplomas({ handleAdminDiplomaId }) {
   const { token } = useAuth();
-  const [programs, setPrograms] = useState([]);
+  // const [programs, setPrograms] = useState([]);
   const [selectedCard, setSelectedCard] = useState(null);
   const [show, setShow] = useState(false);
   const [del, setDelete] = useState(false);
@@ -25,19 +26,20 @@ function Adiplomas({ handleAdminDiplomaId }) {
 
   const fetchData = async () => {
     const res = await indexPrograms(token);
-    setPrograms(res);
+    // setPrograms(res);
+    return res;
   };
 
-  // const { data, isLoading } = useQuery({
-  //   queryFn: fetchData,
-  //   queryKey: ["programs"],
-  // });
+  const { data: programs, isLoading } = useQuery({
+    queryFn: fetchData,
+    queryKey: ["programs"],
+  });
 
   // setPrograms(data);
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
 
   const toggleCardState = (id) => {
     if (del) {
@@ -78,10 +80,26 @@ function Adiplomas({ handleAdminDiplomaId }) {
     }
   };
 
+  const { mutate: subMutation, isSubmitting } = useMutation({
+    mutationFn: (e) => sub(e),
+    onError: (error) => {
+      console.log(error);
+    },
+  });
+
+  const { mutate: deleteMutation, isDeleting } = useMutation({
+    mutationFn: dele,
+    onError: (error) => {
+      console.log(error);
+    },
+  });
+
   const handleClick = (id) => {
     handleAdminDiplomaId(id);
     navigate("/admin/years");
   };
+
+  if (isLoading || isDeleting || isSubmitting) return <Spinner />;
 
   return (
     <div className="Adiplomas">
@@ -93,7 +111,7 @@ function Adiplomas({ handleAdminDiplomaId }) {
           <button onClick={addItem}>
             <img src={plus} alt="plus" />
           </button>
-          <button onClick={dele}>
+          <button onClick={deleteMutation}>
             <img src={trash} alt="trash" />
           </button>
         </div>
@@ -117,7 +135,7 @@ function Adiplomas({ handleAdminDiplomaId }) {
           </div>
         </div>
         {show && (
-          <form onSubmit={sub}>
+          <form onSubmit={subMutation}>
             <div>
               <label htmlFor="name">اسم البرنامج الدراسي :</label>
               <input
