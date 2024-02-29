@@ -55,18 +55,9 @@ $numCol: "blue";
           align-items: center;
           justify-content: center;
 
-          #circle,
-          #circle1,
-          #circle2,
-          #circle3,
-          #circle4,
-          #circle5 {
+          .circle {
             width: 100px;
             height: 100px;
-            background: conic-gradient(
-              var(--col) 0% var(--percentage),
-              #f0f0f0 var(--percentage) 100%
-            );
             border-radius: 50%;
             display: flex;
             justify-content: center;
@@ -87,7 +78,6 @@ $numCol: "blue";
               align-items: center;
               font-weight: 700;
               font-size: 25px;
-              color: var(--numCol);
             }
           }
         }

@@ -1539,37 +1539,21 @@ body {
   align-items: center;
   justify-content: center;
 }
-.Mastermain__in__cards .card__left #circle,
-.Mastermain__in__cards .card__left #circle1,
-.Mastermain__in__cards .card__left #circle2,
-.Mastermain__in__cards .card__left #circle3,
-.Mastermain__in__cards .card__left #circle4,
-.Mastermain__in__cards .card__left #circle5 {
+.Mastermain__in__cards .card__left .circle {
   width: 100px;
   height: 100px;
-  background: conic-gradient(var(--col) 0% var(--percentage), #f0f0f0 var(--percentage) 100%);
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 @media (max-width: 400px) {
-  .Mastermain__in__cards .card__left #circle,
-  .Mastermain__in__cards .card__left #circle1,
-  .Mastermain__in__cards .card__left #circle2,
-  .Mastermain__in__cards .card__left #circle3,
-  .Mastermain__in__cards .card__left #circle4,
-  .Mastermain__in__cards .card__left #circle5 {
+  .Mastermain__in__cards .card__left .circle {
     width: 60%;
     height: 60%;
   }
 }
-.Mastermain__in__cards .card__left #circle .inner,
-.Mastermain__in__cards .card__left #circle1 .inner,
-.Mastermain__in__cards .card__left #circle2 .inner,
-.Mastermain__in__cards .card__left #circle3 .inner,
-.Mastermain__in__cards .card__left #circle4 .inner,
-.Mastermain__in__cards .card__left #circle5 .inner {
+.Mastermain__in__cards .card__left .circle .inner {
   background: white;
   width: 80%;
   height: 80%;
@@ -1579,7 +1563,6 @@ body {
   align-items: center;
   font-weight: 700;
   font-size: 25px;
-  color: var(--numCol);
 }
 .Mastermain__in__links {
   display: flex;

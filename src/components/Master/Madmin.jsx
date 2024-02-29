@@ -1,14 +1,14 @@
-import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
 import home from "../../assets/home.png";
 import plus from "../../assets/plusb.png";
 import trash from "../../assets/trash.png";
 import checked from "../../assets/checked.png";
 import notchecked from "../../assets/notchecked.png";
 import copy from "../../assets/copy.png";
+import { COLLEGE } from "../../services/API";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../services/AuthContext";
 import { indexAdmin } from "../../services/master/admin";
-import { COLLEGE } from "../../services/API";
 import { createAdmin } from "../../services/master/admin/create";
 import { deleteAdmin } from "../../services/master/admin/delete";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -17,28 +17,8 @@ import toast from "react-hot-toast";
 
 function Madmin() {
   const { token } = useAuth();
-  // const [admins, setAdmins] = useState([]);
-  const [name, setName] = useState([]);
-  const [mail, setMail] = useState([]);
-  const [pass, setPass] = useState([]);
-  const queryClient = useQueryClient();
-
-  const fetchData = async () => {
-    const data = await indexAdmin(token);
-    // setAdmins(data.data.admins);
-    return data.data.admins;
-  };
-
-  const { data: admins, isLoading } = useQuery({
-    queryFn: fetchData,
-    queryKey: ["admins"],
-  });
-
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
-
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const [show, setShow] = useState(false);
   const [del, setDelete] = useState(false);
@@ -54,15 +34,39 @@ function Madmin() {
     }
   };
 
+  const [name, setName] = useState([]);
+  const [mail, setMail] = useState([]);
+  const [pass, setPass] = useState([]);
+
   const addItem = () => {
     setShow(true);
   };
+
+  const empty = () => {
+    setName("");
+    setMail("");
+    setPass("");
+  };
+
+  const cancel = () => {
+    empty();
+    setShow(false);
+  };
+
+  const fetchData = async () => {
+    const data = await indexAdmin(token);
+    return data.data.admins;
+  };
+
+  const { data: admins, isLoading } = useQuery({
+    queryFn: fetchData,
+    queryKey: ["admins"],
+  });
 
   const sub = async (e) => {
     e.preventDefault();
     await createAdmin(token, name, mail, pass);
     setShow(false);
-    // fetchData();
   };
 
   const dele = async () => {
@@ -71,7 +75,6 @@ function Madmin() {
       setSelectedCard(null);
       setDelete(!del);
       toast.success("تم الحذف بنجاح");
-      // fetchData();
     } else {
       setDelete(!del);
       setSelectedCard(null);
@@ -179,7 +182,7 @@ function Madmin() {
               />
             </div>
             <div>
-              <button onClick={() => setShow(false)}>إلغاء</button>
+              <button onClick={() => cancel()}>إلغاء</button>
               <button type="submit" className="btnbtn">
                 إضافة
               </button>

@@ -1,13 +1,13 @@
-import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
 import home from "../../assets/home.png";
 import plus from "../../assets/plusb.png";
 import trash from "../../assets/trash.png";
 import checked from "../../assets/checked.png";
 import notchecked from "../../assets/notchecked.png";
 import col from "../../assets/Collage.png";
-import { indexColleges } from "../../services/master/college/index";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../services/AuthContext";
+import { indexColleges } from "../../services/master/college/index";
 import { createCollege } from "../../services/master/college/create";
 import { deleteCollege } from "../../services/master/college/delete";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -16,27 +16,12 @@ import toast from "react-hot-toast";
 
 function Mcollege() {
   const { token } = useAuth();
-  // const [programs, setPrograms] = useState([]);
-  const [selectedCard, setSelectedCard] = useState(null);
-  const [del, setDelete] = useState(false);
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
 
-  const fetchPrograms = async () => {
-    const data = await indexColleges(token);
-    // setPrograms(data.data.collages);
-    return data.data.collages;
-  };
-
-  const { data: programs, isLoading } = useQuery({
-    queryFn: fetchPrograms,
-    queryKey: ["collages"],
-  });
-
-  // useEffect(() => {
-  //   fetchPrograms();
-  // }, []);
-
-  const navigate = useNavigate();
+  const [show, setShow] = useState(false);
+  const [del, setDelete] = useState(false);
+  const [selectedCard, setSelectedCard] = useState(null);
 
   const toggleCardState = (id) => {
     if (del) {
@@ -48,21 +33,38 @@ function Mcollege() {
     }
   };
 
+  const [faculty, setFaculty] = useState("");
+  const [college, setCollege] = useState("");
+
   const addItem = () => {
     setShow(true);
   };
 
-  const [show, setShow] = useState(false);
-  const [faculty, setFaculty] = useState("");
-  const [college, setCollege] = useState("");
+  const empty = () => {
+    setFaculty("");
+    setCollege("");
+  };
+
+  const cancel = () => {
+    empty();
+    setShow(false);
+  };
+
+  const fetchPrograms = async () => {
+    const data = await indexColleges(token);
+    return data.data.collages;
+  };
+
+  const { data: programs, isLoading } = useQuery({
+    queryFn: fetchPrograms,
+    queryKey: ["collages"],
+  });
 
   const sub = async (e) => {
     e.preventDefault();
     await createCollege(token, faculty, college);
     setShow(false);
-    // fetchPrograms();
-    setFaculty("");
-    setCollege("");
+    empty();
   };
 
   const { mutate: create, isCreating } = useMutation({
@@ -82,8 +84,6 @@ function Mcollege() {
       await deleteCollege(token, selectedCard);
       setSelectedCard(null);
       toast.success("تم الحذف بنجاح");
-      // fetchPrograms();
-
       setDelete(!del);
     } else {
       setDelete(!del);
@@ -162,7 +162,7 @@ function Mcollege() {
               />
             </div>
             <div>
-              <button onClick={() => setShow(false)}>إلغاء</button>
+              <button onClick={() => cancel()}>إلغاء</button>
               <button className="btnbtn" disabled={isCreating}>
                 إضافة
               </button>

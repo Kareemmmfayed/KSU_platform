@@ -1,4 +1,3 @@
-import { useState, useEffect, useRef } from "react";
 import plus from "../../assets/plus.png";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../services/AuthContext";
@@ -8,19 +7,10 @@ import Spinner from "../Applicant/Spinner";
 
 function Mastermain() {
   const { token } = useAuth();
-
-  const myRef = useRef(null);
-  const myRef1 = useRef(null);
-  const myRef2 = useRef(null);
-  const myRef3 = useRef(null);
-  const myRef4 = useRef(null);
-  const myRef5 = useRef(null);
-
-  // const [stats, setStats] = useState({});
+  const navigate = useNavigate();
 
   const getData = async () => {
     const data = await getStats(token);
-    // setStats(data);
     return data;
   };
 
@@ -28,28 +18,6 @@ function Mastermain() {
     queryFn: getData,
     queryKey: ["stats"],
   });
-
-  // console.log(stats);
-
-  useEffect(() => {
-    const circle = (per, ele, col, ref) => {
-      const percentage = per;
-      const circleElement = document.getElementById(ele);
-      circleElement?.style.setProperty("--percentage", `${percentage}%`);
-      circleElement?.style.setProperty("--col", col);
-      const myElement = ref.current;
-      myElement?.style.setProperty("--numCol", col);
-    };
-
-    circle(100, "circle", "#CB8589", myRef);
-    circle(100, "circle1", "#B4869F", myRef1);
-    circle(100, "circle2", "#539987", myRef2);
-    circle(100, "circle3", "#4793CD", myRef3);
-    circle(100, "circle4", "#A18276", myRef4);
-    circle(100, "circle5", "#cc5454", myRef5);
-  }, []);
-
-  const navigate = useNavigate();
 
   if (isLoading) return <Spinner />;
 
@@ -62,8 +30,8 @@ function Mastermain() {
               <p>عدد الكليات</p>
             </div>
             <div className="card__left">
-              <div id="circle">
-                <div className="inner" ref={myRef}>
+              <div className="circle" style={{ background: "#CB8589" }}>
+                <div className="inner" style={{ color: "#CB8589" }}>
                   {stats.collagesCount}
                 </div>
               </div>
@@ -74,8 +42,8 @@ function Mastermain() {
               <p>عدد برامج الدبلومة</p>
             </div>
             <div className="card__left">
-              <div id="circle1">
-                <div className="inner" ref={myRef1}>
+              <div className="circle" style={{ background: "#B4869F" }}>
+                <div className="inner" style={{ color: "#B4869F" }}>
                   {stats.programsCount}
                 </div>
               </div>
@@ -86,8 +54,8 @@ function Mastermain() {
               <p>عدد الطلاب</p>
             </div>
             <div className="card__left">
-              <div id="circle2">
-                <div className="inner" ref={myRef2}>
+              <div className="circle" style={{ background: "#539987" }}>
+                <div className="inner" style={{ color: "#539987" }}>
                   {stats.studentsCount}
                 </div>
               </div>
@@ -98,8 +66,8 @@ function Mastermain() {
               <p>عدد المسؤولين</p>
             </div>
             <div className="card__left">
-              <div id="circle3">
-                <div className="inner" ref={myRef3}>
+              <div className="circle" style={{ background: "#4793CD" }}>
+                <div className="inner" style={{ color: "#4793CD" }}>
                   {stats.adminsCount}
                 </div>
               </div>
@@ -110,8 +78,8 @@ function Mastermain() {
               <p>عدد الموظفين</p>
             </div>
             <div className="card__left">
-              <div id="circle4">
-                <div className="inner" ref={myRef4}>
+              <div className="circle" style={{ background: "#A18276" }}>
+                <div className="inner" style={{ color: "#A18276" }}>
                   {stats.employeesCount}
                 </div>
               </div>
@@ -122,8 +90,8 @@ function Mastermain() {
               <p>عدد المحاضرين</p>
             </div>
             <div className="card__left">
-              <div id="circle5">
-                <div className="inner" ref={myRef5}>
+              <div className="circle" style={{ background: "#cc5454" }}>
+                <div className="inner" style={{ color: "#cc5454" }}>
                   {stats.instructorsCount}
                 </div>
               </div>
