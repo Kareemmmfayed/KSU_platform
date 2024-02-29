@@ -81,6 +81,7 @@ function Mcollege() {
     if (del && selectedCard) {
       await deleteCollege(token, selectedCard);
       setSelectedCard(null);
+      toast.success("تم الحذف بنجاح");
       // fetchPrograms();
 
       setDelete(!del);
@@ -94,7 +95,6 @@ function Mcollege() {
     mutationFn: dele,
     onSuccess: () => {
       queryClient.invalidateQueries("collages");
-      toast.success("تم الحذف بنجاح");
     },
     onError: (error) => {
       console.log(error);
@@ -102,7 +102,7 @@ function Mcollege() {
     },
   });
 
-  if (isLoading || isCreating || isDeleting) return <Spinner />;
+  if (isLoading || isDeleting || isCreating) return <Spinner />;
 
   return (
     <div className="Mcollege">
@@ -114,7 +114,7 @@ function Mcollege() {
           <button onClick={addItem}>
             <img src={plus} alt="plus" />
           </button>
-          <button onClick={deleteColl}>
+          <button onClick={deleteColl} disabled={isDeleting}>
             <img src={trash} alt="trash" />
           </button>
         </div>
@@ -163,7 +163,9 @@ function Mcollege() {
             </div>
             <div>
               <button onClick={() => setShow(false)}>إلغاء</button>
-              <button className="btnbtn">إضافة</button>
+              <button className="btnbtn" disabled={isCreating}>
+                إضافة
+              </button>
             </div>
           </form>
         )}
