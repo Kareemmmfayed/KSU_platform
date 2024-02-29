@@ -3,7 +3,7 @@ import plus from "../../assets/plusb.png";
 import trash from "../../assets/trash.png";
 import notchecked from "../../assets/notchecked.png";
 import checked from "../../assets/checked.png";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../services/AuthContext";
 import { indexPrograms } from "../../services/admin/program";
@@ -15,33 +15,12 @@ import toast from "react-hot-toast";
 
 function Adiplomas({ handleAdminDiplomaId }) {
   const { token } = useAuth();
-  // const [programs, setPrograms] = useState([]);
-  const [selectedCard, setSelectedCard] = useState(null);
-  const [show, setShow] = useState(false);
-  const [del, setDelete] = useState(false);
-  const [name, setName] = useState("");
-  const [intro, setIntro] = useState("");
-  const [stime, setStime] = useState("");
-  const [ctime, setCtime] = useState("");
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
-  const fetchData = async () => {
-    const res = await indexPrograms(token);
-    // setPrograms(res);
-    return res;
-  };
-
-  const { data: programs, isLoading } = useQuery({
-    queryFn: fetchData,
-    queryKey: ["programs"],
-  });
-
-  // setPrograms(data);
-
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
+  const [show, setShow] = useState(false);
+  const [del, setDelete] = useState(false);
+  const [selectedCard, setSelectedCard] = useState(null);
 
   const toggleCardState = (id) => {
     if (del) {
@@ -53,9 +32,36 @@ function Adiplomas({ handleAdminDiplomaId }) {
     }
   };
 
+  const [name, setName] = useState("");
+  const [intro, setIntro] = useState("");
+  const [stime, setStime] = useState("");
+  const [ctime, setCtime] = useState("");
+
   const addItem = () => {
     setShow(true);
   };
+
+  const empty = () => {
+    setName("");
+    setIntro("");
+    setStime("");
+    setCtime("");
+  };
+
+  const cancel = () => {
+    empty();
+    setShow(false);
+  };
+
+  const fetchData = async () => {
+    const res = await indexPrograms(token);
+    return res;
+  };
+
+  const { data: programs, isLoading } = useQuery({
+    queryFn: fetchData,
+    queryKey: ["programs"],
+  });
 
   const sub = async (e) => {
     e.preventDefault();
@@ -67,7 +73,6 @@ function Adiplomas({ handleAdminDiplomaId }) {
       `${ctime}T12:00:00`
     );
     setShow(false);
-    // fetchData();
   };
 
   const dele = async () => {
@@ -76,7 +81,6 @@ function Adiplomas({ handleAdminDiplomaId }) {
       setSelectedCard(null);
       setDelete(!del);
       toast.success("تم الحذف بنجاح");
-      // fetchData();
     } else {
       setDelete(!del);
       setSelectedCard(null);
@@ -129,7 +133,7 @@ function Adiplomas({ handleAdminDiplomaId }) {
         </div>
         <div className="Adiplomas__in__body">
           <div className="cards">
-            {programs.map((program) => (
+            {programs?.map((program) => (
               <div className={del ? "card delete" : "card"} key={program.id}>
                 <h2>{program.name}</h2>
                 {del ? (
@@ -191,7 +195,7 @@ function Adiplomas({ handleAdminDiplomaId }) {
               />
             </div>
             <div>
-              <button onClick={() => setShow(false)}>إلغاء</button>
+              <button onClick={() => cancel()}>إلغاء</button>
               <button type="submit" className="btnbtn">
                 إضافة
               </button>

@@ -1,30 +1,22 @@
 import home from "../../assets/home.png";
 import plus from "../../assets/plusb.png";
 import trash from "../../assets/trash.png";
-import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
 import notchecked from "../../assets/notchecked.png";
 import checked from "../../assets/checked.png";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { useAuth } from "../../services/AuthContext";
 import { indexLevel } from "../../services/admin/level/index";
 import { createLevel } from "../../services/admin/level/create";
 import { deleteLevel } from "../../services/admin/level/delete";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import Spinner from "../Applicant/Spinner";
+import toast from "react-hot-toast";
 
 export default function Ayear({ AdminDiplomaId, handleLevelId }) {
   const { token } = useAuth();
-  const [years, setYears] = useState([]);
-  const [level, setLevel] = useState("");
-
   const navigate = useNavigate();
-
-  const fetchData = async () => {
-    const data = await indexLevel(token, AdminDiplomaId);
-    setYears(data);
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
+  const queryClient = useQueryClient();
 
   const [show, setShow] = useState(false);
   const [del, setDelete] = useState(false);
@@ -40,33 +32,74 @@ export default function Ayear({ AdminDiplomaId, handleLevelId }) {
     }
   };
 
+  const [level, setLevel] = useState("");
+
   const addItem = () => {
     setShow(true);
   };
+
+  const cancel = () => {
+    setLevel("");
+    setShow(false);
+  };
+
+  const fetchData = async () => {
+    const data = await indexLevel(token, AdminDiplomaId);
+    return data;
+  };
+
+  const { data: levels, isLoading } = useQuery({
+    queryFn: fetchData,
+    queryKey: ["levels"],
+  });
 
   const sub = async (e) => {
     e.preventDefault();
     await createLevel(token, AdminDiplomaId, level);
     setShow(false);
-    fetchData();
   };
+
+  const { mutate: subMutation, isSubmitting } = useMutation({
+    mutationFn: (e) => sub(e),
+    onSuccess: () => {
+      queryClient.invalidateQueries("levels");
+      toast.success("تمت الإضافة بنجاح");
+    },
+    onError: (error) => {
+      console.log(error);
+      toast.error("حدث خطأ ما");
+    },
+  });
 
   const dele = async () => {
     if (del && selectedCard) {
       await deleteLevel(token, AdminDiplomaId, selectedCard);
       setSelectedCard(null);
       setDelete(!del);
-      fetchData();
+      toast.success("تم الحذف بنجاح");
     } else {
       setDelete(!del);
       setSelectedCard(null);
     }
   };
 
+  const { mutate: deleteMutation, isDeleting } = useMutation({
+    mutationFn: dele,
+    onSuccess: () => {
+      queryClient.invalidateQueries("levels");
+    },
+    onError: (error) => {
+      console.log(error);
+      toast.error("حدث خطأ ما");
+    },
+  });
+
   const handleClick = (id) => {
     handleLevelId(id);
     navigate("/admin/semesters");
   };
+
+  if (isLoading || isDeleting || isSubmitting) return <Spinner />;
 
   return (
     <div className="Ayear">
@@ -78,31 +111,31 @@ export default function Ayear({ AdminDiplomaId, handleLevelId }) {
           <button onClick={addItem}>
             <img src={plus} alt="plus" />
           </button>
-          <button onClick={dele}>
+          <button onClick={deleteMutation}>
             <img src={trash} alt="trash" />
           </button>
         </div>
         <div className="Ayear__in__body">
           <div className="cards">
-            {years.map((year) => (
-              <div className={del ? "card delete" : "card"} key={year.id}>
-                <p>{year.name}</p>
+            {levels?.map((lvl) => (
+              <div className={del ? "card delete" : "card"} key={lvl.id}>
+                <p>{lvl.name}</p>
                 {del ? (
-                  <button onClick={() => toggleCardState(year.id)}>
+                  <button onClick={() => toggleCardState(lvl.id)}>
                     <img
-                      src={selectedCard === year.id ? checked : notchecked}
+                      src={selectedCard === lvl.id ? checked : notchecked}
                       alt="circle"
                     />
                   </button>
                 ) : (
-                  <button onClick={() => handleClick(year.id)}></button>
+                  <button onClick={() => handleClick(lvl.id)}></button>
                 )}
               </div>
             ))}
           </div>
         </div>
         {show && (
-          <form onSubmit={sub}>
+          <form onSubmit={subMutation}>
             <div>
               <label htmlFor="name">إسم المستوي :</label>
               <input
@@ -113,7 +146,7 @@ export default function Ayear({ AdminDiplomaId, handleLevelId }) {
               />
             </div>
             <div>
-              <button onClick={() => setShow(false)}>إلغاء</button>
+              <button onClick={() => cancel()}>إلغاء</button>
               <button type="submit" className="btnbtn">
                 إضافة
               </button>

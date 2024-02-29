@@ -1,11 +1,11 @@
-import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
 import home from "../../assets/home.png";
 import plus from "../../assets/plusb.png";
 import trash from "../../assets/trash.png";
 import checked from "../../assets/checked.png";
 import notchecked from "../../assets/notchecked.png";
 import copy from "../../assets/copy.png";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../services/AuthContext";
 import { indexLecturer } from "../../services/admin/lecturer/index";
 import { createLecturer } from "../../services/admin/lecturer/create";
@@ -16,73 +16,82 @@ import Spinner from "../Applicant/Spinner";
 
 function Alect() {
   const { token } = useAuth();
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
-  // const [lecturers, setLecturers] = useState([]);
+  const [show, setShow] = useState(false);
+  const [del, setDelete] = useState(false);
+  const [selectedCard, setSelectedCard] = useState(null);
+
+  const toggleCardState = (id) => {
+    if (del) {
+      if (selectedCard === id) {
+        setSelectedCard(null);
+      } else {
+        setSelectedCard(id);
+      }
+    }
+  };
+
   const [name, setName] = useState("");
   const [mail, setMail] = useState("");
   const [password, setPassword] = useState("");
-  const queryClient = useQueryClient();
-  const navigate = useNavigate();
+
+  const addItem = () => {
+    setShow(true);
+  };
+
+  const empty = () => {
+    setName("");
+    setMail("");
+    setPassword("");
+  };
+
+  const cancel = () => {
+    empty();
+    setShow(false);
+  };
 
   const fetchData = async () => {
     const res = await indexLecturer(token);
-    setLecturers(res);
+    return res;
   };
-
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
 
   const { data: lecturers, isLoading } = useQuery({
     queryFn: fetchData,
     queryKey: ["lecturers"],
   });
 
-  const [show, setShow] = useState(false);
-  const [del, setDelete] = useState(false);
-  const [cardStates, setCardStates] = useState(null);
-
-  const toggleCardState = (id) => {
-    if (del) {
-      setCardStates(id);
-    }
-  };
-
-  const addItem = () => {
-    setShow(true);
-  };
-
   const sub = async (e) => {
     e.preventDefault();
     await createLecturer(token, name, mail, password);
     setShow(false);
-    // fetchData();
-  };
-
-  const dele = async () => {
-    if (del && cardStates) {
-      await deleteLecturer(token, cardStates);
-      setCardStates(null);
-      setDelete(!del);
-      toast.success("تم الحذف بنجاح");
-      // fetchData();
-    } else {
-      setDelete(!del);
-      setCardStates(null);
-    }
   };
 
   const { mutate: addLecturer, isAdding } = useMutation({
     mutationFn: (e) => sub(e),
     onSuccess: () => {
       queryClient.invalidateQueries("lecturers");
-      toast.success("تم الحذف بنجاح");
+      toast.success("تمت الاضافة بنجاح");
     },
     onError: (error) => {
       console.log(error);
       toast.error("حدث خطأ ما");
     },
   });
+
+  const dele = async () => {
+    if (del && selectedCard) {
+      await deleteLecturer(token, selectedCard);
+      setSelectedCard(null);
+      setDelete(!del);
+      toast.success("تم الحذف بنجاح");
+    } else {
+      setDelete(!del);
+      setSelectedCard(null);
+    }
+  };
+
   const { mutate: deleteMutation, isDeleting } = useMutation({
     mutationFn: dele,
     onSuccess: () => {
@@ -123,7 +132,7 @@ function Alect() {
                 {del && (
                   <button onClick={() => toggleCardState(lec.id)}>
                     <img
-                      src={cardStates === lec.id ? checked : notchecked}
+                      src={selectedCard === lec.id ? checked : notchecked}
                       alt="circle"
                       className="notcopy"
                     />
@@ -171,7 +180,7 @@ function Alect() {
               />
             </div>
             <div>
-              <button onClick={() => setShow(false)}>إلغاء</button>
+              <button onClick={() => cancel()}>إلغاء</button>
               <button className="btnbtn">إضافة</button>
             </div>
           </form>

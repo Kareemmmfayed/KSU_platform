@@ -1,22 +1,18 @@
 import plus from "../../assets/plus.png";
 import print from "../../assets/print.png";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { indexPrograms } from "../../services/admin/program";
 import { useAuth } from "../../services/AuthContext";
-import Spinner from "../Applicant/Spinner";
+import { indexPrograms } from "../../services/admin/program";
 import { useQuery } from "@tanstack/react-query";
-// import { useQuery } from "@tanstack/react-query";
+import Spinner from "../Applicant/Spinner";
 
 function Addmain() {
-  const navigate = useNavigate();
-
   const { token } = useAuth();
-  // const [programs, setPrograms] = useState([]);
+  const navigate = useNavigate();
 
   const fetchData = async () => {
     const res = await indexPrograms(token);
-    // setPrograms(res);
     return res;
   };
 
@@ -24,12 +20,6 @@ function Addmain() {
     queryFn: fetchData,
     queryKey: ["programs"],
   });
-
-  // setPrograms(data);
-
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
 
   const [filterValue, setFilterValue] = useState("");
   const filteredProgram = programs?.filter((pro) =>
@@ -104,7 +94,7 @@ function Addmain() {
           </div>
           <div className="Addmain__in__screen__body">
             <div className="cards">
-              {filteredProgram.map((pro) => (
+              {filteredProgram?.map((pro) => (
                 <div className="card" key={pro.id}>
                   <button onClick={() => printDiploma(pro)}>
                     <img src={print} alt="print" />
