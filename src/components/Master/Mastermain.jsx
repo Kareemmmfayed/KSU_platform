@@ -31,23 +31,23 @@ function Mastermain() {
 
   // console.log(stats);
 
-  // useEffect(() => {
-  //   const circle = (per, ele, col, ref) => {
-  //     const percentage = per;
-  //     const circleElement = document.getElementById(ele);
-  //     circleElement?.style.setProperty("--percentage", `${percentage}%`);
-  //     circleElement?.style.setProperty("--col", col);
-  //     const myElement = ref.current;
-  //     myElement?.style.setProperty("--numCol", col);
-  //   };
+  useEffect(() => {
+    const circle = (per, ele, col, ref) => {
+      const percentage = per;
+      const circleElement = document.getElementById(ele);
+      circleElement?.style.setProperty("--percentage", `${percentage}%`);
+      circleElement?.style.setProperty("--col", col);
+      const myElement = ref.current;
+      myElement?.style.setProperty("--numCol", col);
+    };
 
-  //   circle(100, "circle", "#CB8589", myRef);
-  //   circle(100, "circle1", "#B4869F", myRef1);
-  //   circle(100, "circle2", "#539987", myRef2);
-  //   circle(100, "circle3", "#4793CD", myRef3);
-  //   circle(100, "circle4", "#A18276", myRef4);
-  //   circle(100, "circle5", "#cc5454", myRef5);
-  // }, []);
+    circle(100, "circle", "#CB8589", myRef);
+    circle(100, "circle1", "#B4869F", myRef1);
+    circle(100, "circle2", "#539987", myRef2);
+    circle(100, "circle3", "#4793CD", myRef3);
+    circle(100, "circle4", "#A18276", myRef4);
+    circle(100, "circle5", "#cc5454", myRef5);
+  }, []);
 
   const navigate = useNavigate();
 

@@ -11,8 +11,9 @@ import { indexAdmin } from "../../services/master/admin";
 import { COLLEGE } from "../../services/API";
 import { createAdmin } from "../../services/master/admin/create";
 import { deleteAdmin } from "../../services/master/admin/delete";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Spinner from "../Applicant/Spinner";
+import toast from "react-hot-toast";
 
 function Madmin() {
   const { token } = useAuth();
@@ -20,6 +21,7 @@ function Madmin() {
   const [name, setName] = useState([]);
   const [mail, setMail] = useState([]);
   const [pass, setPass] = useState([]);
+  const queryClient = useQueryClient();
 
   const fetchData = async () => {
     const data = await indexAdmin(token);
@@ -60,7 +62,7 @@ function Madmin() {
     e.preventDefault();
     await createAdmin(token, name, mail, pass);
     setShow(false);
-    fetchData();
+    // fetchData();
   };
 
   const dele = async () => {
@@ -68,18 +70,42 @@ function Madmin() {
       await deleteAdmin(token, selectedCard);
       setSelectedCard(null);
       setDelete(!del);
-      fetchData();
+      toast.success("تم الحذف بنجاح");
+      // fetchData();
     } else {
       setDelete(!del);
       setSelectedCard(null);
     }
   };
 
+  const { mutate: create, isCreating } = useMutation({
+    mutationFn: (e) => sub(e),
+    onSuccess: () => {
+      queryClient.invalidateQueries("admins");
+      toast.success("تمت الإضافة بنجاح");
+    },
+    onError: (error) => {
+      console.log(error);
+      toast.error("حدث خطأ ما");
+    },
+  });
+
+  const { mutate: delAdmin, isDeleting } = useMutation({
+    mutationFn: dele,
+    onSuccess: () => {
+      queryClient.invalidateQueries("admins");
+    },
+    onError: (error) => {
+      console.log(error);
+      toast.error("حدث خطأ ما");
+    },
+  });
+
   const copycontent = (content) => {
     navigator.clipboard.writeText(content);
   };
 
-  if (isLoading) return <Spinner />;
+  if (isLoading || isCreating || isDeleting) return <Spinner />;
 
   return (
     <div className="Madmin">
@@ -91,7 +117,7 @@ function Madmin() {
           <button onClick={addItem}>
             <img src={plus} alt="plus" />
           </button>
-          <button onClick={dele}>
+          <button onClick={delAdmin}>
             <img src={trash} alt="trash" />
           </button>
         </div>
@@ -127,7 +153,7 @@ function Madmin() {
           </div>
         </div>
         {show && (
-          <form onSubmit={sub}>
+          <form onSubmit={create}>
             <div>
               <label htmlFor="name">الاسم الرباعي :</label>
               <input
@@ -154,7 +180,9 @@ function Madmin() {
             </div>
             <div>
               <button onClick={() => setShow(false)}>إلغاء</button>
-              <button className="btnbtn">إضافة</button>
+              <button type="submit" className="btnbtn">
+                إضافة
+              </button>
             </div>
           </form>
         )}
