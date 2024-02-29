@@ -32,7 +32,7 @@ function Addmain() {
   // }, []);
 
   const [filterValue, setFilterValue] = useState("");
-  const filteredProgram = programs.filter((pro) =>
+  const filteredProgram = programs?.filter((pro) =>
     pro.name.includes(filterValue)
   );
 
