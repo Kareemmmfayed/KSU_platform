@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
-
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
 const AuthContext = createContext();
 
@@ -57,10 +56,6 @@ const AuthProvider = ({ children }) => {
       sessionStorage.removeItem("token");
     }
   };
-
-  useEffect(() => {
-    // Additional logic you might need on authentication state change
-  }, [isLoggedIn, userType, token]);
 
   return (
     <AuthContext.Provider
