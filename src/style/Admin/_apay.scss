@@ -85,7 +85,7 @@
       top: 95px;
       left: 50%;
       width: 45%;
-      height: 55%;
+      height: 42%;
       background: white;
       transform: translate(-50%, 0);
       box-shadow: 0px 3.276521682739258px 26.212173461914062px 0px #00000040;
@@ -115,6 +115,7 @@
 
       div:last-of-type {
         justify-content: center;
+        gap: 52px;
         margin-top: 60px;
 
         button {
@@ -123,6 +124,10 @@
           color: white;
           padding: 9px 14px;
           width: 160px;
+
+          &:first-of-type {
+            background-color: #cc5454;
+          }
         }
       }
     }

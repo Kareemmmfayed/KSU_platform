@@ -1,5 +1,5 @@
 import { API_URL, COLLEGE } from "../../API";
-import { createProgramFiles } from "../program_files/create";
+// import { createProgramFiles } from "../program_files/create";
 
 export const createProgram = async (token, name, desc, open, close) => {
   let headersList = {
@@ -24,7 +24,7 @@ export const createProgram = async (token, name, desc, open, close) => {
     }
   );
 
-  let data = await response.json();
-  await createProgramFiles(token, data.data.program.id, name);
+  // let data = await response.json();
+  // await createProgramFiles(token, data.data.program.id, name);
   return response;
 };

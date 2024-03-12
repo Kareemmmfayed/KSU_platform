@@ -12,12 +12,14 @@ import { indexCourse } from "../../services/admin/course/index";
 import { createCourse } from "../../services/admin/course/create";
 import { deleteCourse } from "../../services/admin/course/delete";
 import { indexLecturer } from "../../services/admin/lecturer/index";
+import { indexYears } from "../../services/admin/year/index";
 import { AssignCourseToAdmin } from "../../services/admin/course/assignCourseToAdmin";
 
 function Asubjects({ AdminDiplomaId, levelId, semesterId }) {
   const { token } = useAuth();
   const [subjects, setSubjects] = useState([]);
   const [lecturers, setLecturers] = useState([]);
+  const [years, setYears] = useState([]);
 
   const navigate = useNavigate();
 
@@ -27,6 +29,9 @@ function Asubjects({ AdminDiplomaId, levelId, semesterId }) {
 
     const data = await indexLecturer(token);
     setLecturers(data);
+
+    const resres = await indexYears(token);
+    setYears(resres);
   };
 
   useEffect(() => {
@@ -55,6 +60,17 @@ function Asubjects({ AdminDiplomaId, levelId, semesterId }) {
   const [hours, setHours] = useState("");
   const [code, setCode] = useState("");
 
+  const clear = () => {
+    setName("");
+    setHours("");
+    setCode("");
+  };
+
+  const cancel = () => {
+    clear();
+    setShow(false);
+  };
+
   const sub = async (e) => {
     e.preventDefault();
     await createCourse(
@@ -68,6 +84,7 @@ function Asubjects({ AdminDiplomaId, levelId, semesterId }) {
     );
     setShow(false);
     fetchData();
+    clear();
   };
 
   const dele = async () => {
@@ -95,6 +112,7 @@ function Asubjects({ AdminDiplomaId, levelId, semesterId }) {
   const [select, setSelect] = useState(false);
   const [subId, setSubId] = useState("");
   const [lecturerId, setLecturerId] = useState("");
+  const [dyear, setDyear] = useState("");
 
   const handleSelect = (id) => {
     setSelect(true);
@@ -109,7 +127,8 @@ function Asubjects({ AdminDiplomaId, levelId, semesterId }) {
       levelId,
       semesterId,
       subId,
-      lecturerId
+      lecturerId,
+      dyear
     );
     setSelect(false);
   };
@@ -199,27 +218,38 @@ function Asubjects({ AdminDiplomaId, levelId, semesterId }) {
               />
             </div>
             <div>
-              <button onClick={() => setShow(false)}>إلغاء</button>
+              <button onClick={() => cancel()}>إلغاء</button>
               <button className="btnbtn">إضافة</button>
             </div>
           </form>
         )}
         {select && (
-          <form>
-            <h2>إختر المحاضر المناسب :</h2>
-            <ul>
-              {lecturers.map((lect) => (
-                <li key={lect.id}>
-                  <input
-                    type="radio"
-                    name="lecturer"
-                    id={`lect${lect.id}`}
-                    onChange={() => setLecturerId(lect.id)}
-                  />
-                  <label htmlFor={`lect${lect.id}`}>{lect.name}</label>
-                </li>
-              ))}
-            </ul>
+          <form style={{ height: "265px" }}>
+            <div>
+              <label>إختر المحاضر المناسب :</label>
+              <select
+                value={lecturerId}
+                onChange={(e) => setLecturerId(e.target.value)}
+              >
+                <option selected disabled></option>
+                {lecturers.map((lect) => (
+                  <option key={lect.id} value={lect.id}>
+                    {lect.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label>السنة الدراسية :</label>
+              <select value={dyear} onChange={(e) => setDyear(e.target.value)}>
+                <option selected disabled></option>
+                {years.map((year) => (
+                  <option key={year.id} value={year.id}>
+                    {year.name}
+                  </option>
+                ))}
+              </select>
+            </div>
             <div>
               <button onClick={() => setSelect(false)}>إلغاء</button>
               <button className="btnbtn" onClick={subL}>

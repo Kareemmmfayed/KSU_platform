@@ -4,19 +4,19 @@ import trash from "../../assets/trash.png";
 import notchecked from "../../assets/notchecked.png";
 import checked from "../../assets/checked.png";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "../../services/AuthContext";
 import { indexLevel } from "../../services/admin/level/index";
 import { createLevel } from "../../services/admin/level/create";
 import { deleteLevel } from "../../services/admin/level/delete";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+// import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Spinner from "../Applicant/Spinner";
 import toast from "react-hot-toast";
 
 export default function Ayear({ AdminDiplomaId, handleLevelId }) {
   const { token } = useAuth();
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
+  // const queryClient = useQueryClient();
 
   const [show, setShow] = useState(false);
   const [del, setDelete] = useState(false);
@@ -43,33 +43,42 @@ export default function Ayear({ AdminDiplomaId, handleLevelId }) {
     setShow(false);
   };
 
+  const [levels, setlevels] = useState([]); //
+
   const fetchData = async () => {
     const data = await indexLevel(token, AdminDiplomaId);
-    return data;
+    setlevels(data);
   };
 
-  const { data: levels, isLoading } = useQuery({
-    queryFn: fetchData,
-    queryKey: ["levels"],
-  });
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  // const { data: levels, isLoading } = useQuery({
+  //   queryFn: fetchData,
+  //   queryKey: [`level/${AdminDiplomaId}`],
+  // });
 
   const sub = async (e) => {
     e.preventDefault();
     await createLevel(token, AdminDiplomaId, level);
     setShow(false);
+    fetchData(); //
+    toast.success("تمت الإضافة بنجاح");
+    setLevel("");
   };
 
-  const { mutate: subMutation, isSubmitting } = useMutation({
-    mutationFn: (e) => sub(e),
-    onSuccess: () => {
-      queryClient.invalidateQueries("levels");
-      toast.success("تمت الإضافة بنجاح");
-    },
-    onError: (error) => {
-      console.log(error);
-      toast.error("حدث خطأ ما");
-    },
-  });
+  // const { mutate: subMutation, isSubmitting } = useMutation({
+  //   mutationFn: (e) => sub(e),
+  //   onSuccess: () => {
+  //     queryClient.invalidateQueries(`level/${AdminDiplomaId}`);
+  //     toast.success("تمت الإضافة بنجاح");
+  //   },
+  //   onError: (error) => {
+  //     console.log(error);
+  //     toast.error("حدث خطأ ما");
+  //   },
+  // });
 
   const dele = async () => {
     if (del && selectedCard) {
@@ -77,29 +86,30 @@ export default function Ayear({ AdminDiplomaId, handleLevelId }) {
       setSelectedCard(null);
       setDelete(!del);
       toast.success("تم الحذف بنجاح");
+      fetchData(); //
     } else {
       setDelete(!del);
       setSelectedCard(null);
     }
   };
 
-  const { mutate: deleteMutation, isDeleting } = useMutation({
-    mutationFn: dele,
-    onSuccess: () => {
-      queryClient.invalidateQueries("levels");
-    },
-    onError: (error) => {
-      console.log(error);
-      toast.error("حدث خطأ ما");
-    },
-  });
+  // const { mutate: deleteMutation, isDeleting } = useMutation({
+  //   mutationFn: dele,
+  //   onSuccess: () => {
+  //     queryClient.invalidateQueries(`level/${AdminDiplomaId}`);
+  //   },
+  //   onError: (error) => {
+  //     console.log(error);
+  //     toast.error("حدث خطأ ما");
+  //   },
+  // });
 
   const handleClick = (id) => {
     handleLevelId(id);
     navigate("/admin/semesters");
   };
 
-  if (isLoading || isDeleting || isSubmitting) return <Spinner />;
+  // if (isLoading || isDeleting || isSubmitting) return <Spinner />;
 
   return (
     <div className="Ayear">
@@ -111,7 +121,7 @@ export default function Ayear({ AdminDiplomaId, handleLevelId }) {
           <button onClick={addItem}>
             <img src={plus} alt="plus" />
           </button>
-          <button onClick={deleteMutation}>
+          <button onClick={dele}>
             <img src={trash} alt="trash" />
           </button>
         </div>
@@ -135,7 +145,7 @@ export default function Ayear({ AdminDiplomaId, handleLevelId }) {
           </div>
         </div>
         {show && (
-          <form onSubmit={subMutation}>
+          <form onSubmit={sub}>
             <div>
               <label htmlFor="name">إسم المستوي :</label>
               <input

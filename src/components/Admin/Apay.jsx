@@ -7,70 +7,67 @@ import { useState, useEffect } from "react";
 import { useAuth } from "../../services/AuthContext";
 import { indexPayments } from "../../services/admin/payments/index";
 import { createPayment } from "../../services/admin/payments/create";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+// import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import Spinner from "../Applicant/Spinner";
 
 function Apay({ payId }) {
-  const navigate = useNavigate();
   const { token } = useAuth();
-
-  // const [payments, setPayments] = useState([]);
-  const [kind, setKind] = useState();
+  const navigate = useNavigate();
+  // const queryClient = useQueryClient();
 
   const [show, setShow] = useState(false);
-  const [del, setDelete] = useState(false);
-  const [selectedCard, setSelectedCard] = useState(null);
-  const queryClient = useQueryClient();
 
-  const fetchData = async () => {
-    const data = await indexPayments(token, payId);
-    setPayments(data);
-  };
-
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
-
-  const { data: payments, isLoading } = useQuery({
-    queryFn: fetchData,
-    queryKey: ["payments"],
-  });
-
-  const toggleCardState = (id) => {
-    if (del) {
-      if (selectedCard === id) {
-        setSelectedCard(null);
-      } else {
-        setSelectedCard(id);
-      }
-    }
-  };
+  const [payments, setPayments] = useState([]);
 
   const addItem = () => {
     setShow(true);
   };
 
+  const cancel = () => {
+    setKind("");
+    setShow(false);
+  };
+
+  const [kind, setKind] = useState();
+
+  const fetchData = async () => {
+    const data = await indexPayments(token, payId);
+    console.log(payId);
+    setPayments(data);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  // const { data: payments, isLoading } = useQuery({
+  //   queryFn: fetchData,
+  //   queryKey: ["payments"],
+  // });
+
   const sub = async (e) => {
     e.preventDefault();
     await createPayment(token, kind, payId);
     setShow(false);
-    // fetchData();
+    fetchData();
+    toast.success("تمت الإضافة بنجاح");
+    setKind("");
   };
 
-  const { mutate: addPayment, isPending: isAdding } = useMutation({
-    mutationFn: (e) => sub(e),
-    onSuccess: () => {
-      queryClient.invalidateQueries("payments");
-      toast.success("تمت الإضافة بنجاح");
-    },
-    onError: (error) => {
-      console.log(error);
-      toast.error("حدث خطأ ما");
-    },
-  });
+  // const { mutate: addPayment, isPending: isAdding } = useMutation({
+  //   mutationFn: (e) => sub(e),
+  //   onSuccess: () => {
+  //     queryClient.invalidateQueries("payments");
+  //     toast.success("تمت الإضافة بنجاح");
+  //   },
+  //   onError: (error) => {
+  //     console.log(error);
+  //     toast.error("حدث خطأ ما");
+  //   },
+  // });
 
-  if (isLoading || isAdding) return <Spinner />;
+  // if (isLoading || isAdding) return <Spinner />;
 
   return (
     <div className="Apay">
@@ -85,23 +82,15 @@ function Apay({ payId }) {
         </div>
         <div className="Apay__in__body">
           <div className="cards">
-            {payments.map((pay) => (
-              <div className={del ? "card delete" : "card"} key={pay.id}>
+            {payments?.map((pay) => (
+              <div className="card" key={pay.id}>
                 <p>{pay.payment_kind}</p>
-                {del && (
-                  <button onClick={() => toggleCardState(pay.id)}>
-                    <img
-                      src={selectedCard === pay.id ? checked : notchecked}
-                      alt="circle"
-                    />
-                  </button>
-                )}
               </div>
             ))}
           </div>
         </div>
         {show && (
-          <form onSubmit={addPayment}>
+          <form onSubmit={sub}>
             <div>
               <label htmlFor="name">نوع القسط :</label>
               <input
@@ -112,7 +101,7 @@ function Apay({ payId }) {
               />
             </div>
             <div>
-              <button onClick={() => setShow(false)}>إلغاء</button>
+              <button onClick={() => cancel()}>إلغاء</button>
               <button type="submit" className="btnbtn">
                 إضافة
               </button>

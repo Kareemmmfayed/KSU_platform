@@ -78,6 +78,12 @@ function Addmain() {
                 <span>إضافة مدفوعات جديدة</span>
               </button>
             </li>
+            <li>
+              <button onClick={() => navigate("/admin/DipYear")}>
+                <img src={plus} alt="plus" />
+                <span>إضافة سنة دراسية جديدة</span>
+              </button>
+            </li>
           </ul>
         </div>
         <div className="Addmain__in__screen">

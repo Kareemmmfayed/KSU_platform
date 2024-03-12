@@ -1,4 +1,4 @@
-import { API_URL, COLLEGE, YEAR } from "../../API";
+import { API_URL, COLLEGE } from "../../API";
 
 export const AssignCourseToAdmin = async (
   token,
@@ -6,7 +6,8 @@ export const AssignCourseToAdmin = async (
   levelId,
   semesterId,
   courseId,
-  instructorId
+  lecturerId,
+  dyear
 ) => {
   let headersList = {
     Accept: "*/*",
@@ -15,17 +16,18 @@ export const AssignCourseToAdmin = async (
   };
 
   let bodyContent = JSON.stringify({
-    instructorId: instructorId,
-    yearId: YEAR.id,
+    instructorId: lecturerId,
+    yearId: dyear,
   });
 
   let response = await fetch(
-    `${API_URL}/admin/collages/${COLLEGE.id}/programs/${programId}/levels/${levelId}/semesters/${semesterId}/courses/${courseId}/`,
+    `${API_URL}/admin/collages/${COLLEGE.id}/programs/${programId}/levels/${levelId}/semesters/${semesterId}/courses/${courseId}`,
     {
       method: "POST",
       body: bodyContent,
       headers: headersList,
     }
   );
+
   return response;
 };

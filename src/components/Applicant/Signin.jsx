@@ -31,7 +31,7 @@ function Signin() {
     if (role == "applicant") {
       const token = await LogInApplicant(email, password);
       if (token) {
-        login(role, token, rem);
+        login(role, token, true); // rem
         navigate("/");
       } else {
         setWrong(true);
@@ -39,7 +39,7 @@ function Signin() {
     } else if (role == "lecturer") {
       const token = await LogInLecturer(email, password);
       if (token) {
-        login(role, token, rem);
+        login(role, token, true); // rem
         navigate("/");
       } else {
         setWrong(true);
@@ -47,7 +47,7 @@ function Signin() {
     } else if (role == "employee") {
       const token = await LogInEmployee(email, password);
       if (token) {
-        login(role, token, rem);
+        login(role, token, true); // rem
         navigate("/");
       } else {
         setWrong(true);
@@ -55,7 +55,7 @@ function Signin() {
     } else if (role == "admin") {
       const token = await LogInAdmin(email, password);
       if (token) {
-        login(role, token, rem);
+        login(role, token, true); // rem
         navigate("/admin/main");
       } else {
         setWrong((e) => !e);
@@ -63,7 +63,7 @@ function Signin() {
     } else if (role == "master") {
       const token = await LogInMaster(email, password);
       if (token) {
-        login(role, token, rem);
+        login(role, token, true); // rem
         navigate("/master/main");
       } else {
         setWrong(true);

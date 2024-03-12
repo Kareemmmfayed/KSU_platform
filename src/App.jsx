@@ -37,6 +37,7 @@ import AppLayout from "./components/AppLayout";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 import Spinner from "./components/Applicant/Spinner";
 import { Toaster } from "react-hot-toast";
+import DipYear from "./components/Admin/DipYear";
 
 function App() {
   const queryClient = new QueryClient({
@@ -180,6 +181,7 @@ function App() {
                     />
                   }
                 />
+                <Route path="DipYear" element={<DipYear />} />
               </Route>
 
               <Route path="/master">
