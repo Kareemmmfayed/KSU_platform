@@ -1,15 +1,11 @@
 import home from "../../assets/home.png";
 import plus from "../../assets/plusb.png";
-import notchecked from "../../assets/notchecked.png";
-import checked from "../../assets/checked.png";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useAuth } from "../../services/AuthContext";
 import { indexPayments } from "../../services/admin/payments/index";
 import { createPayment } from "../../services/admin/payments/create";
-// import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import Spinner from "../Applicant/Spinner";
 
 function Apay({ payId }) {
   const { token } = useAuth();
@@ -33,7 +29,6 @@ function Apay({ payId }) {
 
   const fetchData = async () => {
     const data = await indexPayments(token, payId);
-    console.log(payId);
     setPayments(data);
   };
 
@@ -48,6 +43,7 @@ function Apay({ payId }) {
 
   const sub = async (e) => {
     e.preventDefault();
+    console.log(payId);
     await createPayment(token, kind, payId);
     setShow(false);
     fetchData();
@@ -73,7 +69,7 @@ function Apay({ payId }) {
     <div className="Apay">
       <div className="Apay__in">
         <div className="Apay__in__top">
-          <button onClick={() => navigate("/")}>
+          <button onClick={() => navigate("/admin/main")}>
             <img src={home} alt="home" />
           </button>
           <button onClick={addItem}>

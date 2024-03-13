@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../services/AuthContext";
 import { indexYears } from "../../services/admin/year/index";
 import { createYear } from "../../services/admin/year/create";
+import { deleteYear } from "../../services/admin/year/delete";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Spinner from "../Applicant/Spinner";
 import toast from "react-hot-toast";
@@ -61,7 +62,7 @@ function DipYear() {
 
   const dele = async () => {
     if (del && selectedCard) {
-      // await deleteProgram(token, selectedCard);
+      await deleteYear(token, selectedCard);
       setSelectedCard(null);
       setDelete(!del);
       toast.success("تم الحذف بنجاح");
@@ -115,7 +116,7 @@ function DipYear() {
               <div className={del ? "card delete" : "card"} key={year.id}>
                 <h2>{year.name}</h2>
                 {del ? (
-                  <button onClick={() => toggleCardState(program.id)}>
+                  <button onClick={() => toggleCardState(year.id)}>
                     <img
                       src={selectedCard === year.id ? checked : notchecked}
                       alt="circle"
