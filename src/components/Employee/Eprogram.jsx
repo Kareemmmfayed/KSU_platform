@@ -29,7 +29,7 @@ function Eprogram({ diplomaId }) {
           <h4>عن الدبلومة</h4>
           <p>{data.description}</p>
         </div>
-        <div className="Eprogram__in__add">
+        {/* <div className="Eprogram__in__add">
           <button>
             <img src={plus} alt="plus" />
             <p>العام الدراسي الاول</p>
@@ -38,7 +38,7 @@ function Eprogram({ diplomaId }) {
             <img src={plus} alt="plus" />
             <p>العام الدراسي الثاني</p>
           </button>
-        </div>
+        </div> */}
         <button
           className="btnbtn"
           onClick={() => navigate("/employee/applicants")}

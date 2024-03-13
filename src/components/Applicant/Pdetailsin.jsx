@@ -24,7 +24,7 @@ function Pdetailsin({ Signed, data }) {
           <li>مقابلة شخصية لتقييم المهارات والمؤهلات.</li>
         </ul>
       </div>
-      <div className="Pdetails__in__pay">
+      {/* <div className="Pdetails__in__pay">
         <h4>رسوم البرنامج</h4>
         <ul>
           <li>رسوم التقديم: {data.applying_fees} (غير قابلة للاسترداد).</li>
@@ -38,7 +38,7 @@ function Pdetailsin({ Signed, data }) {
           <li>عامين دراسيين</li>
           <li>أربعة فصول دراسية.</li>
         </ul>
-      </div>
+      </div> */}
       {Signed ? (
         <button
           className="btnbtn"

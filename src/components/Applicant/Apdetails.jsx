@@ -1,10 +1,8 @@
-import Header from "../Header";
-import Footer from "../Footer";
 import Pdetailsin from "./Pdetailsin";
 
 function Apdetails() {
   const data = {
-    name: "kareem",
+    name: "دبلومة كذا",
     description: "intro",
     applying_fees: "1000",
     program_fees: "1000",

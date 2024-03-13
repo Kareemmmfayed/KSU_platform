@@ -155,7 +155,7 @@ function Application() {
               <button className="left">حفظ</button>
               <button
                 className="right btnbtn"
-                onClick={() => navigate("/success")}
+                onClick={() => navigate("/applicant/success")}
               >
                 إرسال
               </button>

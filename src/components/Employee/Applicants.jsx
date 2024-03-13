@@ -2,28 +2,57 @@ import { useState, useEffect } from "react";
 import copy from "../../assets/copy.png";
 import { indexApplications } from "../../services/employee/application";
 import { useAuth } from "../../services/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 function Applicants({ diplomaId }) {
-  const [applicants, setApplicants] = useState("");
+  // const [applicants, setApplicants] = useState("");
+
+  const navigate = useNavigate();
+
+  const applicants = [
+    {
+      name: "كريم حسام الدين فايد",
+      id: "8568464561643",
+      national_id: "85555555555555",
+    },
+
+    {
+      name: "كريم حسام الدين فايد",
+      id: "8568464561643",
+      national_id: "85555555555555",
+    },
+
+    {
+      name: "كريم حسام الدين فايد",
+      id: "8568464561643",
+      national_id: "85555555555555",
+    },
+
+    {
+      name: "كريم حسام الدين فايد",
+      id: "8568464561643",
+      national_id: "85555555555555",
+    },
+  ];
   const [searchValue, setSearchValue] = useState("");
   const [filteredApplicants, setFilteredApplicants] = useState();
 
-  const { token } = useAuth();
+  // const { token } = useAuth();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await indexApplications(token, diplomaId);
-      setApplicants(res);
-    };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const res = await indexApplications(token, diplomaId);
+  //     setApplicants(res);
+  //   };
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
 
   const handleSearch = (e) => {
     const searchTerm = e.target.value;
     setSearchValue(searchTerm);
 
-    const filtered = initialApplicants.filter(
+    const filtered = applicants.filter(
       (applicant) =>
         applicant[0].includes(searchTerm) || applicant[1].includes(searchTerm)
     );
@@ -54,14 +83,22 @@ function Applicants({ diplomaId }) {
           />
         </div>
         <ol>
-          {filteredApplicants?.map((applicant) => (
+          {applicants?.map((applicant) => (
             <div className="Applicants__in__bot" key={applicant.id}>
-              <div className="Applicants__in__bot__right">
+              <button
+                className="Applicants__in__bot__right"
+                style={{
+                  border: "none",
+                  background: "transparent",
+                  display: "block",
+                }}
+                onClick={() => navigate("/employee/Applicant/info")}
+              >
                 <div>
                   <li>{applicant.name}</li>
                 </div>
                 <p>الرقم القومي : {applicant.national_id}</p>
-              </div>
+              </button>
               <button
                 onClick={() =>
                   copyToClipboard(applicant.name, applicant.national_id)

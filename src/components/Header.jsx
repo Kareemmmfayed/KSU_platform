@@ -98,7 +98,7 @@ function Header(props) {
               <ul>
                 {userType == "applicant" && (
                   <li>
-                    <button onClick={() => navigate("/diplomas")}>
+                    <button onClick={() => navigate("/applicant/diplomas")}>
                       الدبلومات السابقة
                     </button>
                   </li>
