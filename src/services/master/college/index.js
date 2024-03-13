@@ -10,6 +10,10 @@ export const indexColleges = async (token) => {
     headers: headersList,
   });
 
-  let data = response.json();
-  return data;
+  if (response.ok) {
+    let data = response.json();
+    return data.data.collages;
+  } else {
+    return [];
+  }
 };

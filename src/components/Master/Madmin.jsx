@@ -55,7 +55,7 @@ function Madmin() {
 
   const fetchData = async () => {
     const data = await indexAdmin(token);
-    return data.data.admins;
+    return data;
   };
 
   const { data: admins, isLoading } = useQuery({

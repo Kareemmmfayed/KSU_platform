@@ -14,6 +14,11 @@ export const indexLevel = async (token, programId) => {
       headers: headersList,
     }
   );
-  const data = await response.json();
-  return data.data.levels;
+
+  if (response.ok) {
+    const data = await response.json();
+    return data.data.levels;
+  } else {
+    return [];
+  }
 };

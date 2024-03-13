@@ -12,6 +12,10 @@ export const indexYears = async (token) => {
     headers: headersList,
   });
 
-  let data = await response.json();
-  return data.data.years;
+  if (response.ok) {
+    let data = await response.json();
+    return data.data.years;
+  } else {
+    return [];
+  }
 };

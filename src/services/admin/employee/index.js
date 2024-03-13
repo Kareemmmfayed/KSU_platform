@@ -15,6 +15,10 @@ export const indexEmployee = async (token) => {
     }
   );
 
-  let data = await response.json();
-  return data.data.employees;
+  if (response.ok) {
+    let data = await response.json();
+    return data.data.employees;
+  } else {
+    return [];
+  }
 };

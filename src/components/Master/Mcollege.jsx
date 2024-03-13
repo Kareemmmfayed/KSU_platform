@@ -52,10 +52,10 @@ function Mcollege() {
 
   const fetchPrograms = async () => {
     const data = await indexColleges(token);
-    return data.data.collages;
+    return data;
   };
 
-  const { data: programs, isLoading } = useQuery({
+  const { data: colleges, isLoading } = useQuery({
     queryFn: fetchPrograms,
     queryKey: ["collages"],
   });
@@ -120,7 +120,7 @@ function Mcollege() {
         </div>
         <div className="Mcollege__in__body">
           <div className="cards">
-            {programs.map((college) => (
+            {colleges?.map((college) => (
               <div
                 className={del ? "card delete" : "card"}
                 key={college.id}

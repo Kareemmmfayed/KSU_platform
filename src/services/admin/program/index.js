@@ -14,6 +14,10 @@ export const indexPrograms = async (token) => {
       headers: headersList,
     }
   );
-  const data = await response.json();
-  return data.data.programs;
+  if (response.ok) {
+    const data = await response.json();
+    return data.data.programs;
+  } else {
+    return [];
+  }
 };

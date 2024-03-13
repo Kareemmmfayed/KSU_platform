@@ -111,7 +111,6 @@ function Adiplomas({ handleAdminDiplomaId }) {
   });
 
   const handleClick = (id) => {
-    console.log(id);
     handleAdminDiplomaId(id);
     navigate("/admin/years");
   };

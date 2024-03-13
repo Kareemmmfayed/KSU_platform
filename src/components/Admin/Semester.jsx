@@ -4,19 +4,19 @@ import trash from "../../assets/trash.png";
 import notchecked from "../../assets/notchecked.png";
 import checked from "../../assets/checked.png";
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useAuth } from "../../services/AuthContext";
 import { indexSemester } from "../../services/admin/semester/index";
 import { createSemester } from "../../services/admin/semester/create";
 import { deleteSemester } from "../../services/admin/semester/delete";
-// import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Spinner from "../Applicant/Spinner";
 import toast from "react-hot-toast";
 
 function Semester({ AdminDiplomaId, levelId, handleSemesterId }) {
   const { token } = useAuth();
   const navigate = useNavigate();
-  // const queryClient = useQueryClient();
+  const queryClient = useQueryClient();
 
   const [show, setShow] = useState(false);
   const [del, setDelete] = useState(false);
@@ -43,43 +43,34 @@ function Semester({ AdminDiplomaId, levelId, handleSemesterId }) {
     setShow(false);
   };
 
-  const [semesters, setSemesters] = useState([]); //
-
   const fetchData = async () => {
     const data = await indexSemester(token, AdminDiplomaId, levelId);
-    // return data;
-    setSemesters(data);
+    return data;
   };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  // const { data: semesters, isLoading } = useQuery({
-  //   queryFn: fetchData,
-  //   queryKey: ["semesters"],
-  // });
+  const { data: semesters, isLoading } = useQuery({
+    queryFn: fetchData,
+    queryKey: [`semesters${levelId}`],
+  });
 
   const sub = async (e) => {
     e.preventDefault();
     await createSemester(token, AdminDiplomaId, levelId, name);
     setShow(false);
-    fetchData(); //
-    toast.success("تمت الإضافة بنجاح");
     setName("");
   };
 
-  // const { mutate: subMutation, isSubmitting } = useMutation({
-  //   mutationFn: (e) => sub(e),
-  //   onSuccess: () => {
-  //     queryClient.invalidateQueries("semesters");
-  //     toast.success("تمت الإضافة بنجاح");
-  //   },
-  //   onError: (error) => {
-  //     console.log(error);
-  //     toast.error("حدث خطأ ما");
-  //   },
-  // });
+  const { mutate: subMutation, isSubmitting } = useMutation({
+    mutationFn: (e) => sub(e),
+    onSuccess: () => {
+      queryClient.invalidateQueries(`semesters${levelId}`);
+      toast.success("تمت الإضافة بنجاح");
+    },
+    onError: (error) => {
+      console.log(error);
+      toast.error("حدث خطأ ما");
+    },
+  });
 
   const dele = async () => {
     if (del && selectedCard) {
@@ -94,23 +85,23 @@ function Semester({ AdminDiplomaId, levelId, handleSemesterId }) {
     }
   };
 
-  // const { mutate: deleteMutation, isDeleting } = useMutation({
-  //   mutationFn: dele,
-  //   onSuccess: () => {
-  //     queryClient.invalidateQueries("semesters");
-  //   },
-  //   onError: (error) => {
-  //     console.log(error);
-  //     toast.error("حدث خطأ ما");
-  //   },
-  // });
+  const { mutate: deleteMutation, isDeleting } = useMutation({
+    mutationFn: dele,
+    onSuccess: () => {
+      queryClient.invalidateQueries(`semesters${levelId}`);
+    },
+    onError: (error) => {
+      console.log(error);
+      toast.error("حدث خطأ ما");
+    },
+  });
 
   const handleClick = (id) => {
     handleSemesterId(id);
     navigate("/admin/subjects");
   };
 
-  // if (isLoading || isDeleting || isSubmitting) return <Spinner />;
+  if (isLoading || isDeleting || isSubmitting) return <Spinner />;
 
   return (
     <div className="Ayear">
@@ -122,7 +113,7 @@ function Semester({ AdminDiplomaId, levelId, handleSemesterId }) {
           <button onClick={addItem}>
             <img src={plus} alt="plus" />
           </button>
-          <button onClick={dele}>
+          <button onClick={deleteMutation}>
             <img src={trash} alt="trash" />
           </button>
         </div>
@@ -146,7 +137,7 @@ function Semester({ AdminDiplomaId, levelId, handleSemesterId }) {
           </div>
         </div>
         {show && (
-          <form onSubmit={sub}>
+          <form onSubmit={subMutation}>
             <div>
               <label htmlFor="name">إسم السمستر :</label>
               <input

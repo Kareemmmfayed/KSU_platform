@@ -14,6 +14,11 @@ export const indexSemester = async (token, programId, levelId) => {
       headers: headersList,
     }
   );
-  const data = await response.json();
-  return data.data.semesters;
+
+  if (response.ok) {
+    const data = await response.json();
+    return data.data.semesters;
+  } else {
+    return [];
+  }
 };

@@ -15,6 +15,10 @@ export const indexAdmin = async (token) => {
     }
   );
 
-  let data = await response.json();
-  return data;
+  if (response.ok) {
+    let data = await response.json();
+    return data.data.admins;
+  } else {
+    return [];
+  }
 };

@@ -14,9 +14,14 @@ import { deleteCourse } from "../../services/admin/course/delete";
 import { indexLecturer } from "../../services/admin/lecturer/index";
 import { indexYears } from "../../services/admin/year/index";
 import { AssignCourseToAdmin } from "../../services/admin/course/assignCourseToAdmin";
+// import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+// import Spinner from "../Applicant/Spinner";
+// import toast from "react-hot-toast";
 
 function Asubjects({ AdminDiplomaId, levelId, semesterId }) {
   const { token } = useAuth();
+  // const queryClient = useQueryClient();
+
   const [subjects, setSubjects] = useState([]);
   const [lecturers, setLecturers] = useState([]);
   const [years, setYears] = useState([]);

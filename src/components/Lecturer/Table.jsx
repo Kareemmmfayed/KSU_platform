@@ -1,27 +1,31 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { useAuth } from "../../services/AuthContext";
 import { indexStudents } from "../../services/instructor/students/index";
+import { useQuery } from "@tanstack/react-query";
+import Spinner from "../Applicant/Spinner";
 
 function Table({ diplomaId }) {
   const { token } = useAuth();
 
   const [searchTerm, setSearchTerm] = useState("");
 
-  const [subjects, setSubjects] = useState([]);
+  const fetchData = async () => {
+    const res = await indexStudents(token, diplomaId);
+    return res;
+  };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await indexStudents(token, diplomaId);
-      setSubjects(res);
-    };
+  const { data: students, isLoading } = useQuery({
+    queryFn: fetchData,
+    queryKey: [`students${diplomaId}`],
+  });
 
-    fetchData();
-  }, [token]);
+  if (!isLoading) {
+    var filteredApplicants = students.filter((sub) =>
+      sub.name.includes(searchTerm)
+    );
+  }
 
-  const filteredApplicants = subjects.filter((sub) =>
-    sub.name.includes(searchTerm)
-  );
+  if (isLoading) return <Spinner />;
 
   const handlePrint = () => {
     const printWindow = window.open("", "_blank");

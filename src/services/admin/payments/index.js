@@ -14,6 +14,11 @@ export const indexPayments = async (token, programId) => {
       headers: headersList,
     }
   );
-  const data = await response.json();
-  return data.data;
+
+  if (response.ok) {
+    const data = await response.json();
+    return data.data;
+  } else {
+    return [];
+  }
 };

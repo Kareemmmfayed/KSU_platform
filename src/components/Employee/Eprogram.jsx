@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-import plus from "../../assets/plus.png";
 import { useNavigate } from "react-router-dom";
 import { showEmployeeProgram } from "../../services/employee/program/show";
 import { useState, useEffect } from "react";

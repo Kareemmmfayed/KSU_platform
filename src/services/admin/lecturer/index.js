@@ -15,6 +15,10 @@ export const indexLecturer = async (token) => {
     }
   );
 
-  let data = await response.json();
-  return data.data.instructors;
+  if (response.ok) {
+    let data = await response.json();
+    return data.data.instructors;
+  } else {
+    return [];
+  }
 };

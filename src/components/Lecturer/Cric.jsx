@@ -1,32 +1,39 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../services/AuthContext";
 import { indexCourses } from "../../services/instructor/courses/index";
+import { useQuery } from "@tanstack/react-query";
+import Spinner from "../Applicant/Spinner";
 
 function Cric({ pickDiplomaId }) {
   const { token } = useAuth();
   const navigate = useNavigate();
 
-  const [subjects, setSubjects] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await indexCourses(token);
-      setSubjects(res);
-    };
+  const fetchData = async () => {
+    const res = await indexCourses(token);
+    return res;
+  };
 
-    fetchData();
-  }, [token]);
+  const { data: subjects, isLoading } = useQuery({
+    queryFn: fetchData,
+    queryKey: ["subjects"],
+  });
 
-  const filteredPrograms = subjects.filter((sub) =>
-    sub.name.includes(searchTerm)
-  );
+  if (!isLoading) {
+    var filteredPrograms = subjects.filter((sub) =>
+      sub.name.includes(searchTerm)
+    );
+  }
 
   const handleClick = (id) => {
     pickDiplomaId(id);
     navigate("/lecturer/table");
   };
+
+  if (isLoading) return <Spinner />;
+
   return (
     <div className="Cric">
       <div className="Cric__in">
