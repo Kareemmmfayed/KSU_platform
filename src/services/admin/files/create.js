@@ -1,6 +1,6 @@
 import { API_URL, COLLEGE } from "../../API";
 
-export const createProgramFiles = async (token, programId, name) => {
+export const createProgramFile = async (token, programId, name, type) => {
   let headersList = {
     Accept: "*/*",
     Authorization: `Bearer ${token}`,
@@ -9,7 +9,7 @@ export const createProgramFiles = async (token, programId, name) => {
 
   let bodyContent = JSON.stringify({
     name: name,
-    type: "image/jpeg",
+    type: type,
   });
 
   let response = await fetch(
@@ -20,5 +20,6 @@ export const createProgramFiles = async (token, programId, name) => {
       headers: headersList,
     }
   );
+
   return response;
 };

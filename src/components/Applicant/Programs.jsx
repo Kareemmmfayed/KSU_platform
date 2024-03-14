@@ -1,33 +1,39 @@
 /* eslint-disable react/prop-types */
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../services/AuthContext";
 import { indexPrograms } from "../../services/applicant/program/index";
 import { indexEmployeePrograms } from "../../services/employee/program/index";
+import { useQuery } from "@tanstack/react-query";
+import Spinner from "../Applicant/Spinner";
 
 function Programs({ pickDiplomaId }) {
   const [searchTerm, setSearchTerm] = useState("");
-  const [diplomas, setDiplomas] = useState([]);
   const { token, userType } = useAuth();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      if (userType === "applicant") {
-        const programs = await indexPrograms(token);
-        setDiplomas(programs);
-      } else if (userType === "employee") {
-        const programs = await indexEmployeePrograms(token);
-        setDiplomas(programs);
-      }
-    };
+  const fetchData = async () => {
+    if (userType === "applicant") {
+      const programs = await indexPrograms(token);
+      return programs;
+    } else if (userType === "employee") {
+      const programs = await indexEmployeePrograms(token);
+      return programs;
+    } else {
+      return [];
+    }
+  };
 
-    fetchData();
-  }, [token]);
+  const { data: programs, isLoading } = useQuery({
+    queryFn: fetchData,
+    queryKey: ["programs"],
+  });
 
-  const filteredPrograms = diplomas.filter((program) =>
-    program.name.includes(searchTerm)
-  );
+  if (!isLoading) {
+    var filteredPrograms = programs.filter((program) =>
+      program.name.includes(searchTerm)
+    );
+  }
 
   const details = (id) => {
     pickDiplomaId(id);
@@ -37,6 +43,8 @@ function Programs({ pickDiplomaId }) {
       navigate("/employee/programs/details");
     }
   };
+
+  if (isLoading) return <Spinner />;
 
   return (
     <div className="Programs">

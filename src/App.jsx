@@ -100,7 +100,10 @@ function App() {
                   element={<Pdetails diplomaId={diplomaId} />}
                 />
                 <Route path="programs/Adetails" element={<Apdetails />} />
-                <Route path="application" element={<Application />} />
+                <Route
+                  path="application"
+                  element={<Application diplomaId={diplomaId} />}
+                />
                 <Route path="success" element={<Success />} />
                 <Route path="diplomas" element={<Mydiplomas />} />
                 <Route path="subjects" element={<Regsubs />} />

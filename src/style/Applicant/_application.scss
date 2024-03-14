@@ -1,14 +1,12 @@
 .Application {
   font-family: "Cairo", sans-serif;
   position: relative;
-  height: 125vh;
 
   &__inner {
     min-height: calc(100vh - 175px);
     justify-content: center;
     align-items: center;
     display: flex;
-    margin-top: 20px;
 
     &__form {
       flex-direction: column;
@@ -27,8 +25,16 @@
         flex-direction: column;
         width: 85%;
 
-        input[type="file"] {
-          display: none;
+        div {
+          position: relative;
+          border: 1px solid grey;
+
+          input {
+            position: absolute;
+            top: 11px;
+            left: 11px;
+            direction: ltr;
+          }
         }
 
         label,

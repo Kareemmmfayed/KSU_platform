@@ -1,6 +1,6 @@
 import { API_URL, COLLEGE } from "../../API";
 
-export const indexPrograms = async (token) => {
+export const indexProgramFiles = async (token, programId) => {
   let headersList = {
     Accept: "*/*",
     Authorization: `Bearer ${token}`,
@@ -8,7 +8,7 @@ export const indexPrograms = async (token) => {
   };
 
   let response = await fetch(
-    `${API_URL}/applicant/collages/${COLLEGE.id}/programs`,
+    `${API_URL}/applicant/collages/${COLLEGE.id}/programs/${programId}/program-files`,
     {
       method: "GET",
       headers: headersList,
@@ -17,7 +17,7 @@ export const indexPrograms = async (token) => {
 
   if (response.ok) {
     let data = await response.json();
-    return data.data.programs;
+    return data.data.programFiles;
   } else {
     return [];
   }

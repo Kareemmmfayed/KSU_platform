@@ -655,14 +655,12 @@ body {
 .Application {
   font-family: "Cairo", sans-serif;
   position: relative;
-  height: 125vh;
 }
 .Application__inner {
   min-height: calc(100vh - 175px);
   justify-content: center;
   align-items: center;
   display: flex;
-  margin-top: 20px;
 }
 .Application__inner__form {
   flex-direction: column;
@@ -682,8 +680,15 @@ body {
   flex-direction: column;
   width: 85%;
 }
-.Application__inner__form form input[type=file] {
-  display: none;
+.Application__inner__form form div {
+  position: relative;
+  border: 1px solid grey;
+}
+.Application__inner__form form div input {
+  position: absolute;
+  top: 11px;
+  left: 11px;
+  direction: ltr;
 }
 .Application__inner__form form label,
 .Application__inner__form form .btns {
@@ -1648,6 +1653,13 @@ body {
   top: 15px;
   left: 15px;
 }
+.Adiplomas__in__body .cards .card .files {
+  width: 18%;
+  height: 52%;
+}
+.Adiplomas__in__body .cards .card .files img {
+  width: 28px;
+}
 .Adiplomas__in__body .cards .delete {
   position: relative;
   background-color: lightgrey;
@@ -1662,6 +1674,10 @@ body {
   transform: translate(-50%, 0);
   box-shadow: 0px 3.2765216827px 26.2121734619px 0px rgba(0, 0, 0, 0.2509803922);
   padding: 20px 10px 0;
+}
+.Adiplomas__in form.second {
+  top: 120px;
+  height: 48%;
 }
 .Adiplomas__in form div {
   display: flex;
@@ -2683,7 +2699,7 @@ body {
   height: 100%;
   direction: rtl;
   padding: 20px 60px 0;
-  min-height: 76vh;
+  min-height: calc(100vh - 175px);
   position: relative;
 }
 .Pdetails .Pdetails__in h2,

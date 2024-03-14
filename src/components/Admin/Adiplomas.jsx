@@ -3,12 +3,14 @@ import plus from "../../assets/plusb.png";
 import trash from "../../assets/trash.png";
 import notchecked from "../../assets/notchecked.png";
 import checked from "../../assets/checked.png";
+import myFiles from "../../assets/files.png";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../services/AuthContext";
 import { indexPrograms } from "../../services/admin/program";
 import { createProgram } from "../../services/admin/program/create";
 import { deleteProgram } from "../../services/admin/program/delete";
+import { createProgramFile } from "../../services/admin/files/create";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Spinner from "../Applicant/Spinner";
 import toast from "react-hot-toast";
@@ -115,6 +117,29 @@ function Adiplomas({ handleAdminDiplomaId }) {
     navigate("/admin/years");
   };
 
+  const [fileName, setFileName] = useState("");
+  const [fileType, setFileType] = useState("");
+  const [programId, setProgramId] = useState("");
+
+  const [files, setFiles] = useState(false);
+
+  const onShowFiles = (id) => {
+    setFiles(true);
+    setProgramId(id);
+  };
+
+  const cancelFiles = () => {
+    setFileName("");
+    setFileType("");
+    setFiles(false);
+  };
+
+  const subFile = async (e) => {
+    e.preventDefault();
+    await createProgramFile(token, programId, fileName, fileType);
+    cancelFiles();
+  };
+
   if (isLoading || isDeleting || isSubmitting) return <Spinner />;
 
   return (
@@ -144,7 +169,15 @@ function Adiplomas({ handleAdminDiplomaId }) {
                     />
                   </button>
                 ) : (
-                  <button onClick={() => handleClick(program.id)}></button>
+                  <>
+                    <button onClick={() => handleClick(program.id)}></button>
+                    <button
+                      className="files"
+                      onClick={() => onShowFiles(program.id)}
+                    >
+                      <img src={myFiles} alt="Add files" />
+                    </button>
+                  </>
                 )}
               </div>
             ))}
@@ -196,6 +229,39 @@ function Adiplomas({ handleAdminDiplomaId }) {
             </div>
             <div>
               <button onClick={() => cancel()}>إلغاء</button>
+              <button type="submit" className="btnbtn">
+                إضافة
+              </button>
+            </div>
+          </form>
+        )}
+        {files && (
+          <form onSubmit={subFile} className="second">
+            <div>
+              <label htmlFor="fileName">اسم الملف :</label>
+              <input
+                type="text"
+                id="fileName"
+                value={fileName}
+                onChange={(e) => setFileName(e.target.value)}
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="intro">نوع الملف :</label>
+              <select
+                value={fileType}
+                onChange={(e) => setFileType(e.target.value)}
+                required
+              >
+                <option selected disabled></option>
+                <option value="image/jpeg">jpeg</option>
+                <option value="image/jpg">jpg</option>
+                <option value="application/pdf">pdf</option>
+              </select>
+            </div>
+            <div>
+              <button onClick={() => cancelFiles()}>إلغاء</button>
               <button type="submit" className="btnbtn">
                 إضافة
               </button>

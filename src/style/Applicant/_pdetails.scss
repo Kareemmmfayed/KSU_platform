@@ -1,42 +1,42 @@
 .Pdetails,
 .Apdetails {
-    font-family: 'Cairo', sans-serif;
-    
-    .Pdetails__in {
-        height: 100%;
-        direction: rtl;
-        padding: 20px 60px 0;
-        min-height: 76vh;
-        position: relative;
+  font-family: "Cairo", sans-serif;
 
-        h2 {
-            font-weight: 600;
-            font-size: 40px;
-            color: var(--main-color);
-            margin-bottom: 40px;     
-        }
+  .Pdetails__in {
+    height: 100%;
+    direction: rtl;
+    padding: 20px 60px 0;
+    min-height: calc(100vh - 175px);
+    position: relative;
 
-        &__about,
-        &__req,
-        &__pay,
-        &__time {
-            margin-bottom: 30px;
-
-            h4 {
-                font-weight: 500;
-                font-size: 25px;
-            }
-        }
-    
-        button {
-            position: absolute;
-            left: 90px;
-            bottom: 25px;
-            width: 130px;
-            color: white;
-            border-radius: 8px;
-            border: none;
-            height: 52px;
-        }
+    h2 {
+      font-weight: 600;
+      font-size: 40px;
+      color: var(--main-color);
+      margin-bottom: 40px;
     }
+
+    &__about,
+    &__req,
+    &__pay,
+    &__time {
+      margin-bottom: 30px;
+
+      h4 {
+        font-weight: 500;
+        font-size: 25px;
+      }
+    }
+
+    button {
+      position: absolute;
+      left: 90px;
+      bottom: 25px;
+      width: 130px;
+      color: white;
+      border-radius: 8px;
+      border: none;
+      height: 52px;
+    }
+  }
 }

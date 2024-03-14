@@ -246,7 +246,11 @@ function Asubjects({ AdminDiplomaId, levelId, semesterId }) {
             </div>
             <div>
               <label>السنة الدراسية :</label>
-              <select value={dyear} onChange={(e) => setDyear(e.target.value)}>
+              <select
+                value={dyear}
+                onChange={(e) => setDyear(e.target.value)}
+                required
+              >
                 <option selected disabled></option>
                 {years.map((year) => (
                   <option key={year.id} value={year.id}>

@@ -1,6 +1,7 @@
 import { API_URL, COLLEGE } from "../../API";
+import { Upload } from "../../storage/AWS/upload";
 
-export const createApplication = async (token, programID) => {
+export const createApplication = async (token, programID, files) => {
   let headersList = {
     Accept: "*/*",
     Authorization: `Bearer ${token}`,
@@ -14,6 +15,11 @@ export const createApplication = async (token, programID) => {
       headers: headersList,
     }
   );
-  console.log(response);
+
+  let data = response.json();
+  data.data.filesToUpload.map(async (file) => {
+    await Upload(file.uploadUrl);
+  });
+
   return response;
 };
