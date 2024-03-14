@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../../services/AuthContext";
 import { useState } from "react";
 import { indexProgramFiles } from "../../services/applicant/files";
@@ -6,9 +6,10 @@ import { createApplication } from "../../services/applicant/application/create";
 import { useQuery } from "@tanstack/react-query";
 import Spinner from "../Applicant/Spinner";
 
-function Application({ diplomaId }) {
+function Application() {
   const { token } = useAuth();
   const navigate = useNavigate();
+  const { diplomaId } = useParams();
 
   const [myFiles, setMyFiles] = useState([]);
 
@@ -29,7 +30,7 @@ function Application({ diplomaId }) {
 
   const handleFileChange = (event, index) => {
     const updatedFiles = [...myFiles];
-    updatedFiles[index] = event.target.files[1];
+    updatedFiles[index] = event.target.files[index];
     setMyFiles(updatedFiles);
     console.log(myFiles);
   };

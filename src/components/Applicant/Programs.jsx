@@ -1,16 +1,15 @@
 /* eslint-disable react/prop-types */
+import { Link } from "react-router-dom";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../services/AuthContext";
 import { indexPrograms } from "../../services/applicant/program/index";
 import { indexEmployeePrograms } from "../../services/employee/program/index";
 import { useQuery } from "@tanstack/react-query";
 import Spinner from "../Applicant/Spinner";
 
-function Programs({ pickDiplomaId }) {
+function Programs() {
   const [searchTerm, setSearchTerm] = useState("");
   const { token, userType } = useAuth();
-  const navigate = useNavigate();
 
   const fetchData = async () => {
     if (userType === "applicant") {
@@ -35,15 +34,6 @@ function Programs({ pickDiplomaId }) {
     );
   }
 
-  const details = (id) => {
-    pickDiplomaId(id);
-    if (userType === "applicant") {
-      navigate("/applicant/programs/details");
-    } else if (userType === "employee") {
-      navigate("/employee/programs/details");
-    }
-  };
-
   if (isLoading) return <Spinner />;
 
   return (
@@ -62,9 +52,10 @@ function Programs({ pickDiplomaId }) {
         <ol>
           {filteredPrograms.map((diploma) => (
             <li key={diploma.id}>
-              <button onClick={() => details(diploma.id)}>
+              {/* <button onClick={() => details(diploma.id)}>
                 {diploma.name}
-              </button>
+              </button> */}
+              <Link to={`${diploma.id}`}>{diploma.name}</Link>
             </li>
           ))}
         </ol>

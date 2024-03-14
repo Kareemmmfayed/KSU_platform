@@ -91,18 +91,13 @@ function App() {
               }
             >
               <Route path="/applicant">
-                <Route
-                  path="programs"
-                  element={<Programs pickDiplomaId={pickDiplomaId} />}
-                />
-                <Route
-                  path="programs/details"
-                  element={<Pdetails diplomaId={diplomaId} />}
-                />
+                <Route path="programs" element={<Programs />} />
+                <Route path="programs/:diplomaId" element={<Pdetails />} />
+
                 <Route path="programs/Adetails" element={<Apdetails />} />
                 <Route
-                  path="application"
-                  element={<Application diplomaId={diplomaId} />}
+                  path="programs/:diplomaId/application"
+                  element={<Application />}
                 />
                 <Route path="success" element={<Success />} />
                 <Route path="diplomas" element={<Mydiplomas />} />
@@ -143,7 +138,7 @@ function App() {
                   }
                 />
                 <Route
-                  path="years"
+                  path="diplomas/:diplomaId/years"
                   element={
                     <Ayear
                       AdminDiplomaId={AdminDiplomaId}
@@ -155,14 +150,8 @@ function App() {
                 <Route path="employees" element={<Aemp />} />
                 <Route path="lecturers" element={<Alect />} />
                 <Route
-                  path="subjects"
-                  element={
-                    <Asubjects
-                      AdminDiplomaId={AdminDiplomaId}
-                      levelId={levelId}
-                      semesterId={semesterId}
-                    />
-                  }
+                  path="diplomas/:diplomaId/years/:yearId/semesters/:semesterId/courses"
+                  element={<Asubjects />}
                 />
                 <Route
                   path="payments"
@@ -174,15 +163,8 @@ function App() {
                 />
                 <Route path="programs" element={<Aprogram />} />
                 <Route
-                  path="semesters"
-                  element={
-                    <Semester
-                      AdminDiplomaId={AdminDiplomaId}
-                      semesterId={semesterId}
-                      levelId={levelId}
-                      handleSemesterId={handleSemesterId}
-                    />
-                  }
+                  path="diplomas/:diplomaId/years/yearId/semesters"
+                  element={<Semester />}
                 />
                 <Route path="DipYear" element={<DipYear />} />
               </Route>

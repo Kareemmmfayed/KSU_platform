@@ -3,7 +3,7 @@ import plus from "../../assets/plusb.png";
 import trash from "../../assets/trash.png";
 import notchecked from "../../assets/notchecked.png";
 import checked from "../../assets/checked.png";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "../../services/AuthContext";
 import { indexLevel } from "../../services/admin/level/index";
@@ -13,10 +13,11 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Spinner from "../Applicant/Spinner";
 import toast from "react-hot-toast";
 
-export default function Ayear({ AdminDiplomaId, handleLevelId }) {
+export default function Ayear() {
   const { token } = useAuth();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const { diplomaId: AdminDiplomaId } = useParams();
 
   const [show, setShow] = useState(false);
   const [del, setDelete] = useState(false);
@@ -95,11 +96,6 @@ export default function Ayear({ AdminDiplomaId, handleLevelId }) {
     },
   });
 
-  const handleClick = (id) => {
-    handleLevelId(id);
-    navigate("/admin/semesters");
-  };
-
   if (isLoading || isDeleting || isSubmitting) return <Spinner />;
 
   return (
@@ -129,7 +125,9 @@ export default function Ayear({ AdminDiplomaId, handleLevelId }) {
                     />
                   </button>
                 ) : (
-                  <button onClick={() => handleClick(lvl.id)}></button>
+                  <button
+                    onClick={() => navigate(`${lvl.id}/semesters`)}
+                  ></button>
                 )}
               </div>
             ))}

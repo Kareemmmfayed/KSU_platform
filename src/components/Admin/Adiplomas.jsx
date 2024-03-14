@@ -15,7 +15,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Spinner from "../Applicant/Spinner";
 import toast from "react-hot-toast";
 
-function Adiplomas({ handleAdminDiplomaId }) {
+function Adiplomas() {
   const { token } = useAuth();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
@@ -112,11 +112,6 @@ function Adiplomas({ handleAdminDiplomaId }) {
     },
   });
 
-  const handleClick = (id) => {
-    handleAdminDiplomaId(id);
-    navigate("/admin/years");
-  };
-
   const [fileName, setFileName] = useState("");
   const [fileType, setFileType] = useState("");
   const [programId, setProgramId] = useState("");
@@ -170,7 +165,9 @@ function Adiplomas({ handleAdminDiplomaId }) {
                   </button>
                 ) : (
                   <>
-                    <button onClick={() => handleClick(program.id)}></button>
+                    <button
+                      onClick={() => navigate(`${program.id}/years`)}
+                    ></button>
                     <button
                       className="files"
                       onClick={() => onShowFiles(program.id)}

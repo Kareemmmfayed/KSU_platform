@@ -3,11 +3,12 @@ import { showProgram } from "../../services/applicant/program/show";
 import { useAuth } from "../../services/AuthContext";
 import { useQuery } from "@tanstack/react-query";
 import Spinner from "../Applicant/Spinner";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-function Pdetails({ diplomaId }) {
+function Pdetails() {
   const { token } = useAuth();
   const navigate = useNavigate();
+  const { diplomaId } = useParams();
 
   const fetchData = async () => {
     const res = await showProgram(token, diplomaId);
@@ -31,7 +32,9 @@ function Pdetails({ diplomaId }) {
         </div>
         <button
           className="btnbtn"
-          onClick={() => navigate("/applicant/application")}
+          onClick={() =>
+            navigate(`/applicant/programs/${diplomaId}/application`)
+          }
         >
           سجل الآن
         </button>

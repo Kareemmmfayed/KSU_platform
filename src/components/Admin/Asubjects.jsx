@@ -6,7 +6,7 @@ import notchecked from "../../assets/notchecked.png";
 import copy from "../../assets/copy.png";
 import lect from "../../assets/lect.png";
 import { useAuth } from "../../services/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { indexCourse } from "../../services/admin/course/index";
 import { createCourse } from "../../services/admin/course/create";
@@ -18,9 +18,14 @@ import { AssignCourseToAdmin } from "../../services/admin/course/assignCourseToA
 // import Spinner from "../Applicant/Spinner";
 // import toast from "react-hot-toast";
 
-function Asubjects({ AdminDiplomaId, levelId, semesterId }) {
+function Asubjects() {
   const { token } = useAuth();
   // const queryClient = useQueryClient();
+  const {
+    programId: AdminDiplomaId,
+    yearId: levelId,
+    semesterId,
+  } = useParams();
 
   const [subjects, setSubjects] = useState([]);
   const [lecturers, setLecturers] = useState([]);
