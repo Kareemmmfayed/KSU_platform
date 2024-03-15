@@ -108,7 +108,7 @@ export default function Ayear() {
           <button onClick={addItem}>
             <img src={plus} alt="plus" />
           </button>
-          <button onClick={deleteMutation}>
+          <button onClick={deleteMutation} disabled={isDeleting}>
             <img src={trash} alt="trash" />
           </button>
         </div>
@@ -146,7 +146,7 @@ export default function Ayear() {
             </div>
             <div>
               <button onClick={() => cancel()}>إلغاء</button>
-              <button type="submit" className="btnbtn">
+              <button type="submit" className="btnbtn" disabled={isSubmitting}>
                 إضافة
               </button>
             </div>

@@ -11,7 +11,7 @@ export const indexColleges = async (token) => {
   });
 
   if (response.ok) {
-    let data = response.json();
+    let data = await response.json();
     return data.data.collages;
   } else {
     return [];

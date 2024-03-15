@@ -50,14 +50,14 @@ function Mcollege() {
     setShow(false);
   };
 
-  const fetchPrograms = async () => {
+  const fetchColleges = async () => {
     const data = await indexColleges(token);
     return data;
   };
 
   const { data: colleges, isLoading } = useQuery({
-    queryFn: fetchPrograms,
-    queryKey: ["collages"],
+    queryFn: fetchColleges,
+    queryKey: ["colleges"],
   });
 
   const sub = async (e) => {
@@ -70,7 +70,7 @@ function Mcollege() {
   const { mutate: create, isCreating } = useMutation({
     mutationFn: (e) => sub(e),
     onSuccess: () => {
-      queryClient.invalidateQueries("collages");
+      queryClient.invalidateQueries("colleges");
       toast.success("تمت الإضافة بنجاح");
     },
     onError: (error) => {
@@ -94,7 +94,7 @@ function Mcollege() {
   const { mutate: deleteColl, isDeleting } = useMutation({
     mutationFn: dele,
     onSuccess: () => {
-      queryClient.invalidateQueries("collages");
+      queryClient.invalidateQueries("colleges");
     },
     onError: (error) => {
       console.log(error);

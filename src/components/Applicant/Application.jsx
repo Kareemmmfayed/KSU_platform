@@ -27,7 +27,7 @@ function Application() {
   const onSub = async (values) => {
     console.log(values);
     const { up_ } = values;
-    await createApplication(token, diplomaId, values);
+    // await createApplication(token, diplomaId, values);
   };
 
   const { register, handleSubmit, errors, getValues, getFieldState } =

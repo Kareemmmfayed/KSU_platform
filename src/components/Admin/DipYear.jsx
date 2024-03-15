@@ -106,7 +106,7 @@ function DipYear() {
           <button onClick={addItem}>
             <img src={plus} alt="plus" />
           </button>
-          <button onClick={deleteMutation}>
+          <button onClick={deleteMutation} disabled={isDeleting}>
             <img src={trash} alt="trash" />
           </button>
         </div>
@@ -143,7 +143,7 @@ function DipYear() {
             </div>
             <div>
               <button onClick={() => cancel()}>إلغاء</button>
-              <button type="submit" className="btnbtn">
+              <button type="submit" className="btnbtn" disabled={isSubmitting}>
                 إضافة
               </button>
             </div>

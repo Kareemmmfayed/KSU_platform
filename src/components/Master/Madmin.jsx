@@ -120,7 +120,7 @@ function Madmin() {
           <button onClick={addItem}>
             <img src={plus} alt="plus" />
           </button>
-          <button onClick={delAdmin}>
+          <button onClick={delAdmin} disabled={isDeleting}>
             <img src={trash} alt="trash" />
           </button>
         </div>
@@ -183,7 +183,7 @@ function Madmin() {
             </div>
             <div>
               <button onClick={() => cancel()}>إلغاء</button>
-              <button type="submit" className="btnbtn">
+              <button type="submit" className="btnbtn" disabled={isCreating}>
                 إضافة
               </button>
             </div>

@@ -119,7 +119,7 @@ function Aemp() {
           <button onClick={addItem}>
             <img src={plus} alt="plus" />
           </button>
-          <button onClick={deleteMutation}>
+          <button onClick={deleteMutation} disabled={isDeleting}>
             <img src={trash} alt="trash" />
           </button>
         </div>
@@ -181,7 +181,9 @@ function Aemp() {
             </div>
             <div>
               <button onClick={() => cancel()}>إلغاء</button>
-              <button className="btnbtn">إضافة</button>
+              <button className="btnbtn" disabled={isAdding}>
+                إضافة
+              </button>
             </div>
           </form>
         )}

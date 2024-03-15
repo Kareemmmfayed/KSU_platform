@@ -54,7 +54,7 @@ function Apay() {
     },
   });
 
-  if (isLoading) return <Spinner />;
+  if (isLoading || isSubmitting) return <Spinner />;
 
   return (
     <div className="Apay">
@@ -89,7 +89,7 @@ function Apay() {
             </div>
             <div>
               <button onClick={() => cancel()}>إلغاء</button>
-              <button type="submit" className="btnbtn">
+              <button type="submit" className="btnbtn" disabled={isSubmitting}>
                 إضافة
               </button>
             </div>

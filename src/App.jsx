@@ -1,48 +1,42 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-// import Home from "./components/Applicant/Home";
-// import Signin from "./components/Applicant/Signin";
-// import Signup from "./components/Applicant/Signup";
-import Success from "./components/Applicant/Success";
-import Application from "./components/Applicant/Application";
-import Programs from "./components/Applicant/Programs";
-import Applicants from "./components/Employee/Applicants";
-import Table from "./components/Lecturer/Table";
-import Cric from "./components/Lecturer/Cric";
-import AccountInfo from "./components/Applicant/AccountInfo";
-import Mydiplomas from "./components/Applicant/Mydiplomas";
-import Regsubs from "./components/Applicant/Regsubs";
-import Appinfo from "./components/Applicant/Appinfo";
-import Appinfoemp from "./components/Employee/Appinfoemp";
-import Addmain from "./components/Admin/Addmain";
-// import Mastermain from "./components/Master/Mastermain";
-import Adiplomas from "./components/Admin/Adiplomas";
-import Aemp from "./components/Admin/Aemp";
-import Alect from "./components/Admin/Alect";
-import Asubjects from "./components/Admin/Asubjects";
-import Ayear from "./components/Admin/Ayear";
-import Aprogram from "./components/Admin/Aprogram";
-import Mcollege from "./components/Master/Mcollege";
-import Madmin from "./components/Master/Madmin";
-import Pdetails from "./components/Applicant/Pdetails";
-import Apdetails from "./components/Applicant/Apdetails";
-import Eprogram from "./components/Employee/Eprogram";
-import Semester from "./components/Admin/Semester";
-import BeforePay from "./components/Admin/BeforePay";
-import Apay from "./components/Admin/Apay";
-import Eprograms from "./components/Employee/Eprograms";
+import { Toaster } from "react-hot-toast";
+import { Suspense, lazy } from "react";
 import AppLayout from "./components/AppLayout";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 import Spinner from "./components/Applicant/Spinner";
-import { Toaster } from "react-hot-toast";
-import { Suspense, lazy } from "react";
-import DipYear from "./components/Admin/DipYear";
-
 const Signin = lazy(() => import("./components/Applicant/Signin"));
 const Signup = lazy(() => import("./components/Applicant/Signup"));
 const Home = lazy(() => import("./components/Applicant/Home"));
 const Mastermain = lazy(() => import("./components/Master/Mastermain"));
+const Mcollege = lazy(() => import("./components/Master/Mcollege"));
+const Madmin = lazy(() => import("./components/Master/Madmin"));
+const Addmain = lazy(() => import("./components/Admin/Addmain"));
+const Adiplomas = lazy(() => import("./components/Admin/Adiplomas"));
+const Aemp = lazy(() => import("./components/Admin/Aemp"));
+const Alect = lazy(() => import("./components/Admin/Alect"));
+const BeforePay = lazy(() => import("./components/Admin/BeforePay"));
+const Apay = lazy(() => import("./components/Admin/Apay"));
+const Ayear = lazy(() => import("./components/Admin/Ayear"));
+const Semester = lazy(() => import("./components/Admin/Semester"));
+const Asubjects = lazy(() => import("./components/Admin/Asubjects"));
+const DipYear = lazy(() => import("./components/Admin/DipYear"));
+const Cric = lazy(() => import("./components/Lecturer/Cric"));
+const Table = lazy(() => import("./components/Lecturer/Table"));
+const Eprograms = lazy(() => import("./components/Employee/Eprograms"));
+const Eprogram = lazy(() => import("./components/Employee/Eprogram"));
+const Applicants = lazy(() => import("./components/Employee/Applicants"));
+const Appinfoemp = lazy(() => import("./components/Employee/Appinfoemp"));
+const Appinfo = lazy(() => import("./components/Applicant/Appinfo"));
+const Programs = lazy(() => import("./components/Applicant/Programs"));
+const Mydiplomas = lazy(() => import("./components/Applicant/Mydiplomas"));
+const Pdetails = lazy(() => import("./components/Applicant/Pdetails"));
+const AccountInfo = lazy(() => import("./components/Applicant/AccountInfo"));
+const Application = lazy(() => import("./components/Applicant/Application"));
+const Success = lazy(() => import("./components/Applicant/Success"));
+const Apdetails = lazy(() => import("./components/Applicant/Apdetails"));
+const Regsubs = lazy(() => import("./components/Applicant/Regsubs"));
 
 function App() {
   const queryClient = new QueryClient({
@@ -110,7 +104,6 @@ function App() {
                   />
                   <Route path="payments" element={<BeforePay />} />
                   <Route path="payments/:paymentId" element={<Apay />} />
-                  <Route path="programs" element={<Aprogram />} />
                   <Route
                     path="diplomas/:diplomaId/years/:yearId/semesters"
                     element={<Semester />}
