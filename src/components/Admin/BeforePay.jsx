@@ -4,7 +4,7 @@ import { useAuth } from "../../services/AuthContext";
 import { useQuery } from "@tanstack/react-query";
 import Spinner from "../Applicant/Spinner";
 
-function BeforePay({ pickPayId }) {
+function BeforePay() {
   const { token } = useAuth();
   const navigate = useNavigate();
 
@@ -18,11 +18,6 @@ function BeforePay({ pickPayId }) {
     queryKey: ["beforePay"],
   });
 
-  const handleClick = (id) => {
-    pickPayId(id);
-    navigate("/admin/program/payments");
-  };
-
   if (isLoading) return <Spinner />;
 
   return (
@@ -30,7 +25,7 @@ function BeforePay({ pickPayId }) {
       <div className="Before__in">
         <div className="cards">
           {cards?.map((card) => (
-            <button key={card.id} onClick={() => handleClick(card.id)}>
+            <button key={card.id} onClick={() => navigate(`${card.id}`)}>
               <p>مصاريف دبلومة :</p>
               <p>{card.name}</p>
             </button>

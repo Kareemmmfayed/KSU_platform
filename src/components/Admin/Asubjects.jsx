@@ -7,46 +7,46 @@ import copy from "../../assets/copy.png";
 import lect from "../../assets/lect.png";
 import { useAuth } from "../../services/AuthContext";
 import { useNavigate, useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { indexCourse } from "../../services/admin/course/index";
 import { createCourse } from "../../services/admin/course/create";
 import { deleteCourse } from "../../services/admin/course/delete";
 import { indexLecturer } from "../../services/admin/lecturer/index";
 import { indexYears } from "../../services/admin/year/index";
 import { AssignCourseToAdmin } from "../../services/admin/course/assignCourseToAdmin";
-// import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-// import Spinner from "../Applicant/Spinner";
-// import toast from "react-hot-toast";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import Spinner from "../Applicant/Spinner";
+import toast from "react-hot-toast";
 
 function Asubjects() {
   const { token } = useAuth();
-  // const queryClient = useQueryClient();
-  const {
-    programId: AdminDiplomaId,
-    yearId: levelId,
-    semesterId,
-  } = useParams();
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
-  const [subjects, setSubjects] = useState([]);
+  const { diplomaId, yearId, semesterId } = useParams();
   const [lecturers, setLecturers] = useState([]);
   const [years, setYears] = useState([]);
 
-  const navigate = useNavigate();
-
   const fetchData = async () => {
-    const res = await indexCourse(token, AdminDiplomaId, levelId, semesterId);
-    setSubjects(res);
-
-    const data = await indexLecturer(token);
-    setLecturers(data);
-
-    const resres = await indexYears(token);
-    setYears(resres);
+    const data = await indexCourse(token, diplomaId, yearId, semesterId);
+    return data;
   };
 
   useEffect(() => {
-    fetchData();
+    const fetchThedata = async () => {
+      const data1 = await indexLecturer(token);
+      setLecturers(data1);
+
+      const data2 = await indexYears(token);
+      setYears(data2);
+    };
+    fetchThedata();
   }, []);
+
+  const { data: subjects, isLoading } = useQuery({
+    queryFn: fetchData,
+    queryKey: [`courses${semesterId}`],
+  });
 
   const [show, setShow] = useState(false);
   const [del, setDelete] = useState(false);
@@ -85,27 +85,33 @@ function Asubjects() {
     e.preventDefault();
     await createCourse(
       token,
-      AdminDiplomaId,
-      levelId,
+      diplomaId,
+      yearId,
       semesterId,
       name,
       Number(hours),
       code
     );
-    setShow(false);
     fetchData();
+    setShow(false);
     clear();
   };
 
+  const { mutate: subMutation, isSubmitting } = useMutation({
+    mutationFn: (e) => sub(e),
+    onSuccess: () => {
+      queryClient.invalidateQueries(`courses${semesterId}`);
+      toast.success("تمت الإضافة بنجاح");
+    },
+    onError: (error) => {
+      console.log(error);
+      toast.error("حدث خطأ ما");
+    },
+  });
+
   const dele = async () => {
     if (del && selectedCard) {
-      await deleteCourse(
-        token,
-        AdminDiplomaId,
-        levelId,
-        semesterId,
-        selectedCard
-      );
+      await deleteCourse(token, diplomaId, yearId, semesterId, selectedCard);
       setSelectedCard(null);
       setDelete(!del);
       fetchData();
@@ -114,6 +120,17 @@ function Asubjects() {
       setSelectedCard(null);
     }
   };
+
+  const { mutate: deleteMutation, isDeleting } = useMutation({
+    mutationFn: dele,
+    onSuccess: () => {
+      queryClient.invalidateQueries(`courses${semesterId}`);
+    },
+    onError: (error) => {
+      console.log(error);
+      toast.error("حدث خطأ ما");
+    },
+  });
 
   const copycontent = (content) => {
     navigator.clipboard.writeText(content);
@@ -133,8 +150,8 @@ function Asubjects() {
     e.preventDefault();
     await AssignCourseToAdmin(
       token,
-      AdminDiplomaId,
-      levelId,
+      diplomaId,
+      yearId,
       semesterId,
       subId,
       lecturerId,
@@ -142,6 +159,8 @@ function Asubjects() {
     );
     setSelect(false);
   };
+
+  if (isLoading || isDeleting || isSubmitting) return <Spinner />;
 
   return (
     <div className="Asubjects">
@@ -153,13 +172,13 @@ function Asubjects() {
           <button onClick={addItem}>
             <img src={plus} alt="plus" />
           </button>
-          <button onClick={dele}>
+          <button onClick={deleteMutation}>
             <img src={trash} alt="trash" />
           </button>
         </div>
         <div className="Asubjects__in__body">
           <div className="cards">
-            {subjects.map((sub) => (
+            {subjects?.map((sub) => (
               <div className={del ? "card delete" : "card"} key={sub.id}>
                 <h2>إسم المقرر : {sub.name}</h2>
                 <p>كود المقرر : {sub.code}</p>
@@ -196,7 +215,7 @@ function Asubjects() {
           </div>
         </div>
         {show && (
-          <form onSubmit={sub}>
+          <form onSubmit={subMutation}>
             <div>
               <label htmlFor="name">اسم المقرر :</label>
               <input

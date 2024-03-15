@@ -1,18 +1,18 @@
 import home from "../../assets/home.png";
 import plus from "../../assets/plusb.png";
-import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useState } from "react";
 import { useAuth } from "../../services/AuthContext";
 import { indexPayments } from "../../services/admin/payments/index";
 import { createPayment } from "../../services/admin/payments/create";
 import toast from "react-hot-toast";
 
-function Apay({ payId }) {
+function Apay() {
   const { token } = useAuth();
   const navigate = useNavigate();
+  const { paymentId } = useParams();
 
   const [show, setShow] = useState(false);
-  const [payments, setPayments] = useState([]);
 
   const addItem = () => {
     setShow(true);
@@ -26,22 +26,35 @@ function Apay({ payId }) {
   const [kind, setKind] = useState();
 
   const fetchData = async () => {
-    const data = await indexPayments(token, payId);
-    setPayments(data);
+    const data = await indexPayments(token, paymentId);
+    return data;
   };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  const { data: payments, isLoading } = useQuery({
+    queryFn: fetchData,
+    queryKey: ["payments"],
+  });
 
   const sub = async (e) => {
     e.preventDefault();
-    await createPayment(token, kind, payId);
+    await createPayment(token, kind, paymentId);
     setShow(false);
-    fetchData();
-    toast.success("تمت الإضافة بنجاح");
     setKind("");
   };
+
+  const { mutate: subMutation, isSubmitting } = useMutation({
+    mutationFn: (e) => sub(e),
+    onSuccess: () => {
+      queryClient.invalidateQueries(`payments${yearId}`);
+      toast.success("تمت الإضافة بنجاح");
+    },
+    onError: (error) => {
+      console.log(error);
+      toast.error("حدث خطأ ما");
+    },
+  });
+
+  if (isLoading) return <Spinner />;
 
   return (
     <div className="Apay">
@@ -64,7 +77,7 @@ function Apay({ payId }) {
           </div>
         </div>
         {show && (
-          <form onSubmit={sub}>
+          <form onSubmit={subMutation}>
             <div>
               <label htmlFor="name">نوع القسط :</label>
               <input

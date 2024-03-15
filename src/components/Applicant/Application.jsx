@@ -5,6 +5,7 @@ import { indexProgramFiles } from "../../services/applicant/files";
 import { createApplication } from "../../services/applicant/application/create";
 import { useQuery } from "@tanstack/react-query";
 import Spinner from "../Applicant/Spinner";
+import { useForm } from "react-hook-form";
 
 function Application() {
   const { token } = useAuth();
@@ -23,17 +24,17 @@ function Application() {
     queryKey: ["files"],
   });
 
-  const onSub = async (e) => {
-    e.preventDefault();
-    await createApplication(token, diplomaId, myFiles);
+  const onSub = async (values) => {
+    console.log(values);
+    const { up_ } = values;
+    await createApplication(token, diplomaId, values);
   };
 
-  const handleFileChange = (event, index) => {
-    const updatedFiles = [...myFiles];
-    updatedFiles[index] = event.target.files[index];
-    setMyFiles(updatedFiles);
-    console.log(myFiles);
-  };
+  const { register, handleSubmit, errors, getValues, getFieldState } =
+    useForm();
+
+  console.log(getValues());
+  console.log(getFieldState());
 
   if (isLoading) return <Spinner />;
 
@@ -42,7 +43,7 @@ function Application() {
       <div className="Application__inner">
         <div className="Application__inner__form col-lg-5 col-md-6 col-12">
           <h2>إستمارة طلب التقديم</h2>
-          <form onSubmit={onSub}>
+          <form onSubmit={handleSubmit(onSub)}>
             {files?.map((file, index) => (
               <div key={file.id}>
                 <label htmlFor={`up-${index}`}>
@@ -51,8 +52,7 @@ function Application() {
                 <input
                   type="file"
                   id={`up-${index}`}
-                  value={myFiles[index]}
-                  onChange={(e) => handleFileChange(e, index)}
+                  {...register(`up-${index}`)}
                 />
               </div>
             ))}
@@ -60,7 +60,7 @@ function Application() {
               <button className="left">حفظ</button>
               <button
                 className="right btnbtn"
-                onClick={() => navigate("/applicant/success")}
+                // onClick={() => navigate("/applicant/success")}
               >
                 إرسال
               </button>

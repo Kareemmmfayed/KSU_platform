@@ -17,7 +17,7 @@ function Semester() {
   const { token } = useAuth();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const { programId: AdminDiplomaId, yearId: levelId } = useParams();
+  const { diplomaId, yearId } = useParams();
 
   const [show, setShow] = useState(false);
   const [del, setDelete] = useState(false);
@@ -45,18 +45,18 @@ function Semester() {
   };
 
   const fetchData = async () => {
-    const data = await indexSemester(token, AdminDiplomaId, levelId);
+    const data = await indexSemester(token, diplomaId, yearId);
     return data;
   };
 
   const { data: semesters, isLoading } = useQuery({
     queryFn: fetchData,
-    queryKey: [`semesters${levelId}`],
+    queryKey: [`semesters${yearId}`],
   });
 
   const sub = async (e) => {
     e.preventDefault();
-    await createSemester(token, AdminDiplomaId, levelId, name);
+    await createSemester(token, diplomaId, yearId, name);
     setShow(false);
     setName("");
   };
@@ -64,7 +64,7 @@ function Semester() {
   const { mutate: subMutation, isSubmitting } = useMutation({
     mutationFn: (e) => sub(e),
     onSuccess: () => {
-      queryClient.invalidateQueries(`semesters${levelId}`);
+      queryClient.invalidateQueries(`semesters${yearId}`);
       toast.success("تمت الإضافة بنجاح");
     },
     onError: (error) => {
@@ -75,7 +75,7 @@ function Semester() {
 
   const dele = async () => {
     if (del && selectedCard) {
-      await deleteSemester(token, AdminDiplomaId, levelId, selectedCard);
+      await deleteSemester(token, diplomaId, yearId, selectedCard);
       setSelectedCard(null);
       setDelete(!del);
       toast.success("تم الحذف بنجاح");
@@ -89,7 +89,7 @@ function Semester() {
   const { mutate: deleteMutation, isDeleting } = useMutation({
     mutationFn: dele,
     onSuccess: () => {
-      queryClient.invalidateQueries(`semesters${levelId}`);
+      queryClient.invalidateQueries(`semesters${yearId}`);
     },
     onError: (error) => {
       console.log(error);

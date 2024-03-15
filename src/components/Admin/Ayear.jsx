@@ -17,7 +17,7 @@ export default function Ayear() {
   const { token } = useAuth();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const { diplomaId: AdminDiplomaId } = useParams();
+  const { diplomaId } = useParams();
 
   const [show, setShow] = useState(false);
   const [del, setDelete] = useState(false);
@@ -45,18 +45,18 @@ export default function Ayear() {
   };
 
   const fetchData = async () => {
-    const data = await indexLevel(token, AdminDiplomaId);
+    const data = await indexLevel(token, diplomaId);
     return data;
   };
 
   const { data: levels, isLoading } = useQuery({
     queryFn: fetchData,
-    queryKey: [`level/${AdminDiplomaId}`],
+    queryKey: [`level/${diplomaId}`],
   });
 
   const sub = async (e) => {
     e.preventDefault();
-    await createLevel(token, AdminDiplomaId, level);
+    await createLevel(token, diplomaId, level);
     setShow(false);
     setLevel("");
   };
@@ -64,7 +64,7 @@ export default function Ayear() {
   const { mutate: subMutation, isSubmitting } = useMutation({
     mutationFn: (e) => sub(e),
     onSuccess: () => {
-      queryClient.invalidateQueries(`level/${AdminDiplomaId}`);
+      queryClient.invalidateQueries(`level/${diplomaId}`);
       toast.success("تمت الإضافة بنجاح");
     },
     onError: (error) => {
@@ -75,7 +75,7 @@ export default function Ayear() {
 
   const dele = async () => {
     if (del && selectedCard) {
-      await deleteLevel(token, AdminDiplomaId, selectedCard);
+      await deleteLevel(token, diplomaId, selectedCard);
       setSelectedCard(null);
       setDelete(!del);
       toast.success("تم الحذف بنجاح");
@@ -88,7 +88,7 @@ export default function Ayear() {
   const { mutate: deleteMutation, isDeleting } = useMutation({
     mutationFn: dele,
     onSuccess: () => {
-      queryClient.invalidateQueries(`level/${AdminDiplomaId}`);
+      queryClient.invalidateQueries(`level/${diplomaId}`);
     },
     onError: (error) => {
       console.log(error);

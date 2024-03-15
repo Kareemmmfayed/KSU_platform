@@ -1,5 +1,5 @@
 import Cards from "./Cards";
-import pro from "../../assets/landing.png";
+import pro from "../../assets/landing.webp";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
