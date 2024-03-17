@@ -21,7 +21,7 @@ export const createApplication = async (token, programID, files) => {
 
   if (response.ok) {
     data.data.filesToUpload.map(async (file, index) => {
-      responses[index] = await Upload(file.uploadUrl, files[index]);
+      responses[index] = await Upload(file.uploadUrl, files[index], file.type);
     });
   }
 

@@ -15,5 +15,5 @@ export const indexApplications = async (token, programId) => {
     }
   );
   let data = await response.json();
-  return data.data.programs;
+  return data.data.applications;
 };

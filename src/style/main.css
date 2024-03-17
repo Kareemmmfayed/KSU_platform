@@ -624,7 +624,7 @@ body {
   font-family: "Cairo", sans-serif;
 }
 .Success__in {
-  height: 75vh;
+  min-height: calc(100vh - 175px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -746,7 +746,6 @@ body {
   position: relative;
 }
 .Programs__in {
-  height: 100%;
   direction: rtl;
   padding: 20px 60px 0;
   min-height: calc(100vh - 175px);
@@ -777,9 +776,9 @@ body {
   cursor: pointer;
   margin: 15px 0;
 }
-.Programs__in ol li a {
-  color: black;
-  text-decoration: none;
+.Programs__in ol li button {
+  background-color: transparent;
+  border: none;
 }
 
 .Applicants {
@@ -812,51 +811,36 @@ body {
 .Applicants__in__top h2 {
   color: var(--main-color);
 }
-.Applicants__in ol {
+.Applicants__in ul {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 40px 155px;
+  list-style: none;
 }
 @media (max-width: 1000px) {
-  .Applicants__in ol {
+  .Applicants__in ul {
     grid-template-columns: 1fr;
   }
 }
-.Applicants__in ol .Applicants__in__bot {
+.Applicants__in ul div {
+  box-shadow: 0px 3.2765216827px 26.2121734619px 0px rgba(0, 0, 0, 0.2509803922);
+  padding: 18px;
+  text-align: center;
   display: flex;
   justify-content: space-between;
-  padding: 20px 40px;
-  box-shadow: 0px 3.2765216827px 26.2121734619px 0px rgba(0, 0, 0, 0.2509803922);
+  background-color: transparent;
+  border: none;
+  font-weight: bold;
 }
-.Applicants__in ol .Applicants__in__bot li {
+.Applicants__in ul div li {
   color: var(--main-color);
   font-weight: 600;
-  font-size: 30px;
+  font-size: 22px;
+  line-height: 56.22px;
 }
-.Applicants__in ol .Applicants__in__bot p {
-  font-weight: 500;
-  font-size: 20px;
-  color: grey;
-}
-.Applicants__in ol .Applicants__in__bot > div {
-  padding-right: 30px;
-}
-.Applicants__in ol .Applicants__in__bot button {
-  align-items: end;
-  display: flex;
-  background: white;
+.Applicants__in ul div button {
+  background-color: transparent;
   border: none;
-}
-.Applicants__in ol .Applicants__in__bot button div {
-  border-radius: 50%;
-  transition: all 0.3s;
-  padding: 10px;
-}
-.Applicants__in ol .Applicants__in__bot button div img {
-  width: 30px;
-}
-.Applicants__in ol .Applicants__in__bot button div:hover {
-  background-color: lightgray;
 }
 
 .Table {
@@ -1298,7 +1282,7 @@ body {
   direction: rtl;
 }
 .Appemp__in {
-  min-height: 100vh;
+  min-height: calc(100vh - 175px);
   padding: 30px 30px 0;
 }
 @media (max-width: 500px) {
@@ -1316,11 +1300,34 @@ body {
     font-size: 25px;
   }
 }
+.Appemp__in form {
+  width: 30%;
+  margin-top: 26px;
+}
+.Appemp__in form div {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  justify-content: space-between;
+  margin: 14px 0;
+}
+.Appemp__in form div label {
+  direction: ltr;
+}
+.Appemp__in form div input {
+  border-radius: 8px;
+  padding: 6px 12px;
+  border: 1px solid grey;
+  width: 60%;
+}
 .Appemp__in__btns {
   display: flex;
   justify-content: center;
   gap: 50px;
-  margin: 30px 0;
+  position: absolute;
+  bottom: 70px;
+  right: 50%;
+  transform: translateX(50%);
 }
 .Appemp__in__btns button {
   width: 145px;

@@ -1,5 +1,3 @@
-import Header from "../Header";
-import Footer from "../Footer";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../services/AuthContext";
 import { COLLEGE } from "../../services/API";
@@ -46,52 +44,48 @@ function AccountInfo() {
   }, []);
 
   return (
-    <>
-      <Header name="< العودة" link="/" />
-      <div className="Account">
-        <div className="Account__inner">
-          <div className="Account__inner__form col-lg-5 col-md-6 col-12">
-            <h2>معلومات الحساب</h2>
-            <form>
-              <input type="text" value={user.name} disabled />
-              <input type="number" value={user.national_id} disabled />
-              <input type="text" value={COLLEGE.name} disabled />
-              <div className="gender">
-                <label htmlFor="gender">: النوع</label>
-                <div className="male">
-                  <label>ذكر</label>
-                  <input
-                    type="radio"
-                    id="male"
-                    name="gender"
-                    value="male"
-                    checked
-                    disabled
-                  />
-                </div>
-                <div className="female">
-                  <label>أنثي</label>
-                  <input
-                    type="radio"
-                    id="female"
-                    name="gender"
-                    value="female"
-                    disabled
-                  />
-                </div>
+    <div className="Account">
+      <div className="Account__inner">
+        <div className="Account__inner__form col-lg-5 col-md-6 col-12">
+          <h2>معلومات الحساب</h2>
+          <form>
+            <input type="text" value={user.name} disabled />
+            <input type="number" value={user.national_id} disabled />
+            <input type="text" value={COLLEGE.name} disabled />
+            <div className="gender">
+              <label htmlFor="gender">: النوع</label>
+              <div className="male">
+                <label>ذكر</label>
+                <input
+                  type="radio"
+                  id="male"
+                  name="gender"
+                  value="male"
+                  checked
+                  disabled
+                />
               </div>
-              <input
-                type="email"
-                placeholder="البريد الإلكتروني"
-                value={user.email}
-                disabled
-              />
-            </form>
-          </div>
+              <div className="female">
+                <label>أنثي</label>
+                <input
+                  type="radio"
+                  id="female"
+                  name="gender"
+                  value="female"
+                  disabled
+                />
+              </div>
+            </div>
+            <input
+              type="email"
+              placeholder="البريد الإلكتروني"
+              value={user.email}
+              disabled
+            />
+          </form>
         </div>
-        <Footer />
       </div>
-    </>
+    </div>
   );
 }
 

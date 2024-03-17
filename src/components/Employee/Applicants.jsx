@@ -1,74 +1,39 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import copy from "../../assets/copy.png";
-import { indexApplications } from "../../services/employee/application";
 import { useAuth } from "../../services/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { indexApplications } from "../../services/employee/application";
+import { useQuery } from "@tanstack/react-query";
+import Spinner from "../Applicant/Spinner";
 
-function Applicants({ diplomaId }) {
-  // const [applicants, setApplicants] = useState("");
-
+function Applicants() {
+  const { token } = useAuth();
   const navigate = useNavigate();
+  const { diplomaId } = useParams();
 
-  const applicants = [
-    {
-      name: "كريم حسام الدين فايد",
-      id: "8568464561643",
-      national_id: "85555555555555",
-    },
+  const fetchData = async () => {
+    const data = await indexApplications(token, diplomaId);
+    return data;
+  };
 
-    {
-      name: "كريم حسام الدين فايد",
-      id: "8568464561643",
-      national_id: "85555555555555",
-    },
+  const { data: applicants, isLoading } = useQuery({
+    queryFn: fetchData,
+    queryKey: [`applicants${diplomaId}`],
+  });
 
-    {
-      name: "كريم حسام الدين فايد",
-      id: "8568464561643",
-      national_id: "85555555555555",
-    },
-
-    {
-      name: "كريم حسام الدين فايد",
-      id: "8568464561643",
-      national_id: "85555555555555",
-    },
-  ];
   const [searchValue, setSearchValue] = useState("");
-  const [filteredApplicants, setFilteredApplicants] = useState();
 
-  // const { token } = useAuth();
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const res = await indexApplications(token, diplomaId);
-  //     setApplicants(res);
-  //   };
-
-  //   fetchData();
-  // }, []);
-
-  const handleSearch = (e) => {
-    const searchTerm = e.target.value;
-    setSearchValue(searchTerm);
-
-    const filtered = applicants.filter(
-      (applicant) =>
-        applicant[0].includes(searchTerm) || applicant[1].includes(searchTerm)
+  if (!isLoading) {
+    var filteredApplicants = applicants?.filter((app) =>
+      app.name.includes(searchValue)
     );
+  }
 
-    setFilteredApplicants(filtered);
+  const copycontent = (content) => {
+    navigator.clipboard.writeText(content);
   };
 
-  const copyToClipboard = (name, number) => {
-    const textToCopy = `${name} - ${number}`;
-    const textArea = document.createElement("textarea");
-    textArea.value = textToCopy;
-    document.body.appendChild(textArea);
-    textArea.select();
-    document.execCommand("copy");
-    document.body.removeChild(textArea);
-  };
+  if (isLoading) return <Spinner />;
 
   return (
     <div className="Applicants">
@@ -79,38 +44,27 @@ function Applicants({ diplomaId }) {
             type="text"
             placeholder="بحث"
             value={searchValue}
-            onChange={handleSearch}
+            onChange={(e) => setSearchValue(e.target.value)}
           />
         </div>
-        <ol>
-          {applicants?.map((applicant) => (
-            <div className="Applicants__in__bot" key={applicant.id}>
-              <button
-                className="Applicants__in__bot__right"
-                style={{
-                  border: "none",
-                  background: "transparent",
-                  display: "block",
-                }}
-                onClick={() => navigate("/employee/Applicant/info")}
-              >
-                <div>
-                  <li>{applicant.name}</li>
-                </div>
-                <p>الرقم القومي : {applicant.national_id}</p>
-              </button>
+        <ul>
+          {filteredApplicants?.map((applicant) => (
+            <div key={applicant.id}>
               <button
                 onClick={() =>
-                  copyToClipboard(applicant.name, applicant.national_id)
+                  navigate(
+                    `/employee/programs/${diplomaId}/applicant/${applicant.id}/info`
+                  )
                 }
               >
-                <div>
-                  <img src={copy} alt="copy" />
-                </div>
+                <li key={applicant.id}>{applicant.name}</li>
+              </button>
+              <button onClick={() => copycontent(`الإسم : ${applicant.name}`)}>
+                <img src={copy} alt="copy" />
               </button>
             </div>
           ))}
-        </ol>
+        </ul>
       </div>
     </div>
   );

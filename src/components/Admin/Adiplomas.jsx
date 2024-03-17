@@ -133,6 +133,7 @@ function Adiplomas() {
     e.preventDefault();
     await createProgramFile(token, programId, fileName, fileType);
     cancelFiles();
+    toast.success("تمت الإضافة بنجاح");
   };
 
   if (isLoading || isDeleting || isSubmitting) return <Spinner />;

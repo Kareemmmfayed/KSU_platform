@@ -1,14 +1,13 @@
-export const Upload = async (URL, file, fileType) => {
+export const download = async (URL, fileType) => {
   let headersList = {
     Accept: "*/*",
     "Content-Type": fileType,
   };
 
   let response = await fetch(`${URL}`, {
-    method: "PUT",
-    body: file["0"],
+    method: "GET",
     headers: headersList,
   });
 
-  return response.ok;
+  return response;
 };

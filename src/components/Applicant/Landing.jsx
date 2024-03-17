@@ -8,12 +8,10 @@ function Landing() {
 
   const handleClick = () => {
     if (isLoggedIn) {
-      if (userType === "applicant") {
-        navigate("/applicant/programs");
+      if (userType === "applicant" || userType === "employee") {
+        navigate("programs");
       } else if (userType === "lecturer") {
         navigate("/lecturer/subjects");
-      } else if (userType === "employee") {
-        navigate("/employee/programs");
       } else if (userType === "admin") {
         navigate("/admin/main");
       } else if (userType === "master") {

@@ -30,56 +30,36 @@
       }
     }
 
-    ol {
+    ul {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 40px 155px;
+      list-style: none;
 
       @media (max-width: 1000px) {
         grid-template-columns: 1fr;
       }
 
-      .Applicants__in__bot {
+      div {
+        box-shadow: 0px 3.276521682739258px 26.212173461914062px 0px #00000040;
+        padding: 18px;
+        text-align: center;
         display: flex;
         justify-content: space-between;
-        padding: 20px 40px;
-        box-shadow: 0px 3.276521682739258px 26.212173461914062px 0px #00000040;
+        background-color: transparent;
+        border: none;
+        font-weight: bold;
 
         li {
           color: var(--main-color);
           font-weight: 600;
-          font-size: 30px;
-        }
-
-        p {
-          font-weight: 500;
-          font-size: 20px;
-          color: grey;
-        }
-
-        > div {
-          padding-right: 30px;
+          font-size: 22px;
+          line-height: 56.22px;
         }
 
         button {
-          align-items: end;
-          display: flex;
-          background: white;
+          background-color: transparent;
           border: none;
-
-          div {
-            border-radius: 50%;
-            transition: all 0.3s;
-            padding: 10px;
-
-            img {
-              width: 30px;
-            }
-          }
-
-          div:hover {
-            background-color: lightgray;
-          }
         }
       }
     }

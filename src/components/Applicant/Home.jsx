@@ -1,20 +1,19 @@
-import Landing from './Landing'
-import Offer from './Offer'
-import Works from './Works'
-import Theslider from './Theslider'
-import Footer from '../Footer'
+import Landing from "./Landing";
+import Offer from "./Offer";
+import Works from "./Works";
+import Theslider from "./Theslider";
+import Footer from "../Footer";
 
 function App() {
-
-    return (
+  return (
     <div className="App">
-        <Landing/>
-        <Offer/>
-        <Works/>
-        <Theslider/>
-        <Footer/>
+      <Landing />
+      <Offer />
+      <Works />
+      <Theslider />
+      <Footer />
     </div>
-    )
+  );
 }
 
-export default App
+export default App;

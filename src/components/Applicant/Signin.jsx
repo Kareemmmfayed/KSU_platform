@@ -1,6 +1,6 @@
 import Header from "../Header";
 import Footer from "../Footer";
-import { Link, redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../services/AuthContext";

@@ -3,7 +3,6 @@
   position: relative;
 
   &__in {
-    height: 100%;
     direction: rtl;
     padding: 20px 60px 0;
     min-height: calc(100vh - 175px);
@@ -37,9 +36,9 @@
         cursor: pointer;
         margin: 15px 0;
 
-        a {
-          color: black;
-          text-decoration: none;
+        button {
+          background-color: transparent;
+          border: none;
         }
       }
     }

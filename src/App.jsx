@@ -24,8 +24,7 @@ const Asubjects = lazy(() => import("./components/Admin/Asubjects"));
 const DipYear = lazy(() => import("./components/Admin/DipYear"));
 const Cric = lazy(() => import("./components/Lecturer/Cric"));
 const Table = lazy(() => import("./components/Lecturer/Table"));
-const Eprograms = lazy(() => import("./components/Employee/Eprograms"));
-const Eprogram = lazy(() => import("./components/Employee/Eprogram"));
+// const Eprogram = lazy(() => import("./components/Employee/Eprogram"));
 const Applicants = lazy(() => import("./components/Employee/Applicants"));
 const Appinfoemp = lazy(() => import("./components/Employee/Appinfoemp"));
 const Appinfo = lazy(() => import("./components/Applicant/Appinfo"));
@@ -57,7 +56,6 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Signin />} />
               <Route path="/signup" element={<Signup />} />
-              <Route path="/account" element={<AccountInfo />} />
               <Route
                 element={
                   <ProtectedRoutes>
@@ -65,10 +63,10 @@ function App() {
                   </ProtectedRoutes>
                 }
               >
+                <Route path="/account" element={<AccountInfo />} />
+                <Route path="/programs" element={<Programs />} />
+                <Route path="/programs/:diplomaId" element={<Pdetails />} />
                 <Route path="/applicant">
-                  <Route path="programs" element={<Programs />} />
-                  <Route path="programs/:diplomaId" element={<Pdetails />} />
-
                   <Route path="programs/Adetails" element={<Apdetails />} />
                   <Route
                     path="programs/:diplomaId/application"
@@ -81,10 +79,14 @@ function App() {
                 </Route>
 
                 <Route path="/employee">
-                  <Route path="programs" element={<Eprograms />} />
-                  <Route path="program/details" element={<Eprogram />} />
-                  <Route path="Applicant/info" element={<Appinfoemp />} />
-                  <Route path="applicants" element={<Applicants />} />
+                  <Route
+                    path="programs/:diplomaId/applicants"
+                    element={<Applicants />}
+                  />
+                  <Route
+                    path="programs/:diplomaId/applicant/:appId/info"
+                    element={<Appinfoemp />}
+                  />
                 </Route>
 
                 <Route path="lecturer">

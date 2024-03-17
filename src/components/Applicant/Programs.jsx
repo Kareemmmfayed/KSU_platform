@@ -1,5 +1,4 @@
-/* eslint-disable react/prop-types */
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "../../services/AuthContext";
 import { indexPrograms } from "../../services/applicant/program/index";
@@ -10,6 +9,7 @@ import Spinner from "../Applicant/Spinner";
 function Programs() {
   const [searchTerm, setSearchTerm] = useState("");
   const { token, userType } = useAuth();
+  const navigate = useNavigate();
 
   const fetchData = async () => {
     if (userType === "applicant") {
@@ -52,10 +52,9 @@ function Programs() {
         <ol>
           {filteredPrograms.map((diploma) => (
             <li key={diploma.id}>
-              {/* <button onClick={() => details(diploma.id)}>
+              <button onClick={() => navigate(`${diploma.id}`)}>
                 {diploma.name}
-              </button> */}
-              <Link to={`${diploma.id}`}>{diploma.name}</Link>
+              </button>
             </li>
           ))}
         </ol>

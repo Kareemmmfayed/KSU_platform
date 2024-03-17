@@ -1,6 +1,6 @@
 import { API_URL } from "../../API";
 
-export const showEmployee = async (
+export const showApplicant = async (
   token,
   collegeId,
   programId,
@@ -20,5 +20,5 @@ export const showEmployee = async (
     }
   );
   let data = await response.json();
-  return data.data.employee;
+  return data.data.applicant;
 };

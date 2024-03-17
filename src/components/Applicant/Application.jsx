@@ -48,6 +48,7 @@ function Application() {
                   type="file"
                   id={`up-${index}`}
                   {...register(`files.${index}`)}
+                  required
                 />
               </div>
             ))}
