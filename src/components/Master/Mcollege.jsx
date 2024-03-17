@@ -3,7 +3,7 @@ import plus from "../../assets/plusb.png";
 import trash from "../../assets/trash.png";
 import checked from "../../assets/checked.png";
 import notchecked from "../../assets/notchecked.png";
-import col from "../../assets/Collage.png";
+import col from "../../assets/Collage.webp";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../services/AuthContext";

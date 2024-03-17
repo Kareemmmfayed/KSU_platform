@@ -12,8 +12,6 @@ function Application() {
   const navigate = useNavigate();
   const { diplomaId } = useParams();
 
-  const [myFiles, setMyFiles] = useState([]);
-
   const fetchData = async () => {
     const files = await indexProgramFiles(token, diplomaId);
     return files;
@@ -25,16 +23,13 @@ function Application() {
   });
 
   const onSub = async (values) => {
-    console.log(values);
-    const { up_ } = values;
-    // await createApplication(token, diplomaId, values);
+    const response = await createApplication(token, diplomaId, values.files);
+    if (response) {
+      navigate("/applicant/success");
+    }
   };
 
-  const { register, handleSubmit, errors, getValues, getFieldState } =
-    useForm();
-
-  console.log(getValues());
-  console.log(getFieldState());
+  const { register, handleSubmit } = useForm();
 
   if (isLoading) return <Spinner />;
 
@@ -52,18 +47,13 @@ function Application() {
                 <input
                   type="file"
                   id={`up-${index}`}
-                  {...register(`up-${index}`)}
+                  {...register(`files.${index}`)}
                 />
               </div>
             ))}
             <div className="btns">
               <button className="left">حفظ</button>
-              <button
-                className="right btnbtn"
-                // onClick={() => navigate("/applicant/success")}
-              >
-                إرسال
-              </button>
+              <button className="right btnbtn">إرسال</button>
             </div>
           </form>
         </div>

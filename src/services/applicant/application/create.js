@@ -16,10 +16,18 @@ export const createApplication = async (token, programID, files) => {
     }
   );
 
-  let data = response.json();
-  data.data.filesToUpload.map(async (file) => {
-    await Upload(file.uploadUrl);
-  });
+  let data = await response.json();
+  let responses = [];
 
-  return response;
+  if (response.ok) {
+    data.data.filesToUpload.map(async (file, index) => {
+      responses[index] = await Upload(file.uploadUrl, files[index]);
+    });
+  }
+
+  if (responses.every((response) => response === true)) {
+    return true;
+  } else {
+    return false;
+  }
 };

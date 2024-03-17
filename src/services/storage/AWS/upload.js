@@ -4,14 +4,11 @@ export const Upload = async (URL, file) => {
     "Content-Type": "application/vnd.ms-excel",
   };
 
-  const formData = new FormData();
-  formData.append("file", file);
-
   let response = await fetch(`${URL}`, {
     method: "PUT",
-    body: formData,
+    body: file["0"],
     headers: headersList,
   });
 
-  return response;
+  return response.ok;
 };

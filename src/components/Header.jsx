@@ -3,7 +3,7 @@ import logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
 import { useAuth } from "../services/AuthContext";
 import pfp from "../assets/pfp.png";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { showApplicant } from "../services/applicant/me/show";
 import { showEmployee } from "../services/employee/me/show";
@@ -43,28 +43,6 @@ function Header(props) {
     retry: false,
   });
 
-  // useEffect(() => {
-  //   const fetchName = async () => {
-  //     if (userType === "applicant") {
-  //       const res = await showApplicant(token);
-  //       setUserName(res.name);
-  //     } else if (userType === "employee") {
-  //       const res = await showEmployee(token);
-  //       setUserName(res.name);
-  //     } else if (userType === "admin") {
-  //       const res = await showAdmin(token);
-  //       setUserName(res.name);
-  //     } else if (userType === "master") {
-  //       const res = await showMaster(token);
-  //       setUserName(res.name);
-  //     }
-  //   };
-
-  //   if (isLoggedIn) {
-  //     fetchName();
-  //   }
-  // }, []);
-
   const show = () => {
     setList(!list);
   };
@@ -79,9 +57,9 @@ function Header(props) {
   return (
     <div className="Header">
       <div className="Header__right">
-        <div className="Header__right__logo">
+        <button className="Header__right__logo" onClick={() => navigate("/")}>
           <img src={logo} alt="logo" />
-        </div>
+        </button>
         <div className="Header__right__text">
           <h3>التقديم علي الدبلومات</h3>
           <p>جامعة كفر الشيخ</p>
