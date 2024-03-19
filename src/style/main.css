@@ -1301,8 +1301,18 @@ body {
   }
 }
 .Appemp__in form {
-  width: 30%;
+  width: 40%;
   margin-top: 26px;
+}
+@media (max-width: 1400px) {
+  .Appemp__in form {
+    width: 70%;
+  }
+}
+@media (max-width: 700px) {
+  .Appemp__in form {
+    width: 90%;
+  }
 }
 .Appemp__in form div {
   display: flex;
@@ -1342,6 +1352,10 @@ body {
   border: 1px solid red;
   color: red;
   background-color: white;
+}
+.Appemp__in__btns button:first-of-type:hover {
+  background-color: red;
+  color: white;
 }
 
 .Addmain {

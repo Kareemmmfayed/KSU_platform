@@ -1,8 +1,7 @@
 import { API_URL, COLLEGE } from "../../API";
 import { showApplicant } from "../applicant/show";
-import { download } from "../../storage/AWS/download";
 
-export const showApplication = async (token, programId, applicantionId) => {
+export const showApplication = async (token, programId, applicationId) => {
   let headersList = {
     Accept: "*/*",
     Authorization: `Bearer ${token}`,
@@ -10,7 +9,7 @@ export const showApplication = async (token, programId, applicantionId) => {
   };
 
   let response = await fetch(
-    `${API_URL}/employee/collages/${COLLEGE.id}/programs/${programId}/applications/${applicantionId}`,
+    `${API_URL}/employee/collages/${COLLEGE.id}/programs/${programId}/applications/${applicationId}`,
     {
       method: "GET",
       headers: headersList,
@@ -28,10 +27,10 @@ export const showApplication = async (token, programId, applicantionId) => {
 
   let files = [];
 
-  data?.data.files.map(async (file, index) => {
-    let picture = await download(file.downloadUrl, file.type);
-    // files[index] = { name: file.original_name, picture: picture };
-  });
+  for (let index = 0; index < data.data.files.length; index++) {
+    let file = data.data.files[index];
+    files.push([file.original_name, file.downloadUrl]);
+  }
 
-  // return { name: applicant.name, id: applicant.national_id, files: files };
+  return { name: applicant.name, id: applicant.national_id, files: files };
 };
