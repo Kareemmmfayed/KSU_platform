@@ -1,16 +1,18 @@
 import home from "../../assets/home.png";
 import plus from "../../assets/plusb.png";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "../../services/AuthContext";
 import { indexPayments } from "../../services/admin/payments/index";
 import { createPayment } from "../../services/admin/payments/create";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import Spinner from "../Applicant/Spinner";
 import toast from "react-hot-toast";
 
 function Apay() {
   const { token } = useAuth();
   const navigate = useNavigate();
-  const { paymentId } = useParams();
+  const queryClient = useQueryClient();
 
   const [show, setShow] = useState(false);
 
@@ -26,7 +28,7 @@ function Apay() {
   const [kind, setKind] = useState();
 
   const fetchData = async () => {
-    const data = await indexPayments(token, paymentId);
+    const data = await indexPayments(token);
     return data;
   };
 
@@ -37,7 +39,7 @@ function Apay() {
 
   const sub = async (e) => {
     e.preventDefault();
-    await createPayment(token, kind, paymentId);
+    await createPayment(token, kind);
     setShow(false);
     setKind("");
   };
@@ -45,7 +47,7 @@ function Apay() {
   const { mutate: subMutation, isSubmitting } = useMutation({
     mutationFn: (e) => sub(e),
     onSuccess: () => {
-      queryClient.invalidateQueries(`payments${yearId}`);
+      queryClient.invalidateQueries(`payments`);
       toast.success("تمت الإضافة بنجاح");
     },
     onError: (error) => {

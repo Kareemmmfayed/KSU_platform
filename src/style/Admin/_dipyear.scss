@@ -37,6 +37,7 @@
         }
 
         .card {
+          position: relative;
           box-shadow: 0px 3.276521682739258px 26.212173461914062px 0px #00000040;
           padding: 25px;
           text-align: center;
@@ -45,12 +46,6 @@
             color: var(--main-color);
             font-weight: 600;
             font-size: 32px;
-          }
-
-          p:first-of-type {
-            color: var(--main-color);
-            font-weight: 500;
-            font-size: 28px;
           }
 
           button {

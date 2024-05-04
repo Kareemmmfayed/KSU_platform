@@ -5,7 +5,7 @@ import { indexCourses } from "../../services/instructor/courses/index";
 import { useQuery } from "@tanstack/react-query";
 import Spinner from "../Applicant/Spinner";
 
-function Cric({ pickDiplomaId }) {
+function Cric() {
   const { token } = useAuth();
   const navigate = useNavigate();
 
@@ -27,11 +27,6 @@ function Cric({ pickDiplomaId }) {
     );
   }
 
-  const handleClick = (id) => {
-    pickDiplomaId(id);
-    navigate("/lecturer/table");
-  };
-
   if (isLoading) return <Spinner />;
 
   return (
@@ -49,7 +44,7 @@ function Cric({ pickDiplomaId }) {
         <ol>
           {filteredPrograms.map((sub) => (
             <li key={sub.id}>
-              <button onClick={() => handleClick(sub.id)}>{sub.name}</button>
+              <button onClick={() => navigate(`${sub.id}`)}>{sub.name}</button>
             </li>
           ))}
         </ol>

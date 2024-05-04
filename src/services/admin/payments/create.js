@@ -1,7 +1,6 @@
 import { API_URL, COLLEGE } from "../../API";
-// import { createProgramFiles } from "../program_files/create";
 
-export const createPayment = async (token, kind, programId) => {
+export const createPayment = async (token, kind) => {
   let headersList = {
     Accept: "*/*",
     Authorization: `Bearer ${token}`,
@@ -13,7 +12,7 @@ export const createPayment = async (token, kind, programId) => {
   });
 
   let response = await fetch(
-    `${API_URL}/admin/collages/${COLLEGE.id}/programs/${programId}/payments`,
+    `${API_URL}/admin/collages/${COLLEGE.id}/payments`,
     {
       method: "POST",
       body: bodyContent,

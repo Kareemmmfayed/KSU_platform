@@ -11,6 +11,8 @@ import { indexPrograms } from "../../services/admin/program";
 import { createProgram } from "../../services/admin/program/create";
 import { deleteProgram } from "../../services/admin/program/delete";
 import { createProgramFile } from "../../services/admin/files/create";
+import { indexYears } from "../../services/admin/year/index";
+import { indexPayments } from "../../services/admin/payments/index";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Spinner from "../Applicant/Spinner";
 import toast from "react-hot-toast";
@@ -65,6 +67,26 @@ function Adiplomas() {
     queryKey: ["programs"],
   });
 
+  const fetchYears = async () => {
+    const res = await indexYears(token);
+    return res;
+  };
+
+  const { data: years } = useQuery({
+    queryFn: fetchYears,
+    queryKey: ["years"],
+  });
+
+  const fetchPayments = async () => {
+    const res = await indexPayments(token);
+    return res;
+  };
+
+  const { data: payments } = useQuery({
+    queryFn: fetchPayments,
+    queryKey: ["payments"],
+  });
+
   const sub = async (e) => {
     e.preventDefault();
     await createProgram(
@@ -117,6 +139,8 @@ function Adiplomas() {
   const [programId, setProgramId] = useState("");
 
   const [files, setFiles] = useState(false);
+  const [showMyList, setShowMyList] = useState(false);
+  const [assignPayment, setAssignPayment] = useState(false);
 
   const onShowFiles = (id) => {
     setFiles(true);
@@ -129,11 +153,46 @@ function Adiplomas() {
     setFiles(false);
   };
 
+  const addFile = (id) => {
+    onShowFiles(id);
+    setShowMyList(false);
+  };
+
+  const addPayment = () => {
+    setAssignPayment(true);
+    setShowMyList(false);
+  };
+
   const subFile = async (e) => {
     e.preventDefault();
     await createProgramFile(token, programId, fileName, fileType);
     cancelFiles();
     toast.success("تمت الإضافة بنجاح");
+  };
+
+  const [selectedPayments, setSelectedPayments] = useState([]);
+  const [prices, setPrices] = useState([]);
+
+  const handleSelectChange = (event) => {
+    const selectedPaymentId = event.target.value.split(",")[0];
+    const selectedPaymentKind = event.target.value.split(",")[1];
+    setSelectedPayments((prevState) => [
+      ...prevState,
+      { id: selectedPaymentId, name: selectedPaymentKind },
+    ]);
+  };
+
+  const cancelAssigning = () => {
+    setAssignPayment(false);
+    setSelectedPayments([]);
+  };
+
+  const deleteLastSelectedPayment = () => {
+    setSelectedPayments((prevState) => {
+      const updatedSelectedPayments = [...prevState];
+      updatedSelectedPayments.pop();
+      return updatedSelectedPayments;
+    });
   };
 
   if (isLoading || isDeleting || isSubmitting) return <Spinner />;
@@ -158,7 +217,10 @@ function Adiplomas() {
               <div className={del ? "card delete" : "card"} key={program.id}>
                 <h2>{program.name}</h2>
                 {del ? (
-                  <button onClick={() => toggleCardState(program.id)}>
+                  <button
+                    onClick={() => toggleCardState(program.id)}
+                    className="this"
+                  >
                     <img
                       src={selectedCard === program.id ? checked : notchecked}
                       alt="circle"
@@ -168,13 +230,30 @@ function Adiplomas() {
                   <>
                     <button
                       onClick={() => navigate(`${program.id}/years`)}
+                      className="this"
                     ></button>
                     <button
                       className="files"
-                      onClick={() => onShowFiles(program.id)}
+                      onClick={() => setShowMyList(!showMyList)}
                     >
                       <img src={myFiles} alt="Add files" />
                     </button>
+                    {showMyList && (
+                      <div className="myList">
+                        <ul>
+                          <li>
+                            <button onClick={() => addFile(program.id)}>
+                              إضافة ملف
+                            </button>
+                          </li>
+                          <li>
+                            <button onClick={() => addPayment()}>
+                              إضافة رسوم
+                            </button>
+                          </li>
+                        </ul>
+                      </div>
+                    )}
                   </>
                 )}
               </div>
@@ -260,6 +339,49 @@ function Adiplomas() {
             </div>
             <div>
               <button onClick={() => cancelFiles()}>إلغاء</button>
+              <button type="submit" className="btnbtn">
+                إضافة
+              </button>
+            </div>
+          </form>
+        )}
+        {assignPayment && (
+          <form style={{ height: "80%" }} className="Assign">
+            <div>
+              <label htmlFor="year">العام الدراسي :</label>
+              <select required id="year">
+                <option selected disabled></option>
+                {years.map((year) => (
+                  <option value={year.id} key={year.id}>
+                    {year.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label htmlFor="payments">قائمة المدفوعات :</label>
+              <select required id="payments" onChange={handleSelectChange}>
+                <option selected disabled></option>
+                {payments.map((pay) => (
+                  <option key={pay.id} value={`${pay.id},${pay.payment_kind}`}>
+                    {pay.payment_kind}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div style={{ height: "146px" }}>
+              <ul className="myList">
+                {selectedPayments?.map((pay) => (
+                  <div>
+                    <li key={pay.id}>{pay.name}</li>
+                    <input type="number" />
+                  </div>
+                ))}
+              </ul>
+              <button onClick={() => deleteLastSelectedPayment()}>إحذف</button>
+            </div>
+            <div>
+              <button onClick={() => cancelAssigning()}>إلغاء</button>
               <button type="submit" className="btnbtn">
                 إضافة
               </button>

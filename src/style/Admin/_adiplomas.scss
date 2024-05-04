@@ -41,6 +41,31 @@
           padding: 25px;
           text-align: center;
 
+          .myList {
+            position: absolute;
+            background: var(--main-color);
+            left: -41px;
+            top: 63px;
+            border-radius: 8px;
+
+            ul {
+              list-style: none;
+
+              li {
+                margin: 13px 0;
+                button {
+                  background: none;
+                  border: none;
+                  color: white;
+
+                  &:hover {
+                    color: lightblue;
+                  }
+                }
+              }
+            }
+          }
+
           h2 {
             color: var(--main-color);
             font-weight: 600;
@@ -53,7 +78,7 @@
             font-size: 28px;
           }
 
-          button {
+          button.this {
             position: absolute;
             width: 100%;
             height: 100%;
@@ -69,9 +94,14 @@
             }
           }
 
-          .files {
-            width: 18%;
+          button.files {
+            position: absolute;
+            width: 20%;
             height: 52%;
+            left: 0;
+            top: 0;
+            border: none;
+            background: transparent;
 
             img {
               width: 28px;
@@ -137,6 +167,18 @@
           }
         }
       }
+    }
+  }
+
+  form.Assign {
+    ul.myList {
+      list-style: none;
+      text-align: right;
+      padding-right: 0;
+      border: 1px solid grey;
+      border-radius: 6px;
+      overflow-y: scroll;
+      width: 80%;
     }
   }
 }

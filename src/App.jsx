@@ -16,7 +16,6 @@ const Addmain = lazy(() => import("./components/Admin/Addmain"));
 const Adiplomas = lazy(() => import("./components/Admin/Adiplomas"));
 const Aemp = lazy(() => import("./components/Admin/Aemp"));
 const Alect = lazy(() => import("./components/Admin/Alect"));
-const BeforePay = lazy(() => import("./components/Admin/BeforePay"));
 const Apay = lazy(() => import("./components/Admin/Apay"));
 const Ayear = lazy(() => import("./components/Admin/Ayear"));
 const Semester = lazy(() => import("./components/Admin/Semester"));
@@ -24,7 +23,6 @@ const Asubjects = lazy(() => import("./components/Admin/Asubjects"));
 const DipYear = lazy(() => import("./components/Admin/DipYear"));
 const Cric = lazy(() => import("./components/Lecturer/Cric"));
 const Table = lazy(() => import("./components/Lecturer/Table"));
-// const Eprogram = lazy(() => import("./components/Employee/Eprogram"));
 const Applicants = lazy(() => import("./components/Employee/Applicants"));
 const Appinfoemp = lazy(() => import("./components/Employee/Appinfoemp"));
 const Appinfo = lazy(() => import("./components/Applicant/Appinfo"));
@@ -90,7 +88,7 @@ function App() {
                 </Route>
 
                 <Route path="lecturer">
-                  <Route path="table" element={<Table />} />
+                  <Route path="subjects/:subId" element={<Table />} />
                   <Route path="subjects" element={<Cric />} />
                 </Route>
 
@@ -104,8 +102,7 @@ function App() {
                     path="diplomas/:diplomaId/years/:yearId/semesters/:semesterId/courses"
                     element={<Asubjects />}
                   />
-                  <Route path="payments" element={<BeforePay />} />
-                  <Route path="payments/:paymentId" element={<Apay />} />
+                  <Route path="payments" element={<Apay />} />
                   <Route
                     path="diplomas/:diplomaId/years/:yearId/semesters"
                     element={<Semester />}

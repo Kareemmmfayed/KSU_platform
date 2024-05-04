@@ -110,20 +110,18 @@ function DipYear() {
             <img src={trash} alt="trash" />
           </button>
         </div>
-        <div className="Adiplomas__in__body">
+        <div className="DipYear__in__body">
           <div className="cards">
             {years?.map((year) => (
               <div className={del ? "card delete" : "card"} key={year.id}>
                 <h2>{year.name}</h2>
-                {del ? (
+                {del && (
                   <button onClick={() => toggleCardState(year.id)}>
                     <img
                       src={selectedCard === year.id ? checked : notchecked}
                       alt="circle"
                     />
                   </button>
-                ) : (
-                  <button></button>
                 )}
               </div>
             ))}

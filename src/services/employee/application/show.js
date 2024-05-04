@@ -32,5 +32,10 @@ export const showApplication = async (token, programId, applicationId) => {
     files.push([file.original_name, file.downloadUrl]);
   }
 
-  return { name: applicant.name, id: applicant.national_id, files: files };
+  return {
+    name: applicant.name,
+    id: applicant.national_id,
+    files: files,
+    application: data.data.application,
+  };
 };

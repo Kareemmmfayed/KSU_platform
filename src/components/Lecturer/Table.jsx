@@ -3,20 +3,21 @@ import { useAuth } from "../../services/AuthContext";
 import { indexStudents } from "../../services/instructor/students/index";
 import { useQuery } from "@tanstack/react-query";
 import Spinner from "../Applicant/Spinner";
+import { useParams } from "react-router-dom";
 
-function Table({ diplomaId }) {
+function Table() {
   const { token } = useAuth();
-
+  const { subId } = useParams();
   const [searchTerm, setSearchTerm] = useState("");
 
   const fetchData = async () => {
-    const res = await indexStudents(token, diplomaId);
+    const res = await indexStudents(token, subId);
     return res;
   };
 
   const { data: students, isLoading } = useQuery({
     queryFn: fetchData,
-    queryKey: [`students${diplomaId}`],
+    queryKey: [`students${subId}`],
   });
 
   if (!isLoading) {

@@ -82,13 +82,14 @@
 
     form {
       position: absolute;
-      top: 95px;
+      top: 137px;
       left: 50%;
       width: 45%;
-      height: 42%;
+      height: 210px;
       background: white;
       transform: translate(-50%, 0);
-      box-shadow: 0px 3.276521682739258px 26.212173461914062px 0px #00000040;
+      box-shadow: 0px 3.2765216827px 26.2121734619px 0px
+        rgba(0, 0, 0, 0.2509803922);
       padding: 20px 10px 0;
 
       div {
@@ -115,8 +116,8 @@
 
       div:last-of-type {
         justify-content: center;
-        gap: 52px;
         margin-top: 60px;
+        gap: 52px;
 
         button {
           border: none;
