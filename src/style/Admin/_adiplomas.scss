@@ -180,5 +180,16 @@
       overflow-y: scroll;
       width: 80%;
     }
+    .dltBtn {
+      border: none;
+      border-radius: 6px;
+      color: white;
+      padding: 9px 14px;
+      width: 78px;
+      height: 48px;
+      background-color: #cc5454;
+      align-self: flex-end;
+      margin-bottom: 20px;
+    }
   }
 }

@@ -13,6 +13,7 @@ import { deleteProgram } from "../../services/admin/program/delete";
 import { createProgramFile } from "../../services/admin/files/create";
 import { indexYears } from "../../services/admin/year/index";
 import { indexPayments } from "../../services/admin/payments/index";
+import { AddPaymentToProgram } from "../../services/admin/payments/addPaymentToProgram";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Spinner from "../Applicant/Spinner";
 import toast from "react-hot-toast";
@@ -158,7 +159,8 @@ function Adiplomas() {
     setShowMyList(false);
   };
 
-  const addPayment = () => {
+  const addPayment = (id) => {
+    setProgramId(id);
     setAssignPayment(true);
     setShowMyList(false);
   };
@@ -185,17 +187,56 @@ function Adiplomas() {
   const cancelAssigning = () => {
     setAssignPayment(false);
     setSelectedPayments([]);
+    setPrices([]);
   };
 
-  const deleteLastSelectedPayment = () => {
-    setSelectedPayments((prevState) => {
-      const updatedSelectedPayments = [...prevState];
-      updatedSelectedPayments.pop();
-      return updatedSelectedPayments;
+  const handlePriceChange = (index, value) => {
+    setPrices((prevPrices) => {
+      const updatedPrices = [...prevPrices];
+      updatedPrices[index] = Number(value);
+      return updatedPrices;
     });
   };
 
-  if (isLoading || isDeleting || isSubmitting) return <Spinner />;
+  const deleteLastSelectedPayment = () => {
+    setSelectedPayments((prevSelectedPayments) => {
+      const updatedSelectedPayments = [...prevSelectedPayments];
+      updatedSelectedPayments.pop();
+      return updatedSelectedPayments;
+    });
+
+    setPrices((prevPrices) => {
+      const updatedPrices = [...prevPrices];
+      updatedPrices.pop();
+      return updatedPrices;
+    });
+  };
+
+  const [yearId, setYearId] = useState("");
+
+  const extractIds = (array) => {
+    return array.map((item) => item.id);
+  };
+
+  const AddToProgram = async (e) => {
+    e.preventDefault();
+    const idsOnly = extractIds(selectedPayments);
+    await AddPaymentToProgram(token, programId, yearId, idsOnly, prices);
+  };
+
+  const { mutate: AssignPayment, isAssigning } = useMutation({
+    mutationFn: (e) => AddToProgram(e),
+    onSuccess: () => {
+      toast.success("تم إضافة الرسوم بنجاح");
+    },
+    onError: (error) => {
+      console.log(error);
+      toast.error("حدث خطأ ما");
+    },
+  });
+
+  if (isLoading || isDeleting || isSubmitting || isAssigning)
+    return <Spinner />;
 
   return (
     <div className="Adiplomas">
@@ -247,7 +288,7 @@ function Adiplomas() {
                             </button>
                           </li>
                           <li>
-                            <button onClick={() => addPayment()}>
+                            <button onClick={() => addPayment(program.id)}>
                               إضافة رسوم
                             </button>
                           </li>
@@ -346,10 +387,19 @@ function Adiplomas() {
           </form>
         )}
         {assignPayment && (
-          <form style={{ height: "80%" }} className="Assign">
+          <form
+            style={{ height: "80%" }}
+            className="Assign"
+            onSubmit={AssignPayment}
+          >
             <div>
               <label htmlFor="year">العام الدراسي :</label>
-              <select required id="year">
+              <select
+                required
+                id="year"
+                value={yearId}
+                onChange={(e) => setYearId(e.target.value)}
+              >
                 <option selected disabled></option>
                 {years.map((year) => (
                   <option value={year.id} key={year.id}>
@@ -371,14 +421,27 @@ function Adiplomas() {
             </div>
             <div style={{ height: "146px" }}>
               <ul className="myList">
-                {selectedPayments?.map((pay) => (
+                {selectedPayments?.map((pay, index) => (
                   <div>
                     <li key={pay.id}>{pay.name}</li>
-                    <input type="number" />
+                    <input
+                      type="number"
+                      key={index}
+                      value={prices[index]}
+                      onChange={(e) => handlePriceChange(index, e.target.value)}
+                      required
+                    />
                   </div>
                 ))}
+                <div></div>
               </ul>
-              <button onClick={() => deleteLastSelectedPayment()}>إحذف</button>
+              <button
+                onClick={() => deleteLastSelectedPayment()}
+                className="dltBtn"
+                type="button"
+              >
+                إحذف
+              </button>
             </div>
             <div>
               <button onClick={() => cancelAssigning()}>إلغاء</button>
