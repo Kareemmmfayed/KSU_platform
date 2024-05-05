@@ -1,10 +1,14 @@
 import home from "../../assets/home.png";
 import plus from "../../assets/plusb.png";
+import trash from "../../assets/trash.png";
+import notchecked from "../../assets/notchecked.png";
+import checked from "../../assets/checked.png";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "../../services/AuthContext";
 import { indexPayments } from "../../services/admin/payments/index";
 import { createPayment } from "../../services/admin/payments/create";
+import { deletePayment } from "../../services/admin/payments/delete";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Spinner from "../Applicant/Spinner";
 import toast from "react-hot-toast";
@@ -15,6 +19,18 @@ function Apay() {
   const queryClient = useQueryClient();
 
   const [show, setShow] = useState(false);
+  const [del, setDelete] = useState(false);
+  const [selectedCard, setSelectedCard] = useState(null);
+
+  const toggleCardState = (id) => {
+    if (del) {
+      if (selectedCard === id) {
+        setSelectedCard(null);
+      } else {
+        setSelectedCard(id);
+      }
+    }
+  };
 
   const addItem = () => {
     setShow(true);
@@ -56,7 +72,30 @@ function Apay() {
     },
   });
 
-  if (isLoading || isSubmitting) return <Spinner />;
+  const dele = async () => {
+    if (del && selectedCard) {
+      await deletePayment(token, selectedCard);
+      setSelectedCard(null);
+      setDelete(!del);
+      toast.success("تم الحذف بنجاح");
+    } else {
+      setDelete(!del);
+      setSelectedCard(null);
+    }
+  };
+
+  const { mutate: deleteMutation, isDeleting } = useMutation({
+    mutationFn: dele,
+    onSuccess: () => {
+      queryClient.invalidateQueries("payments");
+    },
+    onError: (error) => {
+      console.log(error);
+      toast.error("حدث خطأ ما");
+    },
+  });
+
+  if (isLoading || isSubmitting || isDeleting) return <Spinner />;
 
   return (
     <div className="Apay">
@@ -68,12 +107,26 @@ function Apay() {
           <button onClick={addItem}>
             <img src={plus} alt="plus" />
           </button>
+          <button onClick={deleteMutation} disabled={isDeleting}>
+            <img src={trash} alt="trash" />
+          </button>
         </div>
         <div className="Apay__in__body">
           <div className="cards">
             {payments?.map((e) => (
-              <div className="card" key={e.id}>
+              <div className={del ? "card delete" : "card"} key={e.id}>
                 <p>{e.payment_kind}</p>
+                {del && (
+                  <button
+                    onClick={() => toggleCardState(e.id)}
+                    className="this"
+                  >
+                    <img
+                      src={selectedCard === e.id ? checked : notchecked}
+                      alt="circle"
+                    />
+                  </button>
+                )}
               </div>
             ))}
           </div>

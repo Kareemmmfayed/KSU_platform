@@ -1,13 +1,15 @@
 import { API_URL, COLLEGE } from "../../API";
+import { createStudent } from "../student/create";
 
 export const UpdateApplication = async (
   token,
-  programID,
+  programId,
   applicationId,
   status,
   feedback,
   aFees,
-  pFees
+  pFees,
+  applicantId
 ) => {
   let headersList = {
     Accept: "*/*",
@@ -23,7 +25,7 @@ export const UpdateApplication = async (
   });
 
   let response = await fetch(
-    `${API_URL}/employee/collages/${COLLEGE.id}/programs/${programID}/applications/${applicationId}`,
+    `${API_URL}/employee/collages/${COLLEGE.id}/programs/${programId}/applications/${applicationId}`,
     {
       method: "PATCH",
       body: bodyContent,
@@ -31,6 +33,8 @@ export const UpdateApplication = async (
     }
   );
 
-  console.log(await response.json());
+  if (aFees == true && status == "first acceptance") {
+    await createStudent(token, applicantId);
+  }
   return response;
 };

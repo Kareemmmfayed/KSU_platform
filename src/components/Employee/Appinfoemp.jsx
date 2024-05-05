@@ -1,9 +1,8 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../services/AuthContext";
 import { showApplication } from "../../services/employee/application/show";
-import { useQuery } from "@tanstack/react-query";
 import { UpdateApplication } from "../../services/employee/application/update";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Spinner from "../Applicant/Spinner";
 
 function Appinfoemp() {
@@ -11,39 +10,31 @@ function Appinfoemp() {
   const navigate = useNavigate();
   const { diplomaId, appId } = useParams();
 
-  const fetchData = async () => {
-    const data = await showApplication(token, diplomaId, appId);
-    return data;
-  };
+  const [Applicant, setApplicant] = useState({});
+  const [status, setStatus] = useState("");
+  const [feedback, setFeedback] = useState("");
+  const [applyingFees, setApplyingFees] = useState(false);
+  const [programFees, setProgramFees] = useState(false);
+  const [applicantId, setApplicantId] = useState("");
 
-  const { data: Applicant, isLoading } = useQuery({
-    queryFn: fetchData,
-    queryKey: [`Applicant${appId}`],
-  });
+  const [loading, setLoading] = useState(true);
 
-  const [status, setStatus] = useState(
-    Applicant ? Applicant.application.status : ""
-  );
-  const [feedback, setFeedback] = useState(
-    Applicant ? Applicant.application.feedback : ""
-  );
-
-  const [applyingFees, setApplyingFees] = useState(
-    Applicant ? Applicant.application.applying_fees_status : false
-  );
-
-  const [programFees, setProgramFees] = useState(
-    Applicant ? Applicant.application.program_fees_status : false
-  );
+  useEffect(() => {
+    const fetchApplication = async () => {
+      const data = await showApplication(token, diplomaId, appId);
+      setApplicant(data);
+      setStatus(data?.application?.status || "");
+      setFeedback(data?.application?.feedback || "");
+      setApplyingFees(data?.application?.applying_fees_status || false);
+      setProgramFees(data?.application?.program_fees_status || false);
+      setApplicantId(data?.application?.applicant_id);
+      setLoading(false);
+    };
+    fetchApplication();
+  }, [token, diplomaId, appId]);
 
   const onSub = async (e) => {
     e.preventDefault();
-
-    console.log(typeof status);
-    console.log(typeof feedback);
-    console.log(typeof applyingFees);
-    console.log(typeof programFees);
-
     await UpdateApplication(
       token,
       diplomaId,
@@ -51,12 +42,13 @@ function Appinfoemp() {
       status,
       feedback,
       applyingFees,
-      programFees
+      programFees,
+      applicantId
     );
     navigate(`/employee/programs/${diplomaId}/applicants`);
   };
 
-  if (isLoading) return <Spinner />;
+  if (loading) return <Spinner />;
 
   return (
     <div className="Appemp">
@@ -65,13 +57,18 @@ function Appinfoemp() {
         <form onSubmit={onSub}>
           <div>
             <label htmlFor="name"> : الإسم بالكامل</label>
-            <input type="text" id="name" disabled value={Applicant?.name} />
+            <input
+              type="text"
+              id="name"
+              disabled
+              value={Applicant?.name || ""}
+            />
           </div>
           <div>
             <label htmlFor="id"> : الرقم القومي</label>
-            <input type="text" id="id" disabled value={Applicant?.id} />
+            <input type="text" id="id" disabled value={Applicant?.id || ""} />
           </div>
-          {Applicant.files?.map((file, index) => (
+          {Applicant?.files?.map((file, index) => (
             <div key={index}>
               <Link to={file[1]} target="_blank">
                 {file[0]}
@@ -82,24 +79,24 @@ function Appinfoemp() {
             <label htmlFor="applying"> : رسوم التقديم</label>
             <select
               id="applying"
-              value={applyingFees}
+              value={applyingFees.toString()}
               onChange={(e) => setApplyingFees(e.target.value === "true")}
               required
             >
-              <option value={true}>تم الدفع</option>
-              <option value={false}>لم يتم الدفع</option>
+              <option value="true">تم الدفع</option>
+              <option value="false">لم يتم الدفع</option>
             </select>
           </div>
           <div>
             <label htmlFor="fees"> : رسوم الدبلومة</label>
             <select
               id="fees"
-              value={programFees}
+              value={programFees.toString()}
               onChange={(e) => setProgramFees(e.target.value === "true")}
               required
             >
-              <option value={true}>تم الدفع</option>
-              <option value={false}>لم يتم الدفع</option>
+              <option value="true">تم الدفع</option>
+              <option value="false">لم يتم الدفع</option>
             </select>
           </div>
           <div>
@@ -134,7 +131,9 @@ function Appinfoemp() {
             >
               إلغاء
             </button>
-            <button className="btnbtn">إرسال</button>
+            <button type="submit" className="btnbtn">
+              إرسال
+            </button>
           </div>
         </form>
       </div>

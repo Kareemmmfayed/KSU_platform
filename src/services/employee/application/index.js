@@ -15,5 +15,8 @@ export const indexApplications = async (token, programId) => {
     }
   );
   let data = await response.json();
+  if (response.status === 500) {
+    return [];
+  }
   return data.data.applications;
 };

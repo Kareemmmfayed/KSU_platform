@@ -222,6 +222,7 @@ function Adiplomas() {
     e.preventDefault();
     const idsOnly = extractIds(selectedPayments);
     await AddPaymentToProgram(token, programId, yearId, idsOnly, prices);
+    cancelAssigning();
   };
 
   const { mutate: AssignPayment, isAssigning } = useMutation({
