@@ -1,6 +1,6 @@
 import { API_URL, COLLEGE } from "../../API";
 
-export const deletePayment = async (token) => {
+export const deletePayment = async (token, payId) => {
   let headersList = {
     Accept: "*/*",
     Authorization: `Bearer ${token}`,
@@ -8,11 +8,12 @@ export const deletePayment = async (token) => {
   };
 
   let response = await fetch(
-    `${API_URL}/admin/collages/${COLLEGE.id}/programs/${programId}/levels/${levelID}`,
+    `${API_URL}/admin/collages/${COLLEGE.id}/payments/${payId}`,
     {
       method: "DELETE",
       headers: headersList,
     }
   );
+  console.log(response);
   return response;
 };
