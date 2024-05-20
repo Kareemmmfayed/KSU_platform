@@ -28,12 +28,10 @@ function Adiplomas() {
   const [selectedCard, setSelectedCard] = useState(null);
 
   const toggleCardState = (id) => {
-    if (del) {
-      if (selectedCard === id) {
-        setSelectedCard(null);
-      } else {
-        setSelectedCard(id);
-      }
+    if (selectedCard === id) {
+      setSelectedCard(null);
+    } else {
+      setSelectedCard(id);
     }
   };
 
@@ -140,7 +138,6 @@ function Adiplomas() {
   const [programId, setProgramId] = useState("");
 
   const [files, setFiles] = useState(false);
-  const [showMyList, setShowMyList] = useState(false);
   const [assignPayment, setAssignPayment] = useState(false);
 
   const onShowFiles = (id) => {
@@ -156,13 +153,13 @@ function Adiplomas() {
 
   const addFile = (id) => {
     onShowFiles(id);
-    setShowMyList(false);
+    setSelectedCard(null);
   };
 
   const addPayment = (id) => {
     setProgramId(id);
     setAssignPayment(true);
-    setShowMyList(false);
+    setSelectedCard(null);
   };
 
   const subFile = async (e) => {
@@ -276,11 +273,11 @@ function Adiplomas() {
                     ></button>
                     <button
                       className="files"
-                      onClick={() => setShowMyList(!showMyList)}
+                      onClick={() => toggleCardState(program.id)}
                     >
                       <img src={myFiles} alt="Add files" />
                     </button>
-                    {showMyList && (
+                    {selectedCard == program.id && (
                       <div className="myList">
                         <ul>
                           <li>

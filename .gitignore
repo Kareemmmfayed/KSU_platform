@@ -24,4 +24,4 @@ dist-ssr
 *.sw?
 
 # API info
-API.js
+"./src/services/API.js"

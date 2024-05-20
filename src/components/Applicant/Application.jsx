@@ -1,6 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../../services/AuthContext";
-import { useState } from "react";
 import { indexProgramFiles } from "../../services/applicant/files";
 import { createApplication } from "../../services/applicant/application/create";
 import { useQuery } from "@tanstack/react-query";
