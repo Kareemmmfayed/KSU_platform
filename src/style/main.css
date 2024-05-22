@@ -172,9 +172,7 @@ body {
 }
 .userName ul button {
   color: black;
-}
-.userName ul li:first-of-type {
-  border-bottom: 1px solid black;
+  border-radius: 0;
 }
 .userName ul button.red {
   color: red;
@@ -1041,7 +1039,8 @@ body {
   font-family: "Cairo", sans-serif;
 }
 .Mydiplomas .Diploma {
-  min-height: 76vh;
+  min-height: calc(100vh - 175px);
+  padding: 30px 30px 0;
 }
 .Mydiplomas .Diploma .cards {
   display: grid;
@@ -1203,7 +1202,7 @@ body {
 .Appinfo__in h2 {
   color: var(--main-color);
   font-weight: 400;
-  font-size: 40px;
+  font-size: 30px;
 }
 @media (max-width: 500px) {
   .Appinfo__in h2 {

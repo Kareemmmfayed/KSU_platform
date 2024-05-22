@@ -1,18 +1,20 @@
 /* eslint-disable react/prop-types */
 import logo from "../assets/logo.png";
+import pfp from "../assets/pfp.png";
 import { Link } from "react-router-dom";
 import { useAuth } from "../services/AuthContext";
-import pfp from "../assets/pfp.png";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { showApplicant } from "../services/applicant/me/show";
 import { showEmployee } from "../services/employee/me/show";
 import { showAdmin } from "../services/admin/me/show";
 import { showMaster } from "../services/master/me/show";
-import { useQuery } from "@tanstack/react-query";
-import Spinner from "./Applicant/Spinner";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 function Header(props) {
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
   const { isLoggedIn, logout, userType, token } = useAuth();
 
   const [list, setList] = useState(false);
@@ -32,26 +34,22 @@ function Header(props) {
         const res = await showMaster(token);
         return res.name;
       }
-    }
-
-    return "";
+    } else return "";
   };
 
-  const { data, isLoading } = useQuery({
+  const { data } = useQuery({
     queryKey: ["name"],
     queryFn: fetchName,
-    retry: false,
   });
 
   const show = () => {
     setList(!list);
   };
 
-  const navigate = useNavigate();
-
   const LogOut = () => {
     logout();
     navigate("/");
+    queryClient.removeQueries();
   };
 
   return (
@@ -76,13 +74,19 @@ function Header(props) {
               <ul>
                 {userType == "applicant" && (
                   <li>
-                    <button onClick={() => navigate("/applicant/diplomas")}>
+                    <button
+                      onClick={() => navigate("/applicant/diplomas")}
+                      style={{ borderBottom: "1px solid black" }}
+                    >
                       الدبلومات السابقة
                     </button>
                   </li>
                 )}
                 <li>
-                  <button onClick={() => navigate("/account")}>
+                  <button
+                    onClick={() => navigate("/account")}
+                    style={{ borderBottom: "1px solid black" }}
+                  >
                     معلومات الحساب
                   </button>
                 </li>

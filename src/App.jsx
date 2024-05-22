@@ -73,7 +73,7 @@ function App() {
                   <Route path="success" element={<Success />} />
                   <Route path="diplomas" element={<Mydiplomas />} />
                   <Route path="subjects" element={<Regsubs />} />
-                  <Route path="appinfo" element={<Appinfo />} />
+                  <Route path=":diplomaId/appinfo" element={<Appinfo />} />
                 </Route>
 
                 <Route path="/employee">

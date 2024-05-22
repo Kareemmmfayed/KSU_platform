@@ -38,7 +38,7 @@ function Pdetails() {
           <h4>عن الدبلومة</h4>
           <p>{programData.description}</p>
         </div>
-        {userType === "applicant" ? (
+        {userType === "applicant" && (
           <button
             className="btnbtn"
             onClick={() =>
@@ -47,7 +47,8 @@ function Pdetails() {
           >
             سجل الآن
           </button>
-        ) : (
+        )}
+        {userType === "employee" && (
           <button
             className="btnbtn"
             onClick={() =>
@@ -55,6 +56,14 @@ function Pdetails() {
             }
           >
             الطلبة المتقدمون
+          </button>
+        )}
+        {userType === "applicant" && (
+          <button
+            className="btnbtn"
+            onClick={() => navigate(`/applicant/${diplomaId}/appinfo`)}
+          >
+            معلومات طلبك{" "}
           </button>
         )}
       </div>

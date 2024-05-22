@@ -1,10 +1,12 @@
 import { useAuth } from "../../services/AuthContext";
 import { useQuery } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 import { indexMyPrograms } from "../../services/applicant/application";
 import Spinner from "../Applicant/Spinner";
 
 function Mydiplomas() {
   const { token } = useAuth();
+  const navigate = useNavigate();
 
   const fetchData = async () => {
     const data = await indexMyPrograms(token);
@@ -22,18 +24,40 @@ function Mydiplomas() {
     <div className="Mydiplomas">
       <div className="Diploma">
         <div className="cards">
-          {myPrograms.map((diploma, index) => (
+          {myPrograms?.map((diploma, index) => (
             <div className="card" key={index}>
-              <button>
-                <h2>{diploma.name}</h2>
-                <p>{diploma[1]}</p>
-                {show && (
-                  <>
-                    <p>{diploma[2]}</p>
-                    <p>{diploma[3]}</p>
-                  </>
-                )}
-              </button>
+              {diploma.status == "pending" && (
+                <button
+                  onClick={() => navigate(`/programs/${diploma.program_id}`)}
+                >
+                  <h2>{diploma.id}</h2>
+                  <p>إنتظار</p>
+                </button>
+              )}
+              {diploma.status == "reviewed" && (
+                <button
+                  onClick={() => navigate(`/programs/${diploma.program_id}`)}
+                >
+                  <h2>{diploma.id}</h2>
+                  <p>تمت مراجعته</p>{" "}
+                </button>
+              )}
+              {diploma.status == "first acceptance" && (
+                <button
+                  onClick={() => navigate(`/programs/${diploma.program_id}`)}
+                >
+                  <h2>{diploma.id}</h2>
+                  <p>قبول مبدئي</p>{" "}
+                </button>
+              )}
+              {diploma.status == "final acceptance" && (
+                <button
+                  onClick={() => navigate(`/programs/${diploma.program_id}`)}
+                >
+                  <h2>{diploma.id}</h2>
+                  <p>قبول نهائي</p>{" "}
+                </button>
+              )}
             </div>
           ))}
         </div>
