@@ -13,6 +13,7 @@ function Applicants() {
 
   const fetchData = async () => {
     const data = await indexApplications(token, diplomaId);
+    console.log(data);
     return data;
   };
 
@@ -58,6 +59,7 @@ function Applicants() {
                 }
               >
                 <li key={applicant.id}>{applicant.name}</li>
+                <p>{applicant.national_id}</p>
               </button>
               <button onClick={() => copycontent(`الإسم : ${applicant.name}`)}>
                 <img src={copy} alt="copy" />

@@ -19,14 +19,18 @@ export const createApplication = async (token, programID, files) => {
   let data = await response.json();
   let responses = [];
 
-  console.log(response.ok);
+  console.log(response);
   if (response.ok) {
     data.data.filesToUpload.map(async (file, index) => {
       responses[index] = await Upload(file.uploadUrl, files[index], file.type);
     });
   }
 
-  if (responses.every((response) => response === true)) {
+  if (
+    responses.every((response) => response === true) &&
+    responses.length != 0
+  ) {
+    console.log(true);
     return true;
   } else {
     return false;

@@ -3,13 +3,14 @@ import logo from "../assets/logo.png";
 import pfp from "../assets/pfp.png";
 import { Link } from "react-router-dom";
 import { useAuth } from "../services/AuthContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { showApplicant } from "../services/applicant/me/show";
 import { showEmployee } from "../services/employee/me/show";
 import { showAdmin } from "../services/admin/me/show";
 import { showMaster } from "../services/master/me/show";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import Spinner from "./Applicant/Spinner";
 
 function Header(props) {
   const navigate = useNavigate();
@@ -34,11 +35,11 @@ function Header(props) {
         const res = await showMaster(token);
         return res.name;
       }
-    } else return "";
+    } else return "not logged";
   };
 
   const { data } = useQuery({
-    queryKey: ["name"],
+    queryKey: ["name", isLoggedIn],
     queryFn: fetchName,
   });
 
@@ -50,6 +51,16 @@ function Header(props) {
     logout();
     navigate("/");
     queryClient.removeQueries();
+  };
+
+  const toAccount = () => {
+    navigate("/account");
+    setList(false);
+  };
+
+  const toDiplomas = () => {
+    navigate("/applicant/diplomas");
+    setList(false);
   };
 
   return (
@@ -75,7 +86,7 @@ function Header(props) {
                 {userType == "applicant" && (
                   <li>
                     <button
-                      onClick={() => navigate("/applicant/diplomas")}
+                      onClick={toDiplomas}
                       style={{ borderBottom: "1px solid black" }}
                     >
                       الدبلومات السابقة
@@ -84,7 +95,7 @@ function Header(props) {
                 )}
                 <li>
                   <button
-                    onClick={() => navigate("/account")}
+                    onClick={toAccount}
                     style={{ borderBottom: "1px solid black" }}
                   >
                     معلومات الحساب

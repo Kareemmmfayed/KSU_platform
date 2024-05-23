@@ -55,7 +55,7 @@ function Signin() {
     } else if (role == "admin") {
       const token = await LogInAdmin(email, password);
       if (token) {
-        login(role, token, true); // rem
+        login(role, token, rem); // rem
         navigate("/admin/main");
       } else {
         setWrong((e) => !e);

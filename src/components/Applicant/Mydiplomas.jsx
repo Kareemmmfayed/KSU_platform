@@ -30,7 +30,7 @@ function Mydiplomas() {
                 <button
                   onClick={() => navigate(`/programs/${diploma.program_id}`)}
                 >
-                  <h2>{diploma.id}</h2>
+                  <h2>{diploma.program_name}</h2>
                   <p>إنتظار</p>
                 </button>
               )}
@@ -38,7 +38,7 @@ function Mydiplomas() {
                 <button
                   onClick={() => navigate(`/programs/${diploma.program_id}`)}
                 >
-                  <h2>{diploma.id}</h2>
+                  <h2>{diploma.program_name}</h2>
                   <p>تمت مراجعته</p>{" "}
                 </button>
               )}
@@ -46,7 +46,7 @@ function Mydiplomas() {
                 <button
                   onClick={() => navigate(`/programs/${diploma.program_id}`)}
                 >
-                  <h2>{diploma.id}</h2>
+                  <h2>{diploma.program_name}</h2>
                   <p>قبول مبدئي</p>{" "}
                 </button>
               )}
@@ -54,7 +54,7 @@ function Mydiplomas() {
                 <button
                   onClick={() => navigate(`/programs/${diploma.program_id}`)}
                 >
-                  <h2>{diploma.id}</h2>
+                  <h2>{diploma.program_name}</h2>
                   <p>قبول نهائي</p>{" "}
                 </button>
               )}

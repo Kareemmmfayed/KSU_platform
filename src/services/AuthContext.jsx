@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
 const AuthContext = createContext();
 
@@ -9,33 +9,51 @@ const AuthProvider = ({ children }) => {
   const isSessionStorageAvailable =
     typeof window !== "undefined" && window.sessionStorage;
 
-  const storedAuth = isLocalStorageAvailable
-    ? localStorage.getItem("auth")
-    : null;
-  const storedUserType = isLocalStorageAvailable
-    ? localStorage.getItem("userType")
-    : null;
-  const storedToken = isLocalStorageAvailable
-    ? localStorage.getItem("token")
-    : null;
+  const storedAuth =
+    (isLocalStorageAvailable && localStorage.getItem("auth")) ||
+    (isSessionStorageAvailable && sessionStorage.getItem("auth"));
+  const storedUserType =
+    (isLocalStorageAvailable && localStorage.getItem("userType")) ||
+    (isSessionStorageAvailable && sessionStorage.getItem("userType"));
+  const storedToken =
+    (isLocalStorageAvailable && localStorage.getItem("token")) ||
+    (isSessionStorageAvailable && sessionStorage.getItem("token"));
 
   const [isLoggedIn, setLoggedIn] = useState(storedAuth === "true");
   const [userType, setUserType] = useState(storedUserType);
   const [token, setToken] = useState(storedToken);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      if (isLocalStorageAvailable && localStorage.getItem("auth")) {
+        setLoggedIn(true);
+        setUserType(localStorage.getItem("userType"));
+        setToken(localStorage.getItem("token"));
+      } else if (isSessionStorageAvailable && sessionStorage.getItem("auth")) {
+        setLoggedIn(true);
+        setUserType(sessionStorage.getItem("userType"));
+        setToken(sessionStorage.getItem("token"));
+      }
+    }
+  }, [isLoggedIn, isLocalStorageAvailable, isSessionStorageAvailable]);
 
   const login = (userType, token, rememberMe) => {
     setLoggedIn(true);
     setUserType(userType);
     setToken(token);
 
-    if (isLocalStorageAvailable && rememberMe) {
-      localStorage.setItem("auth", "true");
-      localStorage.setItem("userType", userType);
-      localStorage.setItem("token", token);
-    } else if (isSessionStorageAvailable) {
-      sessionStorage.setItem("auth", "true");
-      sessionStorage.setItem("userType", userType);
-      sessionStorage.setItem("token", token);
+    if (rememberMe) {
+      if (isLocalStorageAvailable) {
+        localStorage.setItem("auth", "true");
+        localStorage.setItem("userType", userType);
+        localStorage.setItem("token", token);
+      }
+    } else {
+      if (isSessionStorageAvailable) {
+        sessionStorage.setItem("auth", "true");
+        sessionStorage.setItem("userType", userType);
+        sessionStorage.setItem("token", token);
+      }
     }
   };
 

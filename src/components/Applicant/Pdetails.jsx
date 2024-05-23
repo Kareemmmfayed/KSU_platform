@@ -58,14 +58,6 @@ function Pdetails() {
             الطلبة المتقدمون
           </button>
         )}
-        {userType === "applicant" && (
-          <button
-            className="btnbtn"
-            onClick={() => navigate(`/applicant/${diplomaId}/appinfo`)}
-          >
-            معلومات طلبك{" "}
-          </button>
-        )}
       </div>
     </div>
   );

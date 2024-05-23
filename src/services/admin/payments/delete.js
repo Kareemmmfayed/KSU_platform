@@ -14,6 +14,5 @@ export const deletePayment = async (token, payId) => {
       headers: headersList,
     }
   );
-  console.log(response);
   return response;
 };

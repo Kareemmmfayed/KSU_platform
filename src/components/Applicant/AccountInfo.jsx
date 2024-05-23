@@ -1,47 +1,38 @@
-import { useEffect, useState } from "react";
 import { useAuth } from "../../services/AuthContext";
 import { COLLEGE } from "../../services/API";
-import { useNavigate } from "react-router-dom";
 import { showApplicant } from "../../services/applicant/me/show";
 import { showAdmin } from "../../services/admin/me/show";
 import { showEmployee } from "../../services/employee/me/show";
 import { showMaster } from "../../services/master/me/show";
+import { useQuery } from "@tanstack/react-query";
+import Spinner from "./Spinner";
 
 function AccountInfo() {
   const { token, userType } = useAuth();
-  const navigate = useNavigate();
 
-  const [user, setUser] = useState({});
+  const fetchData = async () => {
+    if (userType === "applicant") {
+      const res = await showApplicant(token);
+      return res;
+    } else if (userType === "employee") {
+      const res = await showEmployee(token);
+      return res;
+    } else if (userType === "admin") {
+      const res = await showAdmin(token);
+      return res;
+    } else if (userType === "master") {
+      const res = await showMaster(token);
+      return res;
+    }
+    return "";
+  };
 
-  useEffect(() => {
-    // if (!isloggedIn) {
-    //   navigate("/login");
-    // }
+  const { data: user, isLoading } = useQuery({
+    queryFn: fetchData,
+    queryKey: ["myInfo"],
+  });
 
-    const fetchData = async () => {
-      if (userType === "applicant") {
-        const res = await showApplicant(token);
-        setUser(res);
-        return;
-      } else if (userType === "employee") {
-        const res = await showEmployee(token);
-        setUser(res);
-        return;
-      } else if (userType === "admin") {
-        const res = await showAdmin(token);
-        console.log(res.national_id);
-        setUser(res);
-        return;
-      } else if (userType === "master") {
-        const res = await showMaster(token);
-        setUser(res);
-        return;
-      }
-      return "";
-    };
-
-    fetchData();
-  }, []);
+  if (isLoading) return <Spinner />;
 
   return (
     <div className="Account">
@@ -50,7 +41,9 @@ function AccountInfo() {
           <h2>معلومات الحساب</h2>
           <form>
             <input type="text" value={user.name} disabled />
-            <input type="number" value={user.national_id} disabled />
+            {userType === "applicant" && (
+              <input type="number" value={user.national_id} disabled />
+            )}
             <input type="text" value={COLLEGE.name} disabled />
             <div className="gender">
               <label htmlFor="gender">: النوع</label>

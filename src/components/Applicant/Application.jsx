@@ -3,8 +3,9 @@ import { useAuth } from "../../services/AuthContext";
 import { indexProgramFiles } from "../../services/applicant/files";
 import { createApplication } from "../../services/applicant/application/create";
 import { useQuery } from "@tanstack/react-query";
-import Spinner from "../Applicant/Spinner";
 import { useForm } from "react-hook-form";
+import Spinner from "../Applicant/Spinner";
+import toast from "react-hot-toast";
 
 function Application() {
   const { token } = useAuth();
@@ -25,6 +26,9 @@ function Application() {
     const response = await createApplication(token, diplomaId, values.files);
     if (response) {
       navigate("/applicant/success");
+      toast.success("تم التقديم بنجاح");
+    } else {
+      toast.error(" حدث خطأ ما");
     }
   };
 

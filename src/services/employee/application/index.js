@@ -14,6 +14,7 @@ export const indexApplications = async (token, programId) => {
       headers: headersList,
     }
   );
+
   let data = await response.json();
   if (response.status === 500) {
     return [];
