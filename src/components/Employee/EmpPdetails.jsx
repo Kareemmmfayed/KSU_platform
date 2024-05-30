@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { showProgram } from "../../services/applicant/program/show";
+import { showEmployeeProgram } from "../../services/employee/program/show";
 import { useAuth } from "../../services/AuthContext";
 import { useQuery } from "@tanstack/react-query";
 import Spinner from "../Applicant/Spinner";
@@ -11,7 +11,7 @@ function Pdetails() {
   const { diplomaId } = useParams();
 
   const fetchData = async () => {
-    const data = await showProgram(token, diplomaId);
+    const data = await showEmployeeProgram(token, diplomaId);
     return data;
   };
 
@@ -32,11 +32,9 @@ function Pdetails() {
         </div>
         <button
           className="btnbtn"
-          onClick={() =>
-            navigate(`/applicant/programs/${diplomaId}/application`)
-          }
+          onClick={() => navigate(`/employee/programs/${diplomaId}/applicants`)}
         >
-          سجل الآن
+          الطلبة المتقدمون
         </button>
       </div>
     </div>

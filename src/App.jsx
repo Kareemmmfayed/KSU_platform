@@ -34,6 +34,8 @@ const Application = lazy(() => import("./components/Applicant/Application"));
 const Success = lazy(() => import("./components/Applicant/Success"));
 const Apdetails = lazy(() => import("./components/Applicant/Apdetails"));
 const Regsubs = lazy(() => import("./components/Applicant/Regsubs"));
+const EmpPrograms = lazy(() => import("./components/Employee/EmpPrograms"));
+const EmpPdetails = lazy(() => import("./components/Employee/EmpPdetails"));
 
 function App() {
   const queryClient = new QueryClient({
@@ -56,13 +58,13 @@ function App() {
               <Route path="/signup" element={<Signup />} />
               <Route
                 element={
-                  <ProtectedRoutes>
+                  <ProtectedRoutes role="applicant">
                     <AppLayout />
                   </ProtectedRoutes>
                 }
               >
-                <Route path="/account" element={<AccountInfo />} />
                 <Route path="/programs" element={<Programs />} />
+                <Route path="/account" element={<AccountInfo />} />
                 <Route path="/programs/:diplomaId" element={<Pdetails />} />
                 <Route path="/applicant">
                   <Route path="programs/Adetails" element={<Apdetails />} />
@@ -75,8 +77,19 @@ function App() {
                   <Route path="subjects" element={<Regsubs />} />
                   <Route path=":diplomaId/appinfo" element={<Appinfo />} />
                 </Route>
-
+              </Route>
+              <Route
+                element={
+                  <ProtectedRoutes role="employee">
+                    <AppLayout />
+                  </ProtectedRoutes>
+                }
+              >
                 <Route path="/employee">
+                  <Route path="programs" element={<EmpPrograms />} />
+
+                  <Route path="programs/:diplomaId" element={<EmpPdetails />} />
+
                   <Route
                     path="programs/:diplomaId/applicants"
                     element={<Applicants />}
@@ -86,12 +99,27 @@ function App() {
                     element={<Appinfoemp />}
                   />
                 </Route>
-
+              </Route>
+              <Route
+                element={
+                  <ProtectedRoutes role="lecturer">
+                    <AppLayout />
+                  </ProtectedRoutes>
+                }
+              >
                 <Route path="lecturer">
                   <Route path="subjects/:subId" element={<Table />} />
                   <Route path="subjects" element={<Cric />} />
                 </Route>
+              </Route>
 
+              <Route
+                element={
+                  <ProtectedRoutes role="admin">
+                    <AppLayout />
+                  </ProtectedRoutes>
+                }
+              >
                 <Route path="/admin">
                   <Route path="main" element={<Addmain />} />
                   <Route path="diplomas" element={<Adiplomas />} />
@@ -109,7 +137,15 @@ function App() {
                   />
                   <Route path="DipYear" element={<DipYear />} />
                 </Route>
+              </Route>
 
+              <Route
+                element={
+                  <ProtectedRoutes role="master">
+                    <AppLayout />
+                  </ProtectedRoutes>
+                }
+              >
                 <Route path="/master">
                   <Route path="main" element={<Mastermain />} />
                   <Route path="colleges" element={<Mcollege />} />

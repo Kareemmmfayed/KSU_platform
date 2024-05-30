@@ -28,9 +28,6 @@ function Asubjects() {
   const [years, setYears] = useState([]);
 
   const fetchData = async () => {
-    console.log(diplomaId);
-    console.log(yearId);
-    console.log(semesterId);
     const data = await indexCourse(token, diplomaId, yearId, semesterId);
     return data;
   };

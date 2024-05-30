@@ -28,6 +28,9 @@ function Header(props) {
       } else if (userType === "employee") {
         const res = await showEmployee(token);
         return res.name;
+      } else if (userType === "lecturer") {
+        const res = await showEmployee(token);
+        return res.name;
       } else if (userType === "admin") {
         const res = await showAdmin(token);
         return res.name;

@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "../../services/AuthContext";
-import { indexPrograms } from "../../services/applicant/program/index";
+import { indexEmployeePrograms } from "../../services/employee/program/index";
 import { useQuery } from "@tanstack/react-query";
 import Spinner from "../Applicant/Spinner";
 
@@ -11,7 +11,7 @@ function Programs() {
   const navigate = useNavigate();
 
   const fetchData = async () => {
-    const programs = await indexPrograms(token);
+    const programs = await indexEmployeePrograms(token);
     return programs;
   };
 

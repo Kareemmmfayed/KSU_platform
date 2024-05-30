@@ -409,12 +409,22 @@ function Adiplomas() {
             <div>
               <label htmlFor="payments">قائمة المدفوعات :</label>
               <select required id="payments" onChange={handleSelectChange}>
-                <option selected disabled></option>
-                {payments.map((pay) => (
-                  <option key={pay.id} value={`${pay.id},${pay.payment_kind}`}>
-                    {pay.payment_kind}
-                  </option>
-                ))}
+                <option selected></option>
+                {payments
+                  .filter(
+                    (pay) =>
+                      !selectedPayments.some(
+                        (selected) => selected.id === pay.id
+                      )
+                  )
+                  .map((pay) => (
+                    <option
+                      key={pay.id}
+                      value={`${pay.id},${pay.payment_kind}`}
+                    >
+                      {pay.payment_kind}
+                    </option>
+                  ))}
               </select>
             </div>
             <div style={{ height: "146px" }}>

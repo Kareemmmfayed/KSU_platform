@@ -26,7 +26,6 @@ function Application() {
     const response = await createApplication(token, diplomaId, values.files);
     if (response) {
       navigate("/applicant/success");
-      toast.success("تم التقديم بنجاح");
     } else {
       toast.error(" حدث خطأ ما");
     }
