@@ -3,14 +3,13 @@ import logo from "../assets/logo.png";
 import pfp from "../assets/pfp.png";
 import { Link } from "react-router-dom";
 import { useAuth } from "../services/AuthContext";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { showApplicant } from "../services/applicant/me/show";
 import { showEmployee } from "../services/employee/me/show";
 import { showAdmin } from "../services/admin/me/show";
 import { showMaster } from "../services/master/me/show";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import Spinner from "./Applicant/Spinner";
 
 function Header(props) {
   const navigate = useNavigate();

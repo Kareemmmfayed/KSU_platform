@@ -9,8 +9,11 @@ import { LogInMaster } from "../../services/auth/LogInMaster";
 import { LogInLecturer } from "../../services/auth/LogInLecturer";
 import { LogInAdmin } from "../../services/auth/LogInAdmin";
 import { LogInEmployee } from "../../services/auth/LogInEmployee";
+import { useQueryClient } from "@tanstack/react-query";
 
 function Signin() {
+  const queryClient = useQueryClient();
+
   const [role, setRole] = useState("");
   const [email, setEmail] = useState("kareem@mail.com");
   const [password, setPassword] = useState("kareempass");
@@ -18,12 +21,11 @@ function Signin() {
   const [wrong, setWrong] = useState(false);
 
   const navigate = useNavigate();
-  const { login, isLoggedIn } = useAuth();
+  const { login, logout } = useAuth();
 
   useEffect(() => {
-    if (isLoggedIn) {
-      navigate("/", { replace: true });
-    }
+    logout();
+    queryClient.removeQueries();
   }, []);
 
   const handleSubmit = async (e) => {
