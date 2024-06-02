@@ -28,7 +28,9 @@ function Mydiplomas() {
             <div className="card" key={index}>
               {diploma.status == "pending" && (
                 <button
-                  onClick={() => navigate(`/programs/${diploma.program_id}`)}
+                  onClick={() =>
+                    navigate(`/applicant/applications/${diploma.id}`)
+                  }
                 >
                   <h2>{diploma.program_name}</h2>
                   <p>إنتظار</p>
@@ -36,7 +38,9 @@ function Mydiplomas() {
               )}
               {diploma.status == "reviewed" && (
                 <button
-                  onClick={() => navigate(`/programs/${diploma.program_id}`)}
+                  onClick={() =>
+                    navigate(`/applicant/applications/${diploma.id}`)
+                  }
                 >
                   <h2>{diploma.program_name}</h2>
                   <p>تمت مراجعته</p>{" "}
@@ -44,7 +48,9 @@ function Mydiplomas() {
               )}
               {diploma.status == "first acceptance" && (
                 <button
-                  onClick={() => navigate(`/programs/${diploma.program_id}`)}
+                  onClick={() =>
+                    navigate(`/applicant/applications/${diploma.id}`)
+                  }
                 >
                   <h2>{diploma.program_name}</h2>
                   <p>قبول مبدئي</p>{" "}
@@ -52,7 +58,9 @@ function Mydiplomas() {
               )}
               {diploma.status == "final acceptance" && (
                 <button
-                  onClick={() => navigate(`/programs/${diploma.program_id}`)}
+                  onClick={() =>
+                    navigate(`/applicant/applications/${diploma.id}`)
+                  }
                 >
                   <h2>{diploma.program_name}</h2>
                   <p>قبول نهائي</p>{" "}

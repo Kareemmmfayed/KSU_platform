@@ -408,7 +408,7 @@ function Adiplomas() {
             </div>
             <div>
               <label htmlFor="payments">قائمة المدفوعات :</label>
-              <select required id="payments" onChange={handleSelectChange}>
+              <select id="payments" onChange={handleSelectChange}>
                 <option selected></option>
                 {payments
                   .filter(

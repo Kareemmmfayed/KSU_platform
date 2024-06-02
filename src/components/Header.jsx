@@ -10,6 +10,7 @@ import { showEmployee } from "../services/employee/me/show";
 import { showAdmin } from "../services/admin/me/show";
 import { showMaster } from "../services/master/me/show";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { showInstructor } from "../services/instructor/me/show";
 
 function Header(props) {
   const navigate = useNavigate();
@@ -28,7 +29,7 @@ function Header(props) {
         const res = await showEmployee(token);
         return res.name;
       } else if (userType === "lecturer") {
-        const res = await showEmployee(token);
+        const res = await showInstructor(token);
         return res.name;
       } else if (userType === "admin") {
         const res = await showAdmin(token);
@@ -37,7 +38,7 @@ function Header(props) {
         const res = await showMaster(token);
         return res.name;
       }
-    } else return "not logged";
+    } else return [];
   };
 
   const { data } = useQuery({
@@ -61,7 +62,7 @@ function Header(props) {
   };
 
   const toDiplomas = () => {
-    navigate("/applicant/diplomas");
+    navigate("/applicant/applications");
     setList(false);
   };
 

@@ -107,7 +107,7 @@ function Appinfoemp() {
               onChange={(e) => setStatus(e.target.value)}
               required
             >
-              <option value="pending">تحت مراجعته</option>
+              <option value="pending">تحت المراجعة</option>
               <option value="reviewed">تمت مراجعته</option>
               <option value="first acceptance">قبول مبدئي</option>
               <option value="final acceptance">قبول نهائي</option>

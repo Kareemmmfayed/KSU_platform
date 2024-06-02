@@ -7,7 +7,9 @@ function ProtectedRoutes({ children, role }) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!isLoggedIn || role != userType) navigate("/login");
+    if (role === "all") {
+      if (!isLoggedIn) navigate("/login");
+    } else if (!isLoggedIn || role != userType) navigate("/login");
   }, [navigate, isLoggedIn, role, userType]);
 
   return <div>{children}</div>;

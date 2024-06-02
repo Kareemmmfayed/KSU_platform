@@ -36,6 +36,9 @@ const Apdetails = lazy(() => import("./components/Applicant/Apdetails"));
 const Regsubs = lazy(() => import("./components/Applicant/Regsubs"));
 const EmpPrograms = lazy(() => import("./components/Employee/EmpPrograms"));
 const EmpPdetails = lazy(() => import("./components/Employee/EmpPdetails"));
+const MyApplication = lazy(() =>
+  import("./components/Applicant/MyApplication")
+);
 
 function App() {
   const queryClient = new QueryClient({
@@ -58,13 +61,21 @@ function App() {
               <Route path="/signup" element={<Signup />} />
               <Route
                 element={
+                  <ProtectedRoutes role="all">
+                    <AppLayout />
+                  </ProtectedRoutes>
+                }
+              >
+                <Route path="/account" element={<AccountInfo />} />
+              </Route>
+              <Route
+                element={
                   <ProtectedRoutes role="applicant">
                     <AppLayout />
                   </ProtectedRoutes>
                 }
               >
                 <Route path="/programs" element={<Programs />} />
-                <Route path="/account" element={<AccountInfo />} />
                 <Route path="/programs/:diplomaId" element={<Pdetails />} />
                 <Route path="/applicant">
                   <Route path="programs/Adetails" element={<Apdetails />} />
@@ -73,7 +84,11 @@ function App() {
                     element={<Application />}
                   />
                   <Route path="success" element={<Success />} />
-                  <Route path="diplomas" element={<Mydiplomas />} />
+                  <Route path="applications" element={<Mydiplomas />} />
+                  <Route
+                    path="applications/:appId"
+                    element={<MyApplication />}
+                  />
                   <Route path="subjects" element={<Regsubs />} />
                   <Route path=":diplomaId/appinfo" element={<Appinfo />} />
                 </Route>

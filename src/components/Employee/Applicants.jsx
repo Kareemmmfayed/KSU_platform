@@ -59,9 +59,17 @@ function Applicants() {
                 }
               >
                 <li key={applicant.id}>{applicant.name}</li>
-                <p>{applicant.national_id}</p>
+                <p style={{ color: "grey" }}>
+                  الرقم القومي : {applicant.national_id}
+                </p>
               </button>
-              <button onClick={() => copycontent(`الإسم : ${applicant.name}`)}>
+              <button
+                onClick={() =>
+                  copycontent(
+                    `الإسم : ${applicant.name}, الرقم القومي : ${applicant.national_id}`
+                  )
+                }
+              >
                 <img src={copy} alt="copy" />
               </button>
             </div>

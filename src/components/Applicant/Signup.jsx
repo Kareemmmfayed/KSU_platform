@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { SignUpApplicant } from "../../services/auth/SignUpApplicant";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../services/AuthContext";
+import toast from "react-hot-toast";
 
 function Signup() {
   const [name, setName] = useState("");
@@ -16,22 +16,20 @@ function Signup() {
   const [wrongPass, setWrongPass] = useState(false);
 
   const navigate = useNavigate();
-  const { login } = useAuth();
 
   const handleSignUp = async (e) => {
     e.preventDefault();
 
     if (password == cpassword) {
       if (await SignUpApplicant(name, email, password, nationalId, gender)) {
-        console.log("Worked");
-        login("applicant", false);
+        toast.success("تم التسجيل بنجاح");
         navigate("/");
       } else {
-        console.log("Sign Up Failed!");
+        toast.error("يوجد خطأ في التسجيل");
       }
     } else {
       setWrongPass((e) => !e);
-      console.log("Wrong pass!");
+      toast.error("كلمة السر غير صحيحة");
     }
   };
 

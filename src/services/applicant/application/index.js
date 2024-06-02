@@ -15,7 +15,6 @@ export const indexMyPrograms = async (token) => {
     }
   );
 
-  console.log(response);
   if (response.ok) {
     let data = await response.json();
     return data.data.applications;

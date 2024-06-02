@@ -4,6 +4,7 @@ import { showApplicant } from "../../services/applicant/me/show";
 import { showAdmin } from "../../services/admin/me/show";
 import { showEmployee } from "../../services/employee/me/show";
 import { showMaster } from "../../services/master/me/show";
+import { showInstructor } from "../../services/instructor/me/show";
 import { useQuery } from "@tanstack/react-query";
 import Spinner from "./Spinner";
 
@@ -16,6 +17,9 @@ function AccountInfo() {
       return res;
     } else if (userType === "employee") {
       const res = await showEmployee(token);
+      return res;
+    } else if (userType === "lecturer") {
+      const res = await showInstructor(token);
       return res;
     } else if (userType === "admin") {
       const res = await showAdmin(token);
