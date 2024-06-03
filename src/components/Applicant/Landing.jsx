@@ -7,17 +7,43 @@ function Landing() {
   const navigate = useNavigate();
 
   const handleClick = () => {
+    // if (isLoggedIn) {
+    //   if (userType === "applicant" || userType === "student") {
+    //     navigate("programs");
+    //   } else if (userType === "employee") {
+    //     navigate("/employee/programs");
+    //   } else if (userType === "lecturer") {
+    //     navigate("/lecturer/subjects");
+    //   } else if (userType === "admin") {
+    //     navigate("/admin/main");
+    //   } else if (userType === "master") {
+    //     navigate("/master/main");
+    //   }
+    // } else {
+    //   navigate("/login");
+    // }
+
     if (isLoggedIn) {
-      if (userType === "applicant" || userType === "student") {
-        navigate("programs");
-      } else if (userType === "employee") {
-        navigate("/employee/programs");
-      } else if (userType === "lecturer") {
-        navigate("/lecturer/subjects");
-      } else if (userType === "admin") {
-        navigate("/admin/main");
-      } else if (userType === "master") {
-        navigate("/master/main");
+      switch (userType) {
+        case "applicant":
+        case "student":
+          navigate("programs");
+          break;
+        case "employee":
+          navigate("/employee/programs");
+          break;
+        case "lecturer":
+          navigate("/lecturer/subjects");
+          break;
+        case "admin":
+          navigate("/admin/main");
+          break;
+        case "master":
+          navigate("/master/main");
+          break;
+        default:
+          navigate("/login");
+          break;
       }
     } else {
       navigate("/login");
@@ -37,9 +63,18 @@ function Landing() {
             مرحبًا بك في منصة التقديم الإلكتروني للدبلومات. نحن هنا لنسهِّل عليك
             الخطوات المطلوبة للحصول على فرصة دراسية في مجالات متنوعة .
           </p>
-          <button className="btnbtn" onClick={handleClick}>
-            إختر مسارك
-          </button>
+          {userType !== "student" ? (
+            <button className="btnbtn" onClick={handleClick}>
+              إختر مسارك
+            </button>
+          ) : (
+            <button
+              className="btnbtn"
+              onClick={() => navigate("/StudentPrograms")}
+            >
+              دبلوماتي{" "}
+            </button>
+          )}
         </div>
       </div>
     </div>

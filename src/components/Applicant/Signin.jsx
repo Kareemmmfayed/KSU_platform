@@ -16,8 +16,8 @@ function Signin() {
   const queryClient = useQueryClient();
 
   const [role, setRole] = useState("");
-  const [email, setEmail] = useState("kareem@mail.com");
-  const [password, setPassword] = useState("kareempass");
+  const [email, setEmail] = useState("kareemmmm@email.com");
+  const [password, setPassword] = useState("kareemmmm123");
   const [rem, setRem] = useState(false);
   const [wrong, setWrong] = useState(false);
 

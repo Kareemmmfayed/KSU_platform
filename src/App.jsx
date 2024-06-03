@@ -39,6 +39,9 @@ const EmpPdetails = lazy(() => import("./components/Employee/EmpPdetails"));
 const MyApplication = lazy(() =>
   import("./components/Applicant/MyApplication")
 );
+const StudentPrograms = lazy(() =>
+  import("./components/Student/StudentPrograms")
+);
 
 function App() {
   const queryClient = new QueryClient({
@@ -67,6 +70,15 @@ function App() {
                 }
               >
                 <Route path="/account" element={<AccountInfo />} />
+              </Route>
+              <Route
+                element={
+                  <ProtectedRoutes role="student">
+                    <AppLayout />
+                  </ProtectedRoutes>
+                }
+              >
+                <Route path="/StudentPrograms" element={<StudentPrograms />} />
               </Route>
               <Route
                 element={
