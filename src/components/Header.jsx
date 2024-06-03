@@ -25,6 +25,9 @@ function Header(props) {
       if (userType === "applicant") {
         const res = await showApplicant(token);
         return res.name;
+      } else if (userType === "student") {
+        const res = await showApplicant(token);
+        return res.name;
       } else if (userType === "employee") {
         const res = await showEmployee(token);
         return res.name;

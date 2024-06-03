@@ -8,7 +8,7 @@ function Landing() {
 
   const handleClick = () => {
     if (isLoggedIn) {
-      if (userType === "applicant") {
+      if (userType === "applicant" || userType === "student") {
         navigate("programs");
       } else if (userType === "employee") {
         navigate("/employee/programs");

@@ -10,6 +10,7 @@ import { LogInLecturer } from "../../services/auth/LogInLecturer";
 import { LogInAdmin } from "../../services/auth/LogInAdmin";
 import { LogInEmployee } from "../../services/auth/LogInEmployee";
 import { useQueryClient } from "@tanstack/react-query";
+import { LogInStudent } from "../../services/auth/LogInStudent";
 
 function Signin() {
   const queryClient = useQueryClient();
@@ -32,6 +33,14 @@ function Signin() {
     e.preventDefault();
     if (role == "applicant") {
       const token = await LogInApplicant(email, password);
+      if (token) {
+        login(role, token, rem);
+        navigate("/");
+      } else {
+        setWrong(true);
+      }
+    } else if (role == "student") {
+      const token = await LogInStudent(email, password);
       if (token) {
         login(role, token, rem);
         navigate("/");
@@ -89,7 +98,8 @@ function Signin() {
                 <option disabled value="">
                   الدور
                 </option>
-                <option value="applicant">طالب</option>
+                <option value="applicant">راغب في التقديم</option>
+                <option value="student">طالب</option>
                 <option value="lecturer">محاضر</option>
                 <option value="employee">موظف</option>
                 <option value="admin">أدمن</option>
