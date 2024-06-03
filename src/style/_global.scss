@@ -50,6 +50,13 @@ body {
   justify-content: center;
 }
 
+.smallSpinnerContainer {
+  height: calc(100vh - 275px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .spinner {
   width: 6rem;
   height: 6rem;

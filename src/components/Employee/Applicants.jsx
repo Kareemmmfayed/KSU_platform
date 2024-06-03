@@ -4,11 +4,10 @@ import { useAuth } from "../../services/AuthContext";
 import { useNavigate, useParams } from "react-router-dom";
 import { indexApplications } from "../../services/employee/application";
 import { useQuery } from "@tanstack/react-query";
-import Spinner from "../Applicant/Spinner";
+import SmallSpinner from "../SmallSpinner";
 
 function Applicants() {
   const { token } = useAuth();
-  const navigate = useNavigate();
   const { diplomaId } = useParams();
 
   const fetchData = async () => {
@@ -30,12 +29,6 @@ function Applicants() {
       app.name.includes(searchValue)
     );
   }
-
-  const copycontent = (content) => {
-    navigator.clipboard.writeText(content);
-  };
-
-  if (isLoading) return <Spinner />;
 
   return (
     <div className="Applicants">
@@ -63,35 +56,53 @@ function Applicants() {
             onChange={(e) => setSearchValue(e.target.value)}
           />
         </div>
-        <ul>
-          {filteredApplicants?.map((applicant) => (
-            <div key={applicant.id}>
-              <button
-                onClick={() =>
-                  navigate(
-                    `/employee/programs/${diplomaId}/applicant/${applicant.id}/info`
-                  )
-                }
-              >
-                <li key={applicant.id}>{applicant.name}</li>
-                <p style={{ color: "grey" }}>
-                  الرقم القومي : {applicant.national_id}
-                </p>
-              </button>
-              <button
-                onClick={() =>
-                  copycontent(
-                    `الإسم : ${applicant.name}, الرقم القومي : ${applicant.national_id}`
-                  )
-                }
-              >
-                <img src={copy} alt="copy" />
-              </button>
-            </div>
-          ))}
-        </ul>
+        <List
+          applicants={filteredApplicants}
+          diplomaId={diplomaId}
+          isLoading={isLoading}
+        />
       </div>
     </div>
+  );
+}
+
+function List({ applicants, diplomaId, isLoading }) {
+  const navigate = useNavigate();
+
+  const copycontent = (content) => {
+    navigator.clipboard.writeText(content);
+  };
+
+  if (isLoading) return <SmallSpinner />;
+
+  return (
+    <ul>
+      {applicants?.map((applicant) => (
+        <div key={applicant.id}>
+          <button
+            onClick={() =>
+              navigate(
+                `/employee/programs/${diplomaId}/applicant/${applicant.id}/info`
+              )
+            }
+          >
+            <li key={applicant.id}>{applicant.name}</li>
+            <p style={{ color: "grey" }}>
+              الرقم القومي : {applicant.national_id}
+            </p>
+          </button>
+          <button
+            onClick={() =>
+              copycontent(
+                `الإسم : ${applicant.name}, الرقم القومي : ${applicant.national_id}`
+              )
+            }
+          >
+            <img src={copy} alt="copy" />
+          </button>
+        </div>
+      ))}
+    </ul>
   );
 }
 

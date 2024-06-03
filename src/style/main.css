@@ -49,6 +49,13 @@ body {
   justify-content: center;
 }
 
+.smallSpinnerContainer {
+  height: calc(100vh - 275px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .spinner {
   width: 6rem;
   height: 6rem;
@@ -1279,7 +1286,8 @@ body {
     font-size: 12px;
   }
 }
-.Lock form > div input, .Lock form > div textarea {
+.Lock form > div input,
+.Lock form > div textarea {
   width: 65%;
   height: 37px;
   border-radius: 7px;
