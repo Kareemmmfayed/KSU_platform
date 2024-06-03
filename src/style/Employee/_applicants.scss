@@ -13,9 +13,33 @@
     }
 
     &__top {
-      display: flex;
-      justify-content: space-between;
       margin-bottom: 20px;
+      display: grid;
+      grid-template-columns: 3fr 1fr 2fr;
+
+      > div {
+        display: flex;
+        padding: 10px 2px;
+        gap: 12px;
+        border-radius: 8px;
+        border: 1px solid var(--main-color);
+        margin-left: 30px;
+        justify-content: center;
+        align-items: center;
+
+        .EmpActive {
+          background-color: var(--main-color);
+          color: white;
+        }
+
+        button {
+          color: var(--main-color);
+          background-color: white;
+          border: none;
+          border-radius: 8px;
+          padding: 4px;
+        }
+      }
 
       input {
         padding: 10px 16px 10px 16px;

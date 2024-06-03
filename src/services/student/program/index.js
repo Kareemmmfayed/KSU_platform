@@ -8,7 +8,7 @@ export const indexStudentPrograms = async (token) => {
   };
 
   let response = await fetch(
-    `${API_URL}/applicant/collages/${COLLEGE.id}/programs`,
+    `${API_URL}/student/collages/${COLLEGE.id}/programs`,
     {
       method: "GET",
       headers: headersList,

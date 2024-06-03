@@ -23,6 +23,7 @@ function Applicants() {
   });
 
   const [searchValue, setSearchValue] = useState("");
+  const [type, setType] = useState("applicant");
 
   if (!isLoading) {
     var filteredApplicants = applicants?.filter((app) =>
@@ -41,6 +42,20 @@ function Applicants() {
       <div className="Applicants__in">
         <div className="Applicants__in__top">
           <h2>الطلبة المتقدمين</h2>
+          <div>
+            <button
+              className={type === "applicant" ? "EmpActive" : ""}
+              onClick={() => setType("applicant")}
+            >
+              المتقدمين
+            </button>
+            <button
+              className={type === "student" ? "EmpActive" : ""}
+              onClick={() => setType("student")}
+            >
+              الطلاب
+            </button>
+          </div>
           <input
             type="text"
             placeholder="بحث"
